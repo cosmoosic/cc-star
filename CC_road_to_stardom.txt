@@ -1,0 +1,598 @@
+######################################
+#  Game Settings                     #
+######################################
+
+game_settings {
+   auto_ask_sound_permissions = false
+   enable_standard_all_behaviour = false
+}
+
+
+redescribe = auto_beta
+
+start_at = cc_room
+
+vocabulary {
+   : verb / aliases = [examine, check, regarde]
+   : verb / aliases = [give, show]
+   : verb / aliases = [up, upstair, upstairs]
+   : verb / aliases = [down, downstair, downstairs]
+   : verb / aliases = [talk, say, speak, tell, ask, wave]
+   : verb / aliases = [comment, comments, note, notes]
+   : verb / aliases = [exchange, exchanging]
+   : verb / aliases = [exit, leave, outside, out]
+   : verb / aliases = [enter, inside, in]
+   : verb / aliases = [ring,strike]
+   : verb / aliases = [thank, thanks]
+   : verb / aliases = [happy, merry, feliz, joyous, feathery, great, joyeux, enjoy, warmest, jolly, cheerful, 행복한, 메리, meli]
+   : verb / aliases = [kill,threaten,menace,intimidate,browbeat,bully,scare,frighten,terrorize,murder,assassinate,beat,fight,combat,hurt,kick,harm,injure,insult]
+   : verb / aliases = ["cry", ":(","=(", "='(", ":'("]
+   : verb / aliases = ["smile", "grin", "laugh", ":)","=)",":D","=D"]
+   : noun      / aliases = [bread, croissant, pain, cookie, loaf, biscuit]
+   : noun      / aliases = [cafe, coocoo, shop, restaurant]
+   : noun      / aliases = [owner, vendor]
+   : noun      / aliases = [pigeon]
+   : noun      / aliases = [yourself, cc, myself, me]
+   : noun      / aliases = [child, children, kid]
+   : noun      / aliases = [comment, note]
+   : noun      / aliases = [bird, dove]
+   : noun      / aliases = [fight,combat,conflict]
+   : noun      / aliases = [floor, ground, flooring]
+   : noun      / aliases = [up,upstair]
+   : noun      / aliases = [laptop,computer]
+   : noun      / aliases = [seven,7,7C,7Cs,sevenseas]
+}
+
+######################################
+#  Variables                         #
+######################################
+
+booleans {
+   can_leave_crispy_garden : boolean "false";
+   can_leave_party_planet : boolean "false";
+   help_about_commands : boolean "false";
+   is_sound_muted : boolean "true";
+   music_ever_enabled : boolean "false";
+   solved_wool_riddle : boolean "false";
+   can_create_june_e : boolean "false";
+}
+
+strings {
+   comments : string "";
+   string_tmp : string "";
+}
+
+######################################
+#  Locations                         #
+######################################
+
+locations {
+
+   cc_room : location "Hello CC! It's your birthday, so your inventor friend <June<#fee>> made a custom magic <mirror<#fee>> that answers your questions. Feel free to <TALK<#fee>> to the mirror." ;
+
+   cc_room_hero : location "You are in your bedroom and see the <mirror<#fee>>. <TALK<#fee>> to the mirror if you have a question." ;
+
+   crispy_garden : location "You are in the Crispy Garden. You see trees where <chicken wings<#fee>> grow.";
+
+   living_room : location "You are in the common living room." ;
+
+   party_planet : location "You are in front of Party Game Planet, the gaming room. Maybe you should ENTER?" ;
+
+   party_planet_inside : location "You are inside the gaming room. The customers here are regulars." ;
+
+   wools_wheels : location "You are at Wool's Wheels, <Wool<#fee>>'s vehicle and ship repair area." ;
+
+}
+
+######################################
+#  Objects                           #
+######################################
+
+objects {
+
+chicken_tree : object "a typical <chicken tree<#fee>>" at = "crispy_garden" ;
+
+ee : scenery "TODO GLITCH  <pigeon E<#fee>>, a friend of June who made a few viral videos" ;
+
+june : scenery "TODO GLITCH inventor <June<#fee>>, who gifted the custom <mirror<#fee>> to CC" ;
+
+laptop : scenery "a <laptop<#fee>> computer" at = "living_room";
+
+laptop_unlocked : scenery "Florrie's <laptop<#fee>>" ;
+
+laptop_disappeared : scenery "nothing else" ;
+
+mirror : object "the <mirror<#fee>> June made for you" at = "cc_room";
+
+rud_happy : scenery "<RuD<#fee>>, who thanks to you, can finish the game then watch a Let's Play video";
+
+rud_sad : scenery "<RuD<#fee>>, who is almost always there" at = "party_planet_inside";
+
+seven_seas : scenery "one of the most data savvy robots, called <Seven Seas<#fee>> or <7Cs<#fee>>" at = "crispy_garden" ;
+
+wool : scenery "mechanic <Wool<#fee>>, who does all kinds of repair work here" at = "wools_wheels";
+
+}
+
+######################################
+#  Connections                       #
+######################################
+
+connections {
+
+   from, direction, to = [
+   cc_room, south, living_room,
+   living_room, west, wools_wheels,
+   wools_wheels, south, party_planet,
+   party_planet, enter, party_planet_inside,
+   party_planet, east, crispy_garden,
+   crispy_garden, north, living_room,
+   ]
+
+}
+
+######################################
+#  Barriers                          #
+######################################
+
+barriers {
+   block_laptop_wools_wheels : block_path {
+      from = living_room
+      to = wools_wheels
+      message  = Curiosity makes your mind more active and open to new ideas. That's why health professionals would recommend unlocking this computer for your personal growth.
+      block_when_exists = laptop
+
+   }
+
+   block_wool : block_path {
+      from = wools_wheels
+      to = party_planet
+      message  = Any internet superstar worthy of the name had to solve a certain number of puzzles first.
+      block_when_not = solved_wool_riddle
+      show_blocked_exit = true
+
+   }
+
+   block_leave_party_planet : block_path {
+      from = party_planet_inside
+      to = party_planet
+      message  = Please talk to RuD and show some compassion, he has to finish his game and cannot lose face.
+      block_when_not = can_leave_party_planet
+      show_blocked_exit = true
+
+   }
+
+   block_rud_sad : block_path {
+
+      from = party_planet
+      to = crispy_garden
+      message  = It's early in the morning, the garden is still closed.
+      block_when_exists = rud_sad
+      show_blocked_exit = true
+
+   }
+
+   block_seven_seas : block_path {
+      from = crispy_garden
+      to = living_room
+      message  = You should enjoy the view a little longer.
+      block_when_not = can_leave_crispy_garden
+      show_blocked_exit = true
+   }
+
+block_laptop_crispy_garden : block_path {
+      from = living_room
+      to = crispy_garden
+      message  = It's early in the morning, let's stay here for a bit.
+      block_when_exists = laptop
+      show_blocked_exit = true
+
+   }
+   block_laptop_unlocked_crispy_garden : block_path {
+      from = living_room
+      to = crispy_garden
+      message  = It's early in the morning, let's stay here for a bit.
+      block_when_exists = laptop_unlocked
+      show_blocked_exit = true
+
+   }
+
+}
+
+######################################
+#  On Startup                        #
+######################################
+
+on_startup {
+   : if (!sysvar_bool "sysvar_has_asked_sound") {
+      : print "CC's Road to Stardom uses background music.\n\nYou can lower the volume or stop the music at any moment using <SOUND LOWEST<#fdd>> or <SOUND OFF<#fdd>>.\n\nDo you wish to enable the music?\n";
+      : if (!sysvar_bool "sysvar_music_enabled") {
+         : print "You can enable the music at any moment with <SOUND ON<#fdd>>.";
+         : press_any_key;
+      }
+      : clear_screen;
+   }
+   : else_if (sysvar_bool "sysvar_music_enabled") {
+      : set_true "music_ever_enabled";
+      : if (sysvar_bool "sysvar_sound_enabled") {
+         : set_false "is_sound_muted";
+         : print "You can lower or stop the sound at any moment with <SOUND LOWEST<#fdd>> or <SOUND OFF<#fdd>>.\n";
+         : press_any_key;
+      }
+      : else {
+         : print "CC's Road to Stardom uses background music. You can enable the music at any moment with <SOUND ON<#fdd>> or <SOUND LOWEST<#fdd>> for lower volume.\n";
+         : press_any_key;
+      }
+   }
+   : print "Type <VERB NOUN<#fdd>> with the keyboard to advance in the game." ;
+   : if (is_mobile()) {
+      : print "You can touch some coloured words to copy them, or touch and hold to choose an action.";
+   }
+   : else {
+      : print "You can click some coloured words to copy them, or right-click to choose an action.";
+   }
+   : print "e.g. <EXAMINE PIGEON<#fdd>> (or <X<#fdd>>) to take a closer look at a PIGEON." ;
+   : print "<GET CHICKEN<#fdd>> to take CHICKEN and add it to your inventory." ;
+   : press_any_key ;
+   : print "To travel, type <NORTH<#fdd>>, <EAST<#fdd>>, <SOUTH<#fdd>>, <WEST<#fdd>> (or <N<#fdd>>, <E<#fdd>>, <S<#fdd>>, <W<#fdd>>), <ENTER<#fdd>>, <EXIT<#fdd>>, <UP<#fdd>>, <DOWN<#fdd>>." ;
+   : press_any_key ;
+   : print "To check your inventory, type <INVENTORY<#fdd>> (or <I<#fdd>>)." ;
+   : press_any_key ;
+   : print "To see available commands at a location, type <HELP<#fdd>>." ;
+   : press_any_key ;
+
+}
+
+######################################
+#  On Describe                       #
+######################################
+
+on_describe {
+   : if (is_at "living_room") {
+      : create "june";
+      : create "ee";
+      #  TODO
+   }
+
+   : if (is_at "cc_room_hero" ) {
+      : print "CONGRATULATIONS!" ;
+      : print "YOU FINISHED THE GAME!" ;
+      : press_any_key ;
+      : clear_screen;
+      : stop_music;
+      : win_game ;
+   }
+}
+
+######################################
+#  On Command                        #
+######################################
+
+on_command {
+   : match "follow _;about _; credit _; credits _; readme _"  {
+      : if ((verb_is "about" || verb_is "follow") && is_exists (s1())) {
+         : set_sentence {("examine "+ rationalized "noun1")};
+      }
+      : else {
+          : print "YOU CAN FOLLOW OR CHECK COSMOOSE EVERYWHERE: <cosmoose.org>[https://cosmoose.org]." ;
+      }
+   }
+   : match "get all;give all" {
+      : print "You don't have proper pockets, that's a little too much.";
+   }
+   : match "refresh _" {
+      : set_sentence "look";
+   }
+   : match "verb noun" {
+      : print "You need to type commands consisting in one verb or one verb and one noun, for example:\n\n>><EXAMINE<#fdd>>\n>><LOOK PIGEON<#fdd>>\n\nType <HELP<#fdd>> to have a summary of useful commands.";
+   }
+   : match "save cc" {
+      : print "We will do it!";
+   }
+   : match "examine mirror; touch mirror"  {
+      : if (is_at "cc_room") {
+         : print "A mirror inspired by antique Venetian aesthetics. Except the usual floral details have been replaced with feathers and bird shapes." ;
+      }
+   }
+   : match "talk mirror; talk -"   {
+      : if (is_at "cc_room") {
+         : print "To answer your question: " ;
+         : print "Will you become the most famous superstar of the Cosmooverse?" ;
+         : press_any_key ;
+         : clear_screen;
+         : print "No, the most famous superstar of the <Cosmooverse<#fee>> will be a <pigeon<#fee>>. Either musician <OK Feather<#fee>> or bling foodie traveller <E<#fee>>." ;
+         : print "That being said, I'm just a talking mirror, whereas you are the true master of your destiny. Follow your dreams or die trying! That's the lesson I learned from <Snow White<#fee>>." ;
+         : print "Wow I'm tired after talking so much, I'll take a break. You can replay my previous answer any time. Ciao!" ;
+         : press_any_key ;
+         : clear_screen;
+         : print "You wonder: why pigeons though? You need to investigate and make sure to become the most famous idol of the Cosmooverse! Let's go." ;
+         : press_any_key ;
+         : redescribe;
+      }
+   }
+   : match "examine cosmooverse"   {
+      : print "The universe where you live." ;
+   }
+   : match "examine ok"   {
+      : print "YOU CAN FOLLOW OR CHECK OK FEATHER EVERYWHERE: <okfeather.com>[https://www.okfeather.com]." ;
+   }
+   : match "examine e"   {
+      : print "E is a pigeon influencer. A good friend of June." ;
+   }
+   : match "examine florrie"  {
+       : print "Florrie is an AI programmer, she is currently busy preparing for a Pygeon programming certification." ;
+   }
+   : match "examine june"   {
+      : print "June is your inventor friend. She also makes a lot of music." ;
+   }
+   : match "examine pigeon; examine dove"   {
+      : print "Pigeons are wonderful creatures. If you are not convinced yet, check out how they saved Christmas here: <okfeather.itch.io/feathery-christmas>[https://okfeather.itch.io/feathery-christmas]." ;
+   }
+   : match "examine snow"   {
+      : print "Everyone in the Cosmooverse knows the story of Snow White. The shared destiny of two women wth seemingly nothing in common. One had unlimited beauty and ambition, while the other became a major figure of survivalism after pulling through a severe case of food poisoning." ;
+   }
+   : match "kill *" {
+      : if (is_carried (s1())) {
+         : print {("It would be a waste to "+original "verb" + " what I have taken!!!")};
+      }
+      : else_if (is_present (s1())) {
+         : print "The thought could never even start to cross my mind.";
+      }
+   }
+   : match "examine comment" {
+      : set_sentence "comment";
+   }
+   : match "comment _" {
+      : set_string var="string_tmp" {(substring {offset -> (strlen {(original "verb")}) string -> (command_text())})};
+      : if (string_tmp == "") {
+        : if (comments == "") {
+            : print "I have not made any <comment<#fdd>> yet";
+        }
+        : else {
+            : print "Here are all the comments I have made:{comments}";
+        }
+     }
+     : else {
+        : print "I'm adding that to my list of <comments<#fee>>.";
+        : set_string var="comments" {(comments + "\n<_<#000>>" + string_tmp)};
+     }
+
+   }
+   : match "drop *" {
+      : print "You don't need to drop anything.";
+   }
+   : match "cheat *" {
+      : print "Unknown verb - \"cheat\".";
+   }
+
+   : match "clear -; redescribe -" {
+        : redescribe;
+   }
+
+   : match "examine laptop; read laptop; use laptop"  {
+      : if (is_at "living_room") {
+         : print "This laptop belongs to <Florrie<#fee>>. The screen displays:" ;
+         : print "Password = answer to this riddle: " ;
+         : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
+         : print "Who am I? UNLOCK me!\' " ;
+      }
+   }
+    : match "unlock pigeon"  {
+      : if (is_at "living_room") {
+        : print "How can Florrie need clues to remember such an easy password??? " ;
+        : print "You wish you had never seen this... Florrie's browser history is nothing but..." ;
+        : print "PIGEONS!!!" ;
+        : print "Video \'TEQ Talk: Improve Office Efficiency\' shows a pigeon at a desk drinking a protein-packed cheese beverage, and then there's \'Learn Programming in Pighon with E\'... " ;
+        : print "How can you compete? So unfair!!!" ;
+        : destroy "laptop";
+        : create "laptop_unlocked";
+        : press_any_key;
+      }
+    }
+
+
+   : match "get laptop"  {
+      : if (is_at "living_room") {
+        : print "This is not your <laptop<#fee>>. <Florrie<#fee>> should need it soon." ;
+      }
+   }
+
+   : match "talk wool; talk -"   {
+      : if (is_at "wools_wheels") {
+         : print "Why pigeons are so popular?" ;
+         : print "I don't know, as I am not interested in physical entities. Only logic moves me." ;
+         : press_any_key ;
+         : clear_screen;
+         : print "Check out this puzzle for instance. I'll give you an easy version: " ;
+         : print "An albatross, a bald eagle and a chicken each wear a hat. They see the colors of the others’ hats but not their own. " ;
+         : print "Their hats were randomly drawn among five hats, three red ones and two blue ones. " ;
+         : print "The albatross is asked to guess its hat color, but responds \'No idea\'. The bald eagle cannot guess its color either." ;
+         : print "Then the chicken says \'I know my color\'. Which one is it? Type GUESS color." ;
+         : press_any_key ;
+      }
+   }
+
+   : match "examine wool"   {
+      : print "Wool is a mysterious mechanic who can repair anything. Not very talkative, but can be a bit judgemental." ;
+   }
+
+   :match "guess red"  {
+      : if (is_at "wools_wheels") {
+         : print "Correct. The chicken's hat is red of course.";
+         : set_true "solved_wool_riddle";
+         : print "Alright, maybe answering riddles is one way to become famous? You should try with someone else. Let's go.";
+      }
+   }
+
+   : match "talk rud; talk -"  {
+      : if (is_present "rud_sad" && is_at "party_planet_inside") {
+         : print "RuD greets you warmly: \'CC!!! You look so cute today!!!!\', then begins to whisper:" ;
+         : print "\'I'm in great trouble CC. I made a bet with Wool that I'd reach the Diamond Rank in Tweet Fighter before the season ends, but the deadline is today!" ;
+         : print "Look: it's supposed to be a fighting game, but now there's this P.U.Z.Z.L.E. thing that's blocking the next level. What's that??? Not fair! Can you HELP me? I only have 10 cans left of Red Gull, but I'll let you take one!\'" ;
+      }
+   }
+
+   : match "examine rud"  {
+       : if (is_present "rud_sad" && is_at "party_planet_inside") {
+         : print "RuD looks a bit sadder than usual. A future idol could surely cheer him up!" ;
+       }
+   }
+
+   : match "examine rud"  {
+       : if (is_present "rud_happy" && is_at "party_planet_inside") {
+         : print "RuD is always working hard to beat his highest score." ;
+       }
+   }
+
+   : match "help rud"  {
+       : if (is_present "rud_sad" && is_at "party_planet_inside") {
+         : print "TODO: puzzle similar to: <layton.fandom.com/wiki/Puzzle:Room_of_Doom>[https://layton.fandom.com/wiki/Puzzle:Room_of_Doom] " ;
+         : set_true "can_leave_party_planet";
+         : destroy "rud_sad";
+         : create "rud_happy";
+         : print "RuD says: \'Nice, next time I'll definitely watch a Let's Play walkthrough before!\'. " ;
+         : print "He doesn't look too admirative of your brilliance, as he's already back to playing." ;
+         : print "Maybe solving puzzles is not enough for eternal stardom, let's see if there are other options." ;
+       }
+   }
+
+   : match "take road"  {
+      : if (is_at "party_planet" && is_exists "rud_sad") {
+         : print "You can't right now, it's too early.";
+      }
+   }
+
+   : match "give laptop"  {
+      : if (is_at "living_room") {
+         : print "This is not your <laptop<#fee>>." ;
+      }
+   }
+
+   : match "show compassion"  {
+      : if (is_at "party_planet_inside") {
+         : print "RuD looks at you with glassy eyes and opens another can of energy drink." ;
+      }
+   }
+
+   : match "get chicken; taste chicken; grab chicken; seize chicken"  {
+      : if (is_at "crispy_garden") {
+        : print "You try one of the chicken wings on the tree. It tastes crispy and juicy, it's full of vitamins and grows really fast." ;
+      }
+   }
+
+   : match "examine chicken; examine tree"  {
+      : if (is_at "crispy_garden") {
+        : print "Everyone loves chicken trees here. The sweet smell of wings drums and flats evokes summertime." ;
+      }
+   }
+
+   : match "examine seven"  {
+       : if (is_at "crispy_garden") {
+         : print "Seven Seas is the walking encyclopedia we all dream of living with. An AI who can analyze any set of data. She <sings<#fee>> during her free time." ;
+       }
+   }
+
+   : match "talk seven"  {
+       : if (is_at "crispy_garden") {
+         : print "Seven Seas says: \'Pigeons will dominate online stardom? That does not coincide with the data I have!" ;
+         : print "To become a successful online entertainer, one must not only upload regular content with professional editing, but also find a unique style and niche audience! It's a lot of work!\'" ;
+         : print "Sounds really dull. Let's ask Seven Seas who's the most famous star right now, it will very likely contradict what she just said." ;
+         : print "\'Hey CC, you look bored. Why don't you try to find out by yourself? \'" ;
+         : press_any_key ;
+         : clear_screen;
+         : print "\'The four current most popular online hosts are:" ;
+         : print "\'beats to mow the lawn to\', a music DJ" ;
+         : print "\'C-Cherries\', introducing movie trailers" ;
+         : print "\'DewDieDie\', a video game expert" ;
+         : print "\'8k-Minute Recipes\', a cooking enthusiast." ;
+         : print "3 of them are equally popular, but there is only 1 number one!" ;
+         : print "You can compare them pairwise. What is the minimal number of pair comparisons you need to determine who is number one? GUESS the number!\'" ;
+         }
+   }
+
+   : match "guess two; guess 2"  {
+       : if (is_at "crispy_garden") {
+         : print "Indeed, you need 2 comparisons at least. In this case, 8k-Minute Recipes and DewDieDie have the same success. But DewDieDie has been beaten by C-Cherries, who is therefore the most successful star." ;
+         : print "C-Cherries looks very wealthy. That's probably the main explanation for this incredible success." ;
+         : set_true "can_leave_crispy_garden" ;
+         : set_true "can_create_june_e" ;
+         : press_any_key ;
+         : redescribe ;
+       }
+   }
+
+   : match "sing _" {
+      : if (is_present "seven_seas") {
+        : print "Seven Seas starts to sing: \'I have a dream, about a place I wanna go...\' but suddenly takes a louder deeper voice and frenetically repeats \'DAPHNE DAPHNE DAPHNE...\'." ;
+      }
+      : else_if (is_present "rud_sad") {
+        : print "RuD sings Cosmoose's hit \'Release Me\': \'If we'll make it outta here, I'll need a vacation \'" ;
+      }
+      : else_if (is_present "rud_happy") {
+        : print "RuD sings Cosmoose's hit \'I wanna conquer youuuuu yeah!\'. Who knew he had such golden pipes?" ;
+      }
+      : else_if (is_present "wool") {
+        : print "Wool sings \'Time to clap your hands, clap your hands and GO!\'. Who knew he liked mainstream music?" ;
+      }
+      : else_if (is_present "june" && is_present "ee") {
+        : print "June and E sing OK Feather's hit \'Coocoo Cafe\'. You can listen to this song at the end of the game <Feathery Christmas>[https://okfeather.itch.io/feathery-christmas]." ;
+      }
+      : else {
+         : print "You start singing your favourite viral song, \"Cosmoose Gang\".";
+      }
+   }
+
+   : match "x fresh; x air; x smell; get fresh; get air; x smell; smell _"  {
+      : if (is_at "cc_room") {
+         : print "Let's <exit<#fdd>> and get some fresh air.";
+      }
+      : else_if (is_at "party_planet_inside") {
+         : print "The mixed smell of spilled energy drinks and crisps really makes me want to cook a proper meal.";
+      }
+      : else {
+         : print "It's nice to get some fresh air.";
+      }
+   }
+
+   : match "talk june"  {
+      : print "TODO June says: \'Wanna try my Pigeoshop software? You can then transform any face or body into a realistic pigeon!" ;
+      : print "Florrie uses it all the time. Well, she has no choice because I secretly hacked her laptop, but her password is so easy to remember! \'" ;
+      : print "OK... That explains why Florrie's browsing history was only about pigeons. So the mirror was lying?" ;
+      : press_any_key ;
+      : clear_screen;
+      : print "\'Does the mirror I gave you always tell the whole truth? Well no machine can tell the whole truth! " ;
+      : print "Otherwise the world would be forever at peace, don't you think? However, what I know for sure is MY TRUTH!" ;
+      : print "In my eyes, pigeons will always be my number one idols.\'" ;
+      : print "Wow, why does it feel like today was a very wasteful day?" ;
+   }
+
+   : match "talk e"  {
+      : print "TODO \'The secret of my viral videos?" ;
+      : print "Being completely invested and passionate about what I do. My patrons send me coupons to try new pizzas, and I document my experience spending these coupons. " ;
+      : print "Sometimes I receive 50 coupons the same day, but I am always committed to using every fresh daily coupon. I think my dedication is what brings happiness to my fans." ;
+      : print "One fan gifted me this gold necklace with my name, I will always cherish it." ;
+      : print "And you know it's a real job, you don't just do this for yourself. One subscriber called RuDenergy paid a hefty amount to see a comparison review of different energy drinks." ;
+      : print "How to describe these beverages... My disappointment was immeasurable and my day was ruined. But sometimes your fans are more important, and it was good money.\'" ;
+      : print "TODO: finish the game" ;
+   }
+
+   : match "examine yourself; talk yourself"  {
+      : print "You are so cute. If only you could be everywhere at once so the world could see your cuteness. This is why your goal is to become a superstar." ;
+   }
+
+   : match "help -" {
+       : print "- Type '<I<#fdd>>' to see what you are holding";
+       : print "- Type '<GET<#fdd>> <objectname<#fee>>' to pick up an item";
+       : print "- Type '<GIVE<#fdd>> <objectname<#fee>>' to give an object to someone";
+       : print "- Type '<X<#fdd>>' or '<X<#fdd>> <objectname<#fee>>' to examine clues";
+       : print "- Type <N<#fdd>>, <S<#fdd>>, <E<#fdd>>, <W<#fdd>>, <UP<#fdd>>, <DOWN<#fdd>>, <ENTER<#fdd>>, <EXIT<#fdd>> to move";
+       : print "- Type '<LOAD<#fdd>>' or  '<SAVE<#fdd>>' to load or save a game";
+       : print "- Type '<QUIT<#fdd>>' to restart a game";
+   }
+
+   : match "examine -"  {
+      : if (is_at "cc_room") {
+         : print "This room is so cute, just like me." ;
+      }
+   }
+}
