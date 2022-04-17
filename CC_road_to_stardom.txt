@@ -97,6 +97,23 @@ locations {
 }
 
 ######################################
+#  Connections                       #
+######################################
+
+connections {
+
+   from, direction, to = [
+   cc_room, south, living_room,
+   living_room, west, wools_wheels,
+   wools_wheels, south, party_planet,
+   party_planet, enter, party_planet_inside,
+   party_planet, east, crispy_garden,
+   crispy_garden, north, living_room,
+   ]
+
+}
+
+######################################
 #  Objects                           #
 ######################################
 
@@ -123,23 +140,6 @@ rud_sad : scenery "<RuD<#fee>>, who is almost always there" at = "party_planet_i
 seven_seas : scenery "one of the most data savvy robots, called <Seven Seas<#fee>> or <7Cs<#fee>>" at = "crispy_garden_7Cs" ;
 
 wool : scenery "mechanic <Wool<#fee>>, who does all kinds of repair work here" at = "wools_wheels";
-
-}
-
-######################################
-#  Connections                       #
-######################################
-
-connections {
-
-   from, direction, to = [
-   cc_room, south, living_room,
-   living_room, west, wools_wheels,
-   wools_wheels, south, party_planet,
-   party_planet, enter, party_planet_inside,
-   party_planet, east, crispy_garden,
-   crispy_garden, north, living_room,
-   ]
 
 }
 
