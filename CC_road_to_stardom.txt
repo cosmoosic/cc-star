@@ -7,7 +7,7 @@ game_settings {
    enable_standard_all_behaviour = false
 }
 
-
+loading_screen = loading_screen
 redescribe = auto_beta
 
 start_at = cc_room
@@ -57,9 +57,19 @@ booleans {
    can_create_june_e : boolean "false";
 }
 
+integers {
+   pitch_random : integer "0";
+}
+
 strings {
-   comments : string "";
+   next_track : string "";
+   current_track : string "";
+   sound_volume : string "normal";
    string_tmp : string "";
+   comments : string "";
+   nothing_message : string "";
+   string_correction : string "";
+
 }
 
 ######################################
@@ -73,6 +83,8 @@ locations {
    cc_room_hero : location "You are in your bedroom and see the <mirror<#fee>>. <TALK<#fee>> to the mirror if you have a question." ;
 
    crispy_garden : location "You are in the Crispy Garden. You see trees where <chicken wings<#fee>> grow.";
+
+   crispy_garden_7Cs : location "You are in the Crispy Garden. You see trees where <chicken wings<#fee>> grow.";
 
    living_room : location "You are in the common living room." ;
 
@@ -108,7 +120,7 @@ rud_happy : scenery "<RuD<#fee>>, who thanks to you, can finish the game then wa
 
 rud_sad : scenery "<RuD<#fee>>, who is almost always there" at = "party_planet_inside";
 
-seven_seas : scenery "one of the most data savvy robots, called <Seven Seas<#fee>> or <7Cs<#fee>>" at = "crispy_garden" ;
+seven_seas : scenery "one of the most data savvy robots, called <Seven Seas<#fee>> or <7Cs<#fee>>" at = "crispy_garden_7Cs" ;
 
 wool : scenery "mechanic <Wool<#fee>>, who does all kinds of repair work here" at = "wools_wheels";
 
@@ -206,6 +218,7 @@ block_laptop_crispy_garden : block_path {
 on_startup {
    : if (!sysvar_bool "sysvar_has_asked_sound") {
       : print "CC's Road to Stardom uses background music.\n\nYou can lower the volume or stop the music at any moment using <SOUND LOWEST<#fdd>> or <SOUND OFF<#fdd>>.\n\nDo you wish to enable the music?\n";
+      : gosub "set_sound_on";
       : if (!sysvar_bool "sysvar_music_enabled") {
          : print "You can enable the music at any moment with <SOUND ON<#fdd>>.";
          : press_any_key;
@@ -224,6 +237,8 @@ on_startup {
          : press_any_key;
       }
    }
+   : gosub "update_volume";
+   : play_music "music_beat_2";
    : print "Type <VERB NOUN<#fdd>> with the keyboard to advance in the game." ;
    : if (is_mobile()) {
       : print "You can touch some coloured words to copy them, or touch and hold to choose an action.";
@@ -241,6 +256,90 @@ on_startup {
    : print "To see available commands at a location, type <HELP<#fdd>>." ;
    : press_any_key ;
 
+}
+
+######################################
+#  Subroutines                       #
+######################################
+
+subroutines {
+   set_sound_on : subroutine {
+      : if (!sysvar_bool "sysvar_sound_enabled") {
+         : ask_permission ask_again_and_again = "true" category = "sound" ;
+      }
+      : if (sysvar_bool "sysvar_sound_enabled" && !sysvar_bool "sysvar_music_enabled") {
+            : ask_permission ask_again_and_again = "true" category = "music" ;
+      }
+      : if (sysvar_bool "sysvar_music_enabled") {
+         : set_false "is_sound_muted";
+         : gosub "update_volume";
+         : set_true "music_ever_enabled";
+      }
+   }
+   random_music : subroutine {
+      : if (is_sound_muted) {
+         : return;
+      }
+      : store_random var = "pitch_random";
+      : if (pitch_random < 20) {
+        :  beep millis="200" pitch="30";
+      }
+      : else_if (pitch_random < 40) {
+        :  beep millis="200" pitch="33";
+      }
+      : else_if (pitch_random < 60) {
+        :  beep millis="200" pitch="36";
+      }
+      : else_if (pitch_random < 80) {
+        :  beep millis="200" pitch="39";
+      }
+      : else {
+        :  beep millis="200" pitch="42";
+      }
+   }
+   play_music : subroutine {
+      : if (is_sound_muted) {
+         : return;
+      }
+      : if (is_at "cc_room") {
+         : set_string var="next_track" text="music_beat_2";
+         : if (next_track != current_track) {
+            : play_music "music_beat_2";
+         }
+      }
+      : else_if (is_at "wools_wheels" || is_at "party_planet_inside" ) {
+         : set_string var="next_track" text="music_beat_1";
+         : if (next_track != current_track) {
+            : if (chance(50)) {
+               : play_music "music_beat_1";
+            }
+            : else {
+               : play_music "music_beat_1";
+            }
+         }
+      }
+      : set_string var="current_track" {(next_track)}
+   }
+   update_volume : subroutine {
+      : if (is_sound_muted) {
+         : set_music_vol volume="0";
+      }
+      : else_if (sound_volume == "lowest") {
+         : set_music_vol volume="3";
+      }
+      : else_if (sound_volume == "low") {
+         : set_music_vol volume="7";
+      }
+      : else_if (sound_volume == "normal") {
+         : set_music_vol volume="16";
+      }
+      : else_if (sound_volume == "high") {
+         : set_music_vol volume="40";
+      }
+      : else_if (sound_volume == "highest") {
+         : set_music_vol volume="100";
+      }
+   }
 }
 
 ######################################
@@ -594,5 +693,28 @@ on_command {
       : if (is_at "cc_room") {
          : print "This room is so cute, just like me." ;
       }
+   }
+}
+
+######################################
+#  Assets                     #
+######################################
+
+assets {
+   sounds {
+      music_beat_1 : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat_1.mp3" ;
+      music_beat_2 : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat_2_ccs_room.mp3" ;
+   }
+   graphics {
+      cc_room : png "https://cosmoosic.github.io/adventuron_april_2022/Images/cc_room.png" ;
+      crispy_garden : png "https://cosmoosic.github.io/adventuron_april_2022/Images/crispy_garden_no7Cs.png" {
+        : if (is_at "crispy_garden_7Cs") {
+               : overlay "crispy_garden_7Cs";
+        }
+      } ;
+      crispy_garden_7Cs : png "https://cosmoosic.github.io/adventuron_april_2022/Images/crispy_garden_7Cs.png" ;
+      living_room : png "https://cosmoosic.github.io/adventuron_april_2022/Images/common_room.png" ;
+      loading_screen : png "https://cosmoosic.github.io/adventuron_april_2022/Images/loading.png" ;
+      party_planet_inside : png "https://cosmoosic.github.io/adventuron_april_2022/Images/rud.png" ;
    }
 }
