@@ -43,7 +43,7 @@ redescribe = auto_beta
 start_at = cc_room
 
 vocabulary {
-   : verb / aliases = [examine, check, regarde]
+   : verb / aliases = [examine, check, regarde, touch]
    : verb / aliases = [give, show]
    : verb / aliases = [up, upstair, upstairs]
    : verb / aliases = [down, downstair, downstairs]
@@ -66,6 +66,8 @@ vocabulary {
    : noun      / aliases = [child, children, kid]
    : noun      / aliases = [comment, note]
    : noun      / aliases = [bird, dove]
+   : noun      / aliases = [mirror, glass, reflection]
+   : noun      / aliases = [garden, park, yard, lawn, land, plot]
    : noun      / aliases = [fight, combat, conflict]
    : noun      / aliases = [floor, ground, flooring]
    : noun      / aliases = [up, upstair, upstairs]
@@ -168,6 +170,8 @@ laptop_unlocked : scenery "Florrie's <laptop<#fee>>" ;
 
 laptop_disappeared : scenery "nothing else" ;
 
+map : object "a <map<#fdd>> of the ship" at = "cc_room";
+
 mirror : object "the <mirror<#fee>> June made for you" at = "cc_room";
 
 rud_happy : scenery "<RuD<#fee>>, who thanks to you, can finish the game then watch a Let's Play video";
@@ -233,7 +237,7 @@ block_living_room_to_crispy_garden : block_path {
       from = living_room
       to = crispy_garden
       message  = It's early in the morning, let's stay here for a bit.
-      block_when_not = can_create_june_e
+      block_when_not_exists = seven_seas
       show_blocked_exit = true
    }
 }
@@ -400,6 +404,9 @@ on_command {
    }
    : match "get all;give all" {
       : print "You don't have proper pockets, that's a little too much.";
+      : if (is_at "cc_room") {
+         : print "You are not a baby anymore. No need to take all these toys with you." ;
+      }
    }
    : match "refresh _" {
       : set_sentence "look";
@@ -410,9 +417,50 @@ on_command {
    : match "save cc" {
       : print "We will do it!";
    }
-   : match "examine mirror; touch mirror"  {
+   : match "examine mirror"  {
       : if (is_at "cc_room") {
          : print "A mirror inspired by antique Venetian aesthetics. Except the usual floral details have been replaced with feathers and bird shapes." ;
+      }
+   }
+   : match "examine star"  {
+      : if (is_at "cc_room") {
+         : print "You are definitely going to become the number one idol of the Cosmooverse! This star is a gentle reminder." ;
+      }
+   }
+   : if (is_present "map" && !is_carried "map" && is_at "cc_room") {
+      : match "get map" {
+        : print "You may be growing up quickly, you still have a lot to learn. This <map<#fee>> may be useful. You take it!";
+        : pocket "map";
+        : press_any_key;
+      }
+      : match "exit _" {
+         : mask {
+            : print "You may be growing up quickly, you still have a lot to learn. This <map<#fee>> may be useful. You take it!";
+            : pocket "map";
+            : press_any_key;
+
+         }
+      }
+   }
+   : match "examine map; map _; use map" {
+      : if (is_carried "map") {
+          : set_theme "theme_mono";
+          : clear_screen;
+          : print {("^n^^c^<______<#000>><________<#000>>|<CC's Bedroom<#" + (is_at "cc_room"?"afa" : "faa")+">>|")};
+          : print "^n^^c^--------------------------";
+          : print {("^n^^c^|<Wool's Wheels<#" + (is_at "wools_wheels"?"afa" : "faa")+">>| <Common Room<#" + (is_at "living_room"?"afa" : "faa")+">>|")};
+          : print "^n^^c^--------------------------";
+          : print {("^n^^c^|<Party Planet<#" + (is_at "party_planet"?"afa" : "faa")+">><_<#000>>| <Crispy Yard<#" + (is_at "crispy_garden"?"afa" : "faa")+">>|")};
+          : print "^n^^c^--------------------------";
+          : print {("^n^^c^⬇<_____________<#000>>")};
+          : print {("^n^^c^<Inside<#" + (is_at "party_planet_inside"?"afa" : "aaf")+">><_____________<#000>>")};
+
+          : press_any_key;
+          : set_theme "theme_base";
+          : redescribe;
+      }
+      : else_if (is_present "map") {
+         : print "A <map<#fee>> of the ship, could it be useful?";
       }
    }
    : match "talk mirror; talk -"   {
