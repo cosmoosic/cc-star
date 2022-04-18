@@ -1,4 +1,34 @@
 ######################################
+#  Adventuron                        #
+######################################
+
+game_information {
+   game_name                    = CC's Road to Stardom
+   game_version                 = 1.0.0
+   game_shortname               = CC Star
+   written_by                   = OK Feather
+   uuid                         = 910e5474-beef-11ec-9d64-0242ac120002
+   year_of_release              = 2022
+   short_synopsis               = Help half-cat half-bunny, 100% cute CC become an online idol!
+}
+
+themes {
+  theme_base : theme {
+      colors {
+         exit_list_item_pen = #fdd
+      }
+      lister_exits {
+         is_list_enter = true
+      }
+  }
+  theme_mono : theme {
+      theme_settings {
+         font = daad
+      }
+   }
+}
+
+######################################
 #  Game Settings                     #
 ######################################
 
