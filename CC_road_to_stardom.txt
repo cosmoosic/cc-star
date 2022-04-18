@@ -128,11 +128,9 @@ locations {
 
    cc_room : location "Hello CC! This is your bedroom, typical of rooms in spaceships nowadays. Today is your birthday, so your inventor friend <June<#fee>> made a custom magic <mirror<#fee>> that answers your questions. Feel free to <TALK<#fee>> to the mirror." ;
 
-   cc_room_hero : location "You are in your bedroom and see the <mirror<#fee>>. <TALK<#fee>> to the mirror if you have a question." ;
+   cc_room_hero : location "Everybody is here, finally we can eat cake!" ;
 
    crispy_garden : location "You are in the Crispy Garden. You see trees where <chicken wings<#fee>> grow.";
-
-   crispy_garden_7Cs : location "You are in the Crispy Garden. You see trees where <chicken wings<#fee>> grow.";
 
    florrie_laptop : location "You are in front of Florrie's laptop. Can you <UNLOCK<#fee>> or <TYPE<#fee>> her password?";
 
@@ -200,7 +198,7 @@ barriers {
       from = living_room
       to = wools_wheels
       message  = Curiosity makes your mind more active and open to new ideas. That's why health professionals would recommend unlocking this computer for your personal growth.
-      block_when_exists = laptop
+      block_when_not = is_laptop_unlocked
 
    }
 
@@ -345,17 +343,48 @@ subroutines {
             : play_music "music_beat_2";
          }
       }
-      : else_if (is_at "wools_wheels" || is_at "party_planet_inside" ) {
-         : set_string var="next_track" text="music_beat_1";
+      : else_if (is_at "party_planet" || is_at "florrie_laptop") {
+         : set_string var="next_track" text="music_short";
          : if (next_track != current_track) {
             : if (chance(50)) {
-               : play_music "music_beat_1";
+               : play_music "music_living_room";
             }
             : else {
-               : play_music "music_beat_1";
+               : play_music "music_wools_wheels";
             }
          }
       }
+      : else_if (is_at "wools_wheels") {
+         : set_string var="next_track" text="music_beat_1";
+         : if (next_track != current_track) {
+            : play_music "music_beat_1";
+         }
+      }
+      : else_if (is_at "crispy_garden") {
+         : set_string var="next_track" text="music_crispy_garden";
+         : if (next_track != current_track) {
+            : play_music "music_crispy_garden";
+         }
+      }
+      : else_if (is_at "living_room") {
+         : set_string var="next_track" text="music_living_room";
+         : if (next_track != current_track) {
+            : play_music "music_living_room";
+         }
+      }
+      : else_if (is_at "party_planet_inside") {
+         : set_string var="next_track" text="music_party_planet_inside";
+         : if (next_track != current_track) {
+            : play_music "music_party_planet_inside";
+         }
+      }
+      : else_if (is_at "cc_room_hero") {
+         : set_string var="next_track" text="music_win";
+         : if (next_track != current_track) {
+            : play_music "music_win";
+         }
+      }
+
       : set_string var="current_track" {(next_track)}
    }
    update_volume : subroutine {
@@ -385,7 +414,7 @@ subroutines {
 ######################################
 
 on_describe {
-
+   : gosub "play_music";
    : if (is_at "cc_room_hero" ) {
       : print "CONGRATULATIONS!" ;
       : print "YOU FINISHED THE GAME!" ;
@@ -575,10 +604,7 @@ on_command {
 
    : match "examine laptop; read laptop; use laptop"  {
       : if (is_at "living_room" && !is_laptop_unlocked) {
-         : print "This laptop belongs to <Florrie<#fee>>. The screen displays:" ;
-         : print "Password = answer to this riddle: " ;
-         : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
-         : print "Who am I? UNLOCK me!\' " ;
+         : print "This laptop belongs to <Florrie<#fee>>." ;
          : goto "florrie_laptop";
       }
       : if (is_at "living_room" && is_laptop_unlocked) {
@@ -844,6 +870,12 @@ on_command {
       : print "You are so cute. If only you could be everywhere at once so the world could see your cuteness. This is why your goal is to become a superstar." ;
    }
 
+   : match "cheat win" {
+      # TODO
+      : print "TODO" ;
+      : goto "cc_room_hero" ;
+   }
+
    : match "help -" {
        : print "- Type '<I<#fdd>>' to see what you are holding";
        : print "- Type '<GET<#fdd>> <objectname<#fee>>' to pick up an item";
@@ -887,6 +919,12 @@ assets {
    sounds {
       music_beat_1 : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat_1.mp3" ;
       music_beat_2 : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat_2_ccs_room.mp3" ;
+      music_wools_wheels : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi2_wool.mp3" ;
+      music_living_room : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi3_livingroom.mp3" ;
+      music_party_planet_inside : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi4_partyplanet.mp3" ;
+      music_party_planet_outside: sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi8_party_planet_outside.mp3" ;
+      music_crispy_garden : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi10_crispy.mp3" ;
+      music_win : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/funprio.mp3" ;
    }
    graphics {
       cc_room : png "https://cosmoosic.github.io/adventuron_april_2022/Images/cc_room.png" ;
