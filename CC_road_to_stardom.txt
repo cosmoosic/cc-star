@@ -58,6 +58,7 @@ vocabulary {
    : verb / aliases = [kill,threaten,menace,intimidate,browbeat,bully,scare,frighten,terrorize,murder,assassinate,beat,fight,combat,hurt,kick,harm,injure,insult]
    : verb / aliases = ["cry", ":(","=(", "='(", ":'("]
    : verb / aliases = ["smile", "grin", "laugh", ":)","=)",":D","=D"]
+   : verb / aliases = [unlock, password]
    : noun      / aliases = [bread, croissant, pain, cookie, loaf, biscuit]
    : noun      / aliases = [cafe, coocoo, shop, restaurant]
    : noun      / aliases = [owner, vendor]
@@ -151,9 +152,9 @@ objects {
 
 chicken_tree : object "a typical <chicken tree<#fee>>" at = "crispy_garden" ;
 
-ee : scenery "TODO GLITCH  <pigeon E<#fee>>, a friend of June who made a few viral videos" ;
+ee : scenery "<pigeon E<#fee>>, a friend of June who made a few viral videos" ;
 
-june : scenery "TODO GLITCH inventor <June<#fee>>, who gifted the custom <mirror<#fee>> to CC" ;
+june : scenery "inventor <June<#fee>>, who gifted the custom <mirror<#fee>> to CC" ;
 
 laptop : scenery "a <laptop<#fee>> computer" at = "living_room";
 
@@ -377,11 +378,6 @@ subroutines {
 ######################################
 
 on_describe {
-   : if (is_at "living_room") {
-      : create "june";
-      : create "ee";
-      #  TODO
-   }
 
    : if (is_at "cc_room_hero" ) {
       : print "CONGRATULATIONS!" ;
@@ -645,6 +641,8 @@ on_command {
          : print "C-Cherries looks very wealthy. That's probably the main explanation for this incredible success." ;
          : set_true "can_leave_crispy_garden" ;
          : set_true "can_create_june_e" ;
+         : create "june" target = "living_room";
+         : create "ee" target = "living_room";
          : press_any_key ;
          : redescribe ;
        }
