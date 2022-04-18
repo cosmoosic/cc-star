@@ -9,7 +9,7 @@ game_information {
    written_by                   = OK Feather
    uuid                         = 910e5474-beef-11ec-9d64-0242ac120002
    year_of_release              = 2022
-   short_synopsis               = Help half-cat half-bunny, 100% cute CC become an online idol!
+   short_synopsis               = Help 50% cat, 50% bunny, 100% cute CC become an online idol!
 }
 
 themes {
@@ -58,20 +58,25 @@ vocabulary {
    : verb / aliases = [kill,threaten,menace,intimidate,browbeat,bully,scare,frighten,terrorize,murder,assassinate,beat,fight,combat,hurt,kick,harm,injure,insult]
    : verb / aliases = ["cry", ":(","=(", "='(", ":'("]
    : verb / aliases = ["smile", "grin", "laugh", ":)","=)",":D","=D"]
-   : verb / aliases = [unlock, password]
+   : verb / aliases = [unlock, password, pass]
    : noun      / aliases = [bread, croissant, pain, cookie, loaf, biscuit]
    : noun      / aliases = [cafe, coocoo, shop, restaurant]
    : noun      / aliases = [owner, vendor]
    : noun      / aliases = [pigeon]
-   : noun      / aliases = [yourself, cc, myself, me]
    : noun      / aliases = [child, children, kid]
    : noun      / aliases = [comment, note]
    : noun      / aliases = [bird, dove]
-   : noun      / aliases = [fight,combat,conflict]
+   : noun      / aliases = [fight, combat, conflict]
    : noun      / aliases = [floor, ground, flooring]
-   : noun      / aliases = [up,upstair]
-   : noun      / aliases = [laptop,computer]
-   : noun      / aliases = [seven,7,7C,7Cs,sevenseas]
+   : noun      / aliases = [up, upstair, upstairs]
+   : noun      / aliases = [laptop, computer]
+   : noun      / aliases = [seven, 7, 7C, 7Cs, sevenseas, daphne, robot]
+   : noun      / aliases = [rud, ru, duri, dhxp, gamer]
+   : noun      / aliases = [wool, woolion, mechanic, lion]
+   : noun      / aliases = [june, inventor, jjyy]
+   : noun      / aliases = [florrie, flora]
+   : noun      / aliases = [e, ee, etana]
+   : noun      / aliases = [yourself, cc, myself, me]
 }
 
 ######################################
@@ -86,6 +91,7 @@ booleans {
    music_ever_enabled : boolean "false";
    solved_wool_riddle : boolean "false";
    can_create_june_e : boolean "false";
+   is_seven_seas_crispy : boolean "true";
 }
 
 integers {
@@ -168,7 +174,7 @@ rud_happy : scenery "<RuD<#fee>>, who thanks to you, can finish the game then wa
 
 rud_sad : scenery "<RuD<#fee>>, who is almost always there" at = "party_planet_inside";
 
-seven_seas : scenery "one of the most data savvy robots, called <Seven Seas<#fee>> or <7Cs<#fee>>" at = "crispy_garden_7Cs" ;
+seven_seas : scenery "one of the most data savvy robots, called <Seven Seas<#fee>> or <7Cs<#fee>>" ;
 
 wool : scenery "mechanic <Wool<#fee>>, who does all kinds of repair work here" at = "wools_wheels";
 
@@ -223,23 +229,13 @@ barriers {
       show_blocked_exit = true
    }
 
-block_laptop_crispy_garden : block_path {
+block_living_room_to_crispy_garden : block_path {
       from = living_room
       to = crispy_garden
       message  = It's early in the morning, let's stay here for a bit.
-      block_when_exists = laptop
+      block_when_not = can_create_june_e
       show_blocked_exit = true
-
    }
-   block_laptop_unlocked_crispy_garden : block_path {
-      from = living_room
-      to = crispy_garden
-      message  = It's early in the morning, let's stay here for a bit.
-      block_when_exists = laptop_unlocked
-      show_blocked_exit = true
-
-   }
-
 }
 
 ######################################
@@ -515,6 +511,13 @@ on_command {
       }
     }
 
+    : match "unlock dove"  {
+      : if (is_at "living_room") {
+        : print "Almost there, too bad there can only be one password." ;
+        : press_any_key;
+      }
+    }
+
 
    : match "get laptop"  {
       : if (is_at "living_room") {
@@ -578,6 +581,8 @@ on_command {
          : print "RuD says: \'Nice, next time I'll definitely watch a Let's Play walkthrough before!\'. " ;
          : print "He doesn't look too admirative of your brilliance, as he's already back to playing." ;
          : print "Maybe solving puzzles is not enough for eternal stardom, let's see if there are other options." ;
+         : set_true "is_seven_seas_crispy" ;
+         : create "seven_seas" target = "crispy_garden" ;
        }
    }
 
@@ -682,6 +687,7 @@ on_command {
    }
 
    : match "talk june"  {
+      : set_false "is_seven_seas_crispy" ;
       : print "TODO June says: \'Wanna try my Pigeoshop software? You can then transform any face or body into a realistic pigeon!" ;
       : print "Florrie uses it all the time. Well, she has no choice because I secretly hacked her laptop, but her password is so easy to remember! \'" ;
       : print "OK... That explains why Florrie's browsing history was only about pigeons. So the mirror was lying?" ;
@@ -694,6 +700,7 @@ on_command {
    }
 
    : match "talk e"  {
+      : set_false "is_seven_seas_crispy" ;
       : print "TODO \'The secret of my viral videos?" ;
       : print "Being completely invested and passionate about what I do. My patrons send me coupons to try new pizzas, and I document my experience spending these coupons. " ;
       : print "Sometimes I receive 50 coupons the same day, but I am always committed to using every fresh daily coupon. I think my dedication is what brings happiness to my fans." ;
@@ -721,6 +728,21 @@ on_command {
       : if (is_at "cc_room") {
          : print "This room is so cute, just like me." ;
       }
+      : if (is_at "crispy_garden") {
+         : print "It's quite warm in here." ;
+      }
+      : if (is_at "living_room") {
+         : print "This room has everything, from nature to technology, and what a nice view on the neighboring planets." ;
+      }
+      : if (is_at "party_planet") {
+         : print "It may look gloomy from the outside, but some people spend their nights and day inside." ;
+      }
+      : if (is_at "party_planet_inside") {
+         : print "RuD is almost always here. He moved all the stuff from his own bedroom (which looks like an empty garage now) to this common gaming room." ;
+      }
+      : if (is_at "wools_wheels") {
+         : print "Wool will repair any gear you bring, mostly with the power of his brain." ;
+      }
    }
 }
 
@@ -736,7 +758,7 @@ assets {
    graphics {
       cc_room : png "https://cosmoosic.github.io/adventuron_april_2022/Images/cc_room.png" ;
       crispy_garden : png "https://cosmoosic.github.io/adventuron_april_2022/Images/crispy_garden_no7Cs.png" {
-        : if (is_at "crispy_garden_7Cs") {
+        : if (is_seven_seas_crispy) {
                : overlay "crispy_garden_7Cs";
         }
       } ;
