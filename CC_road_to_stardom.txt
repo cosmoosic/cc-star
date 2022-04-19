@@ -67,6 +67,8 @@ vocabulary {
    : noun      / aliases = [child, children, kid]
    : noun      / aliases = [comment, note]
    : noun      / aliases = [bird, dove]
+   : noun      / aliases = [door, entrance]
+   : noun      / aliases = [energy, drink, beverage, redgull, can]
    : noun      / aliases = [mirror, glass, reflection]
    : noun      / aliases = [garden, park, yard, lawn, land, plot]
    : noun      / aliases = [fight, combat, conflict]
@@ -80,15 +82,17 @@ vocabulary {
    : noun      / aliases = [plush, plushie, stuffedanimal, animal, stuffed, lion, bear, teddy, teddybear, stuffie, plushtoy, stuffy]
    : noun      / aliases = [boat, ship, barge, gondola, yacht, sailboat, ark, bateau]
    : noun      / aliases = [python, pighon]
-   : noun      / aliases = [tool, machine, instrument, gadget, appliance, kirby, device]
+   : noun      / aliases = [guitar, music, bass, instrument]
+   : noun      / aliases = [tool, machine, gadget, appliance, kirby, device]
    : noun      / aliases = [tree, pine, forest]
+   : noun      / aliases = [joystick, trackball, gamepad, joypad, trackpad, stick]
    : noun      / aliases = [seven, 7, 7C, 7Cs, sevenseas, daphne, robot]
    : noun      / aliases = [rud, ru, duri, dhxp, gamer]
    : noun      / aliases = [wool, woolion, mechanic, lion]
    : noun      / aliases = [june, inventor, jjyy]
    : noun      / aliases = [florrie, flora]
    : noun      / aliases = [e, ee, etana]
-   : noun      / aliases = [yourself, cc, myself, me]
+   : noun      / aliases = [yourself, cc, myself, me, you]
 }
 
 ######################################
@@ -112,6 +116,7 @@ booleans {
    is_e_in_living_room : boolean "false" ;
    is_florrie_in_living_room : boolean "false" ;
    is_florrie_in_living_room_with_cake : boolean "false" ;
+   is_puzzle_rud_started : boolean "false" ;
 }
 
 integers {
@@ -204,7 +209,7 @@ map : object "a <map<#fdd>> of the ship" at = "cc_room";
 
 mirror : object "the <mirror<#fee>> June made for you" at = "cc_room";
 
-rud_happy : scenery "<RuD<#fee>>, who thanks to you, can finish the game then watch a Let's Play video";
+rud_happy : scenery "<RuD<#fee>>, who looks way more energized now";
 
 rud_sad : scenery "<RuD<#fee>>, who is almost always there" at = "party_planet_inside";
 
@@ -674,6 +679,9 @@ on_command {
         : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
         : print "Who am I? UNLOCK me!\' " ;
       }
+      : if (is_at "party_planet_inside") {
+         : print "The computer seems a bit sticky with all the spilled energy drink." ;
+      }
    }
 
    : match "examine tree"  {
@@ -696,6 +704,9 @@ on_command {
         : print "Password = answer to this riddle: " ;
         : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
         : print "Who am I? UNLOCK me!\' " ;
+      }
+      : if (is_at "party_planet_inside" ) {
+        : print "The screen displays what looks like a space game." ;
       }
    }
 
@@ -739,7 +750,7 @@ on_command {
       }
    }
 
-   : match "talk wool; talk -"   {
+   : match "talk wool; talk - ; puzzle -"   {
       : if (is_at "wools_wheels" && !solved_wool_riddle) {
          : print "You ask Wool about pigeons. He replies: \'Why pigeons are so popular?" ;
          : print "I don't know, as I am not interested in physical entities. Only logic moves me.\'" ;
@@ -794,37 +805,100 @@ on_command {
       }
    }
 
+   : match "examine poster ; examine pigeon ; examine game"  {
+      : if (is_at "party_planet_inside") {
+         : print "Tweet Fighter, a classic game. There's a poster too." ;
+      }
+   }
+
+   : match "examine door"  {
+      : if (is_at "party_planet") {
+         : print "There is not much here. Probably you should enter inside." ;
+      }
+   }
+
+   : match "examine guitar ; examine headphones"  {
+      : if (is_at "party_planet_inside") {
+         : print "RuD has been learning music making since joining Windy Music Feedback." ;
+         : print "It's a lovely place, you can join too: <Windy Music Feedback>[https://indiemusicfeedback.com]." ;
+      }
+   }
+
+   : match "examine frog"  {
+      : if (is_at "party_planet_inside") {
+         : print "The frog is an hommage to RuD's mentor, an expert in martial arts who happens to be a frog. " ;
+      }
+   }
+
+   : match "examine joystick ; examine keyboard ; examine mouse "  {
+      : if (is_at "party_planet_inside") {
+         : print "The computer seems a bit sticky with all the spilled energy drink." ;
+      }
+   }
+
    : match "talk rud; talk -"  {
       : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print "RuD greets you warmly: \'CC!!! You look so cute today!!!!\', then begins to whisper:" ;
-         : print "\'I'm in great trouble CC. I made a bet with Wool that I'd reach the Diamond Rank in Tweet Fighter before the season ends, but the deadline is today!" ;
-         : print "Look: it's supposed to be a fighting game, but now there's this P.U.Z.Z.L.E. thing that's blocking the next level. What's that??? Not fair! Can you HELP me? I only have 10 cans left of Red Gull, but I'll let you take one!\'" ;
+         : print "\'I'm in great trouble CC. I made a bet with Wool that I'd reach the Diamond Rank in Tweet Fighter before the season ends, but the deadline is in 1 hour!" ;
+         : print "Wool is so sneaky, he invited me to this Windy Music Feedback club, so I spent the whole time making songs instead of gaming! Not fair!" ;
+         : print "I can do a mini-game to catch up, but I can only choose one!!! And after a few hours some of them stop working!" ;
+         : print "Can you HELP me choose? I only have 10 cans left of Red Gull, but I'll let you take one!\'" ;
+         : print "He takes a sip of energy drink." ;
+         : set_true "is_puzzle_rud_started" ;
+      }
+      : if (is_present "rud_happy" && is_at "party_planet_inside") {
+         : print "RuD is very focused, and doesn't want to be disturbed." ;
+         : print "He takes a sip of energy drink." ;
       }
    }
 
    : match "examine rud"  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print "RuD looks a bit sadder than usual. A future idol could surely cheer him up!" ;
+         : print "He takes a sip of energy drink." ;
+       }
+       : if (is_present "rud_happy" && is_at "party_planet_inside") {
+         : print "RuD is always working hard to beat his highest score." ;
+         : print "He takes a sip of energy drink." ;
        }
    }
 
-   : match "examine rud"  {
-       : if (is_present "rud_happy" && is_at "party_planet_inside") {
-         : print "RuD is always working hard to beat his highest score." ;
-       }
+   : match "examine drink"  {
+      : if (is_at "party_planet_inside") {
+        : print "These delicious drinks are a secret mix of artificial sweeteners and flavors, high fructose corn syrup, and stimulants. " ;
+        : print "They also contain amino sulfonic acids like taurine, which may reverse nerve defects in experimental diabetic neuropathic rats." ;
+        : print "You should try them!" ;
+      }
    }
 
    : match "help rud"  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
-         : print "TODO: puzzle similar to: <layton.fandom.com/wiki/Puzzle:Room_of_Doom>[https://layton.fandom.com/wiki/Puzzle:Room_of_Doom] " ;
+         : print "RuD says: \'I have 1 hour left to gain 1444 points, and I can only play 1 mini-game: " ;
+         : print "- Firstly there's AKAFeather, a cursive writing game. You can earn 80 points per minute, but it stops working after 15 minutes, and you need to wait 43 minutes to start again." ;
+         : print "- Secondly there's Brooms, a cleaning game. You can earn 26 points per minute, but it stops working after 54 minutes, and you need to wait 5 minutes to start again." ;
+         : print "- Thirdly there's Cosmoogang, a space cow farming game. You can earn 97 points per minute, but it stops working after 10 minutes, and you need to wait 20 minutes to start again." ;
+         : print "Can you <GUESS<#fee>> which game I should focus on?\'. " ;
+         : print "He takes a sip of energy drink." ;
+       }
+   }
+
+      : match "guess c; guess cosmoogang; guess 3 ; c - ; cosmoogang - ; 3 - "  {
+       : if (is_present "rud_sad" && is_at "party_planet_inside") {
+         : print "RuD rushes to play Cosmoogang. Looks like he will win his bet! He looks so happy now. " ;
+         : print "He takes a sip of energy drink." ;
+         : print "But he doesn't look too impressed by your deduction skills." ;
          : set_false "is_rud_sad";
          : destroy "rud_sad";
          : create "rud_happy";
-         : print "RuD says: \'Nice, next time I'll definitely watch a Let's Play walkthrough before!\'. " ;
-         : print "He doesn't look too admirative of your brilliance, as he's already back to playing." ;
-         : print "Maybe solving puzzles is not enough for eternal stardom, let's see if there are other options." ;
          : set_true "is_seven_seas_crispy" ;
          : create "seven_seas" target = "crispy_garden" ;
+       }
+   }
+
+   : match "guess - ; guess a; guess b; guess akafeather; guess brooms ; guess 1 ; guess 2; 1 - ; 2 - "  {
+       : if (is_present "rud_sad" && is_at "party_planet_inside") {
+         : print " RuD doesn't look too impressed by your deduction skills. \'Are you sure?\' he asks." ;
+         : print " He takes a sip of energy drink." ;
        }
    }
 
@@ -840,9 +914,16 @@ on_command {
       }
    }
 
+
+   : match "examine leaderboard"  {
+      : if (is_at "party_planet_inside" && is_exists "rud_happy") {
+        : print "RuD is so close to the top!!!! Only beaten by a certain OK.F, who must be a nerd." ;
+      }
+   }
+
    : match "show compassion"  {
       : if (is_at "party_planet_inside") {
-         : print "RuD looks at you with glassy eyes and opens another can of energy drink." ;
+         : print "RuD looks at you with glassy eyes and takes a sip of energy drink." ;
       }
    }
 
@@ -996,6 +1077,14 @@ on_command {
         : print "The albatross is asked to guess its hat color, but responds \'No idea\'. The bald eagle cannot guess its color either." ;
         : print "Then the chicken says \'I know my color\'. Which one is it? Type GUESS color." ;
       }
+      : else_if (is_present "rud_sad" && is_at "party_planet_inside") {
+         : print "RuD says: \'I have 1 hour left to gain 1444 points, and I can only play 1 mini-game: " ;
+         : print "- Firstly there's AKAFeather, a cursive writing game. You can earn 80 points per minute, but it stops working after 15 minutes, and you need to wait 43 minutes to start again." ;
+         : print "- Secondly there's Brooms, a cleaning game. You can earn 26 points per minute, but it stops working after 54 minutes, and you need to wait 5 minutes to start again." ;
+         : print "- Thirdly there's Cosmoogang, a space cow farming game. You can earn 97 points per minute, but it stops working after 10 minutes, and you need to wait 20 minutes to start again." ;
+         : print "Can you <GUESS<#fee>> which game I should focus on?\'. " ;
+         : print "He takes a sip of energy drink." ;
+       }
    }
 
    : match "examine -"  {
@@ -1015,7 +1104,8 @@ on_command {
          : print "It may look gloomy from the outside, but some people spend their nights and day inside." ;
       }
       : if (is_at "party_planet_inside") {
-         : print "RuD is almost always here. He moved all the stuff from his own bedroom (which looks like an empty garage now) to this common gaming room." ;
+         : print "RuD is almost always here. He moved his guitar and all the stuff from his own bedroom (which looks like an empty garage now) to this common gaming room." ;
+         : print "He takes a sip of energy drink." ;
       }
       : if (is_at "wools_wheels") {
          : print "Wool will repair any gear you bring, mostly with the power of his brain. He is always surrounded by lots of tools." ;
@@ -1054,6 +1144,9 @@ assets {
       party_planet_inside : png "https://cosmoosic.github.io/adventuron_april_2022/Images/rud.png" {
         : if (!is_rud_sad) {
                : overlay "rudface";
+        }
+        : if (is_puzzle_rud_started) {
+               : overlay "puzzle_rud";
         }
       } ;
       rudface : png "https://cosmoosic.github.io/adventuron_april_2022/Images/rudface.png" ;
