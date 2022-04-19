@@ -68,7 +68,7 @@ vocabulary {
    : noun      / aliases = [comment, note]
    : noun      / aliases = [bird, dove]
    : noun      / aliases = [door, entrance]
-   : noun      / aliases = [energy, drink, beverage, redgull, can]
+   : noun      / aliases = [energy, drink, beverage, redgull, can, red]
    : noun      / aliases = [mirror, glass, reflection]
    : noun      / aliases = [garden, park, yard, lawn, land, plot, greenhouse, orchard]
    : noun      / aliases = [fight, combat, conflict]
@@ -506,7 +506,7 @@ on_command {
    }
    : match "examine bull"  {
       : if (is_at "cc_room") {
-         : print "You are definitely going to become the number one idol of the Cosmooverse! This star is a gentle reminder." ;
+         : print "One of the bouncy bulls you can find in the Cosmooverse." ;
       }
    }
    : match "examine bed"  {
@@ -583,7 +583,7 @@ on_command {
          : press_any_key ;
          : clear_screen;
          : print "No, the most famous superstar of the <Cosmooverse<#fee>> will be a <pigeon<#fee>>. Either musician <OK Feather<#fee>> or bling foodie traveller <E<#fee>>." ;
-         : print "That being said, I'm just a talking mirror, whereas you are the true master of your destiny. Follow your dreams or die trying! That's the lesson I learned from <Snow White<#fee>>." ;
+         : print "That being said, I'm just a talking mirror, whereas you are the true master of your destiny. Follow your dreams or die trying! That's the lesson I learned from <SnowWhite<#fee>>." ;
          : print "Wow I'm tired after talking so much, I'll take a break. You can replay my previous answer any time. Ciao!" ;
          : press_any_key ;
          : clear_screen;
@@ -614,7 +614,7 @@ on_command {
       : print "Pigeons are wonderful creatures. If you are not convinced yet, check out how they saved Christmas here: <okfeather.itch.io/feathery-christmas>[https://okfeather.itch.io/feathery-christmas]." ;
    }
    : match "examine snow"   {
-      : print "Everyone in the Cosmooverse knows the story of Snow White. The shared destiny of two women wth seemingly nothing in common. One had unlimited beauty and ambition, while the other became a major figure of survivalism after pulling through a severe case of food poisoning." ;
+      : print "Everyone in the Cosmooverse knows the story of SnowWhite. The shared destiny of two women wth seemingly nothing in common. One had unlimited beauty and ambition, while the other became a major figure of survivalism after pulling through a severe case of food poisoning." ;
    }
    : match "kill *" {
       : if (is_carried (s1())) {
@@ -762,7 +762,7 @@ on_command {
 
    : match "talk wool; talk - ; puzzle -"   {
       : if (is_at "wools_wheels" && !solved_wool_riddle) {
-         : print "You ask Wool about pigeons. He replies: \'Why pigeons are so popular?" ;
+         : print "You ask Wool about pigeons. He replies: \'Why are pigeons so popular?" ;
          : print "I don't know, as I am not interested in physical entities. Only logic moves me.\'" ;
          : goto "puzzle_hat" ;
          : redescribe ;
@@ -836,7 +836,7 @@ on_command {
 
    : match "examine frog"  {
       : if (is_at "party_planet_inside") {
-         : print "The frog is an hommage to RuD's mentor, an expert in martial arts who happens to be a frog. " ;
+         : print "The frog is an homage to RuD's mentor, an expert in martial arts who happens to be a frog. " ;
       }
    }
 
@@ -850,9 +850,9 @@ on_command {
       : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print "RuD greets you warmly: \'CC!!! You look so cute today!!!!\', then begins to whisper:" ;
          : print "\'I'm in great trouble CC. I made a bet with Wool that I'd reach the Diamond Rank in Tweet Fighter before the season ends, but the deadline is in 1 hour!" ;
-         : print "Wool is so sneaky, he invited me to this Windy Music Feedback club, so I spent the whole time making songs instead of gaming! Not fair!" ;
+         : print "Wool is so sneaky, he invited me to this <Windy Music Feedback>[https://indiemusicfeedback.com] club, so I spent the whole time making songs instead of gaming! Not fair!" ;
          : print "I can do a mini-game to catch up, but I can only choose one!!! And after a few hours some of them stop working!" ;
-         : print "Can you HELP me choose? I only have 10 cans left of Red Gull, but I'll let you take one!\'" ;
+         : print "Can you HELP me choose? I only have 10 cans left of RedGull, but I'll let you take one!\'" ;
          : print "He takes a sip of energy drink." ;
          : set_true "is_puzzle_rud_started" ;
       }
@@ -1045,9 +1045,11 @@ on_command {
       }
       : else_if (is_present "rud_sad") {
         : print "RuD sings Cosmoose's hit \'Release Me\': \'If we'll make it outta here, I'll need a vacation \'" ;
+        : print "He takes a sip of energy drink." ;
       }
       : else_if (is_present "rud_happy") {
         : print "RuD sings Cosmoose's hit \'I wanna conquer youuuuu yeah!\'. Who knew he had such golden pipes?" ;
+        : print "He takes a sip of energy drink." ;
       }
       : else_if (is_present "wool") {
         : print "Wool sings \'Time to clap your hands, clap your hands and GO!\'. Who knew he liked such mainstream music?" ;
@@ -1083,7 +1085,7 @@ on_command {
           : print "OK... That explains Florrie's pigeon browsing history. What does June have to say about the mirror's prediction?" ;
           : press_any_key ;
           : print "She replies: \'Does the mirror always tell the whole truth? Well, no machine can tell the whole truth! " ;
-          : print "Imagine a mirror giving all the answers! Then the world would be forever at peace, which that is definitely NOT happening now hahaha. " ;
+          : print "Imagine a mirror giving all the answers! Then the world would be forever at peace, which is definitely NOT happening now hahaha. " ;
           : print "However, what I know for sure is MY TRUTH!" ;
           : print "In my world, pigeons will always be number 1!\'" ;
             # : redescribe ;
@@ -1169,12 +1171,13 @@ on_command {
       : if (is_exists "florrie" && is_at "living_room" ) {
         : print "Florrie warmly greets you and listens to your accomplishments." ;
         : print "She says: \' So now you are a hero and a puzzle master? Wonderful!!!" ;
-        : print "Speaking of puzzles, I officially passed my Pyghon exam! But I almost failed because I wouldn't remember my password..." ;
+        : print "Speaking of puzzles, I officially passed my Pyghon exam! But I almost failed because I couldn't remember my password..." ;
         : print "Also, there was this question to quickly solve! Can you try it CC? Here it is:\'" ;
         : press_any_key ;
         : set_true "is_puzzle_florrie_now" ;
         : print "The following sentence:" ;
         : print "\'Few radios play June's song.\'" ;
+        : print "translates to:" ;
         : print "19-14-257" ;
         : print "157-4-10-40-109-175" ;
         : print "124-70-4-304" ;
@@ -1222,6 +1225,9 @@ on_command {
        : print "- Type '<GET<#fdd>> <objectname<#fee>>' to pick up an item";
        : print "- Type '<GIVE<#fdd>> <objectname<#fee>>' to give an object to someone";
        : print "- Type '<X<#fdd>>' or '<X<#fdd>> <objectname<#fee>>' to examine clues";
+       : if (is_carried "map") {
+         : print "- Type '<MAP<#fdd>>' to display map (<current location<#afa>>, <accessible<#aaf>>, <inaccessible<#faa>>)";
+       }
        : print "- Type <N<#fdd>>, <S<#fdd>>, <E<#fdd>>, <W<#fdd>>, <UP<#fdd>>, <DOWN<#fdd>>, <ENTER<#fdd>>, <EXIT<#fdd>> to move";
        : print "- Type '<LOAD<#fdd>>' or  '<SAVE<#fdd>>' to load or save a game";
        : print "- Type '<QUIT<#fdd>>' to restart a game";
@@ -1257,6 +1263,7 @@ on_command {
        : else_if (is_at "living_room" && is_exists "florrie" && is_puzzle_florrie_now) {
         : print "The following sentence:" ;
         : print "\'Few radios play June's song.\'" ;
+        : print "translates to:" ;
         : print "19-14-257" ;
         : print "157-4-10-40-109-175" ;
         : print "124-70-4-304" ;
