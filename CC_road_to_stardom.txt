@@ -576,6 +576,52 @@ on_command {
          : print "A <map<#fee>> of the ship, could it be useful?";
       }
    }
+   : match "sound _; music _; volume _" {
+      : if (preposition_is "on" || noun1_is "lowest" || noun1_is "low" || noun1_is "normal" || noun1_is "high" || noun1_is "highest") {
+         : mask {
+            : set_string var="string_tmp" {(rationalized "noun1")}
+            : set_sentence "nothing";
+            : if (music_ever_enabled) {
+               : if (!sysvar_bool "sysvar_sound_enabled") {
+                  : set_sentence "sound on";
+                  : set_false "is_sound_muted";
+               }
+            }
+            : else {
+               : gosub "set_sound_on";
+               : if (music_ever_enabled) {
+                  : gosub "play_music";
+               }
+               : else {
+                  : set_string var="nothing_message" text="You have not enabled the music";
+               }
+            }
+            : if (string_tmp != "") {
+               : set_string var="sound_volume" {(string_tmp)};
+               : print "Sound volume set to {sound_volume}.";
+            }
+            : gosub "update_volume";
+         }
+      }
+      : else_if(noun1_is "off") {
+         : mask {
+           : set_sentence "sound off";
+           # to prevent not restarting on SOUND ON
+           : play_music "music_win";
+           : set_string var = "current_track" text="";
+           : set_true "is_sound_muted";
+           : gosub "update_volume";
+         }
+      }
+      : else {
+         : if (sysvar_bool "sysvar_sound_enabled") {
+            : print "<SOUND OFF<#fdd>> | <LOWEST<#fdd>> | <LOW<#fdd>> | <NORMAL<#fdd>> | <HIGH<#fdd>> | <HIGHEST<#fdd>> to disable sound or change volume.";
+         }
+         : else {
+            : print "<SOUND ON<#fdd>> | <LOWEST<#fdd>> | <LOW<#fdd>> | <NORMAL<#fdd>> | <HIGH<#fdd>> | <HIGHEST<#fdd>> to enable sound and change volume.";
+         }
+     }
+   }
    : match "talk mirror; talk -"   {
       : if (is_at "cc_room") {
          : print "To answer your question: " ;
@@ -1301,6 +1347,10 @@ on_command {
       : if (is_at "wools_wheels") {
          : print "Wool will repair any gear you bring, mostly with the power of his brain. He is always surrounded by lots of tools." ;
       }
+   }
+   : match "nothing -" {
+      : print "{nothing_message}";
+      : set_string var="nothing_message" text="";
    }
 }
 
