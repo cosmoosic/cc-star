@@ -140,8 +140,6 @@ locations {
 
    crispy_garden : location "You are in the Crispy Garden. You see trees where <chicken wings<#fee>> grow.";
 
-   florrie_laptop : location "You are in front of Florrie's laptop. Can you <UNLOCK<#fee>> or <TYPE<#fee>> her password?";
-
    living_room : location "You are in the common living room." ;
 
    party_planet : location "You are in front of Party Game Planet, the gaming room. Maybe you should ENTER?" ;
@@ -149,6 +147,18 @@ locations {
    party_planet_inside : location "You are inside the gaming room. The customers here are regulars." ;
 
    wools_wheels : location "You are at Wool's Wheels, <Wool<#fee>>'s vehicle and ship repair area." ;
+
+   puzzle_florrie_laptop : location "You are in front of Florrie's laptop. Can you <UNLOCK<#fee>> or <TYPE<#fee>> her password?";
+
+   puzzle_channels : location "TODO";
+
+   puzzle_hat : location "TODO";
+
+   puzzle_rud : location "TODO";
+
+   puzzle_ship : location "TODO";
+
+   puzzle_labyrinth : location "TODO";
 
 }
 
@@ -351,7 +361,7 @@ subroutines {
             : play_music "music_beat_2";
          }
       }
-      : else_if (is_at "party_planet" || is_at "florrie_laptop") {
+      : else_if (is_at "party_planet" || is_at "puzzle_florrie_laptop") {
          : set_string var="next_track" text="music_short";
          : if (next_track != current_track) {
             : if (chance(50)) {
@@ -613,12 +623,12 @@ on_command {
    : match "examine laptop; read laptop; use laptop"  {
       : if (is_at "living_room" && !is_laptop_unlocked) {
          : print "This laptop belongs to <Florrie<#fee>>." ;
-         : goto "florrie_laptop";
+         : goto "puzzle_florrie_laptop";
       }
       : if (is_at "living_room" && is_laptop_unlocked) {
          : print "You swore not to touch Florrie's laptop ever again." ;
       }
-      : if (is_at "florrie_laptop") {
+      : if (is_at "puzzle_florrie_laptop") {
         : print "The screen displays:" ;
         : print "Password = answer to this riddle: " ;
         : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
@@ -640,7 +650,7 @@ on_command {
       : if (is_at "living_room") {
         : print "This screen sometimes displays important information." ;
       }
-      : if (is_at "florrie_laptop") {
+      : if (is_at "puzzle_florrie_laptop") {
         : print "This laptop may be expensive, but you mainly notice the bread and chocolate crumbs stuck inside the keyboard. Florrie is a gourmet." ;
         : print "The screen displays:" ;
         : print "Password = answer to this riddle: " ;
@@ -650,7 +660,7 @@ on_command {
    }
 
    : match "unlock pigeon; pigeon -"  {
-      : if (is_at "florrie_laptop") {
+      : if (is_at "puzzle_florrie_laptop") {
         : print "How can Florrie need clues to remember such an easy password??? " ;
         : print "You wish you had never seen this... Florrie's browser history is nothing but..." ;
         : print "PIGEONS!!!" ;
@@ -664,27 +674,27 @@ on_command {
     }
 
     : match "unlock dove"  {
-      : if (is_at "florrie_laptop") {
+      : if (is_at "puzzle_florrie_laptop") {
         : print "Almost there, too bad there can only be one password." ;
         : press_any_key;
       }
     }
 
     : match "unlock - "  {
-      : if (is_at "florrie_laptop") {
+      : if (is_at "puzzle_florrie_laptop") {
         : print "Try again." ;
         : press_any_key;
       }
     }
 
     : match "examine penguin"  {
-      : if (is_at "florrie_laptop") {
+      : if (is_at "puzzle_florrie_laptop") {
         : print "This logo was inspired by a scientist contracting penguinitis after a penguin bite. The most notable symptom is unconditional love towards penguins. Similar to pigeonitis." ;
       }
     }
 
    : match "get laptop"  {
-      : if (is_at "living_room" || is_at "florrie_laptop") {
+      : if (is_at "living_room" || is_at "puzzle_florrie_laptop") {
         : print "This is not your <laptop<#fee>>. <Florrie<#fee>> should need it soon." ;
       }
    }
@@ -911,7 +921,7 @@ on_command {
       : if (is_at "crispy_garden") {
          : print "It's quite warm in here." ;
       }
-      : if (is_at "florrie_laptop") {
+      : if (is_at "puzzle_florrie_laptop") {
          : print "Florrie's laptop screen shows the <Cosmoose<#fee>> logo and a mysterious <penguin<#fee>>." ;
       }
       : if (is_at "living_room") {
@@ -946,7 +956,6 @@ assets {
    }
    graphics {
       cc_room : png "https://cosmoosic.github.io/adventuron_april_2022/Images/cc_room.png" ;
-      florrie_laptop : png "https://cosmoosic.github.io/adventuron_april_2022/Images/laptop.png" ;
       crispy_garden : png "https://cosmoosic.github.io/adventuron_april_2022/Images/crispy_garden_no7Cs.png" {
         : if (is_seven_seas_crispy) {
                : overlay "crispy_garden_7Cs";
@@ -996,5 +1005,11 @@ assets {
       loading_screen : png "https://cosmoosic.github.io/adventuron_april_2022/Images/loading.png" ;
       cc_hero_june : png "https://cosmoosic.github.io/adventuron_april_2022/Images/cc_hero.png" ;
       cc_win : png "https://cosmoosic.github.io/adventuron_april_2022/Images/feast.png" ;
+      puzzle_florrie_laptop : png "https://cosmoosic.github.io/adventuron_april_2022/Images/laptop.png" ;
+      puzzle_channels : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_channels.png" ;
+      puzzle_hat : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_hat.png" ;
+      puzzle_rud : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_rud.png" ;
+      puzzle_ship : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_ship.png" ;
+      puzzle_labyrinth : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_labyrinth.png" ;
    }
 }
