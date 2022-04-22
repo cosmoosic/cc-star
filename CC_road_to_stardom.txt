@@ -1293,7 +1293,7 @@ on_command {
       }
       : else_if ((is_present "june" || is_present "june_kitchen") && is_florrie_in_living_room_with_cake) {
          : print "June sings: \'꽃보다 더 곱게 별보다 더 밝게 사자보다 용감하게";
-         : print "Happy birthday to you 깃털 같은 내 친구야 만수무강 하시라!!!!";
+         : print "Happy birthday to you 깃털 같은 내 친구야 만수무강 하시라~~~~~~!!!!";
          : print "Brighter than flowers, brighter than stars, braver than lions" ;
          : print "Happy birthday to you, my feather-like friend, you shall live forever!!!!\'" ;
          : print "Beautiful. This version of the song is your favorite." ;
@@ -1394,7 +1394,7 @@ on_command {
         : set_true "is_puzzle_florrie_now" ;
         : print "The following sentence:" ;
         : print "\'Few radios play June's song.\'" ;
-        : print "translates to:" ;
+        : print "translates to (thanks to a mysterious mathematical formula):" ;
         : print "19-14-257" ;
         : print "157-4-10-40-109-175" ;
         : print "124-70-4-304" ;
@@ -1525,7 +1525,7 @@ on_command {
        : else_if (is_at "living_room" && is_exists "florrie" && is_puzzle_florrie_now) {
         : print "The following sentence:" ;
         : print "\'Few radios play June's song.\'" ;
-        : print "translates to:" ;
+        : print "translates to (thanks to a mysterious mathematical formula):" ;
         : print "19-14-257" ;
         : print "157-4-10-40-109-175" ;
         : print "124-70-4-304" ;
@@ -1544,6 +1544,10 @@ on_command {
         : else_if (is_at "cc_hero_june") {
             : print "What's going on with this <beak<#fee>>?" ;
         }
+        : else_if (you_win) {
+            : print "Everybody is going to the kitchen! Let's <GO<#fdd>> there!" ;
+        }
+
 
    }
 
