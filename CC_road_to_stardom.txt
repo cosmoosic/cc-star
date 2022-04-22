@@ -1455,6 +1455,15 @@ on_command {
     }
    }
 
+   : match "eat chicken" {
+    : if (is_at "crispy_garden") {
+        : print "You take a chicken fruit from the tree. It's delicious, full of vitamins and grown without pesticides." ;
+    }
+    : else {
+        : print "The Crispy Yard has some crispy chicken on the trees." ;
+    }
+   }
+
    : match "go kitchen ; go - ; kitchen -" {
     : if (you_win) {
         : goto "cc_win" ;
