@@ -141,11 +141,23 @@ booleans {
       talked_to_rud &&
       is_rud_sad
    )}
+   has_blueprint : boolean "false";
+   in_labyrinth : boolean "false";
+   is_labyrinth_open : boolean "true";  # TODO W
 }
 
 integers {
    pitch_random : integer "0";
    inventory_limit : integer "30" ;
+   day_spend_labyrinth_enigma : integer "0";
+   labyrinth_position_x : integer "0";
+   labyrinth_position_y : integer "-13";
+}
+
+collections {
+   labyrinth_dir : list {
+      items  = [ "1_1", "1_2", "1_3", "1_4", "1_5", "2_1", "2_2", "2_3", "2_4", "2_5", "3_1", "3_2", "3_3", "3_4", "3_5", "4_1", "4_2", "4_3", "4_4", "4_5", "5_1", "5_2", "5_3", "5_4", "5_5" ]
+   }
 }
 
 strings {
@@ -182,15 +194,35 @@ locations {
 
    puzzle_florrie_laptop : location "You are in front of Florrie's laptop. Can you <UNLOCK<#fee>> or <TYPE<#fee>> her password?";
 
-   puzzle_channels : location "TODO";
-
    puzzle_hat : location "Wool says: \'I can show you my favorite puzzle of when I was your age. <TALK<#fee>> to me whenever you are ready.\'";
 
-   puzzle_rud : location "TODO";
+   puzzle_labyrinth : location "The only path trough the asteroid belt is filled with drones! Their sensors only see in front of their purple cannon. But there's one we can hack to get the blueprint. We can turn this situation around!";
 
-   puzzle_ship : location "TODO";
-
-   puzzle_labyrinth : location "TODO";
+   labyrinth_1_1: location "Be careful of their purple laser cannons, and get the blueprint!";
+   labyrinth_1_2: location "";
+   labyrinth_1_3: location "It was a trap, there's no way to continue!";
+   labyrinth_1_4: location "";
+   labyrinth_1_5: location "How did you get there?";
+   labyrinth_2_1: location "";
+   labyrinth_2_2: location "";
+   labyrinth_2_3: location "You won't be able to get the blueprint...";
+   labyrinth_2_4: location "";
+   labyrinth_2_5: location "Almost there...";
+   labyrinth_3_1: location "It was a trap, there's no way to continue!";
+   labyrinth_3_2: location "";
+   labyrinth_3_3: location "";
+   labyrinth_3_4: location "";
+   labyrinth_3_5: location "Closer...";
+   labyrinth_4_1: location "";
+   labyrinth_4_2: location "Hack successful! You got the blueprint!";
+   labyrinth_4_3: location "The hacking tool is ready, just go in front of the blue sensor!";
+   labyrinth_4_4: location "";
+   labyrinth_4_5: location "";
+   labyrinth_5_1: location "We need to exit this mine field...";
+   labyrinth_5_2: location "";
+   labyrinth_5_3: location "";
+   labyrinth_5_4: location "We're so close, yet so far!";
+   labyrinth_5_5: location "You made it! Congratulations!";
 
 }
 
@@ -207,6 +239,46 @@ connections {
    party_planet, enter, party_planet_inside,
    party_planet, east, crispy_garden,
    crispy_garden, north, living_room,
+
+   living_room, enter, puzzle_labyrinth,
+   labyrinth_1_1, east_oneway, labyrinth_1_2,
+   labyrinth_1_1, south_oneway, labyrinth_2_1,
+   labyrinth_1_2, east_oneway, labyrinth_1_3,
+   labyrinth_1_2, south_oneway, labyrinth_2_2,
+   labyrinth_1_3, east_oneway, living_room,
+   labyrinth_1_3, south_oneway, living_room,
+   labyrinth_1_4, east_oneway, living_room,
+   labyrinth_1_5, south_oneway, labyrinth_2_5,
+   labyrinth_2_1, east_oneway, living_room,
+   labyrinth_2_1, south_oneway, labyrinth_3_1,
+   labyrinth_2_2, south_oneway, labyrinth_3_2,
+   labyrinth_2_3, west_oneway, living_room,
+   labyrinth_2_3, east_oneway, labyrinth_2_4,
+   labyrinth_2_4, east_oneway, labyrinth_2_5,
+   labyrinth_2_5, south_oneway, labyrinth_3_5,
+   labyrinth_3_1, south_oneway, living_room,
+   labyrinth_3_1, east_oneway, living_room,
+   labyrinth_3_2, east_oneway, labyrinth_3_3,
+   labyrinth_3_3, south_oneway, labyrinth_4_3,
+   labyrinth_3_3, north_oneway, labyrinth_2_3,
+   labyrinth_3_4, west_oneway, living_room,
+   labyrinth_3_4, north_oneway, labyrinth_2_4,
+   labyrinth_3_5, west_oneway, living_room,
+   labyrinth_3_5, south_oneway, labyrinth_4_5,
+   labyrinth_4_1, south_oneway, labyrinth_5_1,
+   labyrinth_4_2, west_oneway, labyrinth_4_1,
+   labyrinth_4_2, south_oneway, living_room,
+   labyrinth_4_3, west_oneway, labyrinth_4_2,
+   labyrinth_4_3, south_oneway, living_room,
+   labyrinth_4_4, north_oneway, labyrinth_3_4,
+   labyrinth_4_4, east_oneway, living_room,
+   labyrinth_4_4, west_oneway, living_room,
+   labyrinth_4_5, south_oneway, labyrinth_5_5,
+   labyrinth_5_1, east_oneway, labyrinth_5_2,
+   labyrinth_5_2, east_oneway, labyrinth_5_3,
+   labyrinth_5_3, east_oneway, labyrinth_5_4,
+   labyrinth_5_4, east_oneway, living_room,
+   labyrinth_5_4, north_oneway, labyrinth_4_4,
    ]
 
 }
@@ -301,11 +373,19 @@ barriers {
       show_blocked_exit = true
    }
 
-block_living_room_to_crispy_garden : block_path {
+   block_living_room_to_crispy_garden : block_path {
       from = living_room
       to = crispy_garden
       message  = The yard is too chilly, let's stay here for a bit.
       block_when = is_rud_sad
+      show_blocked_exit = true
+   }
+
+   block_labyrinth : block_path {
+      from = living_room
+      to = puzzle_labyrinth
+      message  = There is nothing interesting on the screen. Navigation data, space information... how boring.
+      block_when_not = is_labyrinth_open
       show_blocked_exit = true
    }
 }
@@ -315,6 +395,13 @@ block_living_room_to_crispy_garden : block_path {
 ######################################
 
 on_startup {
+   : collection_iterate "labyrinth_dir" {
+       : set_graphic {
+         graphic -> ("puzzle_labyrinth")
+         target -> ("labyrinth_" + item())
+       }
+   }
+
    : if (!sysvar_bool "sysvar_has_asked_sound") {
       : print "CC's Road to Stardom uses background music.\n\nYou can lower the volume or stop the music at any moment using <SOUND LOWEST<#fdd>> or <SOUND OFF<#fdd>>.\n\nDo you wish to enable the music?\n";
       : gosub "set_sound_on";
@@ -442,6 +529,12 @@ subroutines {
             : play_music "music_party_planet_inside";
          }
       }
+      : else_if (in_labyrinth || is_at "puzzle_labyrinth") {
+         : set_string var="next_track" text="music_labyrinth";
+         : if (next_track != current_track) {
+            : play_music "music_labyrinth";
+         }
+      }
       : else_if (is_at "cc_win") {
          : set_string var="next_track" text="music_win";
          : if (next_track != current_track) {
@@ -486,6 +579,41 @@ on_describe {
       : clear_screen;
       : stop_music;
       : win_game ;
+   }
+  : if (is_at "puzzle_labyrinth" ) {
+       : set_true "in_labyrinth";
+       : press_any_key;
+       : goto "labyrinth_1_1";
+       : redescribe;
+   }
+   : else_if (is_at "labyrinth_1_1" ) {
+       : set_false "has_blueprint";
+       : set_integer var = "labyrinth_position_x"  value = "0" ;
+       : set_integer var = "labyrinth_position_y"  value = "-13" ;
+       : set_integer var = "day_spend_labyrinth_enigma" value = "0";
+       : update_graphic;
+   }
+   : else_if (is_at "labyrinth_4_2" ) {
+       : set_true "has_blueprint";
+   }
+   : else_if (is_at "labyrinth_5_5") {
+       : if (has_blueprint) {
+           : set_false "in_labyrinth";
+           : set_false "is_labyrinth_open";
+           : print "You did it! You're a hero, CC!";
+       }
+       : else {
+           : print "You found a way through, but missed the blueprint!";
+       }
+       : press_any_key;
+       : goto "living_room";
+       : redescribe;
+   }
+   : if (is_at "living_room" && in_labyrinth) {
+      : print "Well, that didn't work out, but it's not an easy task. Luckily, that was a simulation that 7Cs' AI ran through her algorithms. Thanks to that we found the mistake in advance so we are safe. Let's try again.";
+      : set_false "in_labyrinth";
+      : press_any_key;
+      : redescribe;
    }
 }
 
@@ -1706,6 +1834,9 @@ on_command {
       : if (is_at "cc_hero_june") {
             : print "What's going on with this <beak<#fee>>?" ;
         }
+      : if (in_labyrinth) {
+         : print "Escape without being detected by any drone, while getting the blueprint!" ;
+      }
    }
    : match "nothing -" {
       : print "{nothing_message}";
@@ -1730,6 +1861,52 @@ on_command {
         : print "You don't have many possible answers though, so you should be able to guess quickly." ;
       }
    }
+   : if (in_labyrinth) {
+      : match "start -; in -; enter -" {
+          : goto "labyrinth_1_1";
+          : redescribe;
+      }
+      : match "e _" {
+         : mask {
+           : if (try_move() != "") {
+              : increment "day_spend_labyrinth_enigma";
+              : set_integer var = "labyrinth_position_x" {( labyrinth_position_x + 16)}
+              : update_graphic;
+              : pause "50" ;
+           }
+         }
+      }
+      : match "s _" {
+         : mask {
+           : if (try_move() != "") {
+              : increment "day_spend_labyrinth_enigma";
+              : set_integer var = "labyrinth_position_y" {( labyrinth_position_y + 14)}
+              : update_graphic;
+              : pause "50" ;
+           }
+         }
+      }
+      : match "n _" {
+         : mask {
+           : if (try_move() != "") {
+              : increment "day_spend_labyrinth_enigma";
+              : set_integer var = "labyrinth_position_y" {( labyrinth_position_y - 14)}
+              : update_graphic;
+              : pause "50" ;
+           }
+         }
+      }
+      : match "w _" {
+         : mask {
+           : if (try_move() != "") {
+              : increment "day_spend_labyrinth_enigma";
+              : set_integer var = "labyrinth_position_x" {( labyrinth_position_x - 16)}
+              : update_graphic;
+              : pause "50" ;
+           }
+         }
+      }
+   }
 }
 
 ######################################
@@ -1745,6 +1922,7 @@ assets {
       music_party_planet_inside : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi4_partyplanet.mp3" ;
       music_party_planet_outside: sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi8_party_planet_outside.mp3" ;
       music_crispy_garden : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi10_crispy.mp3" ;
+      music_labyrinth : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi10_crispy.mp3" ;  # TODO W
       music_win : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/funprio.mp3" ;
    }
    graphics {
@@ -1813,6 +1991,13 @@ assets {
       puzzle_hat : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_hat.png" ;
       puzzle_rud : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_rud.png" ;
       puzzle_ship : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_ship.png" ;
-      puzzle_labyrinth : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_labyrinth.png" ;
+      puzzle_labyrinth : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_labyrinth.png" {
+              : overlay {
+                  graphic -> ("puzzle_ship")
+                  x       -> ( labyrinth_position_x )
+                  y       -> ( labyrinth_position_y )
+            }
+         };
+
    }
 }
