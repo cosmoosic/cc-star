@@ -143,7 +143,7 @@ booleans {
    )}
    has_blueprint : boolean "false";
    in_labyrinth : boolean "false";
-   is_labyrinth_open : boolean "true";  # TODO W
+   is_labyrinth_open : boolean "false";  # TODO W
 }
 
 integers {
@@ -601,6 +601,16 @@ on_describe {
            : set_false "in_labyrinth";
            : set_false "is_labyrinth_open";
            : print "You did it! You're a hero, CC!";
+           : create "florrie" target = "living_room";
+           : print "Oh, Florrie is back!!!" ;
+           : print "Why don't you <TALK<#fdd>> to her?" ;
+           : set_true "is_florrie_in_living_room" ;
+           : set_false "is_june_in_living_room" ;
+           : set_false "is_e_in_living_room" ;
+           : destroy "june" ;
+           : destroy "ee" ;
+           # : redescribe ;
+           : goto "living_room" ;
        }
        : else {
            : print "You found a way through, but missed the blueprint!";
@@ -1373,10 +1383,11 @@ on_command {
          : print "You ask SevenSeas about pigeons. She replies: \'Pigeons dominating online stardom? That does not coincide with the data I have!" ;
          : print "To become a successful online entertainer, one must upload regular content with professional editing, also find a unique style and niche audience, it's a lot of work!\'" ;
          : print "Hmm... You think she sounds really dull. By the way, who's the most famous star? Let's ask SevenSeas." ;
-         : press_any_key ;
          : print "She says: \'The most famous star is... Wait CC, are you even listening to me? You look so bored." ;
          : print "Why don't you try to find out by yourself? \'" ;
+         : print "Hmm... Maybe you should <TALK<#fee>> to her again." ;
          : set_true "is_puzzle_seven_seas_now" ;
+         : press_any_key ;
          : redescribe ;
          }
          : if (is_at "crispy_garden" && is_exists "seven_seas" && is_puzzle_seven_seas_now) {
@@ -1571,15 +1582,9 @@ on_command {
             : print "What an unfunny guy. How can he be so popular, young punks these days have no taste." ;
             : print "June is also crying with laughter, while filming. She says \'This video will be viral HeroCC, great job!\'" ;
             : press_any_key ;
-            : create "florrie" ;
-            : print "Oh, Florrie is back!!!" ;
-            : print "Why don't you <TALK<#fdd>> to her?" ;
-            : set_true "is_florrie_in_living_room" ;
-            : set_false "is_june_in_living_room" ;
-            : set_false "is_e_in_living_room" ;
-            : destroy "june" ;
-            : destroy "ee" ;
-            : redescribe ;
+            : print "Oh no!!!!!! The screen is flashing and beeping!!!! What's going on?" ;
+            : set_true "is_labyrinth_open" ; # TODO W
+            : goto "puzzle_labyrinth";
         }
         : else_if ((is_present "ee" || is_present "ee_kitchen") && is_florrie_in_living_room_with_cake) {
          : print "E says: \'This cake is rather small." ;
