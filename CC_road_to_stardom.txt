@@ -84,6 +84,7 @@ vocabulary {
    : noun      / aliases = [screen, display]
    : noun      / aliases = [porthole, window, view, sky, scenery]
    : noun      / aliases = [snow, white, snowwhite]
+   : noun      / aliases = [chicken, fruit, wing]
    : noun      / aliases = [bull, cow, bouncy, bouncybull, bluecow]
    : noun      / aliases = [plush, plushie, stuffedanimal, animal, stuffed, lion, bear, teddy, teddybear, stuffie, plushtoy, stuffy, plushy]
    : noun      / aliases = [boat, ship, barge, gondola, yacht, sailboat, ark, bateau]
@@ -1173,6 +1174,9 @@ on_command {
       : if (is_at "party_planet_inside") {
          : print "The computer seems a bit sticky with all the spilled energy drink." ;
       }
+      : else_if (is_at "puzzle_florrie_laptop") {
+        : print "This laptop may be expensive, but you mainly notice the bread and chocolate crumbs stuck inside the keyboard. Florrie is a gourmet." ;
+      }
    }
    : match "examine chair "  {
       : if (is_at "party_planet_inside") {
@@ -1741,12 +1745,17 @@ on_command {
     }
    }
 
-   : match "go kitchen ; go - ; kitchen -" {
+   : match "go - ; go _" {
     : if (you_win) {
         : goto "cc_win" ;
     }
     : else {
         : print "\'If you don't know where you're going, you're probably going wrong\' - Terry Pratchett" ;
+    }
+   }
+   : match "go kitchen ; kitchen -" {
+    : if (you_win) {
+        : goto "cc_win" ;
     }
    }
 
@@ -1883,10 +1892,6 @@ on_command {
 
    : match "play *; play -" {
       : print "It's always fun to play!";
-   }
-
-   : match "move _" {
-      : print "Why though?";
    }
 
    : match "wait *; wait -" {
