@@ -1531,7 +1531,11 @@ on_command {
    }
 
    : match "talk june"  {
-      : if (is_at "living_room" && is_exists "june" && !is_puzzle_ee_solved && !talked_to_june) {
+      : if (is_at "living_room" && is_exists "june" && !talked_to_e) {
+          : print "You ask June how a pigeon could be more popular than you. It deserves an explantion!" ;
+          : print "June replies: \'Why ask me, while you have a pigeon right here! Ask him away!" ;
+      }
+      : else_if (is_at "living_room" && is_exists "june" && !is_puzzle_ee_solved && !talked_to_june) {
           : set_false "is_seven_seas_crispy" ;
           : set_false "is_wool_wheeled" ;
           : destroy "seven_seas" ;
