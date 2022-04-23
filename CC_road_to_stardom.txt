@@ -114,7 +114,7 @@ booleans {
    help_about_commands : boolean "false";
    is_sound_muted : boolean "true";
    music_ever_enabled : boolean "false";
-   solved_wool_riddle : boolean "false";
+   is_puzzle_wool_solved : boolean "false" ;
    can_create_june_e : boolean "false";
    is_seven_seas_crispy : boolean "true";
    is_wool_wheeled : boolean "true";
@@ -270,7 +270,7 @@ barriers {
       from = wools_wheels
       to = party_planet
       message  = You should talk to Wool first, he spends way too much time alone, that's not healthy at all.
-      block_when_not = solved_wool_riddle
+      block_when_not = is_puzzle_wool_solved
       show_blocked_exit = true
 
    }
@@ -765,7 +765,7 @@ on_command {
         : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
         : print "Who am I? UNLOCK me!\' " ;
       }
-      : else_if (is_at "puzzle_hat" && !solved_wool_riddle) {
+      : else_if (is_at "puzzle_hat" && !is_puzzle_wool_solved) {
         : print "An albatross, a bald eagle and a chicken each wear a hat. They see the colors of the others’ hats but not their own. " ;
         : print "Their hats were randomly drawn among 5 hats, 3 RED ones and 2 BLUE ones. " ;
         : print "The albatross is asked to guess its hat color, but responds \'No idea\'. The bald eagle cannot guess its color either." ;
@@ -884,7 +884,7 @@ on_command {
    }
 
    : match "talk wool; talk - ; puzzle -"   {
-      : if (is_at "wools_wheels" && !solved_wool_riddle) {
+      : if (is_at "wools_wheels" && !is_puzzle_wool_solved) {
          : print "You ask Wool about pigeons. He replies: \'Why are pigeons so popular?" ;
          : print "I don't know, as I am not interested in physical entities. Only logic moves me.\'" ;
          : goto "puzzle_hat" ;
@@ -896,8 +896,9 @@ on_command {
          : print "The albatross is asked to guess its hat color, but responds \'No idea\'. The bald eagle cannot guess its color either." ;
          : print "Then the chicken says \'I know my color\'. Which one is it? Type <GUESS<#fee>> color." ;
       }
-      : if (is_at "wools_wheels" && solved_wool_riddle && is_wool_wheeled) {
-         : print "Wool asks: \'Isn't logic beautiful?\'" ;
+      : if (is_at "wools_wheels" && is_puzzle_wool_solved && is_wool_wheeled) {
+         : print "Wool says: \'Alright, I'll continue my alternate proof of <Wooluum<#fee>> Hypothesis' independence from ZFC. Isn't logic beautiful?\'" ;
+         : print "You have no idea what this is about but it sounds boring." ;
       }
       : if (is_at "wools_wheels" && !is_wool_wheeled) {
         : print "Finally Wool might be getting some fresh air elsewhere." ;
@@ -907,6 +908,14 @@ on_command {
          : print "One consequence is that wound healing doesn't work as well.\'" ;
          : print "Err... Thanks for wishing a happy birthday I guess???" ;
       }
+   }
+
+   : match "examine wooluum; examine hypothesis; examine zfc" {
+      : print "Wooluum Hypothesis states that: " ;
+      : print "Party Planet has the smallest uncountable number of chicken trees." ;
+      : print "Planet NL-21 has as many chicken trees as there exist real numbers." ;
+      : print "The hypothesis is that Party Planet and Planet NL-21 actually have the same amount of chicken trees." ;
+      : print "It's kinda hard to prove, but one can show that it's independent from Zestful Fried Chicken (ZFC) theory." ;
    }
 
    : match "examine wool"   {
@@ -932,7 +941,7 @@ on_command {
       : if (is_at "puzzle_hat") {
          : print "Correct. The chicken's hat is red of course.";
          : print "I can <EXPLAIN<#fee>> if you want.";
-         : set_true "solved_wool_riddle";
+         : set_true "is_puzzle_wool_solved";
          : set_true "talked_to_mirror_and_solved_puzzles" ;
          : print "Alright, maybe answering riddles is one way to become famous? You should try with someone else. Let's go.";
          : goto "wools_wheels" ;
@@ -947,7 +956,7 @@ on_command {
    }
 
    :match "explain _ ; explain -"  {
-      : if (is_at "wools_wheels" && solved_wool_riddle) {
+      : if (is_at "wools_wheels" && is_puzzle_wool_solved) {
          : print "Let's call our 3 characters A, B and C." ;
          : print "A cannot guess its own color unless both B and C are BLUE. So there must be at least one RED hat among B and C." ;
          : print "Same for B." ;
@@ -1081,7 +1090,7 @@ on_command {
        }
    }
 
-      : match "guess c; guess cosmoogang; guess 3 ; c - ; cosmoogang - ; 3 - "  {
+      : match "guess c; guess cosmoogang; guess 3 ; c - ; cosmoogang - ; 3 - ; third -"  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : create "energy_drink";
          : pocket "energy_drink";
@@ -1099,10 +1108,24 @@ on_command {
        }
    }
 
-   : match "guess - ; guess a; guess b; guess akafeather; guess brooms ; guess 1 ; guess 2; 1 - ; 2 - "  {
+   : match "guess -"  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print " RuD doesn't look too impressed by your deduction skills. \'Are you sure?\' he asks." ;
          : print " He takes a sip of energy drink." ;
+       }
+   }
+
+   : match "guess a; guess akafeather; guess 1 ; 1 - ; akafeather -; first -"  {
+       : if (is_present "rud_sad" && is_at "party_planet_inside") {
+         : print "You are about to suggest \'AKAFeather\', but notice a drawing pad is required to play. RuD excels with any controller... Except this one." ;
+         : print "RuD takes a sip of energy drink." ;
+       }
+   }
+
+   : match "guess b; guess brooms ; guess 2; 2 - ; brooms -; second -"  {
+       : if (is_present "rud_sad" && is_at "party_planet_inside") {
+         : print "You are about to suggest \'Brooms\', but remember that RuD never cleans his room or anything, there's no way he can get Diamond with this game!" ;
+         : print "RuD takes a sip of energy drink." ;
        }
    }
 
@@ -1154,10 +1177,13 @@ on_command {
       }
    }
 
-   : match "drink drink"  {
+   : match "drink drink; drink -"  {
       : if (is_carried "energy_drink") {
          : print "You take a sip of energy drink." ;
          : print "It reminds you of cough syrup, weird but a bit addictive." ;
+      }
+      : else {
+         : print "You think about taking a sip of energy drink." ;
       }
    }
 
@@ -1167,8 +1193,8 @@ on_command {
       }
    }
 
-   : match "examine leaderboard; examine leaders"  {
-      : if (is_at "party_planet_inside" && is_exists "rud_happy") {
+   : match "examine leaderboard; examine leaders; examine leader"  {
+      : if (is_at "party_planet_inside" && is_exists "rud_sad") {
         : print "RuD is so close to the top!!!! Only beaten by a certain OK.F, who must be a nerd." ;
       }
    }
@@ -1200,7 +1226,7 @@ on_command {
 
    : match "examine chicken; examine tree; examine garden; examine greenhouse; examine shrub ; examine glass"  {
       : if (is_at "crispy_garden") {
-        : print "Everyone loves chicken trees here. The sweet smell of wings drums and flats evokes summertime." ;
+        : print "Everyone loves chicken trees here. The sweet smell of wings, drums and flats evokes summertime." ;
       }
    }
 
@@ -1340,7 +1366,7 @@ on_command {
       }
    }
 
-   : match "x fresh; x air; x smell; get fresh; get air; x smell; smell _"  {
+   : match "x fresh; x air; x smell; get fresh; get air; x smell; smell _ ; breathe *"  {
       : if (is_at "cc_room") {
          : print "Let's <EXIT<#fdd>> and get some fresh air.";
       }
@@ -1466,7 +1492,7 @@ on_command {
         : print "You hear a strangled noise." ;
         : print "E, who was eating popcorn, is starting to choke!!!!!" ;
         : press_any_key ;
-        : print "June asks: \'E are you choking??? Make an OK sign!!\'" ;
+        : print "June asks: \'E are you choking??? If so, make an OK sign!!\'" ;
         : print "You know well that pigeons don't make OK signs... And remember SevenSeas' wise advice." ;
         : print "TODO puzzle number 5. TALK TO E when you see this message." ;
         : set_true "is_puzzle_ee_solved" ;
@@ -1526,7 +1552,7 @@ on_command {
             : create "june_kitchen" ;
             : create "ee_kitchen" ;
             : print "Florrie adds: \'It's your birthday CC!!! Let's eat your cake!" ;
-            : print "Everybody is here, we're going to the kitchen! Let's <GO<#fdd>> there!" ;
+            : print "Everybody is here, we're going to the kitchen!\' Let's <GO<#fdd>> there!" ;
             : press_any_key ;
             : set_true "you_win" ;
             : redescribe ;
@@ -1678,8 +1704,12 @@ on_command {
       : set_string var="nothing_message" text="";
    }
 
-   : match "play -" {
+   : match "play *" {
       : print "It's always fun to play!";
+   }
+
+   : match "move _" {
+      : print "Why though?";
    }
 
    : match "wait *" {
@@ -1687,7 +1717,7 @@ on_command {
    }
 
    : match "exit -" {
-      : if (!solved_wool_riddle && is_at "puzzle_hat") {
+      : if (!is_puzzle_wool_solved && is_at "puzzle_hat") {
         : print "If you need help here, type <HELP<#fee>>." ;
         : print "You don't have many possible answers though, so you should be able to guess quickly." ;
       }
