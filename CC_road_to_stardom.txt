@@ -729,7 +729,7 @@ on_command {
          : print "The thought could never even start to cross my mind.";
       }
       : else {
-        : print "Violence is never the solution";
+        : print "Violence is never the solution.";
       }
    }
    : match "examine comment" {
@@ -948,8 +948,12 @@ on_command {
       }
    }
 
-   :match "guess blue ; blue -"  {
+   :match "guess blue ; blue -; guess *; guess -"  {
       : if (is_at "puzzle_hat") {
+         : print "Nope.";
+         : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.";
+      }
+      : else_if (is_at "puzzle_hat" && !is_puzzle_wool_solved) {
          : print "Nope.";
          : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.";
       }
@@ -1366,7 +1370,7 @@ on_command {
       }
    }
 
-   : match "x fresh; x air; x smell; get fresh; get air; x smell; smell _ ; breathe *"  {
+   : match "x fresh; x air; x smell; get fresh; get air; x smell; smell _ ; breathe *; breathe -"  {
       : if (is_at "cc_room") {
          : print "Let's <EXIT<#fdd>> and get some fresh air.";
       }
@@ -1672,6 +1676,9 @@ on_command {
       }
       : if (is_at "crispy_garden") {
          : print "It's quite warm in here." ;
+         : if (is_present "seven_seas") {
+            : print "Do not hesitate to <TALK<#fee>> to SevenSeas." ;
+         }
       }
       : if (is_at "puzzle_florrie_laptop") {
          : print "Florrie's laptop screen shows the <Cosmoose<#fee>> logo and a mysterious <penguin<#fee>>." ;
@@ -1680,6 +1687,7 @@ on_command {
          : print "This room has everything, from nature to technology, and what a nice view on the neighboring planets." ;
       }
       : if (is_at "living_room" && you_win) {
+         : print "You can try to <TALK<#fee>> with your friends.";
          : print "Whenever you are ready, you can <GO<#fee>> and eat cake." ;
       }
       : if (is_at "party_planet") {
@@ -1704,7 +1712,7 @@ on_command {
       : set_string var="nothing_message" text="";
    }
 
-   : match "play *" {
+   : match "play *; play -" {
       : print "It's always fun to play!";
    }
 
@@ -1712,7 +1720,7 @@ on_command {
       : print "Why though?";
    }
 
-   : match "wait *" {
+   : match "wait *; wait -" {
       : print "What are you waiting for? Life is too short to stay passive.";
    }
 
