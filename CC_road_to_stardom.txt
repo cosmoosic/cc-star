@@ -177,13 +177,13 @@ strings {
 
 locations {
 
-   cc_room : location "Hello CC! This is your bedroom, typical of rooms in spaceships nowadays. Today is your birthday, so your inventor friend <June<#fee>> made a custom magic <mirror<#fee>> that answers your questions. Feel free to <TALK<#fee>> to the mirror." ;
+   cc_room : location "Hello CC! This is your bedroom, typical of rooms in spaceships nowadays. Today is your birthday, so your inventor friend <June<#cc0>> made a custom magic <mirror<#cc0>> that answers your questions. Feel free to <TALK<#cc0>> to the mirror." ;
 
-   cc_hero_june : location "June helped you transform into HeroCC thanks to her magic <beak<#fee>>." ;
+   cc_hero_june : location "June helped you transform into HeroCC thanks to her magic <beak<#cc0>>." ;
 
    cc_win : location "Everybody is here, finally we can eat cake!" ;
 
-   crispy_garden : location "You are in the Crispy Garden. You see trees where <chicken wings<#fee>> grow.";
+   crispy_garden : location "You are in the Crispy Garden. You see trees where <chicken wings<#cc0>> grow.";
 
    living_room : location "You are in the common living room." ;
 
@@ -191,11 +191,11 @@ locations {
 
    party_planet_inside : location "You are inside the gaming room." ;
 
-   wools_wheels : location "You are at Wool's Wheels, <Wool<#fee>>'s vehicle and ship repair area." ;
+   wools_wheels : location "You are at Wool's Wheels, <Wool<#cc0>>'s vehicle and ship repair area." ;
 
-   puzzle_florrie_laptop : location "You are in front of Florrie's laptop. Can you <UNLOCK<#fee>> or <TYPE<#fee>> her password?";
+   puzzle_florrie_laptop : location "You are in front of Florrie's laptop. Can you <UNLOCK<#cc0>> or <TYPE<#cc0>> her password?";
 
-   puzzle_hat : location "Wool says: \'I can show you my favorite puzzle of when I was your age. <TALK<#fee>> to me whenever you are ready.\'";
+   puzzle_hat : location "Wool says: \'I can show you my favorite puzzle of when I was your age. <TALK<#cc0>> to me whenever you are ready.\'";
 
    puzzle_labyrinth : location "The only path trough the asteroid belt is filled with drones! Their sensors only see in front of their purple cannon. But there's one we can hack to get the blueprint. We can turn this situation around!";
 
@@ -291,41 +291,41 @@ connections {
 
 objects {
 
-chicken_tree : object "a typical <chicken tree<#fee>>" at = "crispy_garden" ;
+chicken_tree : object "a typical <chicken tree<#cc0>>" at = "crispy_garden" ;
 
-ee : scenery "<pigeon E<#fee>>, a friend of June who made a few viral videos" ;
+ee : scenery "<pigeon E<#cc0>>, a friend of June who made a few viral videos" ;
 
-florrie : scenery "programmer <Florrie<#fee>>" ;
+florrie : scenery "programmer <Florrie<#cc0>>" ;
 
-june : scenery "inventor <June<#fee>>, who made you the custom <mirror<#fee>>" ;
+june : scenery "inventor <June<#cc0>>, who made you the custom <mirror<#cc0>>" ;
 
-laptop : scenery "a <laptop<#fee>> computer" at = "living_room";
+laptop : scenery "a <laptop<#cc0>> computer" at = "living_room";
 
-screen : scenery "a large digital <screen<#fee>>" at = "living_room";
+screen : scenery "a large digital <screen<#cc0>>" at = "living_room";
 
-map : object "a <map<#fdd>> of the ship" at = "cc_room";
+map : object "a <map<#cc0>> of the ship" at = "cc_room";
 
-energy_drink : object "a brand new can of energy <drink<#fee>>";
+energy_drink : object "a brand new can of energy <drink<#cc0>>";
 
 chicken_wing : object "a ripe chicken wing" at = "crispy_garden";
 
-mirror : object "the <mirror<#fee>> June made for you" at = "cc_room";
+mirror : object "the <mirror<#cc0>> June made for you" at = "cc_room";
 
-rud_happy : scenery "<RuD<#fee>>, who looks way more energized now";
+rud_happy : scenery "<RuD<#cc0>>, who looks way more energized now";
 
-rud_sad : scenery "<RuD<#fee>>, who is almost always there" at = "party_planet_inside";
+rud_sad : scenery "<RuD<#cc0>>, who is almost always there" at = "party_planet_inside";
 
-seven_seas : scenery "one of the most data savvy robots, called <SevenSeas<#fee>> or <7Cs<#fee>>" ;
+seven_seas : scenery "one of the most data savvy robots, called <SevenSeas<#cc0>> or <7Cs<#cc0>>" ;
 
-wool : scenery "mechanic <Wool<#fee>>, who does all kinds of repair work here" at = "wools_wheels";
+wool : scenery "mechanic <Wool<#cc0>>, who does all kinds of repair work here" at = "wools_wheels";
 
-wool_puzzled : scenery "mechanic <Wool<#fee>>, showing his favorite puzzle";
+wool_puzzled : scenery "mechanic <Wool<#cc0>>, showing his favorite puzzle";
 
-wool_kitchen : scenery "<Wool<#fee>>" ;
-sevenseas_kitchen : scenery "<SevenSeas<#fee>>" ;
-rud_kitchen : scenery "<RuD<#fee>>" ;
-june_kitchen : scenery "<June<#fee>>" ;
-ee_kitchen : scenery "<E<#fee>>" ;
+wool_kitchen : scenery "<Wool<#cc0>>" ;
+sevenseas_kitchen : scenery "<SevenSeas<#cc0>>" ;
+rud_kitchen : scenery "<RuD<#cc0>>" ;
+june_kitchen : scenery "<June<#cc0>>" ;
+ee_kitchen : scenery "<E<#cc0>>" ;
 
 }
 
@@ -407,10 +407,10 @@ on_startup {
    }
 
    : if (!sysvar_bool "sysvar_has_asked_sound") {
-      : print "CC's Road to Stardom uses background music.\n\nYou can lower the volume or stop the music at any moment using <SOUND LOWEST<#fdd>> or <SOUND OFF<#fdd>>.\n\nDo you wish to enable the music?\n";
+      : print "CC's Road to Stardom uses background music.\n\nYou can lower the volume or stop the music at any moment using <SOUND LOWEST<#cc0>> or <SOUND OFF<#cc0>>.\n\nDo you wish to enable the music?\n";
       : gosub "set_sound_on";
       : if (!sysvar_bool "sysvar_music_enabled") {
-         : print "You can enable the music at any moment with <SOUND ON<#fdd>>.";
+         : print "You can enable the music at any moment with <SOUND ON<#cc0>>.";
          : press_any_key;
       }
       : clear_screen;
@@ -419,31 +419,31 @@ on_startup {
       : set_true "music_ever_enabled";
       : if (sysvar_bool "sysvar_sound_enabled") {
          : set_false "is_sound_muted";
-         : print "You can lower or stop the sound at any moment with <SOUND LOWEST<#fdd>> or <SOUND OFF<#fdd>>.\n";
+         : print "You can lower or stop the sound at any moment with <SOUND LOWEST<#cc0>> or <SOUND OFF<#cc0>>.\n";
          : press_any_key;
       }
       : else {
-         : print "CC's Road to Stardom uses background music. You can enable the music at any moment with <SOUND ON<#fdd>> or <SOUND LOWEST<#fdd>> for lower volume.\n";
+         : print "CC's Road to Stardom uses background music. You can enable the music at any moment with <SOUND ON<#cc0>> or <SOUND LOWEST<#cc0>> for lower volume.\n";
          : press_any_key;
       }
    }
    : gosub "update_volume";
    : play_music "music_beat_2";
-   : print "Type <VERB NOUN<#fdd>> with the keyboard to advance in the game." ;
+   : print "Type <VERB NOUN<#cc0>> with the keyboard to advance in the game." ;
    : if (is_mobile()) {
       : print "You can touch some coloured words to copy them, or touch and hold to choose an action.";
    }
    : else {
       : print "You can click some coloured words to copy them, or right-click to choose an action.";
    }
-   : print "e.g. <EXAMINE PIGEON<#fdd>> (or <X<#fdd>>) to take a closer look at a PIGEON." ;
-   : print "<GET CHICKEN<#fdd>> to take CHICKEN and add it to your inventory." ;
+   : print "e.g. <EXAMINE PIGEON<#cc0>> (or <X<#cc0>>) to take a closer look at a PIGEON." ;
+   : print "<GET CHICKEN<#cc0>> to take CHICKEN and add it to your inventory." ;
    : press_any_key ;
-   : print "To travel, type <NORTH<#fdd>>, <EAST<#fdd>>, <SOUTH<#fdd>>, <WEST<#fdd>> (or <N<#fdd>>, <E<#fdd>>, <S<#fdd>>, <W<#fdd>>), <ENTER<#fdd>>, <EXIT<#fdd>>, <UP<#fdd>>, <DOWN<#fdd>>." ;
+   : print "To travel, type <NORTH<#cc0>>, <EAST<#cc0>>, <SOUTH<#cc0>>, <WEST<#cc0>> (or <N<#cc0>>, <E<#cc0>>, <S<#cc0>>, <W<#cc0>>), <ENTER<#cc0>>, <EXIT<#cc0>>, <UP<#cc0>>, <DOWN<#cc0>>." ;
    : press_any_key ;
-   : print "To check your inventory, type <INVENTORY<#fdd>> (or <I<#fdd>>)." ;
+   : print "To check your inventory, type <INVENTORY<#cc0>> (or <I<#cc0>>)." ;
    : press_any_key ;
-   : print "To see available commands at a location, type <HELP<#fdd>>." ;
+   : print "To see available commands at a location, type <HELP<#cc0>>." ;
    : press_any_key ;
 
 }
@@ -627,7 +627,7 @@ on_describe {
            : print "You did it! You're a hero, CC!";
            : create "florrie" target = "living_room";
            : print "Oh, Florrie is back!!!" ;
-           : print "Why don't you <TALK<#fdd>> to her?" ;
+           : print "Why don't you <TALK<#cc0>> to her?" ;
            : set_true "is_florrie_alone_in_living_room" ;
            : set_false "is_june_in_living_room" ;
            : set_false "is_e_in_living_room" ;
@@ -677,7 +677,7 @@ on_command {
       : set_sentence "look";
    }
    : match "verb noun" {
-      : print "You need to type commands consisting in one verb or one verb and one noun, for example:\n\n>><EXAMINE<#fdd>>\n>><LOOK PIGEON<#fdd>>\n\nType <HELP<#fdd>> to have a summary of useful commands.";
+      : print "You need to type commands consisting in one verb or one verb and one noun, for example:\n\n>><EXAMINE<#cc0>>\n>><LOOK PIGEON<#cc0>>\n\nType <HELP<#cc0>> to have a summary of useful commands.";
    }
    : match "save cc; help cc" {
       : print "We will do it!";
@@ -736,16 +736,16 @@ on_command {
    }
    : if (is_present "map" && !is_carried "map" && is_at "cc_room") {
       : match "get map" {
-        : print "You may be growing up quickly, you still have a lot to learn. This <map<#fee>> may be useful. You take it!";
+        : print "You may be growing up quickly, you still have a lot to learn. This <map<#cc0>> may be useful. You take it!";
         : pocket "map";
-        : print "The <map<#fee>> has been added to your <INVENTORY<#fee>>.";
+        : print "The <map<#cc0>> has been added to your <INVENTORY<#cc0>>.";
         : press_any_key;
       }
       : match "exit _" {
          : mask {
-            : print "You may be growing up quickly, you still have a lot to learn. This <map<#fee>> may be useful. You take it!";
+            : print "You may be growing up quickly, you still have a lot to learn. This <map<#cc0>> may be useful. You take it!";
             : pocket "map";
-            : print "The <map<#fee>> has been added to your <INVENTORY<#fee>>.";
+            : print "The <map<#cc0>> has been added to your <INVENTORY<#cc0>>.";
             : press_any_key;
 
          }
@@ -769,7 +769,7 @@ on_command {
           : redescribe;
       }
       : else_if (is_present "map") {
-         : print "A <map<#fee>> of the ship, could it be useful?";
+         : print "A <map<#cc0>> of the ship, could it be useful?";
       }
    }
    : match "sound _; music _; volume _" {
@@ -811,10 +811,10 @@ on_command {
       }
       : else {
          : if (sysvar_bool "sysvar_sound_enabled") {
-            : print "<SOUND OFF<#fdd>> | <LOWEST<#fdd>> | <LOW<#fdd>> | <NORMAL<#fdd>> | <HIGH<#fdd>> | <HIGHEST<#fdd>> to disable sound or change volume.";
+            : print "<SOUND OFF<#cc0>> | <LOWEST<#cc0>> | <LOW<#cc0>> | <NORMAL<#cc0>> | <HIGH<#cc0>> | <HIGHEST<#cc0>> to disable sound or change volume.";
          }
          : else {
-            : print "<SOUND ON<#fdd>> | <LOWEST<#fdd>> | <LOW<#fdd>> | <NORMAL<#fdd>> | <HIGH<#fdd>> | <HIGHEST<#fdd>> to enable sound and change volume.";
+            : print "<SOUND ON<#cc0>> | <LOWEST<#cc0>> | <LOW<#cc0>> | <NORMAL<#cc0>> | <HIGH<#cc0>> | <HIGHEST<#cc0>> to enable sound and change volume.";
          }
      }
    }
@@ -825,8 +825,8 @@ on_command {
          : print "Will you become the most famous superstar of the Cosmooverse?" ;
          : press_any_key ;
          : clear_screen;
-         : print "No, the most famous superstar of the <Cosmooverse<#fee>> will be a <pigeon<#fee>>. Either musician <OK Feather<#fee>> or bling foodie traveller <E<#fee>>." ;
-         : print "That being said, I'm just a talking mirror, whereas you are the true master of your destiny. Follow your dreams or die trying! That's the lesson I learned from <SnowWhite<#fee>>." ;
+         : print "No, the most famous superstar of the <Cosmooverse<#cc0>> will be a <pigeon<#cc0>>. Either musician <OK Feather<#cc0>> or bling foodie traveller <E<#cc0>>." ;
+         : print "That being said, I'm just a talking mirror, whereas you are the true master of your destiny. Follow your dreams or die trying! That's the lesson I learned from <SnowWhite<#cc0>>." ;
          : print "Wow I'm tired after talking so much, I'll take a break. You can replay my previous answer any time. Ciao!\'" ;
          : press_any_key ;
          : clear_screen;
@@ -853,7 +853,7 @@ on_command {
       : print "E is a pigeon influencer. A good friend of June." ;
    }
    : match "examine florrie"  {
-       : print "Florrie is an AI programmer, she is currently busy preparing for a <Pyghon<#fee>> programming certification." ;
+       : print "Florrie is an AI programmer, she is currently busy preparing for a <Pyghon<#cc0>> programming certification." ;
    }
    : match "get florrie" {
       : if (is_present "florrie") {
@@ -903,14 +903,14 @@ on_command {
       : set_string var="string_tmp" {(substring {offset -> (strlen {(original "verb")}) string -> (command_text())})};
       : if (string_tmp == "") {
         : if (comments == "") {
-            : print "I have not made any <comment<#fdd>> yet";
+            : print "I have not made any <comment<#cc0>> yet";
         }
         : else {
             : print "Here are all the comments I have made:{comments}";
         }
      }
      : else {
-        : print "I'm adding that to my list of <comments<#fee>>.";
+        : print "I'm adding that to my list of <comments<#cc0>>.";
         : set_string var="comments" {(comments + "\n<_<#000>>" + string_tmp)};
      }
 
@@ -948,7 +948,7 @@ on_command {
 
    : match "examine laptop; read laptop; use laptop"  {
       : if (is_at "living_room" && !is_laptop_unlocked) {
-         : print "This laptop belongs to <Florrie<#fee>>." ;
+         : print "This laptop belongs to <Florrie<#cc0>>." ;
          : goto "puzzle_florrie_laptop";
       }
       : if (is_at "living_room" && is_laptop_unlocked) {
@@ -1049,7 +1049,7 @@ on_command {
 
    : match "get laptop"  {
       : if (is_at "living_room" || is_at "puzzle_florrie_laptop") {
-        : print "This is not your <laptop<#fee>>. <Florrie<#fee>> should need it soon." ;
+        : print "This is not your <laptop<#cc0>>. <Florrie<#cc0>> should need it soon." ;
       }
    }
 
@@ -1064,10 +1064,10 @@ on_command {
          : print "An albatross, a bald eagle and a chicken each wear a hat. They see the colors of the others’ hats but not their own. " ;
          : print "Their hats were randomly drawn among 5 hats, 3 RED ones and 2 BLUE ones. " ;
          : print "The albatross is asked to guess its hat color, but responds \'No idea\'. The bald eagle cannot guess its color either." ;
-         : print "Then the chicken says \'I know my color\'. Which one is it? Type <GUESS<#fee>> color." ;
+         : print "Then the chicken says \'I know my color\'. Which one is it? Type <GUESS<#cc0>> color." ;
       }
       : if (is_at "wools_wheels" && is_puzzle_wool_solved && is_wool_wheeled) {
-         : print "Wool says: \'Alright, I'll continue my alternate proof of <Wooluum<#fee>> Hypothesis' independence from ZFC. Isn't logic beautiful?\'" ;
+         : print "Wool says: \'Alright, I'll continue my alternate proof of <Wooluum<#cc0>> Hypothesis' independence from ZFC. Isn't logic beautiful?\'" ;
          : print "You have no idea what this is about but it sounds boring." ;
       }
       : if (is_at "wools_wheels" && !is_wool_wheeled) {
@@ -1110,7 +1110,7 @@ on_command {
    :match "guess red ; red -"  {
       : if (is_at "puzzle_hat") {
          : print "Correct. The chicken's hat is red of course.";
-         : print "I can <EXPLAIN<#fee>> if you want.";
+         : print "I can <EXPLAIN<#cc0>> if you want.";
          : set_true "is_puzzle_wool_solved";
          : set_true "talked_to_mirror_and_solved_puzzles" ;
          : print "Alright, maybe answering riddles is one way to become famous? You should try with someone else. Let's go.";
@@ -1210,7 +1210,7 @@ on_command {
          : print "I can do a mini-game to catch up, but I can only choose one!!! And after a few hours some of them stop working!" ;
          : print "Can you help me choose? I only have 10 cans left of RedGull, but I'll let you take one!\'" ;
          : print "He takes a sip of energy drink." ;
-         : print "Can you <ASSIST RuD<#fee>>?" ;
+         : print "Can you <ASSIST RuD<#cc0>>?" ;
          : set_true "is_puzzle_rud_in_progress" ;
          : press_any_key ;
          : redescribe ;
@@ -1278,7 +1278,7 @@ on_command {
          : print "- Firstly there's AKAFeather, a cursive writing game. You can earn 80 points per minute, but it stops working after 15 minutes, and you need to wait 43 minutes to start again." ;
          : print "- Secondly there's Brooms, a cleaning game. You can earn 26 points per minute, but it stops working after 54 minutes, and you need to wait 5 minutes to start again." ;
          : print "- Thirdly there's Cosmoogang, a space cow farming game. You can earn 97 points per minute, but it stops working after 10 minutes, and you need to wait 20 minutes to start again." ;
-         : print "Can you <GUESS<#fee>> which game I should focus on?\'. " ;
+         : print "Can you <GUESS<#cc0>> which game I should focus on?\'. " ;
          : print "He takes a sip of energy drink." ;
        }
    }
@@ -1291,7 +1291,7 @@ on_command {
          : print "He takes a sip of energy drink." ;
          : print "But he doesn't look too impressed by your deduction skills." ;
          : print "He gives you a can of energy drink, as promised. " ;
-         : print "It's in your <INVENTORY<#fee>>, you can <GIVE<#fee>>, <USE<#fee>> it." ;
+         : print "It's in your <INVENTORY<#cc0>>, you can <GIVE<#cc0>>, <USE<#cc0>> it." ;
          : set_false "is_rud_sad";
          : set_false "is_puzzle_rud_in_progress" ;
          : destroy "rud_sad";
@@ -1330,7 +1330,7 @@ on_command {
 
    : match "give laptop"  {
       : if (is_at "living_room") {
-         : print "This is not your <laptop<#fee>>." ;
+         : print "This is not your <laptop<#cc0>>." ;
       }
    }
 
@@ -1408,7 +1408,7 @@ on_command {
     : if (is_at "crispy_garden" && is_present "chicken_wing" && !is_carried "chicken_wing") {
         : print "You take a chicken fruit from the tree. It's delicious, full of vitamins and grown without pesticides." ;
         : pocket "chicken_wing" ;
-        : print "This <WING<#fee>> is now in your <INVENTORY<#fee>>." ;
+        : print "This <WING<#cc0>> is now in your <INVENTORY<#cc0>>." ;
     }
     : else_if (is_at "crispy_garden") {
         : print "These fruits from the tree are delicious, full of vitamins and grown without pesticides." ;
@@ -1472,7 +1472,7 @@ on_command {
 
    : match "examine seven"  {
        : if (is_at "crispy_garden") {
-         : print "SevenSeas is the walking encyclopedia we all dream of living with. An AI who can analyze any set of data. She <sings<#fee>> during her free time." ;
+         : print "SevenSeas is the walking encyclopedia we all dream of living with. An AI who can analyze any set of data. She <sings<#cc0>> during her free time." ;
        }
    }
 
@@ -1483,7 +1483,7 @@ on_command {
          : print "Hmm... You think she sounds really dull. By the way, who's the most famous star? Let's ask SevenSeas." ;
          : print "She says: \'The most famous star is... Wait CC, are you even listening to me? You look so bored." ;
          : print "Why don't you try to find out by yourself? \'" ;
-         : print "Hmm... Maybe you should <TALK<#fee>> to her again." ;
+         : print "Hmm... Maybe you should <TALK<#cc0>> to her again." ;
          : set_true "is_puzzle_seven_seas_now" ;
          : press_any_key ;
          : redescribe ;
@@ -1495,9 +1495,9 @@ on_command {
              : print "\'DewDieDie\', a video game expert" ;
              : print "\'8k-Minute Recipes\', a cooking enthusiast." ;
              : print "Let's call them B, C, D and E. 3 of them are equally popular, but there is only 1 number one!" ;
-             : print "I'll give you a <HINT<#fee>> for the channel you want, can you then <GUESS<#fee>> who is the most popular?\'" ;
-             : print "Use \'<HINT<#fee>> channel\' whenever you are ready for SevenSeas to give a hint." ;
-             : print "If you know the answer, \'<GUESS<#fee>> channel\' whenever you are ready." ;
+             : print "I'll give you a <HINT<#cc0>> for the channel you want, can you then <GUESS<#cc0>> who is the most popular?\'" ;
+             : print "Use \'<HINT<#cc0>> channel\' whenever you are ready for SevenSeas to give a hint." ;
+             : print "If you know the answer, \'<GUESS<#cc0>> channel\' whenever you are ready." ;
          }
          : if (is_at "crispy_garden" && is_exists "seven_seas" && !is_puzzle_seven_seas_now && can_leave_crispy_garden) {
              : print "You are becoming a puzzle master!" ;
@@ -1576,7 +1576,7 @@ on_command {
 
    : match "guess one; guess 1; guess three; guess 3; guess four; guess 4; guess b; guess beat; guess d; guess dew; guess dewdiedie ; guess e; guess eight; guess 8; guess 8k; guess eightk; guess eightkminuterecipes"  {
        : if (is_at "crispy_garden" && is_exists "seven_seas" && is_puzzle_seven_seas_now) {
-         : print "Maybe you need another <HINT<#fee>>?" ;
+         : print "Maybe you need another <HINT<#cc0>>?" ;
        }
    }
 
@@ -1611,7 +1611,7 @@ on_command {
 
    : match "x fresh; x air; x smell; get fresh; get air; x smell; smell _ ; breathe *; breathe -"  {
       : if (is_at "cc_room") {
-         : print "Let's <EXIT<#fdd>> and get some fresh air.";
+         : print "Let's <EXIT<#cc0>> and get some fresh air.";
       }
       : else_if (is_at "party_planet_inside") {
          : print "The mixed smell of spilled energy drinks and crisps really makes me want to cook a proper meal.";
@@ -1651,7 +1651,7 @@ on_command {
             # : redescribe ;
           : press_any_key ;
           : print "You start feeling hungry. Also it's your birthday and no one said anything. Why is the world so unfair?" ;
-          : print "Where is your cake??? Let's <ASK<#fdd>> June." ;
+          : print "Where is your cake??? Let's <ASK<#cc0>> June." ;
           : set_true "talked_to_june" ;
       }
       : else_if ((is_present "june" || is_present "june_kitchen") && (is_florrie_in_living_room_with_cake || is_everybody_here)) {
@@ -1701,7 +1701,7 @@ on_command {
 
    : match "examine necklace"  {
       : if (is_exists "ee") {
-        : print "<E<#fdd>> always wears this bling gold necklace. Its symbol means wealth, and refers to the authorities supervising credit institutions and the stability of the financial system." ;
+        : print "<E<#cc0>> always wears this bling gold necklace. Its symbol means wealth, and refers to the authorities supervising credit institutions and the stability of the financial system." ;
       }
    }
 
@@ -1719,7 +1719,7 @@ on_command {
             : press_any_key ;
             : print "You are mortified. You don't want to be that kind of celebrity." ;
             : print "June gives you a small plastic thing:" ;
-            : print "\'This is a magic <beak<#fee>>, it transforms you into a superhero called HeroCC.\'" ;
+            : print "\'This is a magic <beak<#cc0>>, it transforms you into a superhero called HeroCC.\'" ;
             : print "As fishy as it sounds, you try it on and..." ;
             : goto "cc_hero_june" ;
             : redescribe ;
@@ -1768,7 +1768,7 @@ on_command {
         : print "109-124-14-95" ;
         : print "175-109-214-157-7-14" ;
         : print "95-109-257" ;
-        : print "<TYPE<#fdd>> THEFULLANSWER (without spaces)." ;
+        : print "<TYPE<#cc0>> THEFULLANSWER (without spaces)." ;
       }
       : else_if (is_present "florrie"  && (is_florrie_in_living_room_with_cake || is_everybody_here)) {
              : print "Florrie sings: \'Happy birthday CC!";
@@ -1787,7 +1787,7 @@ on_command {
             : set_false "is_florrie_alone_in_living_room" ;
             : print "Everybody has arrived!!!!" ;
             : print "Wool, RuD, SevenSeas, are here with June, E and Florrie!" ;
-            : print "<TALK<#fee>> to them, so you can <EAT<#fee>> cake!" ;
+            : print "<TALK<#cc0>> to them, so you can <EAT<#cc0>> cake!" ;
             : create "wool_kitchen" ;
             : create "sevenseas_kitchen" ;
             : create "rud_kitchen" ;
@@ -1813,12 +1813,12 @@ on_command {
         : set_true "is_florrie_in_living_room_with_cake";
         : set_false "is_everybody_here";
         : print "Florrie adds: \'It's your birthday CC!!! Let's eat your cake!" ;
-        : print "Everybody is here, we're going to the kitchen!\' Let's <GO<#fdd>> there!" ;
+        : print "Everybody is here, we're going to the kitchen!\' Let's <GO<#cc0>> there!" ;
         : press_any_key ;
         : redescribe ;
     }
     : else_if (is_florrie_in_living_room_with_cake) {
-        : print "We're going to eat cake with everybody! Let's <GO<#fdd>> to the kitchen!" ;
+        : print "We're going to eat cake with everybody! Let's <GO<#cc0>> to the kitchen!" ;
     }
     : else {
         : print "You think of the famous song about the delicious and moist cake." ;
@@ -1849,16 +1849,16 @@ on_command {
    }
 
    : match "help -" {
-       : print "- Type '<I<#fdd>>' to see what you are holding";
-       : print "- Type '<GET<#fdd>> <objectname<#fee>>' to pick up an item";
-       : print "- Type '<GIVE<#fdd>> <objectname<#fee>>' to give an object to someone";
-       : print "- Type '<X<#fdd>>' or '<X<#fdd>> <objectname<#fee>>' to examine clues";
+       : print "- Type '<I<#cc0>>' to see what you are holding";
+       : print "- Type '<GET<#cc0>> <objectname<#cc0>>' to pick up an item";
+       : print "- Type '<GIVE<#cc0>> <objectname<#cc0>>' to give an object to someone";
+       : print "- Type '<X<#cc0>>' or '<X<#cc0>> <objectname<#cc0>>' to examine clues";
        : if (is_carried "map") {
-         : print "- Type '<MAP<#fdd>>' to display map (<current location<#afa>>, <accessible<#aaf>>, <inaccessible<#faa>>)";
+         : print "- Type '<MAP<#cc0>>' to display map (<current location<#afa>>, <accessible<#aaf>>, <inaccessible<#faa>>)";
        }
-       : print "- Type <N<#fdd>>, <S<#fdd>>, <E<#fdd>>, <W<#fdd>>, <UP<#fdd>>, <DOWN<#fdd>>, <ENTER<#fdd>>, <EXIT<#fdd>> to move";
-       : print "- Type '<LOAD<#fdd>>' or  '<SAVE<#fdd>>' to load or save a game";
-       : print "- Type '<QUIT<#fdd>>' to restart a game";
+       : print "- Type <N<#cc0>>, <S<#cc0>>, <E<#cc0>>, <W<#cc0>>, <UP<#cc0>>, <DOWN<#cc0>>, <ENTER<#cc0>>, <EXIT<#cc0>> to move";
+       : print "- Type '<LOAD<#cc0>>' or  '<SAVE<#cc0>>' to load or save a game";
+       : print "- Type '<QUIT<#cc0>>' to restart a game";
        : if (is_at "puzzle_florrie_laptop") {
         : print "The screen displays:" ;
         : print "Password = answer to this riddle: " ;
@@ -1879,7 +1879,7 @@ on_command {
          : print "- Firstly there's AKAFeather, a cursive writing game. You can earn 80 points per minute, but it stops working after 15 minutes, and you need to wait 43 minutes to start again." ;
          : print "- Secondly there's Brooms, a cleaning game. You can earn 26 points per minute, but it stops working after 54 minutes, and you need to wait 5 minutes to start again." ;
          : print "- Thirdly there's Cosmoogang, a space cow farming game. You can earn 97 points per minute, but it stops working after 10 minutes, and you need to wait 20 minutes to start again." ;
-         : print "Can you <GUESS<#fee>> which game I should focus on?\'. " ;
+         : print "Can you <GUESS<#cc0>> which game I should focus on?\'. " ;
          : print "He takes a sip of energy drink." ;
        }
        : else_if (is_at "crispy_garden" && is_exists "seven_seas" && is_puzzle_seven_seas_now) {
@@ -1889,9 +1889,9 @@ on_command {
              : print "\'DewDieDie\', a video game expert" ;
              : print "\'8k-Minute Recipes\', a cooking enthusiast." ;
              : print "Let's call them B, C, D and E. 3 of them are equally popular, but there is only 1 number one!" ;
-             : print "I'll give you a <HINT<#fee>> for the channel you want, can you then <GUESS<#fee>> who is the most popular?\'" ;
-             : print "Ask SevenSeas \'<HINT<#fee>> channel\' whenever you are ready." ;
-             : print "If you know the answer, \'<GUESS<#fee>> channel\' whenever you are ready." ;
+             : print "I'll give you a <HINT<#cc0>> for the channel you want, can you then <GUESS<#cc0>> who is the most popular?\'" ;
+             : print "Ask SevenSeas \'<HINT<#cc0>> channel\' whenever you are ready." ;
+             : print "If you know the answer, \'<GUESS<#cc0>> channel\' whenever you are ready." ;
        }
        : else_if (is_at "living_room" && is_exists "florrie" && is_puzzle_florrie_now) {
         : print "The following sentence:" ;
@@ -1907,19 +1907,19 @@ on_command {
         : print "109-124-14-95" ;
         : print "175-109-214-157-7-14" ;
         : print "95-109-257" ;
-        : print "<TYPE<#fdd>> THEFULLANSWER (without spaces)." ;
+        : print "<TYPE<#cc0>> THEFULLANSWER (without spaces)." ;
         }
         : else_if (is_at "living_room" && is_exists "june" && is_exists "ee" ) {
             : print "Make sure you talk to both June and E." ;
         }
         : else_if (is_at "cc_hero_june") {
-            : print "What's going on with this <beak<#fee>>?" ;
+            : print "What's going on with this <beak<#cc0>>?" ;
         }
         : else_if (you_win && is_everybody_here) {
-            : print "Where is your cake? <EAT CAKE<#fdd>> whenever you are ready to eat!" ;
+            : print "Where is your cake? <EAT CAKE<#cc0>> whenever you are ready to eat!" ;
         }
         : else_if (you_win && is_florrie_in_living_room_with_cake) {
-            : print "Everybody is going to the kitchen! Let's <GO<#fdd>> there!" ;
+            : print "Everybody is going to the kitchen! Let's <GO<#cc0>> there!" ;
         }
 
 
@@ -1932,11 +1932,11 @@ on_command {
       : if (is_at "crispy_garden") {
          : print "It's quite warm in here." ;
          : if (is_present "seven_seas") {
-            : print "Do not hesitate to <TALK<#fee>> to SevenSeas." ;
+            : print "Do not hesitate to <TALK<#cc0>> to SevenSeas." ;
          }
       }
       : if (is_at "puzzle_florrie_laptop") {
-         : print "Florrie's laptop screen shows the <Cosmoose<#fee>> logo and a mysterious <penguin<#fee>>." ;
+         : print "Florrie's laptop screen shows the <Cosmoose<#cc0>> logo and a mysterious <penguin<#cc0>>." ;
       }
       : if (is_at "living_room") {
          : print "This room has everything, from nature to technology, and what a nice view on the neighboring planets." ;
@@ -1945,8 +1945,8 @@ on_command {
          : print "The screen is flashing brightly, and making alarming sounds. It may be time to do something, urgently.";
       }
       : if (is_at "living_room" && you_win) {
-         : print "You can try to <TALK<#fee>> with your friends.";
-         : print "Whenever you are ready, you can <GO<#fee>> and eat cake." ;
+         : print "You can try to <TALK<#cc0>> with your friends.";
+         : print "Whenever you are ready, you can <GO<#cc0>> and eat cake." ;
       }
       : if (is_at "party_planet") {
          : print "It may look gloomy from the outside, but some people spend their nights and day inside." ;
@@ -1962,7 +1962,7 @@ on_command {
          : print "You've never seen Wool so excited. He must love a good puzzle." ;
       }
       : if (is_at "cc_hero_june") {
-            : print "What's going on with this <beak<#fee>>?" ;
+            : print "What's going on with this <beak<#cc0>>?" ;
         }
       : if (in_labyrinth) {
          : print "Escape without being detected by any drone, while getting the blueprint!" ;
@@ -1983,7 +1983,7 @@ on_command {
 
    : match "exit -" {
       : if (!is_puzzle_wool_solved && is_at "puzzle_hat") {
-        : print "If you need help here, type <HELP<#fee>>." ;
+        : print "If you need help here, type <HELP<#cc0>>." ;
         : print "You don't have many possible answers though, so you should be able to guess quickly." ;
       }
    }
