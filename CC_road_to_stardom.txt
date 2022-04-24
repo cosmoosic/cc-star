@@ -85,6 +85,7 @@ vocabulary {
    : noun      / aliases = [porthole, window, view, sky, scenery]
    : noun      / aliases = [snow, white, snowwhite]
    : noun      / aliases = [chicken, fruit, wing]
+   : noun      / aliases = [banach, banachspherificator, spherificator, sphere]
    : noun      / aliases = [bull, cow, bouncy, bouncybull, bluecow]
    : noun      / aliases = [plush, plushie, stuffedanimal, animal, stuffed, lion, bear, teddy, teddybear, stuffie, plushtoy, stuffy, plushy]
    : noun      / aliases = [boat, ship, barge, gondola, yacht, sailboat, ark, bateau]
@@ -308,6 +309,8 @@ map : object "a <map<#cc0>> of the ship" at = "cc_room";
 energy_drink : object "a brand new can of energy <drink<#cc0>>";
 
 chicken_wing : object "a ripe chicken wing" at = "crispy_garden";
+
+spherificator : object "a Banach-Spherificator" at = "wools_wheels";
 
 mirror : object "the <mirror<#cc0>> June made for you" at = "cc_room";
 
@@ -1410,6 +1413,15 @@ on_command {
       }
    }
 
+   : match "discard spherificator"  {
+      : if (is_carried "spherificator" && !is_at "wools_wheels") {
+         : print "If Wool finds it away, he may be more careful next time. Better keep it." ;
+      }
+      : if (is_carried "spherificator" && is_at "wools_wheels") {
+         : print "Better put it back in its place so that Wool doesn't notice its disappearance." ;
+      }
+   }
+
    : match "examine leaderboard; examine leaders; examine leader"  {
       : if (is_at "party_planet_inside" && is_exists "rud_sad") {
         : print "RuD is so close to the top!!!! Only beaten by a certain OK.F, who must be a nerd." ;
@@ -1433,6 +1445,20 @@ on_command {
     }
     : else {
         : print "The Crispy Yard has some crispy chicken on the trees." ;
+    }
+   }
+
+   : match "get spherificator; take spherificator"  {
+    : if (is_at "wools_wheels" && is_present "spherificator" && !is_carried "spherificator") {
+        : print "You sneakily take the Banach-Spherificator. You don't know how to use it though." ;
+        : pocket "spherificator" ;
+        : print "This <SPHERIFICATOR<#cc0>> is now in your <INVENTORY<#cc0>>." ;
+    }
+    : else_if (is_at "wools_wheels") {
+        : print "Wool has only one Banach-Spherificator, he takes good care of his tools." ;
+    }
+    : else {
+        : print "Only Wool uses this kind of tool." ;
     }
    }
 
@@ -1462,6 +1488,31 @@ on_command {
       }
     }
    }
+   : match "give spherificator"  {
+       : if (is_carried "spherificator") {
+         : if ((is_present "rud_happy" || is_present "rud_kitchen")) {
+            : print "RuD says: \'I've seen wool guarding it like a treasure, how did you get it? Hey I'll trade an energy drink for it!\'" ;
+            : print "You politely decline, while he takes a sip of energy drink." ;
+         }
+         : if ((is_present "seven_seas" || is_present "sevenseas_kitchen")) {
+             : print "Seven Seas says: \'Interesting, is it some kind of measuring device?" ;
+             : print "My data does not contain any usage manual. How unfortunate.\'" ;
+         }
+         : if ((is_present "june"|| is_present "june_kitchen")) {
+             : print "June says: \'No thanks, I don't understand why he uses such primitive tools." ;
+             : print "I can measure everything perfectly with my gyro-bubble gum device!\'" ;
+         }
+         : if ((is_present "wool" || is_present "wool_kitchen")) {
+             : print "Wool is deep in thoughts, he does not even notice you." ;
+         }
+         : if ((is_present "ee" || is_present "ee_kitchen")) {
+             : print "E looks puzzled, like chicken in front of a knife." ;
+         }
+         : if (is_present "florrie") {
+             : print "Florrie says: \'Thanks, but I would prefer some chicken wing or chocolate!\'" ;
+         }
+       }
+   }
 
    : match "get mirror ; get chicken_tree"  {
       : if (is_present "mirror") {
@@ -1485,6 +1536,15 @@ on_command {
       }
       : else_if (is_at "crispy_garden") {
         : print "Everyone loves chicken trees here. The sweet smell of wings, drums and flats evokes summertime." ;
+      }
+   }
+
+   : match "examine spherificator"  {
+      : if (is_carried "spherificator") {
+        : print "" ;
+      }
+      : else_if (is_at "wools_wheels") {
+        : print "Wool said the Banach-Spherificator is the best measuring tool around. Old but reliable." ;
       }
    }
 
