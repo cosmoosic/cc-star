@@ -307,6 +307,8 @@ map : object "a <map<#fdd>> of the ship" at = "cc_room";
 
 energy_drink : object "a brand new can of energy <drink<#fee>>";
 
+chicken_wing : object "a ripe chicken wing" at = "crispy_garden";
+
 mirror : object "the <mirror<#fee>> June made for you" at = "cc_room";
 
 rud_happy : scenery "<RuD<#fee>>, who looks way more energized now";
@@ -736,12 +738,14 @@ on_command {
       : match "get map" {
         : print "You may be growing up quickly, you still have a lot to learn. This <map<#fee>> may be useful. You take it!";
         : pocket "map";
+        : print "The <map<#fee>> has been added to your <INVENTORY<#fee>>.";
         : press_any_key;
       }
       : match "exit _" {
          : mask {
             : print "You may be growing up quickly, you still have a lot to learn. This <map<#fee>> may be useful. You take it!";
             : pocket "map";
+            : print "The <map<#fee>> has been added to your <INVENTORY<#fee>>.";
             : press_any_key;
 
          }
@@ -1382,6 +1386,12 @@ on_command {
       }
    }
 
+   : match "discard chicken"  {
+      : if (is_carried "chicken_wing") {
+         : print "You may need it if you get hungry at night." ;
+      }
+   }
+
    : match "examine leaderboard; examine leaders; examine leader"  {
       : if (is_at "party_planet_inside" && is_exists "rud_sad") {
         : print "RuD is so close to the top!!!! Only beaten by a certain OK.F, who must be a nerd." ;
@@ -1395,11 +1405,43 @@ on_command {
    }
 
    : match "get chicken; taste chicken; grab chicken; seize chicken; eat chicken"  {
-    : if (is_at "crispy_garden") {
+    : if (is_at "crispy_garden" && is_present "chicken_wing" && !is_carried "chicken_wing") {
         : print "You take a chicken fruit from the tree. It's delicious, full of vitamins and grown without pesticides." ;
+        : pocket "chicken_wing" ;
+        : print "This <WING<#fee>> is now in your <INVENTORY<#fee>>." ;
+    }
+    : else_if (is_at "crispy_garden") {
+        : print "These fruits from the tree are delicious, full of vitamins and grown without pesticides." ;
     }
     : else {
         : print "The Crispy Yard has some crispy chicken on the trees." ;
+    }
+   }
+
+   : match "give chicken"  {
+       : if (is_carried "chicken_wing") {
+         : if ((is_present "rud_happy" || is_present "rud_kitchen")) {
+            : print "RuD says: \'Thanks, but I don't want to get my fingers dirty before gaming.\'" ;
+            : print "He takes a sip of energy drink." ;
+         }
+      : if ((is_present "seven_seas" || is_present "sevenseas_kitchen")) {
+         : print "Seven Seas says: \'Interesting, as this contains vitamin C and carotenoids, it is considered a CC-rich food." ;
+         : print "Certainly nutritious for you, but not as useful for me.\'" ;
+      }
+      : if ((is_present "june"|| is_present "june_kitchen")) {
+         : print "June says: \'Thanks, but I grow my own in my lab and they are way tastier. Please try them some time!\'" ;
+      }
+      : if ((is_present "wool"|| is_present "wool_kitchen")) {
+         : print "Wool says: \'Thanks, but my flying tool friend Pigeon can go and grab some for me anytime.\'" ;
+      }
+      : if ((is_present "ee" || is_present "ee_kitchen")) {
+         : print "E takes a bite of the chicken wing." ;
+         : print "E says: \'Not too bad, but I prefer the ones that June give me.\'" ;
+      }
+      : if (is_present "florrie") {
+         : print "Florrie takes a bite of the chicken wing..." ;
+         : print "Florrie says: \'Thanks CC, it tastes super good! \'" ;
+      }
     }
    }
 
@@ -1413,8 +1455,17 @@ on_command {
    }
 
 
-   : match "examine chicken; examine tree; examine garden; examine greenhouse; examine shrub ; examine glass"  {
+   : match "examine garden; examine greenhouse; examine shrub ; examine glass"  {
       : if (is_at "crispy_garden") {
+        : print "Everyone loves chicken trees here. The sweet smell of wings, drums and flats evokes summertime." ;
+      }
+   }
+
+   : match "examine chicken; examine tree"  {
+      : if (is_carried "chicken_wing") {
+        : print "" ;
+      }
+      : else_if (is_at "crispy_garden") {
         : print "Everyone loves chicken trees here. The sweet smell of wings, drums and flats evokes summertime." ;
       }
    }
@@ -1734,7 +1785,9 @@ on_command {
             : set_true "is_puzzle_florrie_solved" ;
             : set_true "is_everybody_here" ;
             : set_false "is_florrie_alone_in_living_room" ;
-            : print "Everybody has arrived!!!! <TALK<#fee>> to them, so you can <EAT<#fee>> cake!" ;
+            : print "Everybody has arrived!!!!" ;
+            : print "Wool, RuD, SevenSeas, are here with June, E and Florrie!" ;
+            : print "<TALK<#fee>> to them, so you can <EAT<#fee>> cake!" ;
             : create "wool_kitchen" ;
             : create "sevenseas_kitchen" ;
             : create "rud_kitchen" ;
