@@ -922,7 +922,9 @@ on_command {
       : if (is_at "puzzle_florrie_laptop") {
         : print "The screen displays:" ;
         : print "Password = answer to this riddle: " ;
-        : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
+        : print "\'My feathers take me anywhere. The tones of grey in my plumage are reminiscent of everyone's favorite weather." ;
+        : print "I am a star in the city, where admirers fawn over my shiny iridescent neck." ;
+        : print "I brighten everyone's day by leaving white traces of my visit on cars and fresh air-dried laundry." ;
         : print "Who am I? UNLOCK me!\' " ;
       }
       : else_if (is_at "puzzle_hat" && !is_puzzle_wool_solved) {
@@ -951,7 +953,9 @@ on_command {
       : if (is_at "puzzle_florrie_laptop") {
         : print "The screen displays:" ;
         : print "Password = answer to this riddle: " ;
-        : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
+        : print "\'My feathers take me anywhere. The tones of grey in my plumage are reminiscent of everyone's favorite weather." ;
+        : print "I am a star in the city, where admirers fawn over my shiny iridescent neck." ;
+        : print "I brighten everyone's day by leaving white traces of my visit on cars and fresh air-dried laundry." ;
         : print "Who am I? UNLOCK me!\' " ;
       }
       : if (is_at "party_planet_inside") {
@@ -990,7 +994,9 @@ on_command {
         : print "This laptop may be expensive, but you mainly notice the bread and chocolate crumbs stuck inside the keyboard. Florrie is a gourmet." ;
         : print "The screen displays:" ;
         : print "Password = answer to this riddle: " ;
-        : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
+        : print "\'My feathers take me anywhere. The tones of grey in my plumage are reminiscent of everyone's favorite weather." ;
+        : print "I am a star in the city, where admirers fawn over my shiny iridescent neck.";
+        : print "I brighten everyone's day by leaving white traces of my visit on cars and fresh air-dried laundry." ;
         : print "Who am I? UNLOCK me!\' " ;
       }
       : if (is_at "party_planet_inside" ) {
@@ -1803,8 +1809,11 @@ on_command {
        : if (is_at "puzzle_florrie_laptop") {
         : print "The screen displays:" ;
         : print "Password = answer to this riddle: " ;
-        : print "\'My feathers take me anywhere. Everywhere I go there are admirers of my shiny iridescent neck. The tones of grey in my plumage are reminiscent of everyone's favorite weather. " ;
+        : print "\'My feathers take me anywhere. The tones of grey in my plumage are reminiscent of everyone's favorite weather." ;
+        : print "I am a star in the city, where admirers fawn over my shiny iridescent neck." ;
+        : print "I brighten everyone's day by leaving white traces of my visit on cars and fresh air-dried laundry." ;
         : print "Who am I? UNLOCK me!\' " ;
+        : print "Hint: it's a famous bird, most kids like to run after them in the streets." ;
       }
       : else_if (is_at "puzzle_hat") {
         : print "An albatross, a bald eagle and a chicken each wear a hat. They see the colors of the others’ hats but not their own. " ;
