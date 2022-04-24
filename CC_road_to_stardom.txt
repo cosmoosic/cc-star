@@ -146,6 +146,7 @@ booleans {
    has_blueprint : boolean "false";
    in_labyrinth : boolean "false";
    is_labyrinth_open : boolean "false";
+   is_playing_logic  : boolean "false";
 }
 
 integers {
@@ -154,11 +155,77 @@ integers {
    day_spend_labyrinth_enigma : integer "0";
    labyrinth_position_x : integer "0";
    labyrinth_position_y : integer "-13";
+   choking_e_solution : integer "0";
+   choking_e_form : integer "0";
+   integer_tmp : integer "0";
 }
 
 collections {
    labyrinth_dir : list {
       items  = [ "1_1", "1_2", "1_3", "1_4", "1_5", "2_1", "2_2", "2_3", "2_4", "2_5", "3_1", "3_2", "3_3", "3_4", "3_5", "4_1", "4_2", "4_3", "4_4", "4_5", "5_1", "5_2", "5_3", "5_4", "5_5" ]
+   }
+
+   choking_e_choice_1: list {
+    items = [
+        "Give 5 abdominal thrusts (also known as the Heimlich maneuver).",
+        "Alternate between 5 blows and 5 thrusts until the blockage is dislodged.",
+        "Give 5 back blows.",
+    ]
+   }
+
+   choking_e_choices: list {
+      items = [choking_e_choice_1]
+   }
+
+   choking_e_response_1: list {
+        items = [
+            "{rescue_person_1} begins to give 5 back blows, you stay behind and observe. {rescue_person_3} takes care of the rest.",
+            "{rescue_person_2} begins to give 5 back blows, you stay behind and observe. {rescue_person_4} takes care of the rest.",
+            "Yes, you are awesome!!!! You give 5 back blows, and E looks a bit better. {rescue_person_5} takes care of the rest.",
+        ]
+   }
+
+   choking_e_response_2: list {
+        items = [
+            "Yes, you are awesome!!!! You do the Heimlich maneuver, and E seems a bit more alive.",
+            "{rescue_person_3} begins to do the Heimlich maneuver, you stay behind and observe.",
+            "{rescue_person_4} begins to do the Heimlich maneuver, you stay behind and observe.",
+        ]
+   }
+
+   choking_e_response_3: list {
+        items = [
+            "{rescue_person_5} begins to alternate between 5 blows and 5 thrusts, you stay behind and observe.",
+            "Yes, you are awesome!!!! You alternate between 5 blows and 5 thrusts, and it really looks like the last step to save E!",
+            "{rescue_person_6} begins to alternate between 5 blows and 5 thrusts, you stay behind and observe.",
+        ]
+   }
+
+   choking_e_responses: list {
+      items = [choking_e_response_1, choking_e_response_2, choking_e_response_3]
+   }
+
+   choking_e_introductions: list {
+      items = [
+         "We need to save E!"
+      ]
+   }
+
+   choking_e_queries: list {
+      items = [
+         "We need to save E! What is the first step to help him?",
+         "It's not over yet! What is the second step to help him?",
+         "Almost there! What is the third step to help him?",
+      ]
+   }
+
+   rescue_people: set {items = [June, SevenSeas, Wool, RuD, Kirby, Pigeon]}
+
+   choking_e_solutions: list {
+        items = [2, 0, 1]
+   }
+   choking_e_order: list {
+      items = [0, 1, 2]
    }
 }
 
@@ -170,6 +237,12 @@ strings {
    comments : string "";
    nothing_message : string "";
    string_correction : string "";
+   rescue_person_1 : string "";
+   rescue_person_2 : string "";
+   rescue_person_3 : string "";
+   rescue_person_4 : string "";
+   rescue_person_5 : string "";
+   rescue_person_6 : string "";
 }
 
 ######################################
@@ -590,6 +663,57 @@ subroutines {
       : else_if (sound_volume == "highest") {
          : set_music_vol volume="100";
       }
+   }
+   play_choking_e_puzzle_choice : subroutine {
+      : set_integer var="integer_tmp" {(
+         int(collection_get { collection="choking_e_order" index -> (integer_tmp)})
+      )}
+      : set_string var="string_tmp" {(
+         collection_get { collection -> (collection_get { collection="choking_e_responses" index -> (choking_e_form)}) index -> (integer_tmp)}
+      )}
+      : print "{string_tmp}";
+      : if (is_playing_logic) {
+         : return;
+      }
+   }
+   play_choking_e_puzzle_next_response_line :  subroutine {
+      : set_integer var="integer_tmp" {(
+         int(collection_get { collection="choking_e_order" index -> (integer_tmp)})
+      )}
+      : set_string var="string_tmp" {(
+         collection_get { collection -> (collection_get { collection="choking_e_choices" index -> (choking_e_form)}) index -> (integer_tmp)}
+      )}
+   }
+   play_choking_e_puzzle : subroutine {
+      : collection_sort collection="choking_e_order" algorithm="shuffle";
+      : collection_sort collection="rescue_people" algorithm="shuffle";
+      : set_string var="rescue_person_1" {(collection_get { collection="rescue_people" index -> (0)} )};
+      : set_string var="rescue_person_2" {(collection_get { collection="rescue_people" index -> (1)} )};
+      : set_string var="rescue_person_3" {(collection_get { collection="rescue_people" index -> (2)} )};
+      : set_string var="rescue_person_4" {(collection_get { collection="rescue_people" index -> (3)} )};
+      : set_string var="rescue_person_5" {(collection_get { collection="rescue_people" index -> (4)} )};
+      : set_string var="rescue_person_6" {(collection_get { collection="rescue_people" index -> (5)} )};
+      : set_integer var="choking_e_solution" {(int(collection_get { collection="choking_e_solutions" index -> (choking_e_form)}))}
+      : set_integer var="integer_tmp" value="0";
+      : gosub "play_choking_e_puzzle_next_response_line";
+      : add_choice  "{string_tmp}" {
+         : set_integer var="integer_tmp" value="0";
+         : gosub  "play_choking_e_puzzle_choice" ;
+      }
+      : set_integer var="integer_tmp" value="1";
+      : gosub mask = "true"  "play_choking_e_puzzle_next_response_line";
+      : add_choice  "{string_tmp}" {
+         : set_integer var="integer_tmp" value="1";
+         : gosub "play_choking_e_puzzle_choice";
+      }
+      : set_integer var="integer_tmp" value="2";
+      : gosub "play_choking_e_puzzle_next_response_line";
+      : add_choice "{string_tmp}" {
+         : set_integer var="integer_tmp" value="2";
+         : gosub "play_choking_e_puzzle_choice";
+      }
+      : set_string var="string_tmp"  {(collection_get { collection="choking_e_queries" index -> (choking_e_form)})};
+      : choose "{string_tmp}" hint="numeric_list_always" ;
    }
 }
 
@@ -1816,8 +1940,12 @@ on_command {
         : press_any_key ;
         : print "June asks: \'E are you choking??? If so, make an OK sign!!\'" ;
         : print "You know well that pigeons don't make OK signs... And remember SevenSeas' wise advice." ;
-        : print "TODO puzzle number 5. TALK TO E when you see this message." ;
-        : set_true "is_puzzle_ee_solved" ;
+        # : print "TODO puzzle number 5. TALK TO E when you see this message." ;
+         : print "Some of your friends are passing by and can help you, but do you remember SevenSeas' advice?" ;
+         : gosub "play_choking_e_puzzle";
+         : print "Awesome! Thanks for helping save E! Now try to <TALK<#fee>> to him." ;
+         : set_false var="is_playing_logic";
+         : set_true "is_puzzle_ee_solved" ;
         : goto "living_room" ;
       }
    }
@@ -2074,6 +2202,17 @@ on_command {
         : print "You don't have many possible answers though, so you should be able to guess quickly." ;
       }
    }
+
+   : match "todo puzzle" {
+      : set_true "is_playing_logic" ;
+      : if (is_playing_logic) {
+         : gosub "play_choking_e_puzzle";
+         : print "Awesome! Thanks for helping save E! Now try to <TALK<#fee>> to him." ;
+         : set_false var="is_playing_logic";
+         : set_true "is_puzzle_ee_solved" ;
+      }
+   }
+
    : if (in_labyrinth) {
       : match "start -; in -; enter -" {
           : goto "labyrinth_1_1";
