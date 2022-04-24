@@ -269,6 +269,7 @@ connections {
    labyrinth_4_1, south_oneway, labyrinth_5_1,
    labyrinth_4_2, west_oneway, labyrinth_4_1,
    labyrinth_4_2, south_oneway, living_room,
+   labyrinth_4_2, north_oneway, labyrinth_3_2,
    labyrinth_4_3, west_oneway, labyrinth_4_2,
    labyrinth_4_3, south_oneway, living_room,
    labyrinth_4_4, north_oneway, labyrinth_3_4,
