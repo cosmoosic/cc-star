@@ -1220,6 +1220,22 @@ on_command {
       }
    }
 
+   : match "examine bet"  {
+       : if (talked_to_rud) {
+         : print "RuD and Wool often make bets. This time, if RuD wins:";
+         : print "Wool will repair RuD's broken and rusty umbrella drone. It has a built-in energy drink case (protecting it from shocks and leaks).";
+         : print "If Wool wins:";
+         : print "Wool will keep RuD's umbrella drone and turn it into a device that makes one float in the air, and protects from attacks and falling objects." ;
+       }
+   }
+
+   : match "examine umbrella; examine drone"  {
+       : if (talked_to_rud) {
+         : print "RuD's umbrella drone is buried under a pile of old junk.";
+         : print "It's a hands-free umbrella that can protect from the rain, but makes a lot of noise.";
+       }
+   }
+
    : match "examine rud"  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print "RuD looks a bit sadder than usual. A future idol could surely cheer him up!" ;
@@ -1739,6 +1755,8 @@ on_command {
         : set_false "is_everybody_here";
         : print "Florrie adds: \'It's your birthday CC!!! Let's eat your cake!" ;
         : print "Everybody is here, we're going to the kitchen!\' Let's <GO<#fdd>> there!" ;
+        : press_any_key ;
+        : redescribe ;
     }
     : else_if (is_florrie_in_living_room_with_cake) {
         : print "We're going to eat cake with everybody! Let's <GO<#fdd>> to the kitchen!" ;
