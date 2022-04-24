@@ -1479,13 +1479,15 @@ on_command {
          : print "C-Cherries looks very wealthy. That's probably the main explanation for this incredible success." ;
          : print "SevenSeas says: \'CC, I may have another suggestion for becoming popular." ;
          : press_any_key ;
-         : print "You could become a hero. For instance saving a life! " ;
-         : print "For instance, choking is a common emergency. Here are the first-aid steps: " ;
+         : print "My data shows heroes are popular. You could become one? " ;
+         : print "A hero is someone who saves lives." ;
+         : print "According to statistics, choking is a most common emergency. Here are the first-aid steps: " ;
          : print "1. Give 5 back blows. " ;
          : print "2. Give 5 abdominal thrusts (also known as the Heimlich maneuver)." ;
          : print "3. Alternate between 5 blows and 5 thrusts until the blockage is dislodged." ;
          : press_any_key ;
          : print "And voilà. I cannot wait to watch you experiment this technique!\'" ;
+         : print "This sounds like too much information, of the boring kind. Let's scram." ;
          : set_true "can_leave_crispy_garden" ;
          : set_true "can_create_june_e" ;
          : create "june" target = "living_room";
