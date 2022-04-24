@@ -4,7 +4,7 @@ A text adventure to help CC find the road to stardom! (Adventuron game for TALP2
 
 It's CC's birthday!
 Will he be gifted his dream, to become the universe's biggest idol?
-He's the cutest creature in the universe after all, so it would be fair.
+He's the cutest creature in the universe after all, so it would only be fair.
 If he doesn't, all his friends from the Cosmoose gang can help him. Maybe?
 
 This is a small, heartwarming story you can play with your kids.
@@ -24,11 +24,17 @@ Type HELP to get some HELP.
 Learn to write your own text adventure game (in an hour) with Adventuron:
 https://adventuron.io/documentation/tutorial-a.html
 
+## Booklet
+
+Compile with ```pdflatex main.tex``` in the booklet folder.
+Gives a full walkthrough of the game puzzles, as well as some background information.
+
 ## Credits
 
 Made with love by the OK Feather/Cosmoose crew. 
 Music is DHXP, pixel graphics by Woolion, programming by E and Dova Lin, and some help from Woolion.
-Special Thank You to all our Playtesters: Mélanie the shadowy but benevolent figure, ... (TODO)
+Special Thank You to all our Playtesters: Mélanie the shadowy but benevolent figure, 
+Daphne our reliable AI member, and everybody else who helped improve the game.
 
 ## Jam Submissions Comments
 
