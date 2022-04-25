@@ -104,7 +104,7 @@ vocabulary {
    : noun      / aliases = [tree, pine, forest, plant]
    : noun      / aliases = [room, chamber, place, here]
    : noun      / aliases = [joystick, trackball, gamepad, joypad, trackpad, stick, controller, arcade]
-   : noun      / aliases = [blue, black, yellow, pink, white, colorless, rainbow, purple, green]
+   : noun      / aliases = [black, yellow, pink, white, colorless, rainbow, purple, green]
    : noun      / aliases = [seven, 7, 7C, 7Cs, sevenseas, robot, bot]
    : noun      / aliases = [necklace, chain, jewel, euro, gold]
    : noun      / aliases = [rud, ru, duri, dhxp, gamer, r]
@@ -1311,12 +1311,7 @@ on_command {
    }
 
    :match "guess black ; black -; guess *; guess -"  {
-      : if (is_at "puzzle_hat") {
-         : print "\'Did you hurt your head or something?";
-         : print "You only have a choice between two colors, red and blue.";
-         : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
-      }
-      : else_if (is_at "puzzle_hat" && !is_puzzle_wool_solved) {
+      : if (is_at "puzzle_hat" && !is_puzzle_wool_solved) {
          : print "\'Did you hurt your head or something?";
          : print "You only have a choice between two colors, red and blue.";
          : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
@@ -1918,7 +1913,7 @@ on_command {
    : match "talk june"  {
       : if (is_at "living_room" && is_exists "june" && !talked_to_e) {
           : print "You ask June how a pigeon could be more popular than you. It deserves an explanation!" ;
-          : print "June replies: \'Why ask me, while you have a pigeon right here! Ask him away!" ;
+          : print "June replies: \'Why ask me, while you have a pigeon right here! Talk to E and ask him away!" ;
       }
       : else_if (is_at "living_room" && is_exists "june" && !is_puzzle_ee_solved && !talked_to_june) {
           : set_false "is_seven_seas_crispy" ;
@@ -2074,7 +2069,7 @@ on_command {
              : print "Florrie sings: \'Happy birthday CC!";
              : print "Try this cake we made with plenty of";
              : print "C6H1206 it's so sweet\'" ;
-             : print "Hmm... What is she talking about?" ;
+             : print "Hmm... Not sure what this is all about." ;
              : set_true "talked_to_someone_before_cake" ;
       }
    }
