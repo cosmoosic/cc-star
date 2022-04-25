@@ -2336,22 +2336,22 @@ on_command {
 
 assets {
    sounds {
-      music_beat_1 : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat_1.mp3" ;
-      music_beat_2 : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat_2_ccs_room.mp3" ;
-      music_wools_wheels : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat07_Wools_room.mp3" ;
-      music_laptop : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi2_wool.mp3" ;
-      music_living_room : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi3_livingroom.mp3" ;
-      music_party_planet_inside : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi4_partyplanet.mp3" ;
-      music_party_planet_outside: sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi8_party_planet_outside.mp3" ;
-      music_crispy_garden : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/lofi10_crispy.mp3" ;
-      music_labyrinth_1 : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat08_puzzle.mp3" ;
-      music_labyrinth_2 : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat11_Puzzle.mp3" ;
-      music_living_room_pigeon : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/Beat09_living_room_june_E_ganggang.mp3" ;
-      music_win : sound_sample "https://cosmoosic.github.io/adventuron_april_2022/Music/funprio.mp3" ;
+      music_beat_1 : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat_1.mp3" ;
+      music_beat_2 : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat_2_ccs_room.mp3" ;
+      music_wools_wheels : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat07_Wools_room.mp3" ;
+      music_laptop : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/lofi2_wool.mp3" ;
+      music_living_room : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/lofi3_livingroom.mp3" ;
+      music_party_planet_inside : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/lofi4_partyplanet.mp3" ;
+      music_party_planet_outside: sound_sample "https://cosmoose.org/adventuron_april_2022/Music/lofi8_party_planet_outside.mp3" ;
+      music_crispy_garden : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/lofi10_crispy.mp3" ;
+      music_labyrinth_1 : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat08_puzzle.mp3" ;
+      music_labyrinth_2 : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat11_Puzzle.mp3" ;
+      music_living_room_pigeon : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat09_living_room_june_E_ganggang.mp3" ;
+      music_win : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/funprio.mp3" ;
    }
    graphics {
-      cc_room : png "https://cosmoosic.github.io/adventuron_april_2022/Images/cc_room.png" ;
-      crispy_garden : png "https://cosmoosic.github.io/adventuron_april_2022/Images/crispy_garden_no7Cs.png" {
+      cc_room : png "https://cosmoose.org/adventuron_april_2022/Images/cc_room.png" ;
+      crispy_garden : png "https://cosmoose.org/adventuron_april_2022/Images/crispy_garden_no7Cs.png" {
         : if (is_seven_seas_crispy) {
                : overlay "crispy_garden_7Cs";
         }
@@ -2359,13 +2359,13 @@ assets {
                : overlay "puzzle_channels";
         }
       } ;
-      wools_wheels : png "https://cosmoosic.github.io/adventuron_april_2022/Images/wools_wheels.png" {
+      wools_wheels : png "https://cosmoose.org/adventuron_april_2022/Images/wools_wheels.png" {
         : if (is_wool_wheeled) {
                : overlay "wool";
         }
       } ;
-      party_planet : png "https://cosmoosic.github.io/adventuron_april_2022/Images/party_planet.png" ;
-      party_planet_inside : png "https://cosmoosic.github.io/adventuron_april_2022/Images/rud.png" {
+      party_planet : png "https://cosmoose.org/adventuron_april_2022/Images/party_planet.png" ;
+      party_planet_inside : png "https://cosmoose.org/adventuron_april_2022/Images/rud.png" {
         : if (is_rud_sad) {
                : overlay "rudface";
                : if (is_puzzle_rud_in_progress) {
@@ -2376,14 +2376,14 @@ assets {
                : overlay "puzzle_rud";
         }
       } ;
-      rudface : png "https://cosmoosic.github.io/adventuron_april_2022/Images/rudface.png" ;
-      crispy_garden_7Cs : png "https://cosmoosic.github.io/adventuron_april_2022/Images/crispy_garden_7Cs.png" ;
-      wool : png "https://cosmoosic.github.io/adventuron_april_2022/Images/wool.png" ;
-      june : png "https://cosmoosic.github.io/adventuron_april_2022/Images/june.png" ;
-      etana : png "https://cosmoosic.github.io/adventuron_april_2022/Images/etana.png" ;
-      florrie : png "https://cosmoosic.github.io/adventuron_april_2022/Images/florrie.png" ;
-      florrie_cake : png "https://cosmoosic.github.io/adventuron_april_2022/Images/florrie_cake.png" ;
-      living_room : png "https://cosmoosic.github.io/adventuron_april_2022/Images/common_room.png" {
+      rudface : png "https://cosmoose.org/adventuron_april_2022/Images/rudface.png" ;
+      crispy_garden_7Cs : png "https://cosmoose.org/adventuron_april_2022/Images/crispy_garden_7Cs.png" ;
+      wool : png "https://cosmoose.org/adventuron_april_2022/Images/wool.png" ;
+      june : png "https://cosmoose.org/adventuron_april_2022/Images/june.png" ;
+      etana : png "https://cosmoose.org/adventuron_april_2022/Images/etana.png" ;
+      florrie : png "https://cosmoose.org/adventuron_april_2022/Images/florrie.png" ;
+      florrie_cake : png "https://cosmoose.org/adventuron_april_2022/Images/florrie_cake.png" ;
+      living_room : png "https://cosmoose.org/adventuron_april_2022/Images/common_room.png" {
         : if (is_june_in_living_room) {
                : overlay "june";
                : if (is_e_in_living_room) {
@@ -2406,16 +2406,16 @@ assets {
 
 
       } ;
-      everyone : png "https://cosmoosic.github.io/adventuron_april_2022/Images/everyone.png" ;
-      loading_screen : png "https://cosmoosic.github.io/adventuron_april_2022/Images/loading.png" ;
-      cc_hero_june : png "https://cosmoosic.github.io/adventuron_april_2022/Images/cc_hero.png" ;
-      cc_win : png "https://cosmoosic.github.io/adventuron_april_2022/Images/feast.png" ;
-      puzzle_florrie_laptop : png "https://cosmoosic.github.io/adventuron_april_2022/Images/laptop.png" ;
-      puzzle_channels : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_channels.png" ;
-      puzzle_hat : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_hat.png" ;
-      puzzle_rud : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_rud.png" ;
-      puzzle_ship : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_ship.png" ;
-      puzzle_labyrinth : png "https://cosmoosic.github.io/adventuron_april_2022/Images/puzzle_labyrinth.png" {
+      everyone : png "https://cosmoose.org/adventuron_april_2022/Images/everyone.png" ;
+      loading_screen : png "https://cosmoose.org/adventuron_april_2022/Images/loading.png" ;
+      cc_hero_june : png "https://cosmoose.org/adventuron_april_2022/Images/cc_hero.png" ;
+      cc_win : png "https://cosmoose.org/adventuron_april_2022/Images/feast.png" ;
+      puzzle_florrie_laptop : png "https://cosmoose.org/adventuron_april_2022/Images/laptop.png" ;
+      puzzle_channels : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_channels.png" ;
+      puzzle_hat : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_hat.png" ;
+      puzzle_rud : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_rud.png" ;
+      puzzle_ship : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_ship.png" ;
+      puzzle_labyrinth : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_labyrinth.png" {
               : overlay {
                   graphic -> ("puzzle_ship")
                   x       -> ( labyrinth_position_x )
