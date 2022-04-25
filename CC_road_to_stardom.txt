@@ -1402,6 +1402,10 @@ on_command {
    }
 
    : match "examine rud"  {
+       : if ((is_everybody_here || is_florrie_in_living_room_with_cake) && is_at "party_planet_inside") {
+        : print "RuD followed you to the gaming room." ;
+        : print "It's probably because he wants to guard his energy drink deposit." ;
+       }
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print "RuD looks a bit sadder than usual. A future idol could surely cheer him up!" ;
          : print "He takes a sip of energy drink." ;
@@ -1409,10 +1413,6 @@ on_command {
        : else_if (is_present "rud_happy" && is_at "party_planet_inside") {
          : print "RuD is always working hard to beat his highest score." ;
          : print "He takes a sip of energy drink." ;
-       }
-       : else_if ((is_everybody_here || is_florrie_in_living_room_with_cake) && is_at "party_planet_inside") {
-        : print "RuD followed you to the gaming room." ;
-        : print "It's probably because he wants to guard his energy drink deposit." ;
        }
        : else {
          : print "RuD is a pilot and occasional postman, very skilled but he can be lazy." ;
@@ -1877,6 +1877,9 @@ on_command {
           : print "You start feeling hungry. Also it's your birthday and no one said anything. Why is the world so unfair?" ;
           : print "Where is your cake??? Let's <ASK<#cc0>> June." ;
           : set_true "talked_to_june" ;
+      }
+      : else_if (is_at "living_room" && is_exists "june" && is_puzzle_ee_solved) {
+          : print "June says: \'Wow, you're a real hero! Thank you for saving E, I'm looking forward to his new videos!\'" ;
       }
       : else_if ((is_present "june" || is_present "june_kitchen") && (is_florrie_in_living_room_with_cake || is_everybody_here)) {
          : print "June sings: \'꽃보다 더 곱게 별보다 더 밝게 사자보다 용감하게";
