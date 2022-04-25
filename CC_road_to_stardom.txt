@@ -2138,47 +2138,21 @@ on_command {
         : print "Hint: it's a famous bird, most kids like to run after them in the streets." ;
       }
       : else_if (is_at "puzzle_hat") {
-        : print "An albatross, a bald eagle and a chicken each wear a hat. They see the colors of the others’ hats but not their own. " ;
-        : print "Their hats were randomly drawn among 5 hats, 3 RED ones and 2 BLUE ones. " ;
-        : print "The albatross is asked to guess its hat color, but responds \'No idea\'. The bald eagle cannot guess its color either." ;
-        : print "Then the chicken says \'I know my color\'. Which one is it? Type GUESS color." ;
+        : print "All birds will know their hat color as soon as they have enough information to do so. " ;
+        : print "If they don't know, it means they do not see enough hats of the same color. " ;
+        : print "Think how does the chicken could use it to deduce is own hat color. " ;
+        : print "Type GUESS color when you are ready." ;
       }
       : else_if (is_present "rud_sad" && is_at "party_planet_inside") {
-         : print "RuD says: \'I have 1 hour left to gain 1444 points, and I can only play 1 mini-game: " ;
-         : print "- Firstly there's AKAFeather, a cursive writing game. You can earn 80 points per minute, but it stops working after 15 minutes, and you need to wait 43 minutes to start again." ;
-         : print "- Secondly there's Brooms, a cleaning game. You can earn 26 points per minute, but it stops working after 54 minutes, and you need to wait 5 minutes to start again." ;
-         : print "- Thirdly there's Cosmoogang, a space cow farming game. You can earn 97 points per minute, but it stops working after 10 minutes, and you need to wait 20 minutes to start again." ;
-         : print "Can you <GUESS<#cc0>> which game I should focus on?\'. " ;
-         : print "He takes a sip of energy drink." ;
+         : print "You simply need to multiply the time interval per number of points to know which mini-game wins more points." ;
+         : print "When you're done <GUESS<#cc0>> the game name!" ;
        }
        : else_if (is_at "crispy_garden" && is_exists "seven_seas" && is_puzzle_seven_seas_now) {
-             : print "\'The four current most popular online hosts are:" ;
-             : print "\'beats to mow the lawn to\', a music DJ" ;
-             : print "\'C-Cherries\', introducing movie trailers" ;
-             : print "\'DewDieDie\', a video game expert" ;
-             : print "\'8k-Minute Recipes\', a cooking enthusiast." ;
-             : print "Let's call them B, C, D and E. 3 of them are equally popular, but there is only 1 number one!" ;
-             : print "I'll give you a <CLUE<#cc0>> for the channel you want, can you then <GUESS<#cc0>> who is the most popular?\'" ;
-             : print "Ask SevenSeas \'<CLUE<#cc0>> channel\' whenever you are ready." ;
-             : print "If you know the answer, \'<GUESS<#cc0>> channel\' whenever you are ready." ;
+             : print "Equality is transitive, so you just need to keep track of the one channel that has no equal!" ;
+             : print "Just ask for more <CLUE<#cc0>>S until you know enough!" ;
+             : print "When you know the answer, \'<GUESS<#cc0>> channel\' whenever you are ready." ;
          }
        : else_if (is_at "living_room" && is_exists "florrie" && is_puzzle_florrie_now) {
-        : print "The following sentence:" ;
-        : print "\'Few radios play June's song.\'" ;
-        : print "translates to (thanks to a mysterious mathematical formula):" ;
-        : print "19-14-257" ;
-        : print "157-4-10-40-109-175" ;
-        : print "124-70-4-304" ;
-        : print "49-214-95-14'175" ;
-        : print "175-109-95-25" ;
-        : press_any_key ;
-        : print "Can you guess the original sentence behind the following:" ;
-        : print "109-124-14-95" ;
-        : print "175-109-214-157-7-14" ;
-        : print "95-109-257" ;
-        : print "<TYPE<#cc0>> THEFULLANSWER (without spaces)." ;
-        : print "" ;
-        : print "Clue:" ;
         : print "Letters are translated to numbers following a mathematical sequence. Can you see the pattern?" ;
         : print "D = 10" ;
         : print "E = 14" ;
