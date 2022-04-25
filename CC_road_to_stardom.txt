@@ -12,6 +12,8 @@ game_information {
    short_synopsis               = Help 50% cat, 50% bunny, 100% cute CC become an online idol!
 }
 
+start_theme = theme_base
+
 themes {
   theme_base : theme {
       colors {
@@ -23,6 +25,8 @@ themes {
       theme_settings {
          experimental_contextual_menus = true
          layout = H G LOCK D X O
+         success_jingle  = on
+         failure_jingle  = on
       }
   }
   theme_mono : theme {
@@ -534,6 +538,14 @@ on_startup {
 ######################################
 
 subroutines {
+
+   success_jingle : subroutine {
+      : play_incidental "incidental_success";
+   }
+   failure_jingle : subroutine {
+      : play_incidental "incidental_failure";
+   }
+
    set_sound_on : subroutine {
       : if (!sysvar_bool "sysvar_sound_enabled") {
          : ask_permission ask_again_and_again = "true" category = "sound" ;
@@ -770,6 +782,7 @@ on_describe {
    }
    : else_if (is_at "labyrinth_5_5") {
        : if (has_blueprint) {
+           : success;
            : set_false "in_labyrinth";
            : set_false "is_labyrinth_open";
            : print "You did it! You're a hero, CC!";
@@ -792,6 +805,7 @@ on_describe {
        : redescribe;
    }
    : if (is_at "living_room" && in_labyrinth) {
+      : failure;
       : print "Well, that didn't work out, but it's not an easy task. Luckily, that was a simulation that 7Cs' AI ran through her algorithms. Thanks to that we found the mistake in advance so we are safe. Let's try again.";
       : set_false "in_labyrinth";
       : press_any_key;
@@ -1177,6 +1191,7 @@ on_command {
         : print "Video \'TEQ Talk: Improve Office Efficiency\' shows a pigeon at a desk drinking a protein-packed cheese beverage, and then there's \'Learn Programming in Pyghon with E\'... " ;
         : print "How can you compete? So unfair!!! You quickly lock the computer and swear not to touch it ever again." ;
         : press_any_key;
+        : success ;
         : set_true "is_laptop_unlocked" ;
         : goto "living_room";
         : redescribe;
@@ -1185,6 +1200,7 @@ on_command {
 
     : match "unlock dove"  {
       : if (is_at "puzzle_florrie_laptop") {
+        : failure ;
         : print "Almost there, too bad there can only be one password." ;
         : press_any_key;
       }
@@ -1192,6 +1208,7 @@ on_command {
 
     : match "unlock - "  {
       : if (is_at "puzzle_florrie_laptop") {
+        : failure ;
         : print "Try again." ;
         : press_any_key;
       }
@@ -1347,6 +1364,7 @@ on_command {
 
    : match "get poster; get guitar; get headphones; get frog ; get joystick ; get mouse ; get keyboard; get chair" {
       : if (is_at "party_planet_inside") {
+         : play_incidental "incidental_error";
          : print "RuD will probably be very angry if someone touches his stuff." ;
       }
    }
@@ -1614,6 +1632,7 @@ on_command {
 
    : match "get chicken; taste chicken; grab chicken; seize chicken; eat chicken"  {
     : if (is_at "crispy_garden" && is_present "chicken_wing" && !is_carried "chicken_wing") {
+        : play_incidental "incidental_useless_success";
         : print "You take a chicken fruit from the tree. It's delicious, full of vitamins and grown without pesticides." ;
         : pocket "chicken_wing" ;
         : print "This <WING<#cc0>> is now in your <INVENTORY<#cc0>>." ;
@@ -2006,6 +2025,7 @@ on_command {
 
    : match "examine beak; examine herocc; examine hero; talk june; thank june; beak -; talk -"  {
       : if (is_at "cc_hero_june") {
+        : success ;
         : print "This thing looks like a Belgian cuberdon, those raspberry gummy candies." ;
         : print "Wow! You feel lighter and different." ;
         : print "You hear a strangled noise." ;
@@ -2358,6 +2378,11 @@ assets {
       music_labyrinth_2 : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat11_Puzzle.mp3" ;
       music_living_room_pigeon : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat09_living_room_june_E_ganggang.mp3" ;
       music_win : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/funprio.mp3" ;
+      incidental_success : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/SFX_usefull_sucess_100bpm.mp3" ;
+      incidental_failure : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/SFX_failure_130bpm.mp3" ;
+      incidental_useless_success : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/SFX_useless_sucess_130bpm.mp3" ;
+      incidental_error : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/SFX_error_130bpm.mp3" ;
+      incidental_ok : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/SFX_OK_130bpm.mp3" ;
    }
    graphics {
       cc_room : png "https://cosmoose.org/adventuron_april_2022/Images/cc_room.png" ;
