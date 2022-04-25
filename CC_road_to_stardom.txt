@@ -72,7 +72,7 @@ vocabulary {
    : noun      / aliases = [pigeon]
    : noun      / aliases = [child, children, kid]
    : noun      / aliases = [comment, note]
-   : noun      / aliases = [bird, dove]
+   : noun      / aliases = [bird, dove, birb]
    : noun      / aliases = [door, entrance]
    : noun      / aliases = [energy, drink, beverage, redgull, can, red, potion, barrel, taurine, juice, clayrox, clorox]
    : noun      / aliases = [mirror, reflection]
@@ -147,6 +147,7 @@ booleans {
    in_labyrinth : boolean "false";
    is_labyrinth_open : boolean "false";
    is_playing_logic  : boolean "false";
+   talked_to_someone_before_cake : boolean "false";
 }
 
 integers {
@@ -1222,6 +1223,7 @@ on_command {
          : print "Wool says: \'One thing you might observe after each birthday is the loss of collagen and its change from ordered bundles of fibres to fragmented and messy fibres." ;
          : print "One consequence is that wound healing doesn't work as well.\'" ;
          : print "Err... Thanks for wishing a happy birthday I guess???" ;
+         : set_true "talked_to_someone_before_cake" ;
       }
    }
 
@@ -1371,13 +1373,15 @@ on_command {
          : print "RuD is very focused, and doesn't want to be disturbed." ;
          : print "He takes a sip of energy drink." ;
       }
-      : else_if ((is_exists "june" || is_exists "ee" || is_exists "june_kitchen" || is_exists "ee_kitchen") && is_at "party_planet_inside") {
+      : else_if ((is_everybody_here || is_florrie_in_living_room_with_cake) && is_at "party_planet_inside") {
         : print "RuD followed you to the gaming room." ;
+        : print "It's probably because he wants to guard his energy drink deposit." ;
       }
       : else_if ((is_present "rud_happy"|| is_present "rud_kitchen")  && (is_florrie_in_living_room_with_cake || is_everybody_here)) {
              : print "RuD sings: \'Happy birthday CC!";
              : print "If you're happy and you know it, clap your hands, clap your hands!\'";
              : print "He takes a sip of energy drink." ;
+             : set_true "talked_to_someone_before_cake" ;
       }
    }
 
@@ -1405,6 +1409,10 @@ on_command {
        : else_if (is_present "rud_happy" && is_at "party_planet_inside") {
          : print "RuD is always working hard to beat his highest score." ;
          : print "He takes a sip of energy drink." ;
+       }
+       : else_if ((is_everybody_here || is_florrie_in_living_room_with_cake) && is_at "party_planet_inside") {
+        : print "RuD followed you to the gaming room." ;
+        : print "It's probably because he wants to guard his energy drink deposit." ;
        }
        : else {
          : print "RuD is a pilot and occasional postman, very skilled but he can be lazy." ;
@@ -1723,6 +1731,7 @@ on_command {
              : print "Like worker bees, like compost bags" ;
              : print "That makes you want to feel alive, yeah\'" ;
              : print "Well... You had no idea SevenSeas could be so heavy-hearted. You will definitely throw her a huge party one of these days." ;
+             : set_true "talked_to_someone_before_cake" ;
       }
    }
 
@@ -1875,6 +1884,7 @@ on_command {
          : print "Brighter than flowers, brighter than stars, braver than lions" ;
          : print "Happy birthday to you, my feather-like friend, you shall live forever!!!!\'" ;
          : print "Beautiful. This version of the song is your favorite." ;
+         : set_true "talked_to_someone_before_cake" ;
       }
    }
 
@@ -1902,7 +1912,7 @@ on_command {
             : print "June is also crying with laughter, while filming. She says \'This video will be viral HeroCC, great job!\'" ;
             : press_any_key ;
             : print "Oh no!!!!!! The screen is flashing and beeping!!!! What's going on?" ;
-            : print "Let's enter the command panel to know, quick!" ;
+            : print "Let's <ENTER<#cc0>> the command panel to know, quick!" ;
             : set_true "is_labyrinth_open" ;
         }
         : else_if ((is_present "ee" || is_present "ee_kitchen") && (is_florrie_in_living_room_with_cake || is_everybody_here)) {
@@ -1910,6 +1920,7 @@ on_command {
          : print "For my birthday my subscribers sent me 77 cakes. ";
          : print "I also received flour, milk and sugar to prepare for food shortage.\'" ;
          : print "Okaaaaay... Don't meet your idols, they say. " ;
+         : set_true "talked_to_someone_before_cake" ;
       }
    }
 
@@ -1991,6 +2002,7 @@ on_command {
              : print "Try this cake we made with plenty of";
              : print "C6H1206 it's so sweet\'" ;
              : print "Hmm... What is she talking about?" ;
+             : set_true "talked_to_someone_before_cake" ;
       }
    }
 
@@ -2188,6 +2200,15 @@ on_command {
         }
       : if (in_labyrinth) {
          : print "Escape without being detected by any drone, while getting the blueprint!" ;
+      }
+   }
+
+   : match "examine - ; examine _ ; talk - ; talk _" {
+      : if (talked_to_someone_before_cake && is_at "living_room") {
+        : print "Let's <EAT<#cc0>> cake!" ;
+      }
+      : else_if (talked_to_someone_before_cake && is_at "living_room" && is_florrie_in_living_room_with_cake) {
+        : print "Whenever you are ready, you can <GO<#cc0>> and eat cake." ;
       }
    }
    : match "nothing -" {
