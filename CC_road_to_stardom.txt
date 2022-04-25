@@ -174,7 +174,7 @@ collections {
    }
 
    choking_e_choices: list {
-      items = [choking_e_choice_1]
+      items = [choking_e_choice_1, choking_e_choice_1, choking_e_choice_1]
    }
 
    choking_e_response_1: list {
@@ -672,8 +672,18 @@ subroutines {
          collection_get { collection -> (collection_get { collection="choking_e_responses" index -> (choking_e_form)}) index -> (integer_tmp)}
       )}
       : print "{string_tmp}";
-      : if (is_playing_logic) {
-         : return;
+      : if (choking_e_solution == integer_tmp) {
+         : increment "choking_e_form";
+         : if ((collection_count "choking_e_responses") == choking_e_form) {
+            : set_true "is_puzzle_ee_solved";
+            : goto "living_room" ;
+         }
+         : else {
+            : gosub "play_choking_e_puzzle" ;
+         }
+      }
+      : else {
+         : gosub "play_choking_e_puzzle" ;
       }
    }
    play_choking_e_puzzle_next_response_line :  subroutine {
@@ -1944,9 +1954,6 @@ on_command {
          : print "Some of your friends are passing by and can help you, but do you remember SevenSeas' advice?" ;
          : gosub "play_choking_e_puzzle";
          : print "Awesome! Thanks for helping save E! Now try to <TALK<#fee>> to him." ;
-         : set_false var="is_playing_logic";
-         : set_true "is_puzzle_ee_solved" ;
-        : goto "living_room" ;
       }
    }
    : match "transform -; transform _" {
@@ -2208,8 +2215,6 @@ on_command {
       : if (is_playing_logic) {
          : gosub "play_choking_e_puzzle";
          : print "Awesome! Thanks for helping save E! Now try to <TALK<#fee>> to him." ;
-         : set_false var="is_playing_logic";
-         : set_true "is_puzzle_ee_solved" ;
       }
    }
 
