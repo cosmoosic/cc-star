@@ -1910,8 +1910,12 @@ on_command {
           : print "Where is your cake??? Let's <ASK<#cc0>> June." ;
           : set_true "talked_to_june" ;
       }
-      : else_if (is_at "living_room" && is_exists "june" && is_puzzle_ee_solved) {
+      : else_if (is_at "living_room" && is_exists "june" && is_puzzle_ee_solved && !is_labyrinth_open) {
           : print "June says: \'Wow, you're a real hero! Thank you for saving E, I'm looking forward to his new videos!\'" ;
+      }
+      : else_if (is_at "living_room" && is_exists "june" && is_labyrinth_open) {
+            : print "She is watching a video of E, giggling. Does she really enjoy that content?" ;
+            : print "She seems totally unfazed by the alarm though." ;
       }
       : else_if ((is_present "june" || is_present "june_kitchen") && (is_florrie_in_living_room_with_cake || is_everybody_here)) {
          : print "June sings: \'꽃보다 더 곱게 별보다 더 밝게 사자보다 용감하게";
@@ -1938,7 +1942,7 @@ on_command {
               : print "How to describe these beverages... My disappointment was immeasurable and my day was ruined. But your fans are always more important, and it was good money.\'" ;
               : set_true "talked_to_e" ;
         }
-        : if (is_at "living_room" && is_exists "ee" && is_puzzle_ee_solved) {
+        : if (is_at "living_room" && is_exists "ee" && is_puzzle_ee_solved && !is_labyrinth_open) {
             : print "After you carefully followed SevenSeas' instruction, E collapses on the floor..." ;
             : print "..." ;
             : press_any_key ;
@@ -1949,6 +1953,9 @@ on_command {
             : print "Oh no!!!!!! The screen is flashing and beeping!!!! What's going on?" ;
             : print "Let's <ENTER<#cc0>> the command panel to know, quick!" ;
             : set_true "is_labyrinth_open" ;
+        }
+        : else_if (is_at "living_room" && is_exists "ee" && is_labyrinth_open) {
+            : print "\'Don't you think you have something more pressing to do than talk to me again?\'" ;
         }
         : else_if ((is_present "ee" || is_present "ee_kitchen") && (is_florrie_in_living_room_with_cake || is_everybody_here)) {
          : print "E says: \'This cake is rather small." ;
