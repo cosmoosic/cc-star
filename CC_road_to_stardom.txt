@@ -179,9 +179,9 @@ collections {
 
    choking_e_response_1: list {
         items = [
-            "{rescue_person_1} begins to give 5 back blows, you stay behind and observe. {rescue_person_3} takes care of the rest.",
-            "{rescue_person_2} begins to give 5 back blows, you stay behind and observe. {rescue_person_4} takes care of the rest.",
-            "Yes, you are awesome!!!! You give 5 back blows, and E looks a bit better. {rescue_person_5} takes care of the rest.",
+            "{rescue_person_1} begins to give 5 back blows, you stay behind and observe. {rescue_person_3} also helps.",
+            "{rescue_person_2} begins to give 5 back blows, you stay behind and observe. {rescue_person_4} also helps.",
+            "Yes, you are awesome!!!! You give 5 back blows, and E looks a bit better. {rescue_person_5} also helps.",
         ]
    }
 
