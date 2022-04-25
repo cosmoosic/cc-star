@@ -21,6 +21,8 @@ To move on the map, you can use the cardinal directions, NORTH, EAST, SOUTH and 
 
 Type HELP to get some HELP.
 
+Check the booklet if you get stuck! Or RTFM as some used to say!
+
 Learn to write your own text adventure game (in an hour) with Adventuron:
 https://adventuron.io/documentation/tutorial-a.html
 
