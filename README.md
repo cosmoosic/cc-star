@@ -34,7 +34,8 @@ Gives a full walkthrough of the game puzzles, as well as some background informa
 Made with love by the OK Feather/Cosmoose crew. 
 Music is DHXP, pixel graphics by Woolion, programming by E and Dova Lin, and some help from Woolion.
 Special Thank You to all our Playtesters: Mélanie the shadowy but benevolent figure, 
-Daphne our reliable AI member, and everybody else who helped improve the game.
+Daphne our reliable AI member, JJYY, Gaby, Jorchime, 
+and everybody else who helped improve the game.
 
 ## Jam Submissions Comments
 
