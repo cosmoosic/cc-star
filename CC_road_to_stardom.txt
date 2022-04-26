@@ -68,6 +68,7 @@ vocabulary {
    : verb / aliases = [move, go]
    : verb / aliases = [pigeon]
    : verb / aliases = [red]
+   : verb / aliases = [cosmoogang]
    : verb / aliases = [guess, reply]
    : verb / aliases = [thank, thanks]
    : verb / aliases = [happy, merry, feliz, joyous, feathery, great, joyeux, enjoy, warmest, jolly, cheerful, 행복한, 메리, meli]
@@ -80,6 +81,7 @@ vocabulary {
    : noun      / aliases = [owner, vendor]
    : noun      / aliases = [pigeon]
    : noun      / aliases = [red]
+   : noun      / aliases = [cosmoogang]
    : noun      / aliases = [child, children, kid]
    : noun      / aliases = [comment, note]
    : noun      / aliases = [bird, dove, birb]
@@ -257,6 +259,9 @@ strings {
    laptop_password : string "pigeon";
    hat_color : string "red";
    hat_blue : string "blue";
+   correct_game : string "cosmoogang";
+   incorrect_game_1 : string "akafeather";
+   incorrect_game_2 : string "brooms";
 }
 
 ######################################
@@ -1538,7 +1543,7 @@ on_command {
        }
    }
 
-      : match "guess c; guess cosmoogang; guess 3 ; c - ; cosmoogang - ; 3 - "  {
+      : match "guess c; guess 3 ; c - ; cosmoogang - ; 3 - "  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : create "energy_drink";
          : pocket "energy_drink";
@@ -1547,6 +1552,7 @@ on_command {
          : print "But he doesn't look too impressed by your deduction skills." ;
          : print "He gives you a can of energy drink, as promised. " ;
          : print "It's in your <INVENTORY<#cc0>>, you can <GIVE<#cc0>>, <USE<#cc0>> it." ;
+         : success ;
          : set_false "is_rud_sad";
          : set_false "is_puzzle_rud_in_progress" ;
          : destroy "rud_sad";
@@ -1556,24 +1562,55 @@ on_command {
        }
    }
 
-   : match "guess -"  {
+   : match "guess _"  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
-         : print " RuD doesn't look too impressed by your deduction skills. \'Are you sure?\' he asks." ;
-         : print " He takes a sip of energy drink." ;
+            : if (correct_game == original "noun1") {
+             : create "energy_drink";
+             : pocket "energy_drink";
+             : print "RuD rushes to play Cosmoogang. Looks like he will win his bet! He looks so happy now. " ;
+             : print "He takes a sip of energy drink." ;
+             : print "But he doesn't look too impressed by your deduction skills." ;
+             : print "He gives you a can of energy drink, as promised. " ;
+             : print "It's in your <INVENTORY<#cc0>>, you can <GIVE<#cc0>>, <USE<#cc0>> it." ;
+             : success ;
+             : set_false "is_rud_sad";
+             : set_false "is_puzzle_rud_in_progress" ;
+             : destroy "rud_sad";
+             : create "rud_happy";
+             : set_true "is_seven_seas_crispy" ;
+             : create "seven_seas" target = "crispy_garden" ;
+            }
+            : else_if (incorrect_game_1 == original "noun1") {
+                : print "You are about to suggest \'AKAFeather\', but notice a drawing pad is required to play. RuD excels with any controller... Except this one." ;
+                : print "RuD takes a sip of energy drink." ;
+                : failure ;
+            }
+            : else_if (incorrect_game_2 == original "noun1") {
+                : print "You are about to suggest \'Brooms\', but remember that RuD never cleans his room or anything, there's no way he can get Diamond with this game!" ;
+                : print "RuD takes a sip of energy drink." ;
+                : failure ;
+            }
+            : else {
+                : print " RuD doesn't look too impressed by your deduction skills. \'Does this even exist?\' he asks." ;
+                : print " He takes a sip of energy drink." ;
+                : failure ;
+            }
        }
    }
 
-   : match "guess a; guess akafeather; guess 1 ; 1 - ; akafeather -"  {
+   : match "guess a; guess 1 ; 1 - ; akafeather -"  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print "You are about to suggest \'AKAFeather\', but notice a drawing pad is required to play. RuD excels with any controller... Except this one." ;
          : print "RuD takes a sip of energy drink." ;
+         : failure ;
        }
    }
 
-   : match "guess b; guess brooms ; guess 2; 2 - ; brooms -"  {
+   : match "guess b; guess 2; 2 - ; brooms -"  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print "You are about to suggest \'Brooms\', but remember that RuD never cleans his room or anything, there's no way he can get Diamond with this game!" ;
          : print "RuD takes a sip of energy drink." ;
+         : failure ;
        }
    }
 
