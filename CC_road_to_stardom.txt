@@ -69,6 +69,7 @@ vocabulary {
    : verb / aliases = [pigeon]
    : verb / aliases = [red]
    : verb / aliases = [cosmoogang]
+   : verb / aliases = [opensourcenow]
    : verb / aliases = [guess, reply]
    : verb / aliases = [thank, thanks]
    : verb / aliases = [happy, merry, feliz, joyous, feathery, great, joyeux, enjoy, warmest, jolly, cheerful, 행복한, 메리, meli]
@@ -82,6 +83,7 @@ vocabulary {
    : noun      / aliases = [pigeon]
    : noun      / aliases = [red]
    : noun      / aliases = [cosmoogang]
+   : noun      / aliases = [opensourcenow]
    : noun      / aliases = [child, children, kid]
    : noun      / aliases = [comment, note]
    : noun      / aliases = [bird, dove, birb]
@@ -262,6 +264,7 @@ strings {
    correct_game : string "cosmoogang";
    incorrect_game_1 : string "akafeather";
    incorrect_game_2 : string "brooms";
+   florrie_code : string "opensourcenow";
 }
 
 ######################################
@@ -1855,8 +1858,8 @@ on_command {
              : print "\'8k-Minute Recipes\', a cooking enthusiast." ;
              : print "Let's call them B, C, D and E. 3 of them are equally popular, but there is only 1 number one!" ;
              : print "I'll give you a <CLUE<#cc0>> for the channel you want, can you then <GUESS<#cc0>> who is the most popular?\'" ;
-             : print "Use \'<CLUE<#cc0>> channel\' whenever you are ready for SevenSeas to give a clue." ;
-             : print "If you know the answer, \'<GUESS<#cc0>> channel\' whenever you are ready." ;
+             : print "Use \'<CLUE<#cc0>> channel\' (e.g. CLUE E) whenever you are ready for SevenSeas to give a clue." ;
+             : print "If you know the answer, \'<GUESS<#cc0>> channel\' (e.g. GUESS E) whenever you are ready." ;
          }
          : if (is_at "crispy_garden" && is_exists "seven_seas" && !is_puzzle_seven_seas_now && can_leave_crispy_garden) {
              : print "You are becoming a puzzle master!" ;
@@ -1910,6 +1913,7 @@ on_command {
        : if (is_at "crispy_garden" && is_exists "seven_seas" && is_puzzle_seven_seas_now) {
          : print "Well-done! Indeed, C-Cherries is currently the top star." ;
          : print "C-Cherries looks very wealthy. That's probably the main explanation for this incredible success." ;
+         : success ;
          : print "SevenSeas says: \'CC, I may have another suggestion for becoming popular." ;
          : press_any_key ;
          : print "My data shows heroes are popular. You could become one? " ;
@@ -1937,6 +1941,7 @@ on_command {
    : match "guess one; guess 1; guess three; guess 3; guess four; guess 4; guess b; guess beat; guess d; guess dew; guess dewdiedie ; guess e; guess eight; guess 8; guess 8k; guess eightk; guess eightkminuterecipes"  {
        : if (is_at "crispy_garden" && is_exists "seven_seas" && is_puzzle_seven_seas_now) {
          : print "Maybe you need another <CLUE<#cc0>>?" ;
+         : failure ;
        }
    }
 
@@ -2100,7 +2105,6 @@ on_command {
 
    : match "examine beak; examine herocc; examine hero; talk june; thank june; beak -; talk -; get beak"  {
       : if (is_at "cc_hero_june") {
-        : success ;
         : print "This thing looks like a Belgian cuberdon, those raspberry gummy candies." ;
         : print "Wow! You feel lighter and different." ;
         : print "You hear a strangled noise." ;
@@ -2154,9 +2158,10 @@ on_command {
       }
    }
 
-   : match "type opensourcenow ; opensourcenow -; guess opensourcenow ; write opensourcenow"  {
+   : match "opensourcenow -"  {
         : if (is_exists "florrie" && is_at "living_room" && is_puzzle_florrie_now ) {
-            : print "Awesome!!! What could this mean though?" ;
+            : print "Awesome!!! I wonder what it means though." ;
+            : success ;
             : set_false "is_puzzle_florrie_now" ;
             : set_true "is_puzzle_florrie_solved" ;
             : set_true "is_everybody_here" ;
@@ -2174,6 +2179,34 @@ on_command {
             : redescribe ;
         }
    }
+
+   : match "type _ ; guess _ ; write _"  {
+    : if (is_exists "florrie" && is_at "living_room" && is_puzzle_florrie_now ) {
+        : if (florrie_code == original "noun1") {
+            : print "Awesome!!! I wonder what it means though." ;
+            : success ;
+            : set_false "is_puzzle_florrie_now" ;
+            : set_true "is_puzzle_florrie_solved" ;
+            : set_true "is_everybody_here" ;
+            : set_false "is_florrie_alone_in_living_room" ;
+            : print "Everybody has arrived!!!!" ;
+            : print "Wool, RuD, SevenSeas, are here with June, E and Florrie!" ;
+            : print "<TALK<#cc0>> to them, so you can <EAT<#cc0>> cake!" ;
+            : create "wool_kitchen" ;
+            : create "sevenseas_kitchen" ;
+            : create "rud_kitchen" ;
+            : create "june_kitchen" ;
+            : create "ee_kitchen" ;
+            : press_any_key ;
+            : set_true "you_win" ;
+            : redescribe ;
+        }
+        : else {
+            : print "Florrie says: \'It's a tough question, do you need a <HINT<#cc0>>?\'";
+            : failure ;
+        }
+     }
+    }
 
    : match "examine cake; examine flame; examine candle; examine birthday" {
     : if (is_florrie_in_living_room_with_cake) {
