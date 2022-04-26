@@ -1203,14 +1203,14 @@ on_command {
       }
     }
 
-    : if (is_at "puzzle_florrie_laptop") {
-      : if (!verb_is "pigeon" && !is_first_entered ()) {
-            : print "Try again." ;
-            : failure ;
-         }
-      }
+    # : if (is_at "puzzle_florrie_laptop") {
+    #  : if (!verb_is "pigeon" && !is_first_entered ()) {
+    #        : print "Try again." ;
+    #        : failure ;
+    #     }
+    #  }
 
-    : match "unlock *"  {
+    : match "unlock _"  {
       : if (is_at "puzzle_florrie_laptop") {
         : if (laptop_password == original "noun1") {
             : print "How can Florrie need clues to remember such an easy password??? " ;
