@@ -66,6 +66,7 @@ vocabulary {
    : verb / aliases = [throw, discard, vomit, puke]
    : verb / aliases = [ring,strike]
    : verb / aliases = [move, go]
+   : verb / aliases = [pigeon]
    : verb / aliases = [guess, reply]
    : verb / aliases = [thank, thanks]
    : verb / aliases = [happy, merry, feliz, joyous, feathery, great, joyeux, enjoy, warmest, jolly, cheerful, 행복한, 메리, meli]
@@ -252,6 +253,7 @@ strings {
    rescue_person_4 : string "";
    rescue_person_5 : string "";
    rescue_person_6 : string "";
+   laptop_password : string "pigeon";
 }
 
 ######################################
@@ -1183,7 +1185,7 @@ on_command {
       }
    }
 
-   : match "unlock pigeon; pigeon -"  {
+   : match "pigeon -"  {
       : if (is_at "puzzle_florrie_laptop") {
         : print "How can Florrie need clues to remember such an easy password??? " ;
         : print "You wish you had never seen this... Florrie's browser history is nothing but..." ;
@@ -1198,18 +1200,36 @@ on_command {
       }
     }
 
-    : match "unlock dove"  {
+    : if (is_at "puzzle_florrie_laptop") {
+      : if (!verb_is "pigeon" && !is_first_entered ()) {
+            : print "Try again." ;
+            : failure ;
+         }
+      }
+
+    : match "unlock *"  {
+      : if (is_at "puzzle_florrie_laptop") {
+        : if (laptop_password == original "noun1") {
+            : print "How can Florrie need clues to remember such an easy password??? " ;
+            : print "You wish you had never seen this... Florrie's browser history is nothing but..." ;
+            : print "PIGEONS!!!" ;
+            : print "Video \'TEQ Talk: Improve Office Efficiency\' shows a pigeon at a desk drinking a protein-packed cheese beverage, and then there's \'Learn Programming in Pyghon with E\'... " ;
+            : print "How can you compete? So unfair!!! You quickly lock the computer and swear not to touch it ever again." ;
+            : press_any_key;
+            : success ;
+            : set_true "is_laptop_unlocked" ;
+            : goto "living_room";
+            : redescribe;
+        }
+        : print "Try again." ;
+        : failure ;
+     }
+   }
+
+    : match "unlock dove; dove -"  {
       : if (is_at "puzzle_florrie_laptop") {
         : failure ;
         : print "Almost there, too bad there can only be one password." ;
-        : press_any_key;
-      }
-    }
-
-    : match "unlock - "  {
-      : if (is_at "puzzle_florrie_laptop") {
-        : failure ;
-        : print "Try again." ;
         : press_any_key;
       }
     }
