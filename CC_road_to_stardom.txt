@@ -20,6 +20,10 @@ themes {
       lister_exits {
          is_list_enter = true
       }
+      theme_settings {
+         experimental_contextual_menus = true
+         layout = H G LOCK D X O
+      }
   }
   theme_mono : theme {
       theme_settings {
