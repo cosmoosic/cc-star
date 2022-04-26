@@ -648,21 +648,27 @@ subroutines {
    update_volume : subroutine {
       : if (is_sound_muted) {
          : set_music_vol volume="0";
+         : set_incidental_vol volume="0";
       }
       : else_if (sound_volume == "lowest") {
          : set_music_vol volume="3";
+         : set_incidental_vol volume="3";
       }
       : else_if (sound_volume == "low") {
          : set_music_vol volume="7";
+         : set_incidental_vol volume="7";
       }
       : else_if (sound_volume == "normal") {
          : set_music_vol volume="16";
+         : set_incidental_vol volume="16";
       }
       : else_if (sound_volume == "high") {
          : set_music_vol volume="40";
+         : set_incidental_vol volume="40";
       }
       : else_if (sound_volume == "highest") {
          : set_music_vol volume="100";
+         : set_incidental_vol volume="100";
       }
    }
    play_choking_e_puzzle_choice : subroutine {
