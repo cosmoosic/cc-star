@@ -67,23 +67,24 @@ vocabulary {
    : verb / aliases = [ring,strike]
    : verb / aliases = [move, go]
    : verb / aliases = [pigeon]
+   : verb / aliases = [red]
    : verb / aliases = [guess, reply]
    : verb / aliases = [thank, thanks]
    : verb / aliases = [happy, merry, feliz, joyous, feathery, great, joyeux, enjoy, warmest, jolly, cheerful, 행복한, 메리, meli]
    : verb / aliases = [kill,threaten,menace,intimidate,browbeat,bully,scare,frighten,terrorize,murder,assassinate,beat,fight,combat,hurt,kick,harm,injure,insult,destroy,smash]
    : verb / aliases = ["cry", ":(","=(", "='(", ":'("]
    : verb / aliases = ["smile", "grin", "laugh", ":)","=)",":D","=D"]
-   : verb / aliases = [black, yellow, pink, white, colorless, rainbow, purple, green]
    : verb / aliases = [unlock, password, pass, type, write, input]
    : noun      / aliases = [bread, croissant, pain, cookie, loaf, biscuit]
    : noun      / aliases = [cafe, coocoo, shop, restaurant]
    : noun      / aliases = [owner, vendor]
    : noun      / aliases = [pigeon]
+   : noun      / aliases = [red]
    : noun      / aliases = [child, children, kid]
    : noun      / aliases = [comment, note]
    : noun      / aliases = [bird, dove, birb]
    : noun      / aliases = [door, entrance]
-   : noun      / aliases = [energy, drink, beverage, redgull, can, red, potion, barrel, taurine, juice, clayrox, clorox]
+   : noun      / aliases = [energy, drink, beverage, redgull, can, potion, barrel, taurine, juice, clayrox, clorox]
    : noun      / aliases = [mirror, reflection]
    : noun      / aliases = [garden, park, yard, lawn, land, plot, greenhouse, orchard]
    : noun      / aliases = [fight, combat, conflict]
@@ -254,6 +255,8 @@ strings {
    rescue_person_5 : string "";
    rescue_person_6 : string "";
    laptop_password : string "pigeon";
+   hat_color : string "red";
+   hat_blue : string "blue";
 }
 
 ######################################
@@ -1308,10 +1311,11 @@ on_command {
       }
    }
 
-   :match "guess red ; red -"  {
+   :match "red -"  {
       : if (is_at "puzzle_hat") {
-         : print "Correct. The chicken's hat is red of course.";
-         : print "I can <EXPLAIN<#cc0>> if you want.";
+         : print "Wool says: \'Correct. The chicken's hat is red of course.";
+         : print "I can <EXPLAIN<#cc0>> if you want.\'";
+         : success ;
          : set_true "is_puzzle_wool_solved";
          : set_true "talked_to_mirror_and_solved_puzzles" ;
          : print "Alright, maybe answering riddles is one way to become famous? You should try with someone else. Let's go.";
@@ -1319,22 +1323,36 @@ on_command {
       }
    }
 
-   :match "guess blue ; blue -"  {
+   : match "guess _"  {
       : if (is_at "puzzle_hat") {
-         : print "Wool says: \'Nope.";
-         : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
-      }
-      : else_if (is_at "puzzle_hat" && !is_puzzle_wool_solved) {
-         : print "\'Nope.";
-         : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
-      }
+        : if (hat_color == original "noun1") {
+            : print "Wool says: \'Correct. The chicken's hat is red of course.";
+            : print "I can <EXPLAIN<#cc0>> if you want.\'";
+            : success ;
+            : set_true "is_puzzle_wool_solved";
+            : set_true "talked_to_mirror_and_solved_puzzles" ;
+            : print "Alright, maybe answering riddles is one way to become famous? You should try with someone else. Let's go.";
+            : goto "wools_wheels" ;
+        }
+        : else_if (hat_blue == original "noun1") {
+            : print "Wool says: \'Nope.";
+            : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
+            : failure ;
+        }
+        : else {
+            : print "Wool says: \'Did you hurt your head or something?";
+            : print "You only have a choice between two colors, red and blue.";
+            : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
+            : failure ;
+        }
+     }
    }
 
-   :match "guess black ; black -; guess *; guess -"  {
+   :match "blue -"  {
       : if (is_at "puzzle_hat" && !is_puzzle_wool_solved) {
-         : print "\'Did you hurt your head or something?";
-         : print "You only have a choice between two colors, red and blue.";
+         : print "\'Nope.";
          : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
+         : failure ;
       }
    }
 
