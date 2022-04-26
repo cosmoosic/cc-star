@@ -772,6 +772,7 @@ on_describe {
    : if (is_at "cc_win" ) {
       : print "CONGRATULATIONS!" ;
       : print "YOU FINISHED THE GAME! C-C YOU LATER!!!!" ;
+      : print "(wait a bit before pressing any key to stay and enjoy the ending song!)" ;
       : press_any_key ;
       : clear_screen;
       : stop_music;
@@ -2254,6 +2255,7 @@ on_command {
    : match "go - ; go _" {
     : if (you_win) {
         : goto "cc_win" ;
+        : redescribe;
     }
     : else {
         : print "\'If you don't know where you're going, you're probably going wrong\' - Terry Pratchett" ;
@@ -2262,6 +2264,7 @@ on_command {
    : match "go kitchen ; kitchen -" {
     : if (you_win) {
         : goto "cc_win" ;
+        : redescribe;
     }
    }
 
