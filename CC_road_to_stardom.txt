@@ -2757,7 +2757,11 @@ assets {
       puzzle_rud : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_rud.png" ;
       puzzle_ship : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_ship.png" ;
       puzzle_ship_destroyed : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_ship_destroyed.png" ;
+      puzzle_labyrinth_danger : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_labyrinth_danger.png" ;
       puzzle_labyrinth : png "https://cosmoose.org/adventuron_april_2022/Images/puzzle_labyrinth.png" {
+              : if (is_at "labyrinth_ship_destroyed") {
+                 : overlay "puzzle_labyrinth_danger";
+              }
               : overlay {
                   graphic -> (is_at "labyrinth_ship_destroyed" ? "puzzle_ship_destroyed" : "puzzle_ship")
                   x       -> ( labyrinth_position_x )
