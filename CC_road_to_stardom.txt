@@ -2050,6 +2050,16 @@ on_command {
       }
    }
 
+   : match "talk pigeon"  {
+        : print "You start coocooing like you've seen pigeons do. What a great sound!" ;
+        : if (is_present "ee") {
+              : print "Pigeon E is looking at you funny. He doesn't seem too impressed." ;
+        }
+        : if (is_present "june") {
+              : print "June starts coocoing with you!" ;
+        }
+   }
+
    : match "talk e"  {
         : if (is_at "living_room" && is_exists "ee" && !is_puzzle_ee_solved) {
               : set_false "is_seven_seas_crispy" ;
