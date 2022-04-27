@@ -2112,6 +2112,7 @@ on_command {
             : print "Oh no!!!!!! The screen is flashing and beeping!!!! What's going on?" ;
             : print "Let's <ENTER<#cc0>> the command panel to know, quick!" ;
             : set_true "is_labyrinth_open" ;
+            : redescribe ;
         }
         : else_if (is_at "living_room" && is_exists "ee" && is_labyrinth_open) {
             : print "\'Don't you think you have something more pressing to do than talk to me again?\'" ;
@@ -2697,7 +2698,11 @@ assets {
       etana : png "https://cosmoose.org/adventuron_april_2022/Images/etana.png" ;
       florrie : png "https://cosmoose.org/adventuron_april_2022/Images/florrie.png" ;
       florrie_cake : png "https://cosmoose.org/adventuron_april_2022/Images/florrie_cake.png" ;
+      living_room_danger : png "https://cosmoose.org/adventuron_april_2022/Images/common_room_danger.png" ;
       living_room : png "https://cosmoose.org/adventuron_april_2022/Images/common_room.png" {
+        : if (is_labyrinth_open) {
+               : overlay "living_room_danger";
+        }
         : if (is_june_in_living_room) {
                : overlay "june";
                : if (is_e_in_living_room) {
