@@ -330,7 +330,7 @@ locations {
    labyrinth_5_4: location "We're so close, yet so far!";
    labyrinth_5_5: location "You made it! Congratulations!";
    labyrinth_ship_destroyed: location "Oh, we got in front of a cannon, shooting a line of fire! Oops!\nTry again with <RETRY<#cc0>>, return to the living room with <EXIT<#cc0>>.";
-   dream : location (!is_carried "map" ? "You are learning how to play, to skip type <WAKE UP<#cc0>> to wake up" : !seen_inventory_tuto ? "You can check all objects you have by typing <INVENTORY<#cc0>> (then pressing Enter)." : !tuto_used_map ? "You got a map, you can use it with <USE map<#cc0>>" : "Last step, to get a list of available commands type <HELP<#cc0>> then press Enter");
+   dream : location (!is_carried "map" ? "You are learning how to play, to skip type <WAKE UP<#cc0>> to wake up." : !seen_inventory_tuto ? "You can check all objects you have by typing <INVENTORY<#cc0>> (then pressing Enter)." : !tuto_used_map ? "You got a map, you can use it with <USE map<#cc0>>." : "Last step, to get a list of available commands type <HELP<#cc0>> then press Enter.");
 }
 
 ######################################
@@ -804,7 +804,7 @@ on_describe {
    }
    : if (is_at "dream") {
       : if(!is_carried "map") {
-         : print "When you get in a room, you can examine object with <LOOK object<#cc0>>  command. Type <LOOK map<#cc0>> to check the map in this room.";
+         : print "When you get in a room, you can examine an object with <LOOK object<#cc0>> command. Type <LOOK map<#cc0>> to check the map in this room.";
       }
    }
    : if (is_at "labyrinth_ship_destroyed") {
@@ -2372,7 +2372,7 @@ on_command {
    
    : match "wake up; exit _" {
       : if (is_at "dream") {
-         : print "You are waking up from your tutiful dream";
+         : print "You are waking up from your tutiful dream.";
          : goto "cc_room";
       }
    }
