@@ -846,6 +846,9 @@ on_describe {
          : print "When you get in a room, you can examine object with <LOOK object<#cc0>>  command. Type <LOOK map<#cc0>> to check the map in this room.";
       }
    }
+   : if (is_at "labyrinth_ship_destroyed") {
+        : failure ;
+   }
    
 }
 
