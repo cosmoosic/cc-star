@@ -302,7 +302,7 @@ locations {
 
    puzzle_hat : location "Wool says: \'I can show you my favorite puzzle of when I was your age. <TALK<#cc0>> to me whenever you are ready.\'";
 
-   puzzle_labyrinth : location "The only path trough the asteroid belt is filled with drones! Their sensors only see in front of their purple cannon. But there's one we can hack to get the blueprint. We can turn this situation around!";
+   puzzle_labyrinth : location "The only path through the asteroid belt is filled with drones! Their sensors only see in front of their purple cannon. But there's one we can hack to get the blueprint. We can turn this situation around!";
 
    labyrinth_1_1: location "Be careful of their purple laser cannons, and get the blueprint!";
    labyrinth_1_2: location "";
@@ -329,7 +329,7 @@ locations {
    labyrinth_5_3: location "";
    labyrinth_5_4: location "We're so close, yet so far!";
    labyrinth_5_5: location "You made it! Congratulations!";
-   labyrinth_ship_destroyed: location "Oh, we got in front of the cannon's lines of fire! Oops!\nTry again with <RETRY<#cc0>>, return to the living room with <EXIT<#cc0>>.";
+   labyrinth_ship_destroyed: location "Oh no, we got in front of the cannon's lines of fire! Oops!\nTry again with <RETRY<#cc0>>, return to the living room with <EXIT<#cc0>>.";
    dream : location (!is_carried "map" ? "You are learning how to play, to skip type <WAKE UP<#cc0>> to wake up." : !seen_inventory_tuto ? "You can check all objects you have by typing <INVENTORY<#cc0>> (then pressing Enter)." : !tuto_used_map ? "You got a map, you can use it with <USE map<#cc0>>." : "Last step, to get a list of available commands type <HELP<#cc0>> then press Enter.");
 }
 
