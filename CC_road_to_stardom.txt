@@ -2066,7 +2066,8 @@ on_command {
             # : redescribe ;
           : press_any_key ;
           : print "You start feeling hungry. Also it's your birthday and no one said anything. Why is the world so unfair?" ;
-          : print "Where is your cake??? Let's <ASK<#cc0>> June." ;
+          : print "You wrap yourself in your safety blanket, feeling so sad your eyes begin to water." ;
+          : print "Where is your cake???" ;
           : set_true "talked_to_june" ;
       }
       : else_if (is_at "living_room" && is_exists "june" && is_puzzle_ee_solved && !is_labyrinth_open) {
