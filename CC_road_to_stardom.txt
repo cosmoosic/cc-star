@@ -329,9 +329,8 @@ locations {
    labyrinth_5_3: location "";
    labyrinth_5_4: location "We're so close, yet so far!";
    labyrinth_5_5: location "You made it! Congratulations!";
-   labyrinth_ship_destroyed: location "Oh, we got in front of cannon line of fire! Oops!\nTry again with <RETRY<#cc0>>, return to living room with <EXIT<#cc0>>.";
-
-   dream : location (!is_carried "map" ? "You are learning how to play, to skip type <WAKE UP<#cc0>> to wake up" : !seen_inventory_tuto ? "You can check all object you have by typing <INVENTORY<#cc0>> (then pressing Enter)." : !tuto_used_map ? "You got a map, you can use it with <USE map<#cc0>>" : "Last step, to get a list of available commands type <HELP<#cc0>> then press Enter");
+   labyrinth_ship_destroyed: location "Oh, we got in front of a cannon, shooting a line of fire! Oops!\nTry again with <RETRY<#cc0>>, return to the living room with <EXIT<#cc0>>.";
+   dream : location (!is_carried "map" ? "You are learning how to play, to skip type <WAKE UP<#cc0>> to wake up" : !seen_inventory_tuto ? "You can check all objects you have by typing <INVENTORY<#cc0>> (then pressing Enter)." : !tuto_used_map ? "You got a map, you can use it with <USE map<#cc0>>" : "Last step, to get a list of available commands type <HELP<#cc0>> then press Enter");
 }
 
 ######################################
@@ -418,7 +417,7 @@ chicken_wing : object "a ripe chicken wing" at = "crispy_garden";
 
 spherificator : object "a Banach-Spherificator" at = "wools_wheels";
 
-stars : object "A bunch of beautiful shining stars!!"  at ="dream" plural = "true" listed = "false"  ;
+stars : object "a bunch of beautiful shining stars"  at ="dream" plural = "true" listed = "false"  ;
 
 mirror : object "the <mirror<#cc0>> June made for you" at = "cc_room";
 
@@ -2140,7 +2139,6 @@ on_command {
         : press_any_key ;
         : print "June asks: \'E are you choking??? If so, make an OK sign!!\'" ;
         : print "You know well that pigeons don't make OK signs... And remember SevenSeas' wise advice." ;
-        # : print "TODO puzzle number 5. TALK TO E when you see this message." ;
          : print "Some of your friends are passing by and can help you, but do you remember SevenSeas' advice?" ;
          : gosub "play_choking_e_puzzle";
          : print "Awesome! Thanks for helping save E! Now try to <TALK<#fee>> to him." ;
@@ -2516,14 +2514,6 @@ on_command {
       : if (!is_puzzle_wool_solved && is_at "puzzle_hat") {
         : print "If you need help here, type <HINT<#cc0>>." ;
         : print "You don't have many possible answers though, so you should be able to guess quickly." ;
-      }
-   }
-
-   : match "todo puzzle" {
-      : set_true "is_playing_logic" ;
-      : if (is_playing_logic) {
-         : gosub "play_choking_e_puzzle";
-         : print "Awesome! Thanks for helping save E! Now try to <TALK<#fee>> to him." ;
       }
    }
 
