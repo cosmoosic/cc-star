@@ -2174,6 +2174,18 @@ on_command {
       : print "Today is your birthday CC. Which means you are all grown up, and grown-ups don't cry unless they accidentally reboot their computer and lose unsaved files.";
    }
 
+   : match "stalk _" {
+      : if (is_present "florrie") {
+        : print "You quickly go and cut a flower stalk, and give it to Florrie." ;
+        : print "Thanks to you, Florrie has accumulated a huge pile of flower stalks." ;
+      }
+      : else {
+        : print "You start pretending you are a detective, and hide to observe the room. ";
+        : print "But then realize you are too old to play like this." ;
+        : print "Now you find fruitful conversations more refined. Especially when they're about chicken wings." ;
+      }
+   }
+
    : match "talk florrie ; talk -"  {
       : if (is_exists "florrie" && is_at "living_room" && !is_puzzle_florrie_solved ) {
         : print "Florrie warmly greets you and listens to your accomplishments." ;
