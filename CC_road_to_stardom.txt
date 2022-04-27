@@ -329,7 +329,7 @@ locations {
    labyrinth_5_3: location "";
    labyrinth_5_4: location "We're so close, yet so far!";
    labyrinth_5_5: location "You made it! Congratulations!";
-   labyrinth_ship_destroyed: location "Oh, we got in front of a cannon, shooting a line of fire! Oops!\nTry again with <RETRY<#cc0>>, return to the living room with <EXIT<#cc0>>.";
+   labyrinth_ship_destroyed: location "Oh, we got in front of the cannon's lines of fire! Oops!\nTry again with <RETRY<#cc0>>, return to the living room with <EXIT<#cc0>>.";
    dream : location (!is_carried "map" ? "You are learning how to play, to skip type <WAKE UP<#cc0>> to wake up." : !seen_inventory_tuto ? "You can check all objects you have by typing <INVENTORY<#cc0>> (then pressing Enter)." : !tuto_used_map ? "You got a map, you can use it with <USE map<#cc0>>." : "Last step, to get a list of available commands type <HELP<#cc0>> then press Enter.");
 }
 
