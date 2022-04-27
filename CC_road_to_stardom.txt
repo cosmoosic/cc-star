@@ -2681,13 +2681,13 @@ assets {
             }
          };
 
-      tutorial: png "https://cosmoose.org/adventuron_april_2022/Images/dream.png";/* {
+      tutorial: png "https://cosmoose.org/adventuron_april_2022/Images/dream.png" {
          : if (tutorial_look_map && !is_carried "map") {
             : overlay "map_object" x = "30" y = "20";
             : overlay "transparent_20x20" x="140" y="60" experimental_command = "look map";
             : overlay "transparent_20x20" x="160" y="60" experimental_command = "look map";
          }
-      };*/
+      };
       // test for text overlay but not great yet
       /*
       tutorial: png "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"  ><g><text >Hello World!</text></g></svg>";
