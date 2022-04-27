@@ -92,6 +92,7 @@ vocabulary {
    : noun      / aliases = [energy, drink, beverage, redgull, can, potion, barrel, taurine, juice, clayrox, clorox]
    : noun      / aliases = [mirror, reflection]
    : noun      / aliases = [garden, park, yard, lawn, land, plot, greenhouse, orchard]
+   : noun      / aliases = [stars, star]
    : noun      / aliases = [fight, combat, conflict]
    : noun      / aliases = [floor, ground, flooring]
    : noun      / aliases = [up, upstair, upstairs]
@@ -417,6 +418,8 @@ chicken_wing : object "a ripe chicken wing" at = "crispy_garden";
 
 spherificator : object "a Banach-Spherificator" at = "wools_wheels";
 
+stars : object "A bunch of beautiful shining stars!!"  at ="dream" plural = "true" listed = "false"  ;
+
 mirror : object "the <mirror<#cc0>> June made for you" at = "cc_room";
 
 rud_happy : scenery "<RuD<#cc0>>, who looks way more energized now";
@@ -424,8 +427,6 @@ rud_happy : scenery "<RuD<#cc0>>, who looks way more energized now";
 rud_sad : scenery "<RuD<#cc0>>, who is almost always there" at = "party_planet_inside";
 
 seven_seas : scenery "one of the most data savvy robots, called <SevenSeas<#cc0>> or <7Cs<#cc0>>" ;
-
-stars : scenery "What beautiful shining stars!!"  at ="dream" plural = "true" listed = "false"  ;
 
 wool : scenery "mechanic <Wool<#cc0>>, who does all kinds of repair work here" at = "wools_wheels";
 
@@ -1131,12 +1132,6 @@ on_command {
         : set_string var="comments" {(comments + "\n<_<#000>>" + string_tmp)};
      }
 
-   }
-   : match "drop *" {
-      : print "You don't need to drop anything.";
-   }
-   : match "cheat *" {
-      : print "Unknown verb - \"cheat\".";
    }
 
    : match "examine puzzle" {
@@ -2496,9 +2491,24 @@ on_command {
    : if (is_at "dream") {
       : match "take stars" {
          : pocket "stars";
+         : update_graphic;
+         : print "You got some shiny stars! They are too big, you can only <drop<#ee0>> them here.";
+      }
+      : match "drop stars" {
+         : if (is_carried "stars") {
+             : drop "stars";
+             : update_graphic;
+             : set_sentence "nothing";
+             : print "The stars are back.";
+             
+         }
+      }
+      : match "look stars" {
+         : print "Those are very bright abstral objects! I should not look at them for too long.";
+         : set_sentence "nothing";
       }
       : match "look _" {
-         : if (!noun1_is "map" && !is_carried "map") {
+         : if (!noun1_is "map" && !is_carried "map" && !noun1_is "stars") {
             : if(noun1_is "") {
             
                : print ("Great, now add <MAP<#cc0>> after the command <" + upper(original "verb") + "<#cc0>> then press enter.");
@@ -2516,6 +2526,14 @@ on_command {
          }
       }
    }
+   
+   : match "drop *" {
+      : print "You don't need to drop anything.";
+   }
+   : match "cheat *" {
+      : print "Unknown verb - \"cheat\".";
+   }
+   
    : match "exit -" {
       : if (!is_puzzle_wool_solved && is_at "puzzle_hat") {
         : print "If you need help here, type <HINT<#cc0>>." ;
@@ -2746,7 +2764,7 @@ assets {
 
       dream: png "https://cosmoose.org/adventuron_april_2022/Images/dream.png" {
          : overlay "dream_cc";
-         : if (is_present "stars") {
+         : if (is_present "stars" && !is_carried "stars") {
             : overlay "dream_stars";
          }
          : if (dream_look_map && !is_carried "map") {
