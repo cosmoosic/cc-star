@@ -166,6 +166,7 @@ booleans {
    is_using_map : boolean "false";
    tutorial_look_map : boolean "true";
    seen_inventory_tuto : boolean "false";
+   tuto_used_map : boolean "false";
 }
 
 integers {
@@ -253,7 +254,7 @@ collections {
 strings {
    next_track : string "";
    current_track : string "";
-   sound_volume : string "normal";
+   sound_volume : string "normal" scope="survivor";
    string_tmp : string "";
    comments : string "";
    nothing_message : string "";
@@ -327,7 +328,7 @@ locations {
    labyrinth_5_4: location "We're so close, yet so far!";
    labyrinth_5_5: location "You made it! Congratulations!";
 
-   tutorial : location "" ;
+   tutorial : location (!is_carried "map" ? "You are learning how to play, to skip type <WAKE UP<#cc0>> to wake up" : !seen_inventory_tuto ? "You can check all object you have by typing <INVENTORY<#cc0>> (then pressing Enter)." : !tuto_used_map ? "You got a map, you can use it with <USE map<#cc0>>" : "Last step, to get a list of available commands type <HELP<#cc0>> then press Enter");
 }
 
 ######################################
@@ -343,6 +344,7 @@ connections {
    party_planet, enter, party_planet_inside,
    party_planet, east, crispy_garden,
    crispy_garden, north, living_room,
+   tutorial, leave_oneway, cc_room,
 
    living_room, enter, puzzle_labyrinth,
    labyrinth_1_1, east_oneway, labyrinth_1_2,
@@ -837,15 +839,7 @@ on_describe {
    }
    : if (is_at "tutorial") {
       : if(!is_carried "map") {
-         : print "Learning how to play, to skip type <WAKE UP<#fee>> to wake up";
-         : press_any_key;
          : print "When you get in a room, you can examine object with <LOOK object<#cc0>>  command. Type <LOOK map<#cc0>> to check the map in this room.";
-      }
-      : else_if (!seen_inventory_tuto) {
-           : print "You can check all object you have by typing <INVENTORY<#cc0>> (then pressing Enter).";
-      }
-      : else {
-         : print "You got a map, use it with <USE map<#fee>>";
       }
    }
    
@@ -943,6 +937,7 @@ on_command {
       : match "get map" {
         : print "You may be growing up quickly, you still have a lot to learn. This <map<#cc0>> may be useful. You take it!";
         : pocket "map";
+        : set_sentence "nothing";
         : print "The <map<#cc0>> has been added to your <INVENTORY<#cc0>>.";
         : press_any_key;
       }
@@ -981,9 +976,9 @@ on_command {
           : redescribe;
           */
           : if (is_at "tutorial") {
-            : print "Well done! Let's start the adventure!";
+            : print "Well done! <Use the map<#cc0>> any time you are lost!";
             : press_any_key;
-            : goto "cc_room";
+            : set_true "tuto_used_map";
           }
       }
       : else_if (is_present "map") {
@@ -2326,6 +2321,12 @@ on_command {
        : print "- Type '<HINT<#cc0>>' to get a hint on a puzzle.";
        : print "- If a HINT is not sufficient, check the solution in the PDF guide. Don't give up!";
        : print "- Type '<QUIT<#cc0>>' to restart a game";
+       : if (is_at "tutorial" && tuto_used_map) {
+            : press_any_key;
+            : print "Well done! I'm waking up! Let's start the day, and don't forget to use <HELP<#cc0>> or <MAP<#cc0>> if you are stuck.";
+            : press_any_key;
+            : goto "cc_room";
+       }
    }
 
    : match "hint -" {
@@ -2474,8 +2475,15 @@ on_command {
       }
    }
    : if (is_at "tutorial") {
-      : match "look object" {
-         : print "Great, now replace <OBJECT<#ee0>> by <MAP<#cc0>> and type <LOOK MAP<#cc0>> then press enter";
+      : match "look _" {
+         : if (!noun1_is "map" && !is_carried "map") {
+            : print ("Great, now replace <" + upper(original "noun1") + "<#ee0>> by <MAP<#cc0>> and type <LOOK MAP<#cc0>> then press enter");
+         }
+      }
+      : match "inventory _" {
+         : mask {
+            : set_true "seen_inventory_tuto";
+         }
       }
    }
    : match "exit -" {
@@ -2673,14 +2681,14 @@ assets {
             }
          };
 
-      tutorial: png "https://cosmoose.org/adventuron_april_2022/Images/dream.png" {
+      tutorial: png "https://cosmoose.org/adventuron_april_2022/Images/dream.png";/* {
          : if (tutorial_look_map && !is_carried "map") {
             : overlay "map_object" x = "30" y = "20";
             : overlay "transparent_20x20" x="140" y="60" experimental_command = "look map";
             : overlay "transparent_20x20" x="160" y="60" experimental_command = "look map";
          }
-      };
-      // test for text on canvas but doesn't work too great
+      };*/
+      // test for text overlay but not great yet
       /*
       tutorial: png "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"  ><g><text >Hello World!</text></g></svg>";
       */
