@@ -551,7 +551,7 @@ on_startup {
    : press_any_key ;
    : print "To check your inventory, type <INVENTORY<#cc0>> (or <I<#cc0>>)." ;
    : press_any_key ;
-   : print "To see available commands at a location, type <HELP<#cc0>> or <HINT<#cc0>>." ;
+   : print "To see available commands at a location, use <HELP<#cc0>> and <HINT<#cc0>>." ;
    : press_any_key ;
 }
 
@@ -2318,6 +2318,7 @@ on_command {
        }
        : print "- Type <N<#cc0>>, <S<#cc0>>, <E<#cc0>>, <W<#cc0>>, <UP<#cc0>>, <DOWN<#cc0>>, <ENTER<#cc0>>, <EXIT<#cc0>> to move";
        : print "- Type '<LOAD<#cc0>>' or  '<SAVE<#cc0>>' to load or save a game";
+       : print "- Type '<CLEAR<#cc0>>' or  '<REDESCRIBE<#cc0>>' to clear the screen";
        : print "- Type '<HINT<#cc0>>' to get a hint on a puzzle.";
        : print "- If a HINT is not sufficient, check the solution in the PDF guide. Don't give up!";
        : print "- Type '<QUIT<#cc0>>' to restart a game";
