@@ -612,77 +612,39 @@ subroutines {
       }
       : if (is_at "cc_room") {
          : set_string var="next_track" value="music_beat_2";
-         : if (next_track != current_track) {
-            : play_music "music_beat_2";
-         }
       }
       : else_if (is_at "party_planet") {
          : set_string var="next_track" value="music_party_planet_outside";
-         : if (next_track != current_track) {
-            : play_music "music_party_planet_outside";
-         }
       }
       : else_if (is_at "puzzle_florrie_laptop") {
-         : set_string var="next_track" value="music_short";
-         : if (next_track != current_track) {
-            : play_music "music_laptop";
-         }
+         : set_string var="next_track" value="music_laptop";
       }
       : else_if (is_at "wools_wheels") {
          : set_string var="next_track" value="music_wools_wheels";
-         : if (next_track != current_track) {
-            : play_music "music_wools_wheels";
-         }
       }
       : else_if (is_at "crispy_garden") {
          : set_string var="next_track" value="music_crispy_garden";
-         : if (next_track != current_track) {
-            : play_music "music_crispy_garden";
-         }
       }
       : else_if (is_at "living_room" && (is_present "june" || is_present "ee")) {
          : set_string var="next_track" value="music_living_room_pigeon";
-         : if (next_track != current_track) {
-            : play_music "music_living_room_pigeon";
-         }
       }
       : else_if (is_at "living_room" && (is_everybody_here || is_florrie_in_living_room_with_cake)) {
          : set_string var="next_track" value="music_win";
-         : if (next_track != current_track) {
-            : play_music "music_win";
-         }
       }
       : else_if (is_at "living_room") {
          : set_string var="next_track" value="music_living_room";
-         : if (next_track != current_track) {
-            : play_music "music_living_room";
-         }
       }
       : else_if (is_at "party_planet_inside") {
          : set_string var="next_track" value="music_party_planet_inside";
-         : if (next_track != current_track) {
-            : play_music "music_party_planet_inside";
-         }
       }
       : else_if (in_labyrinth || is_at "puzzle_labyrinth") {
-         : set_string var="next_track" value="music_labyrinth";
-         : if (next_track != current_track) {
-            : if (chance(33)) {
-               : play_music "music_labyrinth_1";
-            }
-            : else_if (chance(34)) {
-               : play_music "music_labyrinth_2";
-            }
-            : else {
-                : play_music "music_beat_1";
-            }
-         }
+         : set_string var="next_track" (chance(33) ? "music_labyrinth_1" : chance(34) ? "music_labyrinth_2" :"music_beat_1");
       }
       : else_if (is_at "cc_win") {
          : set_string var="next_track" value="music_win";
-         : if (next_track != current_track) {
-            : play_music "music_win";
-         }
+      }
+      : if (next_track != current_track) {
+         : play_music (next_track);
       }
 
       : set_string var="current_track" {(next_track)}
