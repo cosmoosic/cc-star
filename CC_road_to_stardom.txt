@@ -298,7 +298,7 @@ locations {
 
    wools_wheels : location "You are at Wool's Wheels, <Wool<#cc0>>'s vehicle and ship repair area." ;
 
-   puzzle_florrie_laptop : location "You are in front of Florrie's laptop. Can you <UNLOCK<#cc0>> or <TYPE<#cc0>> her password?";
+   puzzle_florrie_laptop : location "You are in front of Florrie's laptop. Can you <UNLOCK<#cc0>> or <TYPE<#cc0>> her password? You see she left a password <HINT<#cc0>> to help herself remember!";
 
    puzzle_hat : location "Wool says: \'I can show you my favorite puzzle of when I was your age. <TALK<#cc0>> to me whenever you are ready.\'";
 
@@ -1126,7 +1126,10 @@ on_command {
    : match "examine laptop; read laptop; use laptop"  {
       : if (is_at "living_room" && !is_laptop_unlocked) {
          : print "This laptop belongs to <Florrie<#cc0>>." ;
+         : print "Maybe she left a note for you on it? Only one way to know." ;
          : goto "puzzle_florrie_laptop";
+         : press_any_key ;
+         : redescribe ;
       }
       : else_if (is_at "living_room" && is_laptop_unlocked) {
          : print "You swore not to touch Florrie's laptop ever again." ;
