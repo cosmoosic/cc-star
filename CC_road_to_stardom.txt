@@ -275,6 +275,9 @@ strings {
    incorrect_game_1 : string "akafeather";
    incorrect_game_2 : string "brooms";
    florrie_code : string "opensourcenow";
+   random_music_labyrinth : dynamic_string (
+       chance(33) ? "music_labyrinth" :
+    chance(34) ? "music_labyrinth_2" : "music_beat_1");
 }
 
 ######################################
@@ -613,6 +616,9 @@ subroutines {
       : if (is_at "cc_room") {
          : set_string var="next_track" value="music_beat_2";
       }
+      : if (is_at "dream") {
+         : set_string var="next_track" value="music_dream";
+      }
       : else_if (is_at "party_planet") {
          : set_string var="next_track" value="music_party_planet_outside";
       }
@@ -638,15 +644,19 @@ subroutines {
          : set_string var="next_track" value="music_party_planet_inside";
       }
       : else_if (in_labyrinth || is_at "puzzle_labyrinth") {
-         : set_string var="next_track" (chance(33) ? "music_labyrinth_1" : chance(34) ? "music_labyrinth_2" :"music_beat_1");
+         : set_string var="next_track" value="music_labyrinth";
       }
       : else_if (is_at "cc_win") {
          : set_string var="next_track" value="music_win";
       }
       : if (next_track != current_track) {
-         : play_music (next_track);
+         : if (next_track == "music_labyrinth") {
+             : play_music (random_music_labyrinth);
+         }
+         : else {
+            : play_music (next_track);
+         }
       }
-
       : set_string var="current_track" {(next_track)}
    }
    update_volume : subroutine {
@@ -837,14 +847,13 @@ on_command {
          : print "We should solve yard's issue";
          : set_true "is_map_command";
       }
+      : if (!is_map_command) {
+         : set_sentence "exit";
+      }
       : match "exit -; leave -; return -" {
          : set_false "is_using_map";
          : set_sentence "nothing";
          : update_graphic;
-         : set_true "is_map_command";
-      }
-      : if (!is_map_command) {
-         : print "This command can't be used on the map, use <exit<#cc0>> to leave the <map<#ee0>>";
       }
    }
    : match "follow _;about _; credit _; credits _; readme _; examine cosmoose; cosmoose - ; dhxp -"  {
@@ -930,6 +939,13 @@ on_command {
          : print "This boat is an old gift from RuD, a self-proclaimed space pirate who loves Earth pirates too." ;
       }
    }
+   
+   : match "wake up; exit _" {
+      : if (is_at "dream") {
+         : print "You are waking up from your tutiful dream.";
+         : set_sentence "exit";
+      }
+   }
    : if (is_present "map" && !is_carried "map" && (is_at "cc_room" || is_at "dream")) {
       : match "get map" {
         : print "You may be growing up quickly, you still have a lot to learn. This <map<#cc0>> may be useful. You take it!";
@@ -949,7 +965,12 @@ on_command {
          }
       }
    }
-   : match "examine map; map _; use map" {
+   : match "wake up; exit _" {
+      : if (is_at "dream") {
+         : goto "cc_room";
+      }
+   }
+   : match "examine map; map _; use map; m _" {
    
       : if (is_carried "map") {
             : set_true "is_using_map";
@@ -2394,13 +2415,6 @@ on_command {
 
 
    }
-   
-   : match "wake up; exit _" {
-      : if (is_at "dream") {
-         : print "You are waking up from your tutiful dream.";
-         : goto "cc_room";
-      }
-   }
 
    : match "examine bedroom"  {
       : if (is_at "cc_room") {
@@ -2658,6 +2672,7 @@ assets {
    sounds {
       music_beat_1 : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat_1.mp3" ;
       music_beat_2 : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat_2_ccs_room.mp3" ;
+      music_dream : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat_12_ccs_dream_70bpm.mp3" ;
       music_wools_wheels : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/Beat07_Wools_room.mp3" ;
       music_laptop : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/lofi2_wool.mp3" ;
       music_living_room : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/lofi3_livingroom.mp3" ;
