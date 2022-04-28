@@ -43,6 +43,7 @@ themes {
 game_settings {
    auto_ask_sound_permissions = false
    enable_standard_all_behaviour = false
+   precache_strategy = precache_all
 }
 
 
@@ -168,6 +169,7 @@ booleans {
    dream_look_map : boolean "true";
    seen_inventory_tuto : boolean "false";
    tuto_used_map : boolean "false";
+   is_map_command : boolean "false";
 }
 
 integers {
@@ -273,7 +275,6 @@ strings {
    incorrect_game_1 : string "akafeather";
    incorrect_game_2 : string "brooms";
    florrie_code : string "opensourcenow";
-   map_icon_cc : string "icon_cc";
 }
 
 ######################################
@@ -818,6 +819,34 @@ on_describe {
 ######################################
 
 on_command {
+   : if (is_using_map) {
+      : set_false "is_map_command";
+      : match "remember wool" {
+         : print "We should solve wool's issue";
+         : set_true "is_map_command";
+      }
+      : match "remember lounge" {
+         : print "We should solve lounge's issue";
+         : set_true "is_map_command";
+      }
+      : match "remember game" {
+         : print "We should solve lounge's issue";
+         : set_true "is_map_command";
+      }
+      : match "remember yard" {
+         : print "We should solve yard's issue";
+         : set_true "is_map_command";
+      }
+      : match "exit -; leave -; return -" {
+         : set_false "is_using_map";
+         : set_sentence "nothing";
+         : update_graphic;
+         : set_true "is_map_command";
+      }
+      : if (!is_map_command) {
+         : print "This command can't be used on the map, use <exit<#cc0>> to leave the <map<#ee0>>";
+      }
+   }
    : match "follow _;about _; credit _; credits _; readme _; examine cosmoose; cosmoose - ; dhxp -"  {
       : if ((verb_is "about" || verb_is "follow") && is_exists (s1())) {
          : set_sentence {("examine "+ rationalized "noun1")};
@@ -924,10 +953,7 @@ on_command {
    
       : if (is_carried "map") {
             : set_true "is_using_map";
-          : update_graphic;
-          : press_any_key;
-          : set_false "is_using_map";
-          : update_graphic;
+            : update_graphic;
       /*
           : set_theme "theme_mono";
           : clear_screen;
@@ -946,7 +972,6 @@ on_command {
           */
           : if (is_at "dream") {
             : print "Well done! <Use the map<#cc0>> any time you are lost!";
-            : press_any_key;
             : set_true "tuto_used_map";
           }
       }
@@ -2583,34 +2608,26 @@ on_command {
 
 on_post_tick {
    : if (is_at "dream") {
-      : set_string var = "map_icon_cc"  value = "icon_cc_right" ;
-      
       : set_integer var = "cc_x" value = "-145";
       : set_integer var = "cc_y" value = "10";
    }
    : else_if (is_at "cc_room") {
-      : set_string var = "map_icon_cc"  value = "icon_cc_right" ;
-      
       : set_integer var = "cc_x" value = "-2";
       : set_integer var = "cc_y" value = "-1";
    }
    : else_if (is_at "living_room") {
-      : set_string var = "map_icon_cc"  value = "icon_cc_right" ;
       : set_integer var = "cc_x" value = "-2";
       : set_integer var = "cc_y" value = "20";
    }
    : else_if (is_at "wools_wheels") {
-      : set_string var = "map_icon_cc"  value = "icon_cc_right" ;
       : set_integer var = "cc_x" value = "-50";
       : set_integer var = "cc_y" value = "20";
    }
    : else_if (is_at "party_planet") {
-      : set_string var = "map_icon_cc"  value = "icon_cc_right" ;
       : set_integer var = "cc_x" value = "-51";
       : set_integer var = "cc_y" value = "52";
    }
    : else_if (is_at "crispy_garden") {
-      : set_string var = "map_icon_cc"  value = "icon_cc_right" ;
       : set_integer var = "cc_x" value = "-1";
       : set_integer var = "cc_y" value = "54";
    }
@@ -2619,8 +2636,14 @@ on_post_tick {
 on_render {
  : if (is_using_map) {
    : overlay "new_map";
+   : overlay "exclamation_mark_grey" x="163" y="35" experimental_command = "remember wool";
+   : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "remember lounge";
+   : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "remember game";
+   : overlay "exclamation_mark_grey" x="162" y="67" experimental_command = "remember yard";
+   : overlay "exclamation_mark_grey" x="218" y="67" experimental_command = "remember wool";
+   : overlay "icon_cross" x="235" y="1" experimental_command = "exit";
    : overlay {
-      graphic -> (map_icon_cc)
+      graphic -> ("icon_cc")
       x -> (cc_x)
       y -> (cc_y)
    }
@@ -2754,7 +2777,10 @@ assets {
       map_object: png "https://cosmoose.org/adventuron_april_2022/Images/icon_map.png";
       new_map:  png "https://cosmoose.org/adventuron_april_2022/Images/map.png";
       transparent_20x20: png "https://ea.cosmoose.org/adventuron_april_2022/Images/transparent_20x20.png";
+      exclamation_mark: png "https://ea.cosmoose.org/adventuron_april_2022/Images/exclamation_mark.png";
+      exclamation_mark_grey: png "https://cosmoose.org/adventuron_april_2022/Images/bang_grey.png";
+      exclamation_mark_orange: png "https://cosmoose.org/adventuron_april_2022/Images/bang_red.png";
       icon_cc: png "https://cosmoose.org/adventuron_april_2022/Images/icon_cc.png";
-      icon_cc_right: png "https://ea.cosmoose.org/adventuron_april_2022/Images/icon_cc_right.png";
+      icon_cross: png "https://cosmoose.org/adventuron_april_2022/Images/icon_cross.png";
    }
-}
+} 
