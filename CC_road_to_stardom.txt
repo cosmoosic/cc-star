@@ -968,6 +968,7 @@ on_command {
    : match "wake up; exit _" {
       : if (is_at "dream") {
          : goto "cc_room";
+         : gosub "play_music";
       }
    }
    : match "examine map; map _; use map; m _" {
