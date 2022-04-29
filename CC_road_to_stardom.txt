@@ -183,11 +183,16 @@ integers {
    integer_tmp : integer "0";
    cc_x : integer "0";
    cc_y : integer "0";
+   current_volume_index : integer "-1";
 }
 
 collections {
    labyrinth_dir : list {
       items  = [ "1_1", "1_2", "1_3", "1_4", "1_5", "2_1", "2_2", "2_3", "2_4", "2_5", "3_1", "3_2", "3_3", "3_4", "3_5", "4_1", "4_2", "4_3", "4_4", "4_5", "5_1", "5_2", "5_3", "5_4", "5_5", "ship_destroyed"]
+   }
+   
+   sound_volumes : list {
+      items = [ "lowlowest", "lowest", "highlowest", "lowlow", "low", "highlow", "lownormal", "normal", "highnormal", "lowhigh", "high", "highhigh", "lowhighest", "highest", "highhighest" ]
    }
 
    choking_e_choice_1: list {
@@ -278,6 +283,7 @@ strings {
    random_music_labyrinth : dynamic_string (
        chance(33) ? "music_labyrinth" :
     chance(34) ? "music_labyrinth_2" : "music_beat_1");
+   previous_command : string "";
 }
 
 ######################################
@@ -664,23 +670,59 @@ subroutines {
          : set_music_vol volume="0";
          : set_incidental_vol volume="0";
       }
+      : else_if (sound_volume == "lowlowest") {
+         : set_music_vol volume="1";
+         : set_incidental_vol volume="1";
+      }
       : else_if (sound_volume == "lowest") {
+         : set_music_vol volume="2";
+         : set_incidental_vol volume="2";
+      }
+      : else_if (sound_volume == "highlowest") {
          : set_music_vol volume="3";
          : set_incidental_vol volume="3";
+      }
+      : else_if (sound_volume == "lowlow") {
+         : set_music_vol volume="5";
+         : set_incidental_vol volume="5";
       }
       : else_if (sound_volume == "low") {
          : set_music_vol volume="7";
          : set_incidental_vol volume="7";
       }
+      : else_if (sound_volume == "highlow") {
+         : set_music_vol volume="10";
+         : set_incidental_vol volume="10";
+      }
+      : else_if (sound_volume == "lownormal") {
+         : set_music_vol volume="13";
+         : set_incidental_vol volume="13";
+      }
       : else_if (sound_volume == "normal") {
          : set_music_vol volume="16";
          : set_incidental_vol volume="16";
+      }
+      : else_if (sound_volume == "highnormal") {
+         : set_music_vol volume="24";
+         : set_incidental_vol volume="24";
+      }
+      : else_if (sound_volume == "lowhigh") {
+         : set_music_vol volume="32";
+         : set_incidental_vol volume="32";
       }
       : else_if (sound_volume == "high") {
          : set_music_vol volume="40";
          : set_incidental_vol volume="40";
       }
+      : else_if (sound_volume == "highhigh") {
+         : set_music_vol volume="60";
+         : set_incidental_vol volume="60";
+      }
       : else_if (sound_volume == "highest") {
+         : set_music_vol volume="80";
+         : set_incidental_vol volume="80";
+      }
+      : else_if (sound_volume == "highhighest") {
          : set_music_vol volume="100";
          : set_incidental_vol volume="100";
       }
@@ -829,6 +871,18 @@ on_describe {
 ######################################
 
 on_command {
+   # use click as look->get->use command
+   : match "click map" {
+      : if (is_present "map" && !is_carried "map" && previous_command == sentence_raw()) {
+         : print "You get the map (you could have done <get map<#cc0>>).";
+         : set_sentence "get map";
+      }
+      : else_if (is_present "map" && !is_carried "map") {
+         : set_string var="previous_command" (sentence_raw());
+         : print "You look at the map (you could have done <look map<#cc0>>).";
+         : set_sentence "look map";
+      }
+   }
    : if (is_using_map) {
       : set_false "is_map_command";
       : match "look wool" {
@@ -848,13 +902,14 @@ on_command {
          : set_true "is_map_command";
       }
       : match "exit -; leave -; return -; close -; m -; map -; use map; examine map" {
+         : set_true "tuto_used_map";
          : set_false "is_using_map";
          : set_sentence "nothing";
          : set_true "is_map_command";
          : update_graphic;
       }
       : if (!is_map_command) {
-         : print "I need to use <M<#cc0>> or <CLOSE<#cc0>> commands to close the map first.";
+         : print "I need to use <M<#cc0>> or <CLOSE<#cc0>> commands to close the map.";
          : set_sentence "nothing";
       }
    }
@@ -1003,7 +1058,47 @@ on_command {
       }
    }
    : match "sound _; music _; volume _" {
-      : if (preposition_is "on" || noun1_is "lowest" || noun1_is "low" || noun1_is "normal" || noun1_is "high" || noun1_is "highest") {
+      : if (noun1_is "lower" || noun1_is "higher") {
+         : set_integer var="current_volume_index" value="-1";
+         : iterate "sound_volumes" {
+            : if (item() == sound_volume) {
+               : set_integer var="current_volume_index" (index());
+            }
+         }
+         : if (current_volume_index != -1) {
+            :if (noun1_is "lower") {
+               : if (current_volume_index > 0) {
+                  : decrement "current_volume_index";
+               }
+               : else {
+                  : print "You are already at the lowest sound volume.";
+                  : set_sentence "nothing";
+               }
+            }
+            : else {
+               : if (current_volume_index + 1 < count "sound_volumes") {
+                  : increment "current_volume_index";
+               }
+               : else {
+                  : print "You are already at the highest sound volume.";
+                  : set_sentence "nothing";
+               }
+            }
+            : set_noun1 (collection_get {
+               collection -> ("sound_volumes")
+                  index -> ( current_volume_index )
+            });
+         }
+      }
+      : if (! verb_is "nothing") {
+         : set_integer var="current_volume_index" value="-1";
+         : iterate "sound_volumes" {
+            : if (rationalized "noun1" == item()) {
+               : set_integer var="current_volume_index" (index());
+            }
+         }
+      }
+      : if (preposition_is "on" || current_volume_index != -1) {
          : mask {
             : set_string var="string_tmp" {(rationalized "noun1")}
             : set_sentence "nothing";
@@ -1039,7 +1134,7 @@ on_command {
            : gosub "update_volume";
          }
       }
-      : else {
+      : else_if (!verb_is "nothing") {
          : if (sysvar_bool "sysvar_sound_enabled") {
             : print "<SOUND OFF<#cc0>> | <LOWEST<#cc0>> | <LOW<#cc0>> | <NORMAL<#cc0>> | <HIGH<#cc0>> | <HIGHEST<#cc0>> to disable sound or change volume.";
          }
@@ -2655,7 +2750,7 @@ on_render {
    : overlay "exclamation_mark_grey" x="163" y="35" experimental_command = "look wool";
    : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "look lounge";
    : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "look game";
-   : overlay "exclamation_mark_grey" x="162" y="67" experimental_command = "loook yard";
+   : overlay "exclamation_mark_grey" x="162" y="67" experimental_command = "look yard";
    : overlay "exclamation_mark_grey" x="218" y="67" experimental_command = "look wool";
    : overlay "icon_cross" x="235" y="1" experimental_command = "exit";
    : overlay {
@@ -2781,8 +2876,8 @@ assets {
          }
          : if (dream_look_map && !is_carried "map") {
             : overlay "map_object" x = "30" y = "20";
-            : overlay "transparent_20x20" x="140" y="60" experimental_command = "look map";
-            : overlay "transparent_20x20" x="160" y="60" experimental_command = "look map";
+            : overlay "transparent_20x20" x="140" y="60" experimental_command = "click map";
+            : overlay "transparent_20x20" x="160" y="60" experimental_command = "click map";
          }
       };
       // test for text overlay but not great yet
