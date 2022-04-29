@@ -543,7 +543,7 @@ on_startup {
       }
    }
    : gosub "update_volume";
-   : play_music "music_beat_2";
+   : play_music "music_dream";
    : print "Type <VERB NOUN<#cc0>> with the keyboard to advance in the game." ;
    : if (is_mobile()) {
       : print "You can touch some colored words to copy them, or touch and hold to choose an action.";
@@ -613,11 +613,11 @@ subroutines {
       : if (is_sound_muted) {
          : return;
       }
-      : if (is_at "cc_room") {
-         : set_string var="next_track" value="music_beat_2";
-      }
       : if (is_at "dream") {
          : set_string var="next_track" value="music_dream";
+      }
+      : if (is_at "cc_room") {
+         : set_string var="next_track" value="music_beat_2";
       }
       : else_if (is_at "party_planet") {
          : set_string var="next_track" value="music_party_planet_outside";
@@ -831,29 +831,31 @@ on_describe {
 on_command {
    : if (is_using_map) {
       : set_false "is_map_command";
-      : match "remember wool" {
+      : match "look wool" {
          : print "We should solve wool's issue";
          : set_true "is_map_command";
       }
-      : match "remember lounge" {
+      : match "look lounge" {
          : print "We should solve lounge's issue";
          : set_true "is_map_command";
       }
-      : match "remember game" {
+      : match "look game" {
          : print "We should solve lounge's issue";
          : set_true "is_map_command";
       }
-      : match "remember yard" {
+      : match "look yard" {
          : print "We should solve yard's issue";
          : set_true "is_map_command";
       }
-      : if (!is_map_command) {
-         : set_sentence "exit";
-      }
-      : match "exit -; leave -; return -" {
+      : match "exit -; leave -; return -; close -; m -; map -; use map; examine map" {
          : set_false "is_using_map";
          : set_sentence "nothing";
+         : set_true "is_map_command";
          : update_graphic;
+      }
+      : if (!is_map_command) {
+         : print "I need to use <M<#cc0>> or <CLOSE<#cc0>> commands to close the map first.";
+         : set_sentence "nothing";
       }
    }
    : match "follow _;about _; credit _; credits _; readme _; examine cosmoose; cosmoose - ; dhxp -"  {
@@ -993,8 +995,7 @@ on_command {
           : redescribe;
           */
           : if (is_at "dream") {
-            : print "Well done! <Use the map<#cc0>> any time you are lost!";
-            : set_true "tuto_used_map";
+            : print "Well done! <Use the map<#cc0>> any time you are lost! (then close it with <close<#cc0>>)";
           }
       }
       : else_if (is_present "map") {
@@ -2651,11 +2652,11 @@ on_post_tick {
 on_render {
  : if (is_using_map) {
    : overlay "new_map";
-   : overlay "exclamation_mark_grey" x="163" y="35" experimental_command = "remember wool";
-   : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "remember lounge";
-   : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "remember game";
-   : overlay "exclamation_mark_grey" x="162" y="67" experimental_command = "remember yard";
-   : overlay "exclamation_mark_grey" x="218" y="67" experimental_command = "remember wool";
+   : overlay "exclamation_mark_grey" x="163" y="35" experimental_command = "look wool";
+   : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "look lounge";
+   : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "look game";
+   : overlay "exclamation_mark_grey" x="162" y="67" experimental_command = "loook yard";
+   : overlay "exclamation_mark_grey" x="218" y="67" experimental_command = "look wool";
    : overlay "icon_cross" x="235" y="1" experimental_command = "exit";
    : overlay {
       graphic -> ("icon_cc")
