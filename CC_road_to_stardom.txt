@@ -138,6 +138,7 @@ booleans {
    is_sound_muted : boolean "true";
    music_ever_enabled : boolean "false";
    is_puzzle_wool_solved : boolean "false" ;
+   is_puzzle_7c_solved : boolean "false" ;
    can_create_june_e : boolean "false";
    is_seven_seas_crispy : boolean "true";
    is_wool_wheeled : boolean "true";
@@ -176,6 +177,10 @@ booleans {
    is_map_command : boolean "false";
    dream_cc_go_right : boolean "false";
    dream_cc_go_bottom : boolean "false";
+   has_seen_laptop_puzzle : boolean "false";
+   has_seen_wool_puzzle : boolean "false";
+   has_seen_rud_puzzle : boolean "false";
+   has_seen_7c_puzzle : boolean "false";
    
 }
 
@@ -468,7 +473,7 @@ barriers {
       from = living_room
       to = wools_wheels
       message  = Curiosity makes your mind more active and open to new ideas. That's why health professionals would recommend unlocking this computer for your personal growth.
-      block_when_not = is_laptop_unlocked
+      block_when_not = has_seen_laptop_puzzle
 
    }
 
@@ -476,7 +481,7 @@ barriers {
       from = wools_wheels
       to = party_planet
       message  = You should talk to Wool first, he spends way too much time alone, that's not healthy at all.
-      block_when_not = is_puzzle_wool_solved
+      block_when_not = has_seen_wool_puzzle
       show_blocked_exit = true
 
    }
@@ -494,7 +499,7 @@ barriers {
       from = party_planet
       to = crispy_garden
       message  = The yard is still chilly, let's stay here for a bit.
-      block_when = is_rud_sad
+      block_when -> (is_rud_sad || !is_puzzle_wool_solved || !is_laptop_unlocked)
       show_blocked_exit = true
 
    }
@@ -916,7 +921,7 @@ on_command {
          : set_false "is_using_map";
          : set_sentence "nothing";
          : set_true "is_map_command";
-         : update_graphic;
+         : redescribe;
       }
       : if (!is_map_command) {
          : print "I need to use <M<#cc0>> or <CLOSE<#cc0>> commands to close the map.";
@@ -1041,8 +1046,10 @@ on_command {
    : match "examine map; map _; use map; m _" {
    
       : if (is_carried "map") {
+            : clear_screen;
             : set_true "is_using_map";
             : update_graphic;
+            : print "Close the map with <M<#cc0>> or <CLOSE<#cc0>>.";
       /*
           : set_theme "theme_mono";
           : clear_screen;
@@ -1347,21 +1354,14 @@ on_command {
          : print "It probably shouldn't be moved." ;
       }
    }
-
-   : match "pigeon -"  {
-      : if (is_at "puzzle_florrie_laptop") {
-        : print "How can Florrie need clues to remember such an easy password??? " ;
-        : print "You wish you had never seen this... Florrie's browser history is nothing but..." ;
-        : print "PIGEONS!!!" ;
-        : print "Video \'TEQ Talk: Improve Office Efficiency\' shows a pigeon at a desk drinking a protein-packed cheese beverage, and then there's \'Learn Programming in Pyghon with E\'... " ;
-        : print "How can you compete? So unfair!!! You quickly lock the computer and swear not to touch it ever again." ;
-        : press_any_key;
-        : success ;
-        : set_true "is_laptop_unlocked" ;
-        : goto "living_room";
-        : redescribe;
+   : match "exit -"  {
+      : if (is_at "puzzle_florrie_laptop" || (is_present "rud_sad" && is_at "party_planet_inside") || is_at "puzzle_hat") {
+         : print "Come back and try to solve this puzzle whenever you want. Don't forget to use <HINT<#cc0>> if you are really stuck.";
+         : press_any_key ;
+         : goto "back";
+         : redescribe;
       }
-    }
+   }
 
     # : if (is_at "puzzle_florrie_laptop") {
     #  : if (!verb_is "pigeon" && !is_first_entered ()) {
@@ -1370,9 +1370,9 @@ on_command {
     #     }
     #  }
 
-    : match "unlock _"  {
+    : match "pigeon -; unlock _"  {
       : if (is_at "puzzle_florrie_laptop") {
-        : if (laptop_password == original "noun1") {
+        : if (laptop_password == original "noun1" || verb_is "pigeon") {
             : print "How can Florrie need clues to remember such an easy password??? " ;
             : print "You wish you had never seen this... Florrie's browser history is nothing but..." ;
             : print "PIGEONS!!!" ;
@@ -1471,21 +1471,9 @@ on_command {
       }
    }
 
-   :match "red -"  {
+   : match "red -; guess _"  {
       : if (is_at "puzzle_hat") {
-         : print "Wool says: \'Correct. The chicken's hat is red of course.";
-         : print "I can <EXPLAIN<#cc0>> if you want.\'";
-         : success ;
-         : set_true "is_puzzle_wool_solved";
-         : set_true "talked_to_mirror_and_solved_puzzles" ;
-         : print "Alright, maybe answering riddles is one way to become famous? You should try with someone else. Let's go.";
-         : goto "wools_wheels" ;
-      }
-   }
-
-   : match "guess _"  {
-      : if (is_at "puzzle_hat") {
-        : if (hat_color == original "noun1") {
+        : if (hat_color == original "noun1" || verb_is "red") {
             : print "Wool says: \'Correct. The chicken's hat is red of course.";
             : print "I can <EXPLAIN<#cc0>> if you want.\'";
             : success ;
@@ -1617,6 +1605,7 @@ on_command {
          : print "He takes a sip of energy drink." ;
          : print "Can you <ASSIST RuD<#cc0>> when you are ready?" ;
          : set_true "is_puzzle_rud_in_progress" ;
+         : set_true "has_seen_rud_puzzle" ;
          : press_any_key ;
          : redescribe ;
       }
@@ -1698,22 +1687,9 @@ on_command {
        }
    }
 
-      : match "c - ; cosmoogang - ; 3 - "  {
+   : match "c - ; cosmoogang - ; 3 - "  {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
-         : create "energy_drink";
-         : pocket "energy_drink";
-         : print "RuD rushes to play Cosmoogang. Looks like he will win his bet! He looks so happy now. " ;
-         : print "He takes a sip of energy drink." ;
-         : print "But he doesn't look too impressed by your deduction skills." ;
-         : print "He gives you a can of energy drink, as promised. " ;
-         : print "It's in your <INVENTORY<#cc0>>, you can <GIVE<#cc0>>, <USE<#cc0>> it." ;
-         : success ;
-         : set_false "is_rud_sad";
-         : set_false "is_puzzle_rud_in_progress" ;
-         : destroy "rud_sad";
-         : create "rud_happy";
-         : set_true "is_seven_seas_crispy" ;
-         : create "seven_seas" target = "crispy_garden" ;
+         : set_sentence "guess cosmoogang";
        }
    }
 
@@ -1734,6 +1710,7 @@ on_command {
              : create "rud_happy";
              : set_true "is_seven_seas_crispy" ;
              : create "seven_seas" target = "crispy_garden" ;
+
             }
             : else_if ((incorrect_game_1 == original "noun1") || "1" == original "noun1" || "a" == original "noun1") {
                 : print "You are about to suggest \'AKAFeather\', but notice a drawing pad is required to play. RuD excels with any controller... Except this one." ;
@@ -2005,6 +1982,7 @@ on_command {
 
    : match "talk seven ; talk -"  {
        : if (is_at "crispy_garden" && is_exists "seven_seas" && !is_puzzle_seven_seas_now && !can_leave_crispy_garden) {
+       
          : print "You ask SevenSeas about pigeons. She replies: \'Pigeons dominating online stardom? That does not coincide with the data I have!" ;
          : print "To become a successful online entertainer, one must upload regular content with professional editing, also find a unique style and niche audience, it's a lot of work!\'" ;
          : print "Hmm... You think she sounds really dull. By the way, who's the most famous star? Let's ask SevenSeas." ;
@@ -2013,6 +1991,7 @@ on_command {
          : print "Hmm... Maybe you should <TALK<#cc0>> to her again." ;
          : set_true "is_puzzle_seven_seas_now" ;
          : press_any_key ;
+         : set_true "has_seen_7c_puzzle";
          : redescribe ;
          }
          : if (is_at "crispy_garden" && is_exists "seven_seas" && is_puzzle_seven_seas_now) {
@@ -2098,6 +2077,7 @@ on_command {
          : set_true "is_june_in_living_room" ;
          : set_true "is_e_in_living_room" ;
          : set_false "is_puzzle_seven_seas_now" ;
+         : set_true "is_puzzle_7c_solved";
          : press_any_key ;
          : redescribe ;
        }
@@ -2784,16 +2764,33 @@ on_post_tick {
       : set_integer var = "cc_x" value = "-1";
       : set_integer var = "cc_y" value = "54";
    }
+   : if (is_at "puzzle_florrie_laptop") {
+      : set_true "has_seen_laptop_puzzle";
+   }
+   : if (is_at "puzzle_hat") {
+      : set_true "has_seen_wool_puzzle";
+   }
 }
 
 on_render {
  : if (is_using_map) {
    : overlay "new_map";
-   : overlay "exclamation_mark_grey" x="163" y="35" experimental_command = "look wool";
-   : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "look lounge";
-   : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "look game";
-   : overlay "exclamation_mark_grey" x="162" y="67" experimental_command = "look yard";
-   : overlay "exclamation_mark_grey" x="218" y="67" experimental_command = "look wool";
+   : if (!is_puzzle_wool_solved) {
+      : overlay (has_seen_wool_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="163" y="35" experimental_command = "look wool";
+   }
+   #: experimental_text_overlay text -> ("yoh"+has_seen_laptop_puzzle) x="20" y="20" ;
+   : if (!is_laptop_unlocked) {
+      : overlay (has_seen_laptop_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="225" y="35" experimental_command = "look lounge";
+   }
+   : if (is_puzzle_7c_solved && is_laptop_unlocked && is_exists "rud_happy" && is_puzzle_wool_solved) {
+      : overlay (has_seen_laptop_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="225" y="35" experimental_command = "look lounge";
+   }
+   : if (is_exists "rud_sad") {
+      : overlay (has_seen_rud_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="162" y="67" experimental_command = "look game";
+   }
+   : if (!is_puzzle_7c_solved) {
+      : overlay (has_seen_7c_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="218" y="67" experimental_command = "look yard";
+   }
    : overlay "icon_cross" x="235" y="1" experimental_command = "exit";
    : overlay {
       graphic -> ("icon_cc")
