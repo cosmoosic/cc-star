@@ -896,8 +896,8 @@ subroutines {
          : print "Lesson {dovalingo_lessons} - exercise 3";
          : gosub "dovalingo_do_exercice";
          : if (dovalingo_score > 1) {
+            : print ((chance(50) ? "Great" : "Well done")+", you finished lesson {dovalingo_lessons} by getting {dovalingo_score} correct answers.");
             : increment "dovalingo_lessons";
-            : print "Well done, you passed this lessons by getting {dovalingo_score} correct answers.";
          }
          : else {
             : print ("So sad, you failed the lesson with "+(dovalingo_score == 1 ? "only one" : "no") +" correct answer. But try again any time.");
@@ -916,8 +916,21 @@ subroutines {
       : iterate "dovalingo_choices" {
          : set_integer var="integer_tmp" (random(dovalingo_wordlist_size));
          : collection_modify { collection = "dovalingo_choices" index -> (index()) item -> (integer_tmp) }
-         
-         : add_choice text -> (first_cap(collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (integer_tmp)})) {
+      }
+      # remove duplicates
+      : collection_sort collection="dovalingo_choices" algorithm = "ascending" ;
+      : set_string var="string_tmp" value="";
+      : iterate "dovalingo_choices" {
+         : set_integer var="integer_tmp" (int(item()));
+            : if (string_tmp == item() || (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (integer_tmp)} == "") || (collection_get { collection -> ("dovalingo_"+dovalingo_src_lang) index -> (integer_tmp)} == "")) {
+               : collection_modify { collection -> ("dovalingo_choices") index -> (index()) item -> ("")}
+            } : else {
+               : set_string var="string_tmp" (item());
+            }
+      }
+      : collection_sort collection="dovalingo_choices" algorithm = "shuffle" ;
+      : iterate "dovalingo_choices" filter -> (item() != "") {
+         : add_choice text -> (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (int(item()))}) {
             : if (chosen() == dova_word_to_find) {
                : print ("You have made the correct choice, it is <"+first_cap(chosen())+"<#ee0>>!");
                : increment "dovalingo_score"; 
@@ -927,26 +940,16 @@ subroutines {
                : gosub "update_volume";
             }
             : else {
-               : print ("Oh, you made an error, the correct choice was <"+first_cap(chosen())+"<#ee0>>.");
+               : print ("Oh, you made an error, the correct choice was <"+dova_word_to_find+"<#ee0>>.");
                : set_music_vol volume="1";
                : failure;
                : pause "500";
                : gosub "update_volume";
             }
          }
+         : set_integer var="integer_tmp" value -> (int(item()));
       }
-      : set_integer var="integer_tmp" value -> (int(dovalingo_choices[0]));
       : set_string var="dova_word_to_find" (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (integer_tmp)});
-      # remove duplicates
-      : collection_sort collection="dovalingo_choices" algorithm = "ascending" ;
-      : set_string var="string_tmp" value="";
-      : iterate "dovalingo_choices" {
-            : if (string_tmp == item()) {
-               : collection_remove { collection -> ("dovalingo_choices") index -> (index()) }
-            } : else {
-               : set_string var="string_tmp" (item());
-            }
-      }
       : set_string var="string_tmp" ("What is « <"+first_cap(collection_get { collection -> ("dovalingo_"+dovalingo_src_lang) index -> (integer_tmp)})+" <#ee0>>» from "+dovalingo_src_lang+" to "+dovalingo_dst_lang+"?");
       : choose question="{string_tmp}" hint="numeric_list_always" columns = "3"  order = "random";
    }
@@ -971,6 +974,9 @@ on_describe {
    }
   : if (is_at "puzzle_labyrinth" ) {
        : set_true "in_labyrinth";
+       : set_integer var = "labyrinth_position_x"  value = "0" ;
+       : set_integer var = "labyrinth_position_y"  value = "-13" ;
+       : update_graphic;
        : press_any_key;
        : goto "labyrinth_1_1";
        : redescribe;
@@ -1048,19 +1054,19 @@ on_command {
    : if (is_using_map) {
       : set_false "is_map_command";
       : match "look wool" {
-         : print "We should solve wool's issue";
+         : print "We should solve Wool's issue.";
          : set_true "is_map_command";
       }
       : match "look lounge" {
-         : print "We should solve lounge's issue";
+         : print "We should solve the laptop's issue.";
          : set_true "is_map_command";
       }
       : match "look game" {
-         : print "We should solve lounge's issue";
+         : print "We should go see RuD's issue.";
          : set_true "is_map_command";
       }
       : match "look yard" {
-         : print "We should solve yard's issue";
+         : print "We should solve 7C's issue.";
          : set_true "is_map_command";
       }
       : match "exit -; leave -; return -; close -; m -; map -; use map; examine map; c -" {
@@ -3113,4 +3119,4 @@ assets {
       icon_cc: png "https://cosmoose.org/adventuron_april_2022/Images/icon_cc.png";
       icon_cross: png "https://cosmoose.org/adventuron_april_2022/Images/icon_cross.png";
    }
-} 
+}
