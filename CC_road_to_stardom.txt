@@ -211,15 +211,19 @@ integers {
       dovalingo_lessons < 21 ? 70 :
       dovalingo_lessons < 70 ? 210 :
       count "dovalingo_english");
+   dova_word_index_to_find : integer "0";
       
 }
 
 collections {
    dovalingo_langs : list {
-      items = ["english", "french", "german", "dutch", "korean", "walloon", "chinese"]
+      items = ["english", "french", "german", "dutch", "korean", "chinese", "walloon"]
    }
    dovalingo_choices : list {
       items = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+   }
+   dovalingo_wrong_choices : list {
+      items = [];
    }
        dovalingo_english : list {
         items = ["Pigeon", "Time", "Way", "Year", "Work", "Government", "Day", "Man", "World", "Life", "Part", "House", "Course", "Case", "System", "Place", "End", "Group", "Company", "Party", "Information", "School", "Fact", "Money", "Point", "Example", "State", "Business", "Night", "Area", "Water", "Thing", "Family", "Head", "Hand", "Order", "Side", "Home", "Development", "Week", "Power", "Country", "Council", "Use", "Service", "Room", "Market", "Problem", "Court", "Lot", "A", "War", "Police", "Interest", "Car", "Law", "Road", "Form", "Face", "Education", "Policy", "Research", "Sort", "Office", "Body", "Person", "Health", "Mother", "Question", "Period", "Name", "Book", "Level", "Child", "Control", "Society", "Minister", "View", "Door", "Line", "Community", "South", "City", "God", "Father", "Centre", "Effect", "Staff", "Position", "Kind", "Job", "Woman", "Action", "Management", "Act", "Process", "North", "Age", "Evidence", "Idea", "West", "Support", "Moment", "Sense", "Report", "Mind", "Church", "Morning", "Death", "Change", "Industry", "Land", "Care", "Century", "Range", "Table", "Back", "Trade", "History", "Study", "Street", "Committee", "Rate", "Word", "Food", "Language", "Experience", "Result", "Team", "Other", "Sir", "Section", "Programme", "Air", "Authority", "Role", "Reason", "Price", "Town", "Class", "Nature", "Subject", "Department", "Union", "Bank", "Member", "Value", "Need", "East", "Practice", "Type", "Paper", "Date", "Decision", "Figure", "Right", "Wife", "President", "University", "Friend", "Club", "Quality", "Voice", "Lord", "Stage", "King", "Us", "Situation", "Light", "Tax", "Production", "March", "Secretary", "Art", "Board", "May", "Hospital", "Month", "Music", "Cost", "Field", "Award", "Issue", "Bed", "Project", "Chapter", "Girl", "Game", "Amount", "Basis", "Knowledge", "Approach", "Series", "Love", "Top", "News", "Front", "Future", "Manager", "Account", "Computer", "Security", "Rest", "Labour", "Structure", "Hair", "Bill", "Heart", "Force", "Attention", "Movement", "Success", "Letter", "Agreement", "Capital", "Analysis", "Population", "Environment", "Performance", "Model", "Material", "Theory", "Growth", "Fire", "Chance", "Boy", "Relationship", "Son", "Sea", "Record", "Size", "Property", "Space", "Term", "Director", "Plan", "Behaviour", "Treatment", "Energy", "Income", "Cup", "Scheme", "Design", "Response", "Association", "Choice", "Pressure", "Hall", "Couple", "Technology", "Defence", "List", "Chairman", "Loss", "Activity", "Contract", "County", "Wall", "Difference", "Army", "Hotel", "Sun", "Product", "Summer", "Set", "Village", "Colour", "Floor", "Season", "Unit", "Park", "Hour", "Investment", "Test", "Garden", "Husband", "Employment", "Style", "Science", "Look", "Deal", "Charge", "Help", "Economy", "New", "Page", "Risk", "Advice", "Event", "Picture", "Commission", "Fish", "College", "Oil", "Doctor", "Opportunity", "Film", "Conference", "Operation", "Application", "Press", "Extent", "Addition", "Station", "Window", "Shop", "Access", "Region", "Doubt", "Majority", "Degree", "Television", "Blood", "Statement", "Sound", "Election", "Parliament", "Site", "Mark", "Importance", "Title", "Species", "Increase", "Return", "Concern", "Public", "Competition", "Software", "Glass", "Lady", "Answer", "Earth", "Daughter", "Purpose", "Responsibility", "Leader", "River", "Eye", "Ability", "Appeal", "Opposition", "Campaign", "Respect", "Task", "Instance", "Sale", "Whole", "Officer", "Method", "Division", "Source", "Piece", "Pattern", "Lack", "Disease", "Equipment", "Surface", "Demand", "Post", "Mouth", "Radio", "Provision", "Attempt", "Sector", "Firm", "Status", "Peace", "Variety", "Teacher", "Show", "Speaker", "Baby", "Arm", "Base", "Miss", "Safety", "Trouble", "Culture", "Direction", "Context", "Character", "Box", "Discussion", "Past", "Weight", "Start", "Brother", "League", "Condition", "Machine", "Argument", "Sex", "Budget", "English", "Transport", "Share", "Mum", "Cash", "Principle", "Exchange", "Aid", "Library", "Version", "Rule", "Tea", "Balance", "Afternoon", "Reference", "Protection", "Truth", "District", "Turn", "Smith", "Review", "Minute", "Duty", "Survey", "Presence", "Influence", "Stone", "Dog", "Benefit", "Collection", "Executive", "Speech", "Function", "Queen", "Marriage", "Stock", "Failure", "Kitchen", "Student", "Effort", "Holiday", "Career", "Attack", "Length", "Horse", "Progress", "Plant", "Visit", "Relation", "Ball", "Memory", "Bar", "Opinion", "Quarter", "Impact", "Scale", "Race", "Image", "Trust", "Justice", "Edge", "Gas", "Railway", "Expression", "Advantage", "Gold", "Wood", "Network", "Text", "Forest", "Sister", "Chair", "Cause", "Foot", "Rise", "Half", "Winter", "Corner", "Insurance", "Step", "Damage", "Credit", "Pain", "Possibility", "Legislation", "Strength", "Speed", "Crime", "Hill", "Debate", "Will", "Supply", "Present", "Confidence", "Patient", "Wind", "Solution", "Band", "Museum", "Farm", "Pound", "Match", "Assessment", "Message", "Football", "No", "Animal", "Skin", "Scene", "Article", "Stuff", "Introduction", "Play", "Administration", "Fear", "Dad", "Proportion", "Island", "Contact", "Japan", "Claim", "Kingdom", "Video", "Tv", "Existence", "Telephone", "Move", "Traffic", "Distance", "Relief", "Cabinet", "Unemployment", "Reality", "Target", "Trial", "Rock", "Concept", "Spirit", "Accident", "Organization", "Construction", "Coffee", "Phone", "Distribution", "Train", "Sight", "Difficulty", "Factor", "Exercise", "Weekend", "Battle", "Prison", "Grant", "Aircraft", "Tree", "Bridge", "Strategy", "Contrast", "Communication", "Background", "Shape", "Wine", "Star", "Hope", "Selection", "Detail", "User", "Path", "Client", "Search", "Master", "Rain", "Offer", "Goal", "Dinner", "Freedom", "Attitude", "While", "Agency", "Seat", "Manner", "Favour", "Pair", "Crisis", "Smile", "Prince", "Danger", "Call", "Capacity", "Output", "Note", "Procedure", "Theatre", "Tour", "Recognition", "Middle", "Absence", "Sentence", "Package", "Track", "Card", "Sign", "Commitment", "Player", "Threat", "Weather", "Element", "Conflict", "Notice", "Victory", "Bottom", "Finance", "Fund", "Violence", "File", "Profit", "Standard", "Jack", "Route", "China", "Expenditure", "Second", "Discipline", "Cell", "Reaction", "Castle", "Congress", "Individual", "Lead", "Consideration", "Debt", "Option", "Payment", "Exhibition", "Reform", "Emphasis", "Spring", "Audience", "Feature", "Touch", "Estate", "Assembly", "Volume", "Youth", "Contribution", "Curriculum", "Appearance", "Martin", "Boat", "Institute", "Membership", "Branch", "Bus", "Waste", "Heat", "Neck", "Object", "Captain", "Driver", "Challenge", "Conversation", "Occasion", "Code", "Crown", "Birth", "Silence", "Literature", "Faith", "Hell", "Entry", "Transfer", "Gentleman", "Bag", "Coal", "Investigation", "Leg", "Belief", "Total", "Major", "Document", "Description", "Murder", "Aim", "Flight", "Conclusion", "Drug", "Tradition", "Pleasure", "Connection", "Owner", "Treaty", "Desire", "Professor", "Copy", "Ministry", "Acid", "Palace", "Address", "Institution", "Lunch", "Generation", "Partner", "Engine", "Newspaper", "Cross", "Reduction", "Welfare"]
@@ -866,7 +870,8 @@ subroutines {
             : set_string var="dovalingo_src_lang" (dovalingo_dst_lang);
             : set_string var="dovalingo_dst_lang" (string_tmp);
          }
-         : add_choice "Change lang?" {
+         : add_choice "Change languages?" {
+            : clear "dovalingo_wrong_choices";
             : set_string var="dovalingo_src_lang" value="";
          }
          : add_choice "Quit?" {
@@ -918,10 +923,19 @@ subroutines {
    }
    
    dovalingo_do_exercice :  subroutine {
+      : set_integer var="dova_word_index_to_find" value="-1";
       : iterate "dovalingo_choices" {
          : set_integer var="integer_tmp" (random(dovalingo_wordlist_size));
          : collection_modify { collection = "dovalingo_choices" index -> (index()) item -> (integer_tmp) }
+         # 13% of chance to get a word to find that was wrong before (1 - 0.98**8/1**8)
+         : if (count "dovalingo_wrong_choices" > 0 && chance(2) && dova_word_index_to_find == -1) {
+            : collection_sort collection="dovalingo_wrong_choices" algorithm = "shuffle" ;
+            : collection_pop  collection = "dovalingo_wrong_choices" var = "string_tmp";
+            : set_integer var="dova_word_index_to_find" (int(string_tmp));
+            : collection_modify { collection -> ("dovalingo_choices") index -> (0) item -> (dova_word_index_to_find)}
+         }
       }
+      : print (dova_word_index_to_find);
       # remove duplicates
       : collection_sort collection="dovalingo_choices" algorithm = "ascending" ;
       : set_string var="string_tmp" value="";
@@ -945,6 +959,7 @@ subroutines {
                : gosub "update_volume";
             }
             : else {
+               : collection_push { collection = "dovalingo_wrong_choices" item -> (dova_word_index_to_find ) }
                : print ("Oh, you made an error, the correct choice was <"+dova_word_to_find+"<#ee0>>.");
                : set_music_vol volume="1";
                : failure;
@@ -952,10 +967,13 @@ subroutines {
                : gosub "update_volume";
             }
          }
-         : set_integer var="integer_tmp" value -> (int(item()));
+         : if (dova_word_index_to_find == -1) {
+            : set_integer var="dova_word_index_to_find" value -> (int(item()));
+         }
       }
-      : set_string var="dova_word_to_find" (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (integer_tmp)});
-      : set_string var="string_tmp" ("What is « <"+first_cap(collection_get { collection -> ("dovalingo_"+dovalingo_src_lang) index -> (integer_tmp)})+" <#ee0>>» from "+dovalingo_src_lang+" to "+dovalingo_dst_lang+"?");
+      : print (dova_word_index_to_find);
+      : set_string var="dova_word_to_find" (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (dova_word_index_to_find)});
+      : set_string var="string_tmp" ("What is « <"+first_cap(collection_get { collection -> ("dovalingo_"+dovalingo_src_lang) index -> (dova_word_index_to_find)})+" <#ee0>>» from "+dovalingo_src_lang+" to "+dovalingo_dst_lang+"?");
       : choose question="{string_tmp}" hint="numeric_list_always" columns = "3"  order = "random";
    }
 }
