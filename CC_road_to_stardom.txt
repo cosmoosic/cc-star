@@ -69,6 +69,10 @@ vocabulary {
    : verb / aliases = [ring,strike]
    : verb / aliases = [move, go]
    : verb / aliases = [pigeon]
+   : verb / aliases = [east, right]
+   : verb / aliases = [west, left]
+   : verb / aliases = [north, top]
+   : verb / aliases = [south, bottom]
    : verb / aliases = [red]
    : verb / aliases = [cosmoogang]
    : verb / aliases = [opensourcenow]
@@ -170,6 +174,9 @@ booleans {
    seen_inventory_tuto : boolean "false";
    tuto_used_map : boolean "false";
    is_map_command : boolean "false";
+   dream_cc_go_right : boolean "false";
+   dream_cc_go_bottom : boolean "false";
+   
 }
 
 integers {
@@ -183,7 +190,10 @@ integers {
    integer_tmp : integer "0";
    cc_x : integer "0";
    cc_y : integer "0";
+   dream_cc_x : integer "0";
+   dream_cc_y : integer "0";
    current_volume_index : integer "-1";
+   tuto_directions : integer "0";
 }
 
 collections {
@@ -340,7 +350,7 @@ locations {
    labyrinth_5_4: location "We're so close, yet so far!";
    labyrinth_5_5: location "You made it! Congratulations!";
    labyrinth_ship_destroyed: location "Oh no, we got in front of the cannon's lines of fire! Oops!\nTry again with <RETRY<#cc0>>, return to the living room with <EXIT<#cc0>>.";
-   dream : location (!is_carried "map" ? "You are learning how to play, to skip type <WAKE UP<#cc0>> to wake up." : !seen_inventory_tuto ? "You can check all objects you have by typing <INVENTORY<#cc0>> (then pressing Enter)." : !tuto_used_map ? "You got a map, you can use it with <USE map<#cc0>>." : "Last step, to get a list of available commands type <HELP<#cc0>> then press Enter.");
+   dream : location (!is_carried "map" ? "You are learning how to play, to skip type <WAKE UP<#cc0>> to wake up." : !seen_inventory_tuto ? "You can check all objects you have by typing <INVENTORY<#cc0>> (then pressing Enter)." : !tuto_used_map ? "You got a map, you can use it with <USE map<#cc0>>." : tuto_directions < 4 ? "During the game, you will be in room and have to navigate between room by entering directions such as <North<#cc0>>, <South<#cc0>>, <West<#cc0>>, <East<#cc0>>.\nTry it now "+(tuto_directions == 0 ? "several" : (4 - tuto_directions)+" more" )+" times and see how CC will go in the direction you commanded." : "Last step, to get a list of available commands type <HELP<#cc0>> then press Enter.");
 }
 
 ######################################
@@ -874,12 +884,12 @@ on_command {
    # use click as look->get->use command
    : match "click map" {
       : if (is_present "map" && !is_carried "map" && previous_command == sentence_raw()) {
-         : print "You get the map (you could have done <get map<#cc0>>).";
+         : print "You get the map (you could have done that with <get map<#cc0>>).";
          : set_sentence "get map";
       }
       : else_if (is_present "map" && !is_carried "map") {
          : set_string var="previous_command" (sentence_raw());
-         : print "You look at the map (you could have done <look map<#cc0>>).";
+         : print "You look at the map (you could have done that with <look map<#cc0>>).";
          : set_sentence "look map";
       }
    }
@@ -1050,7 +1060,7 @@ on_command {
           : redescribe;
           */
           : if (is_at "dream") {
-            : print "Well done! <Use the map<#cc0>> any time you are lost! (then close it with <close<#cc0>>)";
+            : print "Well done! <Use the map<#cc0>> any time you are lost! (then close it with <close<#cc0>> or clicking on red cross in top-right)";
           }
       }
       : else_if (is_present "map") {
@@ -2459,6 +2469,7 @@ on_command {
             : print "Well done! I'm waking up! Let's start the day, and don't forget to use <HELP<#cc0>> or <MAP<#cc0>> if you are stuck.";
             : press_any_key;
             : goto "cc_room";
+            : gosub "play_music";
        }
    }
 
@@ -2632,10 +2643,41 @@ on_command {
          : else_if (!noun1_is "map" && !is_carried "map" && !noun1_is "sign") {
          }
       }
+      : match "look inventory" {
+         : set_sentence "inventory";
+      }
       : match "inventory _" {
          : mask {
             : set_true "seen_inventory_tuto";
          }
+      }
+      : if (is_movement_command() && verb_is "north") {
+         : set_integer var="dream_cc_y" (dream_cc_y - 20);
+         : set_false "dream_cc_go_bottom";
+         : update_graphic;
+         : increment "tuto_directions";
+         : print ("Well done going <"+ original "verb" + "<#cc0>>, in the game you would have gone to the room to the top."+(tuto_directions < 4 ? " Move "+(4 - tuto_directions)+" more time" +(tuto_directions < 3 ? "s" : "") + "." : ""));
+      }
+      : if (is_movement_command() && verb_is "south") {
+         : set_integer var="dream_cc_y" (dream_cc_y + 20);
+         : set_true "dream_cc_go_bottom";
+         : update_graphic;
+         : increment "tuto_directions";
+         : print ("Well done going <"+ original "verb" + "<#cc0>>, in the game you would have gone to the room to the bottom."+(tuto_directions < 4 ? " Move "+(4 - tuto_directions)+" more time" +(tuto_directions < 3 ? "s" : "") + "." : ""));
+      }
+      : if (is_movement_command() && verb_is "west") {
+         : set_integer var="dream_cc_x" (dream_cc_x - 32);
+         : set_true "dream_cc_go_right";
+         : update_graphic;
+         : increment "tuto_directions";
+         : print ("Well done going <"+ original "verb" + "<#cc0>>, in the game you would have gone to the room to the right."+(tuto_directions < 4 ? " Move "+(4 - tuto_directions)+" more time" +(tuto_directions < 3 ? "s" : "") + "." : ""));
+      }
+      : if (is_movement_command() && verb_is "east") {
+         : set_integer var="dream_cc_x" (dream_cc_x + 32);
+         : set_false "dream_cc_go_right";
+         : update_graphic;
+         : increment "tuto_directions";
+         : print ("Well done going <"+ original "verb" + "<#cc0>>, in the game you would have gone to the room to the left."+(tuto_directions < 4 ? " Move "+(4 - tuto_directions)+" more time" +(tuto_directions < 3 ? "s" : "") + "." : ""));
       }
    }
    
@@ -2870,9 +2912,14 @@ assets {
          };
 
       dream: png "https://cosmoose.org/adventuron_april_2022/Images/dream.png" {
-         : overlay "dream_cc";
          : if (is_present "stars" && !is_carried "stars") {
             : overlay "dream_stars";
+         }
+         : overlay "dream_cc" {
+            x -> (dream_cc_x)
+            y -> (dream_cc_y)
+            flip_x -> (dream_cc_go_right)
+            flip_y -> (dream_cc_go_bottom)
          }
          : if (dream_look_map && !is_carried "map") {
             : overlay "map_object" x = "30" y = "20";
@@ -2882,7 +2929,7 @@ assets {
       };
       // test for text overlay but not great yet
       /*
-      dream: png "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"  ><g><text >Hello World!</text></g></svg>";
+      dream: png "data:image/svg+xml;utf8,<svg xmalns=\"http://www.w3.org/2000/svg\"  ><g><text >Hello World!</text></g></svg>";
       */
       dream_cc: png "https://cosmoose.org/adventuron_april_2022/Images/dream_cc.png";
       dream_stars: png "https://cosmoose.org/adventuron_april_2022/Images/dream_stars.png";
