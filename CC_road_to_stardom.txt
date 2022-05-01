@@ -44,6 +44,8 @@ game_settings {
    auto_ask_sound_permissions = false
    enable_standard_all_behaviour = false
    precache_strategy = precache_all
+   experimental_anim   = wait
+   rewind_enabled   = true
 }
 
 
@@ -56,6 +58,7 @@ start_at = dream
 vocabulary {
    : verb / aliases = [examine, check, regarde, touch, look, see]
    : verb / aliases = [give, show]
+   : verb / aliases = [undo, ctr]
    : verb / aliases = [up, upstair, upstairs]
    : verb / aliases = [down, downstair, downstairs]
    : verb / aliases = [talk, say, speak, tell, ask, wave, discuss, chat, t]
@@ -208,8 +211,8 @@ integers {
    dovalingo_score : integer "0";
    dovalingo_wordlist_size : dynamic_integer (
       dovalingo_lessons < 7 ? 21 :
-      dovalingo_lessons < 21 ? 70 :
-      dovalingo_lessons < 70 ? 210 :
+      dovalingo_lessons < 14 ? 70 :
+      dovalingo_lessons < 42 ? 210 :
       count "dovalingo_english");
    dova_word_index_to_find : integer "0";
       
@@ -927,7 +930,7 @@ subroutines {
       : iterate "dovalingo_choices" {
          : set_integer var="integer_tmp" (random(dovalingo_wordlist_size));
          : collection_modify { collection = "dovalingo_choices" index -> (index()) item -> (integer_tmp) }
-         # 13% of chance to get a word to find that was wrong before (1 - 0.98**8/1**8)
+         # 13% of chance to get a word that was wrong before (1 - 0.98**8/1**8)
          : if (count "dovalingo_wrong_choices" > 0 && chance(2) && dova_word_index_to_find == -1) {
             : collection_sort collection="dovalingo_wrong_choices" algorithm = "shuffle" ;
             : collection_pop  collection = "dovalingo_wrong_choices" var = "string_tmp";
@@ -935,7 +938,6 @@ subroutines {
             : collection_modify { collection -> ("dovalingo_choices") index -> (0) item -> (dova_word_index_to_find)}
          }
       }
-      : print (dova_word_index_to_find);
       # remove duplicates
       : collection_sort collection="dovalingo_choices" algorithm = "ascending" ;
       : set_string var="string_tmp" value="";
@@ -971,7 +973,6 @@ subroutines {
             : set_integer var="dova_word_index_to_find" value -> (int(item()));
          }
       }
-      : print (dova_word_index_to_find);
       : set_string var="dova_word_to_find" (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (dova_word_index_to_find)});
       : set_string var="string_tmp" ("What is « <"+first_cap(collection_get { collection -> ("dovalingo_"+dovalingo_src_lang) index -> (dova_word_index_to_find)})+" <#ee0>>» from "+dovalingo_src_lang+" to "+dovalingo_dst_lang+"?");
       : choose question="{string_tmp}" hint="numeric_list_always" columns = "3"  order = "random";
