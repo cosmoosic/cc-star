@@ -1,0 +1,701 @@
+english,french,german,dutch,walloon,korean,chinese
+Pigeon,Pigeon,Taube,Duif,Colon,비둘기 / Bidulgi,鸽子 / Gēzi
+Time,Temps,Zeit,Tijd,Fèye,시각 / Sigag,时间 / Shíjiān
+Way,Chemin,Weg,Manier,Vôye,방법 / Bangbeob,方式 / Fāngshì
+Year,An,Jahr,Jaar,An,년도 / Nyeondo,年 / Nián
+Work,Travail,Arbeit,Het werk,Ovrer,일하다 / Ilhada,工作 / Gōngzuò
+Government,Gouvernement,Regierung,Regering,Gouvèrnèmint,정부 / Jeongbu,政府 / Zhèngfǔ
+Day,Journée,Tag,Dag,Djoûrnêye,낮 / Naj,天 / Tiān
+Man,Homme,Mann,Mens,Ome,남성 / Namseong,男人 / Nánrén
+World,Monde,Welt,Wereld-,Monde,세계 / Segye,世界 / Shìjiè
+Life,Vie,Leben,Leven,Vèye,삶 / Salm,生活 / Shēnghuó
+Part,Partie,Teil,Deel,Pårt,부분 / Bubun,部分 / Bùfèn
+House,Maison,Haus,Huis,Barake,집 / Jib,房子 / Fángzi
+Course,Cours,Kurs,Cursus,Scole,강의 / Gang-ui,课程 / Kèchéng
+Case,Cas,Fall,Geval,Cas,사례 / Salye,案子 / Ànzi
+System,Système,System,Systeem,Sistinme,체계 / Chegye,系统 / Xìtǒng
+Place,Lieu,Ort,Plaats,Plèce,장소 / Jangso,地方 / Dìfāng
+End,Finir,Ende,Einde,Fini,끝 / Kkeut,结尾 / Jiéwěi
+Group,Grouper,Gruppe,Groep,Èsson.ne,그룹 / Geulub,团体 / Tuántǐ
+Company,Société,Unternehmen,Bedrijf,Kipagnêye,회사 / Hoesa,公司 / Gōngsī
+Party,Faire la fête,Party,Partij,Fièsse,파티 / Pati,聚会 / Jùhuì
+Information,Information,Information,Informatie,Infôrmåcion,정보 / Jeongbo,信息 / Xìnxī
+School,École,Schule,School,Scole,학교 / Haggyo,学校 / Xuéxiào
+Fact,Fait,Tatsache,Feit,Fêt,사실 / Sasil,事实 / Shìshí
+Money,L'argent,Geld,Geld,Manôye,돈 / Don,钱 / Qián
+Point,Point,Punkt,Punt,Pont,가리키다 / Galikida,观点 / Guāndiǎn
+Example,Exemple,Beispiel,Voorbeeld,Ègzimpe,예시 / Yesi,例子 / Lìzi
+State,Etat,Zustand,Staat,Acèrtiner,상태 / Sangtae,状态 / Zhuàngtài
+Business,Affaires,Geschäft,Bedrijf,Afêre,사업 / Sa-eob,商业 / Shāngyè
+Night,Nuit,Nacht,Nacht,Al-nut',밤 / Bam,夜晚 / Yèwǎn
+Area,Région,Bereich,Oppervlakte,Redjon,영역 / Yeong-yeog,区域 / Qūyù
+Water,Eau,Wasser,Water,Êwe,물 / Mul,水 / Shuǐ
+Thing,Chose,Sache,Ding,Tchwè,물건 / Mulgeon,事物 / Shìwù
+Family,Famille,Familie,Familie,Famile,가족 / Gajog,家庭 / Jiātíng
+Head,Tête,Kopf,Hoofd,Tièsse,머리 / Meoli,头 / Tóu
+Hand,Main,Hand,Hand,Rimète,손 / Son,手 / Shǒu
+Order,Commande,Befehl,Volgorde,Ôr,주문하다 / Jumunhada,命令 / Mìnglìng
+Side,Côté,Seite,Kant,Pårti,옆 / Yeop,边 / Biān
+Home,Domicile,Heimat,Thuis,Famile,집 / Jib,家 / Jiā
+Development,Développement,Entwicklung,Ontwikkeling,,개발 / Gaebal,发展 / Fāzhǎn
+Week,Semaine,Woche,Week,Saminne,주 / Ju,星期 / Xīngqí
+Power,Puissance,Energie,Stroom,Pwissance,힘 / Him,力量 / Lìliàng
+Country,Pays,Land,Land,Payis,국가 / Gugga,国家 / Guójiā
+Council,Conseil,Rat,Raad,Consèy,이사회 / Isahoe,理事会 / Lǐshì huì
+Use,Utiliser,Benutzen,Gebruik,Si sièrvu di,사용 / Sayong,采用 / Cǎiyòng
+Service,Service,Service,Onderhoud,Chèrvice,서비스 / Seobiseu,服务 / Fúwù
+Room,Salle,Zimmer,Kamer,Plaece,방 / Bang,房间 / Fángjiān
+Market,Marché,Markt,Markt,Fôre,시장 / Sijang,市场 / Shìchǎng
+Problem,Problème,Problem,Probleem,Problème,문제 / Munje,问题 / Wèntí
+Court,Tribunal,Gericht,Rechtbank,Tribunål,법원 / Beob-won,法庭 / Fǎtíng
+Lot,Terrain,Viel,Kavel,Tèrin,많은 / Manh-eun,很多 / Hěnduō
+A,Un,Ein,Een,In,ㅏ / A,一种 / Yī zhǒng
+War,Guerre,Krieg,Oorlog,Guêre,전쟁 / Jeonjaeng,战争 / Zhànzhēng
+Police,Police,Polizei,Politie,Jandarmèrèye,경찰 / Gyeongchal,警察 / Jǐngchá
+Interest,Intérêt,Interesse,Interesse,Intèrèt,관심 / Gwansim,兴趣 / Xìngqù
+Car,Auto,Wagen,Auto,Tchår,차 / Cha,车 / Chē
+Law,Droit,Gesetz,Wet,Dreût,법 / Beob,法律 / Fǎlǜ
+Road,Route,Straße,Weg,Vôye,도로 / Dolo,路 / Lù
+Form,Formulaire,Form,Formulier,,형태 / Hyeongtae,形式 / Xíngshì
+Face,Visage,Gesicht,Gezicht,Afronter,얼굴 / Eolgul,脸 / Liǎn
+Education,Éducation,Bildung,Opleiding,Éducåtion,교육 / Gyoyug,教育 / Jiàoyù
+Policy,Politique,Politik,Het beleid,Politike,정책 / Jeongchaeg,政策 / Zhèngcè
+Research,Rechercher,Forschung,Onderzoek,Ricwèrèdje,연구 / Yeongu,研究 / Yánjiū
+Sort,Trier,Sortieren,Soort,Triyî,종류 / Jonglyu,种类 / Zhǒnglèi
+Office,Bureau,Sekretariat,Kantoor,Burô,사무실 / Samusil,办公室 / Bàngōngshì
+Body,Corps,Karosserie,Lichaam,Cwér,신체 / Sinche,身体 / Shēntǐ
+Person,Personne,Person,Persoon,Pèrsone,사람 / Salam,人 / Rén
+Health,Santé,Gesundheit,Gezondheid,Santé,건강 / Geongang,健康 / Jiànkāng
+Mother,Mère,Mutter,Moeder,Mére,어머니 / Eomeoni,母亲 / Mǔqīn
+Question,Question,Frage,Vraag,Kèstion,문제 / Munje,问题 / Wèntí
+Period,Période,Zeitraum,Punt uit,Trèvint,기간 / Gigan,时期 / Shíqí
+Name,Nom,Name,Naam,Nom,이름 / Ileum,姓名 / Xìngmíng
+Book,Livre,Buchen,Boek,Lîve,도서 / Doseo,书 / Shū
+Level,Niveau,Stufe,Peil,Lèvê,수준 / Sujun,等级 / Děngjí
+Child,Enfant,Kind,Kind,Tètåde,어린이 / Eolin-i,孩子 / Háizi
+Control,Contrôler,Steuerung,Controle,Controler,제어 / Jeeo,控制 / Kòngzhì
+Society,Société,Gesellschaft,Samenleving,Sôcièté,사회 / Sahoe,社会 / Shèhuì
+Minister,Ministre,Minister,Minister,Minisse,장관 / Jang-gwan,部长 / Bùzhǎng
+View,Vue,Aussicht,Weergave,Vuwe,보다 / Boda,看法 / Kànfǎ
+Door,Porte,Tür,Deur-,Ouf,문 / Mun,门 / Mén
+Line,Ligne,Linie,Lijn,Rôye,라인 / Lain,线 / Xiàn
+Community,Communauté,Gemeinschaft,Gemeenschap,Comeune,지역 사회 / Jiyeog sahoe,社区 / Shèqū
+South,Sud,Süden,Zuiden,Sûd,남쪽 / Namjjog,南 / Nán
+City,Ville,Stadt,Stad,Vèye,도시 / Dosi,城市 / Chéngshì
+God,Dieu,Gott,God,Bon diu,하느님 / Haneunim,上帝 / Shàngdì
+Father,Père,Vater,Vader,Pére,아버지 / Abeoji,父亲 / Fùqīn
+Centre,Centre,Center,Centrum,Mitan,센터 / Senteo,中心 / Zhōngxīn
+Effect,Effet,Wirkung,Effect,Èfèt,효과 / Hyogwa,影响 / Yǐngxiǎng
+Staff,Personnel,Mitarbeiter,Personeel,Pèrsonél,직원 / Jig-won,职员 / Zhíyuán
+Position,Position,Position,Positie,Pôchon,위치 / Wichi,位置 / Wèizhì
+Kind,Type,Nett,Vriendelijk,Sôr,친절한 / Chinjeolhan,种类 / Zhǒnglèi
+Job,Travail,Arbeit,Functie,Ovrèdje,직업 / Jig-eob,工作 / Gōngzuò
+Woman,Femme,Frau,Vrouw,Feume,여성 / Yeoseong,女士 / Nǚshì
+Action,Action,Handlung,Actie,Ac',행동 / Haengdong,行动 / Xíngdòng
+Management,Management,Management,Beheer,Administråchon,관리 / Gwanli,管理 / Guǎnlǐ
+Act,Agir,Handlung,Handelen,Adji,행동 / Haengdong,行为 / Xíngwéi
+Process,Processus,Prozess,Verwerken,Trêtî,프로세스 / Peuloseseu,过程 / Guòchéng
+North,Nord,Norden,Noorden,Nôrd,북쪽 / Bugjjog,北 / Běi
+Age,Âge,Alter,Leeftijd,Viyî,나이 / Nai,年龄 / Niánlíng
+Evidence,Preuve,Beweis,Bewijs,Sène,증거 / Jeung-geo,证据 / Zhèngjù
+Idea,Idée,Idee,Idee,Îdèye,아이디어 / Aidieo,主意 / Zhǔyì
+West,Ouest,Westen,West,Ouwèss,서쪽 / Seojjog,西方 / Xīfāng
+Support,Support,Unterstützung,Steun,Aspoyî,지원하다 / Jiwonhada,支持 / Zhīchí
+Moment,Moment,Moment,Moment,Moumint,순간 / Sungan,片刻 / Piànkè
+Sense,Sens,Sinn,Gevoel,Sins',감각 / Gamgag,感觉 / Gǎnjué
+Report,Rapport,Prüfbericht,Verslag,Rapwèrt,보고서 / Bogoseo,报告 / Bàogào
+Mind,Écouter,Geist,Verstand,Spér,정신 / Jeongsin,头脑 / Tóunǎo
+Church,Église,Kirche,Kerk,Èglîhe,교회에 / Gyohoee,教会 / Jiàohuì
+Morning,Matin,Morgen,Ochtend,Matin,아침 / Achim,早晨 / Zǎochén
+Death,Mort,Tod,Dood,Dièrin,죽음 / Jug-eum,死亡 / Sǐwáng
+Change,Monnaie,Veränderung,Wijzigen,Candjî,변화 / Byeonhwa,改变 / Gǎibiàn
+Industry,Industrie,Industrie,Industrie,Industrèye,산업 / San-eob,行业 / Hángyè
+Land,Terre,Land,Land-,Abwèrder,땅 / Ttang,土地 / Tǔdì
+Care,Se soucier,Pflege,Zorg,,케어 / Keeo,关心 / Guānxīn
+Century,Siècle,Jahrhundert,Eeuw,Siéke,세기 / Segi,世纪 / Shìjì
+Range,Portée,Angebot,Bereik,,범위 / Beom-wi,范围 / Fànwéi
+Table,Table,Tisch,Tafel,Tåvlê,테이블 / Teibeul,桌子 / Zhuōzi
+Back,Arrière,Zurück,Rug,Rèscouler,뒤 / Dwi,后退 / Hòutuì
+Trade,Commerce,Handeln,Handel,Comèrce,거래 / Geolae,贸易 / Màoyì
+History,Histoire,Geschichte,Geschiedenis,Fåve,역사 / Yeogsa,历史 / Lìshǐ
+Study,Étude,Lernen,Studie,Ètude,공부하다 / Gongbuhada,学习 / Xuéxí
+Street,Rue,Straße,Straat,Rowe,거리 / Geoli,街道 / Jiēdào
+Committee,Comité,Komitee,Commissie,,위원회 / Wiwonhoe,委员会 / Wěiyuánhuì
+Rate,Taux,Bewertung,Tarief,,비율 / Biyul,速度 / Sùdù
+Word,Mot,Wort,Woord,Mot,단어 / Dan-eo,单词 / Dāncí
+Food,Aliments,Lebensmittel,Voedsel,Amagnî,음식 / Eumsig,食物 / Shíwù
+Language,Langue,Sprache,Taal,Langue,언어 / Eon-eo,语言 / Yǔyán
+Experience,Vivre,Erfahrung,Beleven,Èspèriyince,경험 / Gyeongheom,经验 / Jīngyàn
+Result,Résultat,Ergebnis,Resultaat,,결과 / Gyeolgwa,结果 / Jiéguǒ
+Team,Équipe,Team,Team,,팀 / Tim,团队 / Tuánduì
+Other,Autre,Sonstiges,Ander,Ôte,다른 / Daleun,其他 / Qítā
+Sir,Monsieur,Herr,Meneer,Moncheû,선생님 / Seonsaengnim,先生 / Xiānshēng
+Section,Section,Sektion,Sectie,,부분 / Bubun,部分 / Bùfèn
+Programme,Programme,Programm,Programma,,프로그램 / Peulogeulaem,程序 / Chéngxù
+Air,Air,Luft,Lucht,Êr,공기 / Gong-gi,空气 / Kōngqì
+Authority,Autorité,Behörde,Gezag,,권한 / Gwonhan,权威 / Quánwēi
+Role,Rôle,Rolle,Rol,Role,역할 / Yeoghal,角色 / Juésè
+Reason,Raison,Grund,Reden,Cåse,이유 / Iyu,原因 / Yuányīn
+Price,Prix,Preis,Prijs,Pris,가격 / Gagyeog,价格 / Jiàgé
+Town,Ville,"Stadt, dorf",Dorp,Vèye,도시 / Dosi,镇 / Zhèn
+Class,Classe,Klasse,Klas,,수업 / Sueob,班级 / Bānjí
+Nature,Nature,Natur,Natuur,Nateûre,자연 / Jayeon,自然 / Zìrán
+Subject,Matière,Gegenstand,Onderwerp,,주제 / Juje,学科 / Xuékē
+Department,Département,Abteilung,Afdeling,,학과 / Haggwa,部门 / Bùmén
+Union,Syndicat,Union,Unie,,노동 조합 / Nodong johab,联盟 / Liánméng
+Bank,Banque,Bank,Bank,Banke,은행 / Eunhaeng,银行 / Yínháng
+Member,Membre,Mitglied,Lid,,회원 / Hoewon,成员 / Chéngyuán
+Value,Valeur,Wert,Waarde,Valeûr,값 / Gabs,价值 / Jiàzhí
+Need,Avoir besoin,Brauchen,Behoefte,,필요 / Pil-yo,需要 / Xūyào
+East,Est,Ost,Oosten-,Èst,동쪽 / Dongjjog,东方 / Dōngfāng
+Practice,Entrainement,Trainieren,Oefening,,관행 / Gwanhaeng,实践 / Shíjiàn
+Type,Type,Typ,Type,,유형 / Yuhyeong,类型 / Lèixíng
+Paper,Papier,Papier,Papier,Papî,종이 / Jong-i,纸 / Zhǐ
+Date,Date,Datum,Datum,,데이트 / Deiteu,日期 / Rìqí
+Decision,Décision,Entscheidung,Beslissing,,결정 / Gyeoljeong,决定 / Juédìng
+Figure,Chiffre,Zahl,Figuur,Cogne,수치 / Suchi,数字 / Shùzì
+Right,À droite,Rechts,Rechtsaf,Dreût,오른쪽 / Oleunjjog,对 / Duì
+Wife,Épouse,Ehefrau,Vrouw,Feume,부인 / Bu-in,妻子 / Qīzi
+President,Président,Präsident,President,,대통령 / Daetonglyeong,总统 / Zǒngtǒng
+University,Université,Universität,Universiteit,Ûnivêrsité,대학교 / Daehaggyo,大学 / Dàxué
+Friend,Ami,Freund,Vriend,Ami,친구 / Chingu,朋友 / Péngyǒu
+Club,Club,Verein,Club,,클럽 / Keulleob,俱乐部 / Jùlèbù
+Quality,Qualité,Qualität,Kwaliteit,Cålité,품질 / Pumjil,质量 / Zhìliàng
+Voice,Voix,Stimme,Stem,Vwès,목소리 / Mogsoli,嗓音 / Sǎngyīn
+Lord,Seigneur,Herr,Heer,Sègneûr,주님 / Junim,主 / Zhǔ
+Stage,Organiser,Bühne,Fase,,단계 / Dangye,阶段 / Jiēduàn
+King,Roi,König,Koning,Rwè,왕 / Wang,国王 / Guówáng
+Us,Nous,Uns,Ons,Nos-ôtes,우리를 / Ulileul,我们 / Wǒmen
+Situation,Situation,Lage,Situatie,Situwåcion,상황 / Sanghwang,情况 / Qíngkuàng
+Light,Léger,Hell,Licht,Lèdjîr,빛 / Bich,光 / Guāng
+Tax,Impôt,Mwst,Belasting,,세 / Se,税 / Shuì
+Production,Production,Produktion,Productie,,생산 / Saengsan,生产 / Shēngchǎn
+March,Mars,März,Maart,Cotî,3월 / 3wol,行进 / Xíngjìn
+Secretary,Secrétaire,Sekretär,Secretaris,Sécrètêre,비서 / Biseo,秘书 / Mìshū
+Art,Art,Kunst,Kunst,Årt,미술 / Misul,艺术 / Yìshù
+Board,Planche,Planke,Bord,Plantche,판자 / Panja,木板 / Mùbǎn
+May,Mai,Kann,Kunnen,Pouvwér,5월 / 5wol,可能 / Kěnéng
+Hospital,Hôpital,Krankenhaus,Ziekenhuis,Ospitå,병원 / Byeong-won,医院 / Yīyuàn
+Month,Mois,Monat,Maand,Meûs,월 / Wol,月 / Yuè
+Music,Musique,Musik,Muziek,Muzike,음악 / Eum-ag,音乐 / Yīnyuè
+Cost,Coût,Kosten,Kosten,Costèdje,비용 / Biyong,成本 / Chéngběn
+Field,Domaine,Feld,Veld,Dôminne,들 / Deul,场地 / Chǎngdì
+Award,Décerner,Vergeben,Prijs,Ad'djudjî,상 / Sang,奖 / Jiǎng
+Issue,Publier,Ausgabe,Kwestie,Publiyî,문제 / Munje,问题 / Wèntí
+Bed,Lit,Bett,Bed,Lét,침대 / Chimdae,床 / Chuáng
+Project,Projet,Projekt,Projecteren,Projèt,프로젝트 / Peulojegteu,项目 / Xiàngmù
+Chapter,Chapitre,Kapitel,Hoofdstuk,Chapite,장 / Jang,章节 / Zhāngjié
+Girl,Fille,Mädchen,Meisje,Båcèle,소녀 / Sonyeo,女孩 / Nǚhái
+Game,Jeu,Spiel,Spel,Djeû,게임 / Geim,游戏 / Yóuxì
+Amount,Montant,Menge,Hoeveelheid,Montant,양 / Yang,数量 / Shùliàng
+Basis,Base,Basis,Basis,,기초 / Gicho,基础 / Jīchǔ
+Knowledge,Connaissance,Wissen,Kennis,Kinohance,지식 / Jisig,知识 / Zhīshì
+Approach,Approcher,Sich nähern,Nadering,Aprocher,접근하다 / Jeobgeunhada,方法 / Fāngfǎ
+Series,Séries,Serie,Serie,,시리즈 / Silijeu,系列 / Xìliè
+Love,Amour,Liebe,Liefde,Amoûr,사랑 / Salang,爱 / Ài
+Top,Haut,Oben,Bovenkant,,맨 위 / Maen wi,最佳 / Zuì jiā
+News,Nouvelles,Nachrichten,Nieuws,Novèle,소식 / Sosig,消息 / Xiāoxī
+Front,Face,Vorderseite,Voorkant,D'vant,앞쪽 / Apjjog,正面 / Zhèngmiàn
+Future,Futur,Zukunft,Toekomst,Tins,미래 / Milae,未来 / Wèilái
+Manager,Gestionnaire,Manager,Manager,Administrateûr,관리자 / Gwanlija,经理 / Jīnglǐ
+Account,Compte,Konto,Rekening,Compte,계정 / Gyejeong,帐户 / Zhànghù
+Computer,Ordinateur,Computer,Computer,,컴퓨터 / Keompyuteo,电脑 / Diànnǎo
+Security,Sécurité,Sicherheit,Beveiliging,,보안 / Boan,安全 / Ānquán
+Rest,Repos,Sich ausruhen,Rest,Ripwès,나머지 / Nameoji,休息 / Xiūxí
+Labour,Travail,Arbeit,Werk,,노동 / Nodong,劳动 / Láodòng
+Structure,Structure,Struktur,Structuur,,구조 / Gujo,结构 / Jiégòu
+Hair,Cheveu,Haar,Haar,Dj'vè,머리카락 / Meolikalag,头发 / Tóufǎ
+Bill,Facture,Rechnung,Rekening,Factûre,청구서 / Cheong-guseo,账单 / Zhàngdān
+Heart,Cœur,Herz,Hart,Coûr,마음 / Ma-eum,心 / Xīn
+Force,Obliger,Gewalt,Kracht,Fwèce,힘 / Him,力量 / Lìliàng
+Attention,Attention,Beachtung,Aandacht,Astème,주목 / Jumog,注意力 / Zhùyì lì
+Movement,Mouvement,Bewegung,Beweging,Mouvemint,움직임 / Umjig-im,移动 / Yídòng
+Success,Succès,Erfolg,Succes,,성공 / Seong-gong,成功 / Chénggōng
+Letter,Lettre,Buchstabe,Brief,Lète,편지 / Pyeonji,信 / Xìn
+Agreement,Accord,Zustimmung,Akkoord,Acwérd,합의 / Hab-ui,协议 / Xiéyì
+Capital,Capitale,Hauptstadt,Kapitaal,,수도 / Sudo,首都 / Shǒudū
+Analysis,Analyse,Analyse,Analyse,,분석 / Bunseog,分析 / Fēnxī
+Population,Population,Population,Bevolking,Pôpulåtion,인구 / Ingu,人口 / Rénkǒu
+Environment,Environnement,Umgebung,Omgeving,,환경 / Hwangyeong,环境 / Huánjìng
+Performance,Performance,Leistung,Uitvoering,,성능 / Seongneung,表现 / Biǎoxiàn
+Model,Maquette,Modell,Model-,,모델 / Model,模型 / Móxíng
+Material,Matériel,Material,Materiaal,,재료 / Jaelyo,材料 / Cáiliào
+Theory,Théorie,Theorie,Theorie,,이론 / Ilon,理论 / Lǐlùn
+Growth,Croissance,Wachstum,Groei,,성장 / Seongjang,生长 / Shēngzhǎng
+Fire,Feu,Feuer,Vuur,,불 / Bul,火 / Huǒ
+Chance,Chance,Chance,Kans,,가능성 / Ganeungseong,机会 / Jīhuì
+Boy,Garçon,Junge,Jongen,Valèt,소년 / Sonyeon,男生 / Nánshēng
+Relationship,Relation amoureuse,Verhältnis,Relatie,,관계 / Gwangye,关系 / Guānxì
+Son,Fils,Sohn,Zoon,Fi,아들 / Adeul,儿子 / Érzi
+Sea,Mer,Meer,Zee,,바다 / Bada,海 / Hǎi
+Record,Record,Aufzeichnung,Vermelding,Plake,기록 / Gilog,记录 / Jìlù
+Size,Taille,Größe,Maat,Grandeûr,크기 / Keugi,尺寸 / Chǐcùn
+Property,Biens,Eigentum,Eigendom,,특성 / Teugseong,财产 / Cáichǎn
+Space,Espace,Platz,Ruimte,,우주 / Uju,空间 / Kōngjiān
+Term,Terme,Begriff,Termijn,,기간 / Gigan,学期 / Xuéqí
+Director,Réalisateur,Direktor,Regisseur,,감독 / Gamdog,导向器 / Dǎoxiàng qì
+Plan,Plan,Planen,Plan,Intanchon,계획 / Gyehoeg,计划 / Jìhuà
+Behaviour,Comportement,Verhalten,Gedrag,,행동 / Haengdong,行为 / Xíngwéi
+Treatment,Traitement,Behandlung,Behandeling,,치료 / Chilyo,治疗 / Zhìliáo
+Energy,Énergie,Energie,Energie,Èhowe,에너지 / Eneoji,活力 / Huólì
+Income,Revenu,Einkommen,Inkomen,,소득 / Sodeug,收入 / Shōurù
+Cup,Coupe,Tasse,Beker,Côpe,컵 / Keob,杯子 / Bēizi
+Scheme,Schème,Planen,Schema,,계획 / Gyehoeg,方案 / Fāng'àn
+Design,Motif,Design,Ontwerp,Dèssin,설계 / Seolgye,设计 / Shèjì
+Response,Réponse,Antwort,Antwoord,,응답 / Eungdab,回复 / Huífù
+Association,Association,Verband,Vereniging,,협회 / Hyeobhoe,协会 / Xiéhuì
+Choice,Choix,Auswahl,Keuze,,선택 / Seontaeg,选择 / Xuǎnzé
+Pressure,Pression,Druck,Druk,,압력 / Ablyeog,压力 / Yālì
+Hall,Entrée,Halle,Hal,,홀 / Hol,大厅 / Dàtīng
+Couple,Couple,Paar,Stel,Ome,커플 / Keopeul,一对 / Yī duì
+Technology,Technologie,Technologie,Technologie,,기술 / Gisul,技术 / Jìshù
+Defence,Défense,Verteidigung,Verdediging,,방어 / Bang-eo,防御 / Fángyù
+List,Liste,Aufführen,Lijst,,목록 / Moglog,列表 / Lièbiǎo
+Chairman,Président,Vorsitzende,Voorzitter,,의장 / Uijang,主席 / Zhǔxí
+Loss,Perte,Verlust,Verlies,,상실 / Sangsil,损失 / Sǔnshī
+Activity,Activité,Aktivität,Werkzaamheid,Abèyisté,활동 / Hwaldong,活动 / Huódòng
+Contract,Contrat,Vertrag,Contract,,계약 / Gyeyag,合同 / Hétóng
+County,Comté,Bezirk,District,,군 / Gun,县 / Xiàn
+Wall,Mur,Wand,Muur,Pareûse,벽 / Byeog,墙 / Qiáng
+Difference,Différence,Unterschied,Verschil,Difèrince,차이점 / Chaijeom,不同之处 / Bùtóng zhī chù
+Army,Armée,Armee,Leger,,군대 / Gundae,军队 / Jūnduì
+Hotel,Hôtel,Hotel,Hotel,Ôtél,호텔 / Hotel,酒店 / Jiǔdiàn
+Sun,Soleil,Sonne,Zon,Solo,태양 / Taeyang,太阳 / Tàiyáng
+Product,Produit,Produkt,Product,,제품 / Jepum,产品 / Chǎnpǐn
+Summer,Été,Sommer,Zomer,Osté,여름 / Yeoleum,夏天 / Xiàtiān
+Set,Positionner,Einstellen,Set,,세트 / Seteu,放 / Fàng
+Village,Village,Dorf,Dorp,Viyèdje,마을 / Ma-eul,村庄 / Cūnzhuāng
+Colour,Couleur,Farbe,Kleur,,색깔 / Saegkkal,颜色 / Yánsè
+Floor,Étage,Boden,Vloer,,바닥 / Badag,地面 / Dìmiàn
+Season,Saison,Jahreszeit,Seizoen,Acomôder,계절 / Gyejeol,季节 / Jìjié
+Unit,Unité,Einheit,Eenheid,,단위 / Dan-wi,单元 / Dānyuán
+Park,Parc,Park,Park,,공원 / Gong-won,公园 / Gōngyuán
+Hour,Heure,Stunde,Uur,Eûre,시간 / Sigan,小时 / Xiǎoshí
+Investment,Investissement,Anlage,Investering,,투자 / Tuja,投资 / Tóu zī
+Test,Test,Prüfung,Test,,시험 / Siheom,测试 / Cèshì
+Garden,Jardin,Garten,Tuin,Cotehê,정원 / Jeong-won,花园 / Huāyuán
+Husband,Mari,Ehemann,Echtgenoot,Ome,남편 / Nampyeon,丈夫 / Zhàngfū
+Employment,Emploi,Anstellung,Werkgelegenheid,Plèce,고용 / Goyong,就业 / Jiùyè
+Style,Style,Stil,Stijl,,스타일 / Seutail,风格 / Fēnggé
+Science,Science,Wissenschaft,Wetenschap,Syince,과학 / Gwahag,科学 / Kēxué
+Look,Regarder,Suchen,Look,Êrèdje,바라보다 / Balaboda,看 / Kàn
+Deal,Accord,Handeln,Overeenkomst,Pièle,거래 / Geolae,交易 / Jiāoyì
+Charge,Charger,Aufladen,Aanval,,요금 / Yogeum,收费 / Shōufèi
+Help,Aider,Hilfe,Helpen,,돕다 / Dobda,帮助 / Bāngzhù
+Economy,Économie,Wirtschaft,Economie,,경제 / Gyeongje,经济 / Jīngjì
+New,Nouveau,Neu,Nieuwe,Novê,새로운 / Saeloun,新的 / Xīn de
+Page,Page,Seite,Bladzijde,Pådje,페이지 / Peiji,页 / Yè
+Risk,Risque,Risiko,Risico,Wèzeûr,위험 / Wiheom,风险 / Fēngxiǎn
+Advice,Conseils,Rat,Het advies,Consèy,조언 / Jo-eon,建议 / Jiànyì
+Event,Événement,Veranstaltung,Evenement,,이벤트 / Ibenteu,事件 / Shìjiàn
+Picture,Image,Bild,Afbeelding,Îmådje,그림 / Geulim,图片 / Túpiàn
+Commission,Commission,Kommission,Commissie,,수수료 / Susulyo,委员会 / Wěiyuánhuì
+Fish,Poisson,Fisch,Vis,Pèhî,생선 / Saengseon,鱼 / Yú
+College,Université,Uni,Middelbare school,,대학 / Daehag,大学 / Dàxué
+Oil,Huile,Öl,Olie-,Ôle,기름 / Gileum,油 / Yóu
+Doctor,Médecin,Arzt,Arts,Docteûr,박사님 / Bagsanim,医生 / Yīshēng
+Opportunity,Occasion,Gelegenheit,Mogelijkheid,Ocåzion,기회 / Gihoe,机会 / Jīhuì
+Film,Film,Film,Film,Toûrniker,필름 / Pilleum,电影 / Diànyǐng
+Conference,Conférence,Konferenz,Conferentie,,회의 / Hoeui,会议 / Huìyì
+Operation,Opération,Betrieb,Operatie,Opèråchon,작업 / Jag-eob,手术 / Shǒushù
+Application,Application,Anwendung,Sollicitatie,,애플리케이션 / Aepeullikeisyeon,应用 / Yìngyòng
+Press,Presse,Drücken sie,Druk op,,누르다 / Nuleuda,按 / Àn
+Extent,Étendue,Ausmaß,Omvang,,정도 / Jeongdo,程度 / Chéngdù
+Addition,Addition,Zusatz,Toevoeging,,덧셈 / Deos-sem,添加 / Tiānjiā
+Station,Station,Bahnhof,Station,Gåre,역 / Yeog,车站 / Chēzhàn
+Window,Fenêtre,Fenster,Raam,Fignèsse,창문 / Changmun,窗户 / Chuānghù
+Shop,Magasin,Geschäft,Winkel,,가게 / Gage,店铺 / Diànpù
+Access,Accéder,Zugriff,Toegang,,접속하다 / Jeobsoghada,使用权 / Shǐyòng quán
+Region,Région,Region,Regio,Payis,지역 / Jiyeog,地区 / Dìqū
+Doubt,Doute,Zweifel,Twijfel,Doter,의심 / Uisim,怀疑 / Huáiyí
+Majority,Majorité,Mehrheitlich,Meerderheid,,다수 / Dasu,多数 / Duōshù
+Degree,Diplôme,Grad,Rang,,도 / Do,程度 / Chéngdù
+Television,Télévision,Fernsehen,Televisie,Télévûzion,텔레비전 / Tellebijeon,电视 / Diànshì
+Blood,Sang,Blut,Bloed,Song',피 / Pi,血液 / Xiěyè
+Statement,Déclaration,Erklärung,Uitspraak,,성명 / Seongmyeong,陈述 / Chénshù
+Sound,Son,Klang,Geluid,,소리 / Soli,声音 / Shēngyīn
+Election,Élection,Wahl,Verkiezing,Chwès,선거 / Seongeo,选举 / Xuǎnjǔ
+Parliament,Parlement,Parlament,Parlement,,의회 / Uihoe,议会 / Yìhuì
+Site,Site,Seite? ˅,Site,,대지 / Daeji,地点 / Dìdiǎn
+Mark,Marque,Kennzeichen,Markering,,표시 / Pyosi,标记 / Biāojì
+Importance,Importance,Bedeutung,Belang,Importance,중요성 / Jung-yoseong,重要性 / Zhòngyào xìng
+Title,Titre,Titel,Titel,,제목 / Jemog,标题 / Biāotí
+Species,Espèces,Spezies,Soort,,종 / Jong,物种 / Wùzhǒng
+Increase,Augmenter,Zunahme,Toenemen,,증가하다 / Jeung-gahada,增加 / Zēngjiā
+Return,Retourner,Rückkehr,Opbrengst,Rinde,반품 / Banpum,返回 / Fǎnhuí
+Concern,Préoccuper,Anliegen,Zorg,Importance,우려 / Ulyeo,忧虑 / Yōulǜ
+Public,Publique,Öffentlich,Openbaar,,공공의 / Gong-gong-ui,上市 / Shàngshì
+Competition,Concours,Wettbewerb,Concurrentie,Concoûrs,경쟁 / Gyeongjaeng,竞赛 / Jìngsài
+Software,Logiciel,Software,Software,,소프트웨어 / Sopeuteuweeo,软件 / Ruǎnjiàn
+Glass,Verre,Glas,Glas,Veûle,유리 / Yuli,玻璃 / Bōlí
+Lady,Demoiselle,Dame,Dame,Dame,숙녀 / Sugnyeo,女士 / Nǚshì
+Answer,Répondre,Antworten,Antwoord,Rèsponde,답변 / Dabbyeon,回答 / Huídá
+Earth,Terre,Erde,Aarde,Têre,지구 / Jigu,地球 / Dìqiú
+Daughter,Fille,Tochter,Dochter,Fèye,딸 / Ttal,女儿 / Nǚ'ér
+Purpose,But,Zweck,Doel,Dèssin,목적 / Mogjeog,目的 / Mùdì
+Responsibility,Responsabilité,Verantwortung,Verantwoordelijkheid,,책임 / Chaeg-im,责任 / Zérèn
+Leader,Dirigeant,Führer,Leider,,지도자 / Jidoja,领导者 / Lǐngdǎo zhě
+River,Fleuve,Fluss,Rivier,Scole,강 / Gang,河 / Hé
+Eye,Œil,Auge,Oog,,눈 / Nun,眼睛 / Yǎnjīng
+Ability,Capacité,Fähigkeit,Vermogen,,능력 / Neunglyeog,能力 / Nénglì
+Appeal,Faire appel,Appellieren,Hoger beroep,,항소 / Hangso,上诉 / Shàngsù
+Opposition,Opposition,Opposition,Oppositie,,반대 / Bandae,反对 / Fǎnduì
+Campaign,Campagne,Kampagne,Campagne,Campagne,운동 / Undong,活动 / Huódòng
+Respect,Respect,Respekt,Respect,,존경 / Jongyeong,尊重 / Zūnzhòng
+Task,Tâche,Aufgabe,Taak,Deûr,직무 / Jigmu,任务 / Rènwù
+Instance,Exemple,Beispiel,Voorbeeld,Ègzimpe,사례 / Salye,实例 / Shílì
+Sale,Vendre,Verkauf,Uitverkoop,Vinte,판매 / Panmae,销售 / Xiāoshòu
+Whole,Entier,Ganz,Geheel,,전부의 / Jeonbuui,所有的 / Suǒyǒu de
+Officer,Officier,Offizier,Officier,,장교 / Jang-gyo,官 / Guān
+Method,Méthode,Methode,Methode,,방법 / Bangbeob,方法 / Fāngfǎ
+Division,Division,Aufteilung,Divisie,,분할 / Bunhal,分配 / Fēnpèi
+Source,Source,Quelle,Bron,Fontin.ne,원천 / Woncheon,来源 / Láiyuán
+Piece,Pièce,Stück,Deel,Pårt,조각 / Jogag,片 / Piàn
+Pattern,Modèle,Muster,Patroon,,무늬 / Munui,图案 / Tú'àn
+Lack,Manquer de,Mangel,Gebrek,,부족 / Bujog,缺少 / Quēshǎo
+Disease,Maladie,Krankheit,Ziekte,Maladèye,질병 / Jilbyeong,疾病 / Jíbìng
+Equipment,Équipement,Ausrüstung,Apparatuur,,장비 / Jangbi,设备 / Shèbèi
+Surface,Surface,Fläche,Oppervlakte,,표면 / Pyomyeon,表面 / Biǎomiàn
+Demand,Demande,Nachfrage,Vraag,,수요 / Suyo,要求 / Yāoqiú
+Post,Publier,Post,Na,,게시하다 / Gesihada,邮政 / Yóuzhèng
+Mouth,Bouche,Mund,Mond,Boke,입 / Ib,嘴 / Zuǐ
+Radio,Radio,Radio,Radio-,Posse,라디오 / Ladio,收音机 / Shōuyīn jī
+Provision,Disposition,Bestimmung,Voorraad,,공급 / Gong-geub,条款 / Tiáokuǎn
+Attempt,Tenter,Versuch,Poging,Intrèprinde,시도 / Sido,试图 / Shìtú
+Sector,Secteur,Sektor,Sector,,부문 / Bumun,部门 / Bùmén
+Firm,Solidifier,Feste,Firma,Fèrme,단단한 / Dandanhan,公司 / Gōngsī
+Status,Statut,Status,Toestand,,상태 / Sangtae,地位 / Dìwèi
+Peace,Paix,Frieden,Vrede,Påye,평화 / Pyeonghwa,和平 / Hépíng
+Variety,Variété,Vielfalt,Verscheidenheid,Sôr,다양성 / Dayangseong,种类 / Zhǒnglèi
+Teacher,Prof,Lehrer,Docent,Mêsse,선생님 / Seonsaengnim,老师 / Lǎoshī
+Show,Afficher,Show,Tonen,,보여주다 / Boyeojuda,显示 / Xiǎnshì
+Speaker,Conférencier,Lautsprecher,Spreker,,스피커 / Seupikeo,扬声器 / Yángshēngqì
+Baby,Bébé,Baby,Baby,,아기 / Agi,婴儿 / Yīng'ér
+Arm,Bras,Arm,Arm,,팔 / Pal,手臂 / Shǒubì
+Base,Base,Base,Baseren,,베이스 / Beiseu,根据 / Gēnjù
+Miss,Mademoiselle,Vermissen,Missen,Måquer,놓치다 / Nohchida,错过 / Cuòguò
+Safety,Sécurité,Sicherheit,Veiligheid,,안전 / Anjeon,安全 / Ānquán
+Trouble,Difficulté,Problem,Probleem,,문제 / Munje,麻烦 / Máfan
+Culture,Culture,Kultur,Cultuur,Cultûre,문화 / Munhwa,文化 / Wénhuà
+Direction,Direction,Richtung,Richting,,방향 / Banghyang,方向 / Fāngxiàng
+Context,Contexte,Kontext,Context,,문맥 / Munmaeg,语境 / Yǔ jìng
+Character,Personnage,Charakter,Karakter,Caractére,캐릭터 / Kaeligteo,特点 / Tèdiǎn
+Box,Boîte,Kasten,Doos,Bwète,상자 / Sangja,盒子 / Hézi
+Discussion,Discussion,Diskussion,Discussie,,논의 / Non-ui,讨论 / Tǎolùn
+Past,Passé,Vergangenheit,Verleden,,과거 / Gwageo,过去的 / Guòqù de
+Weight,Masse,Last,Gewicht,Balance,무게 / Muge,重量 / Zhòngliàng
+Start,Démarrer,Anfang,Begin,,시작 / Sijag,开始 / Kāishǐ
+Brother,Frère,Bruder,Broer,Fré,형제 / Hyeongje,兄弟 / Xiōngdì
+League,Ligue,Liga,Liga,,리그 / Ligeu,联盟 / Liánméng
+Condition,État,Zustand,Voorwaarde,,상태 / Sangtae,健康）状况 / Jiànkāng) zhuàngkuàng
+Machine,Machine,Maschine,Machine,,기계 / Gigye,机器 / Jīqì
+Argument,Argument,Streit,Argument,,논쟁 / Nonjaeng,争论 / Zhēnglùn
+Sex,Sexe,Sex,Seks,Sacwè,섹스 / Segseu,性别 / Xìngbié
+Budget,Budget,Budget,Begroting,,예산 / Yesan,预算 / Yùsuàn
+English,Anglais,Englisch,Engels,,영어 / Yeong-eo,英语 / Yīngyǔ
+Transport,Transport,Transport,Vervoer-,,수송 / Susong,运输 / Yùnshū
+Share,Partager,Teilen,Delen,Pårtajer,공유하다 / Gong-yuhada,分享 / Fēnxiǎng
+Mum,Maman,Mama,Mamma,Mére,침묵 / Chimmug,妈妈 / Māmā
+Cash,Espèces,Kasse,Contant geld,,현금 / Hyeongeum,现金 / Xiànjīn
+Principle,Principe,Prinzip,Beginsel,,원칙 / Wonchig,原则 / Yuánzé
+Exchange,Échanger,Austausch,Aandelenbeurs,Discandjî,교환 / Gyohwan,交换 / Jiāohuàn
+Aid,Aide,Hilfe,Hulp,,지원 / Jiwon,援助 / Yuánzhù
+Library,Bibliothèque,Bücherei,Bibliotheek,Bibiliotéque,도서관 / Doseogwan,图书馆 / Túshū guǎn
+Version,Version,Ausführung,Versie,,버전 / Beojeon,版本 / Bǎnběn
+Rule,Règle,Regel,Regel,,규칙 / Gyuchig,规则 / Guīzé
+Tea,Thé,Tee,Thee,Té,차 / Cha,茶 / Chá
+Balance,Solde,Balance,Balans,,균형 / Gyunhyeong,平衡 / Pínghéng
+Afternoon,Après-midi,Nachmittag,Namiddag,Après-dîner,오후 / Ohu,下午 / Xiàwǔ
+Reference,Référence,Hinweis,Verwijzing,,참조 / Chamjo,参考 / Cānkǎo
+Protection,Protection,Schutz,Bescherming,,보호 / Boho,保护 / Bǎohù
+Truth,Vérité,Wahrheit,Waarheid,Vèrité,진실 / Jinsil,真相 / Zhēnxiàng
+District,District,Kreis,Wijk,,구역 / Guyeog,区 / Qū
+Turn,Tourner,Wende,Draai,Tchèrî k'twért,회전하다 / Hoejeonhada,转动 / Zhuǎndòng
+Smith,Forgeron,Schmied,Smid,,스미스 / Seumiseu,史密斯 / Shǐmìsī
+Review,Revue,Überprüfung,Beoordeling,,검토 / Geomto,审查 / Shěnchá
+Minute,Minute,Minute,Minuut,,분 / Bun,分钟 / Fēnzhōng
+Duty,Devoir,Pflicht,Plicht,Deûr,의무 / Uimu,义务 / Yìwù
+Survey,Sondage,Umfrage,Vragenlijst,,서베이 / Seobei,民意调查 / Mínyì diàochá
+Presence,Présence,Gegenwart,Aanwezigheid,,있음 / Iss-eum,在场 / Zàichǎng
+Influence,Influence,Beeinflussen,Invloed,,영향 / Yeonghyang,影响 / Yǐngxiǎng
+Stone,Calcul,Stein,Steen,Pîre,결석 / Gyeolseog,结石 / Jiéshí
+Dog,Chien,Hund,Hond,,개 / Gae,狗 / Gǒu
+Benefit,Avantage,Nutzen,Voordeel,Avantèdje,혜택 / Hyetaeg,益处 / Yìchu
+Collection,Recueil,Sammlung,Verzameling,,수집 / Sujib,收藏 / Shōucáng
+Executive,Exécutif,Exekutive,Leidinggevend,,경영진 / Gyeong-yeongjin,管理人员 / Guǎn lǐ rényuán
+Speech,Discours,Rede,Toespraak,,연설 / Yeonseol,演讲 / Yǎnjiǎng
+Function,Fonction,Funktion,Functie,,기능 / Gineung,功能 / Gōngnéng
+Queen,Reine,Königin,Koningin,Rin.ne,퀸 / Kwin,女王 / Nǚwáng
+Marriage,Mariage,Ehe,Huwelijk,Marièdje,결혼 / Gyeolhon,婚姻 / Hūnyīn
+Stock,Stock,Aktie,Voorraad,,스톡 / Seutog,库存 / Kùcún
+Failure,Échec,Fehler,Mislukking,,실패 / Silpae,失败 / Shībài
+Kitchen,Cuisine,Küche,Keuken,Couhène,주방 / Jubang,厨房 / Chúfáng
+Student,Élève,Schüler,Student,Ètudiant,학생 / Hagsaeng,学生 / Xuéshēng
+Effort,Effort,Anstrengung,Poging,,노력 / Nolyeog,努力 / Nǔlì
+Holiday,Vacance,Urlaub,Vakantie,Candjî,휴일 / Hyuil,假期 / Jiàqī
+Career,Carrière,Werdegang,Carrière,,직업 / Jig-eob,职业 / Zhíyè
+Attack,Attaque,Attacke,Aanval,Ataker,공격 / Gong-gyeog,攻击 / Gōngjí
+Length,Longueur,Länge,Lengte,,길이 / Gil-i,长度 / Chángdù
+Horse,Cheval,Pferd,Paard,Dj'vå,말 / Mal,马 / Mǎ
+Progress,Progrès,Fortschritt,Voortgang,,진전 / Jinjeon,进步 / Jìnbù
+Plant,Plante,"Pflanze, anlage",Plant,,공장 / Gongjang,植物 / Zhíwù
+Visit,Visiter,Besuch,Op bezoek komen,,방문 / Bangmun,访问 / Fǎngwèn
+Relation,Relation,Beziehung,Relatie,Abôrd,관계 / Gwangye,关系 / Guānxì
+Ball,Balle,Ball,Bal,,공 / Gong,球 / Qiú
+Memory,Mémoire,Erinnerung,Geheugen,Mémwére,메모리 / Memoli,记忆 / Jìyì
+Bar,Bar,Bar,Bar,,술집 / Suljib,酒吧 / Jiǔbā
+Opinion,Opinion,Meinung,Mening,Îdêye,의견 / Uigyeon,观点 / Guāndiǎn
+Quarter,Trimestre,Quartal,Kwartaal,,4분의 1 / 4bun-ui 1,四分之一 / Sì fēnzhī yī
+Impact,Impacter,Einschlag,Gevolg,,영향 / Yeonghyang,影响 / Yǐngxiǎng
+Scale,Échelle,Skala,Schaal,Håle,규모 / Gyumo,规模 / Guīmó
+Race,Course,Rennen,Ras,Coûsse,경주 / Gyeongju,种族 / Zhǒngzú
+Image,Image,Bild,Afbeelding,Îmådje,영상 / Yeongsang,图片 / Túpiàn
+Trust,Confiance,Vertrauen,Vertrouwen,,신뢰하다 / Sinloehada,相信 / Xiāngxìn
+Justice,Justice,Gerechtigkeit,Gerechtigheid,Djustice,정당성 / Jeongdangseong,正义 / Zhèngyì
+Edge,Bord,Kante,Kant,,가장자리 / Gajangjali,边缘 / Biānyuán
+Gas,Gaz,Gas,Gas-,,가스 / Gaseu,气体 / Qìtǐ
+Railway,Chemin de fer,Eisenbahn,Spoorweg,,철도 / Cheoldo,铁路 / Tiělù
+Expression,Expression,Ausdruck,Uitdrukking,,표현 / Pyohyeon,表达 / Biǎodá
+Advantage,Avantage,Vorteil,Voordeel,Avantèdjî,이점 / Ijeom,优势 / Yōushì
+Gold,Or,Gold,Goud,Ôr,금 / Geum,金子 / Jīnzi
+Wood,Bois,Holz,Hout,Bwès,목재 / Mogjae,木头 / Mùtou
+Network,Réseau,Netzwerk,Netwerk,,회로망 / Hoelomang,网络 / Wǎngluò
+Text,Texte,Text,Tekst,,텍스트 / Tegseuteu,文本 / Wénběn
+Forest,Forêt,Wald,Woud,Bwès,숲 / Sup,森林 / Sēnlín
+Sister,Sœur,Schwester,Zus,Soûr,자매 / Jamae,姐姐 / Jiějiě
+Chair,Chaise,Stuhl,Stoel,,의자 / Uija,椅子 / Yǐzi
+Cause,Cause,Weil,Oorzaak,Djåzer,원인 / Won-in,原因 / Yuányīn
+Foot,Pied,Fuß,Voet,Pî,발 / Bal,脚丫子 / Jiǎoyāzi
+Rise,Monter,Erhebt euch,Opstaan,,증가 / Jeung-ga,上升 / Shàngshēng
+Half,Moitié,Halb,Voor de helft,Mitan,반 / Ban,一半 / Yībàn
+Winter,Hiver,Winter,Winter,Iviér,겨울 / Gyeoul,冬天 / Dōngtiān
+Corner,Coin,Ecke,Hoek,,모서리 / Moseoli,角落 / Jiǎoluò
+Insurance,Assurance,Versicherung,Verzekering,,보험 / Boheom,保险 / Bǎoxiǎn
+Step,Étape,Schritt,Stap,,단계 / Dangye,步 / Bù
+Damage,Dégâts,Schaden,Schade,Abîmer,피해를 주다 / Pihaeleul juda,损害 / Sǔnhài
+Credit,Crédit,Anerkennung,Credit,,신용 거래 / Sin-yong geolae,信用 / Xìnyòng
+Pain,Douleur,Schmerz,Pijn,Doleûr,통증 / Tongjeung,痛 / Tòng
+Possibility,Possibilité,Wahrscheinlichkeit,Mogelijkheid,,가능성 / Ganeungseong,可能性 / Kěnéng xìng
+Legislation,Législation,Gesetzgebung,Wetgeving,,법률 제정 / Beoblyul jejeong,立法 / Lìfǎ
+Strength,Force,Stärke,Kracht,Fwèce,힘 / Him,力量 / Lìliàng
+Speed,Vitesse,Geschwindigkeit,Snelheid,Vitèsse,속도 / Sogdo,速度 / Sùdù
+Crime,Criminalité,Verbrechen,Misdaad,Crime,범죄 / Beomjoe,犯罪 / Fànzuì
+Hill,Colline,Hügel,Heuvel,Gridjète,언덕 / Eondeog,爬坡道 / Pá pō dào
+Debate,Débat,Debatte,Debat,,토론 / Tolon,辩论 / Biànlùn
+Will,Sera,Wille,Zullen,,~ 할 것이다 / ~ hal geos-ida,将要 / Jiāngyào
+Supply,Fourniture,Liefern,Leveren,,공급 / Gong-geub,供应 / Gōngyìng
+Present,Cadeau,Geschenk,Cadeau,,선물 / Seonmul,展示 / Zhǎnshì
+Confidence,Confiance,Vertrauen,Vertrouwen,Fwè,신뢰 / Sinloe,信心 / Xìnxīn
+Patient,Patient,Geduldig,Geduldig,,인내심 있는 / Innaesim issneun,病人 / Bìngrén
+Wind,Vent,Wind,Wind,Vint,바람 / Balam,风 / Fēng
+Solution,Solution,Lösung,Oplossing,,해결책 / Haegyeolchaeg,解决方案 / Jiějué fāng'àn
+Band,Bande,Band,Band,,밴드 / Baendeu,乐队 / Yuèduì
+Museum,Musée,Museum,Museum,Mûzéye,박물관 / Bagmulgwan,博物馆 / Bówùguǎn
+Farm,Ferme,Bauernhof,Boerderij,Fèrme,농장 / Nongjang,农场 / Nóngchǎng
+Pound,Broyer,Pfund,Pond,,파운드 / Paundeu,磅 / Bàng
+Match,Correspondre,Spiel,Wedstrijd,,성냥 / Seongnyang,匹配 / Pǐpèi
+Assessment,Évaluation,Bewertung,Beoordeling,,평가 / Pyeong-ga,评估 / Pínggū
+Message,Message,Botschaft,Bericht,Mèssèdje,메시지 / Mesiji,信息 / Xìnxī
+Football,Football,Fußball,Amerikaans voetbal,,축구 / Chuggu,足球 / Zúqiú
+No,Non,Nein,Nee,,아니요 / Aniyo,不 / Bù
+Animal,Animal,Tier,Dier,Bièsse,동물 / Dongmul,动物 / Dòngwù
+Skin,Peau,Haut,Huid,Pê,피부 / Pibu,皮肤 / Pífū
+Scene,Scène,Szene,Tafereel,Sin.ne,장면 / Jangmyeon,场景 / Chǎngjǐng
+Article,Article,Artikel,Artikel,Årtike,기사 / Gisa,文章 / Wénzhāng
+Stuff,Truc,Sachen,Spullen,,물건 / Mulgeon,东西 / Dōngxī
+Introduction,Introduction,Einleitung,Invoering,,소개 / Sogae,介绍 / Jièshào
+Play,Joue,Abspielen,Speel,Djouwer,플레이 / Peullei,玩 / Wán
+Administration,Administration,Verwaltung,Administratie,,관리 / Gwanli,行政 / Xíngzhèng
+Fear,Crainte,Furcht,Angst,,두려움 / Dulyeoum,恐惧 / Kǒngjù
+Dad,Père,Vati,Pa,Papa,아빠 / Appa,爸爸 / Bàba
+Proportion,Proportion,Anteil,Proportie,,비율 / Biyul,部分 / Bùfèn
+Island,Île,Insel,Eiland,,섬 / Seom,岛 / Dǎo
+Contact,Contactez,Kontakt,Contact,,연락하다 / Yeonlaghada,接触 / Jiēchù
+Japan,Japon,Japan,Japan,,일본 / Ilbon,日本 / Rìběn
+Claim,Réclamation,Anspruch,Claim,,주장하다 / Jujanghada,宣称 / Xuānchēng
+Kingdom,Royaume,Königreich,Koninkrijk,,왕국 / Wang-gug,王国 / Wángguó
+Video,Vidéo,Video,Video-,,동영상 / Dong-yeongsang,视频 / Shìpín
+Tv,Télé,Fernseher,TV,Télévûzion,TV / Tv,电视 / Diànshì
+Existence,Existence,Existenz,Bestaan,Vikèdje,존재 / Jonjae,存在 / Cúnzài
+Telephone,Téléphone,Telefon,Telefoon,Tèlèphoner,전화 / Jeonhwa,电话 / Diànhuà
+Move,Mouvement,Bewegung,Actie,Mouwer,이동하다 / Idonghada,移动 / Yídòng
+Traffic,Circulation,Verkehr,Verkeer,,교통 / Gyotong,交通 / Jiāotōng
+Distance,Distance,Distanz,Afstand,Trote,거리 / Geoli,距离 / Jùlí
+Relief,Soulagement,Erleichterung,Opluchting,,안도 / Ando,宽慰 / Kuānwèi
+Cabinet,Cabinet,Kabinett,Kastje,Årmå,내각 / Naegag,内阁 / Nèigé
+Unemployment,Chômage,Arbeitslosigkeit,Werkloosheid,,실업 / Sil-eob,失业 / Shīyè
+Reality,Réalité,Wirklichkeit,Realiteit,,현실 / Hyeonsil,现实 / Xiànshí
+Target,Cibler,Ziel,Doel,Dèssin,표적 / Pyojeog,目标 / Mùbiāo
+Trial,Essai,Studie,Proces,,재판 / Jaepan,审判 / Shěnpàn
+Rock,Rocher,Felsen,Steen,Halcoter,바위 / Bawi,岩石 / Yánshí
+Concept,Concept,Konzept,Concept,,개념 / Gaenyeom,概念 / Gàiniàn
+Spirit,Esprit,Geist,Geest,Spér,영혼 / Yeonghon,精神 / Jīngshén
+Accident,Accident,Unfall,Ongeluk,Acsidint,사고 / Sago,事故 / Shìgù
+Organization,Organisme,Organisation,Organisatie,,조직 / Jojig,组织 / Zǔzhī
+Construction,Construction,Konstruktion,Bouw,,건설 / Geonseol,建造 / Jiànzào
+Coffee,Café,Kaffee,Koffie,Cafè,커피 / Keopi,咖啡 / Kāfēi
+Phone,Téléphoner,Telefon,Telefoon,,핸드폰 / Haendeupon,电话 / Diànhuà
+Distribution,Distribution,Verteilung,Verdeling,,분포 / Bunpo,分配 / Fēnpèi
+Train,Train,Zug,Trein,,기차 / Gicha,火车 / Huǒchē
+Sight,Vue,Sicht,Zicht,Alèdje,시력 / Silyeog,视线 / Shìxiàn
+Difficulty,Difficulté,Schwierigkeit,Moeilijkheid,Difigulté,어려움 / Eolyeoum,困难 / Kùnnán
+Factor,Facteur,Faktor,Factor,,요인 / Yoin,因素 / Yīnsù
+Exercise,Exercer,Die übung,Oefening,,연습 / Yeonseub,锻炼 / Duànliàn
+Weekend,Week-end,Wochenende,Weekend,,주말 / Jumal,周末 / Zhōumò
+Battle,Bataille,Schlacht,Strijd,Bate,전투 / Jeontu,战斗 / Zhàndòu
+Prison,Prison,Gefängnis,Gevangenis,Prîhon,감옥 / Gam-og,监狱 / Jiānyù
+Grant,Accorder,Gewähren,Studiebeurs,,승인하다 / Seung-inhada,授予 / Shòuyǔ
+Aircraft,Avion,Flugzeug,Vliegtuigen,,항공기 / Hang-gong-gi,飞机 / Fēijī
+Tree,Arbre,Baum,Boom,Åbe,나무 / Namu,树 / Shù
+Bridge,Pont,Brücke,Brug,Pont,다리 / Dali,桥 / Qiáo
+Strategy,Stratégie,Strategie,Strategie,,전략 / Jeonlyag,战略 / Zhànlüè
+Contrast,Contraste,Kontrast,Contrast,Contrasse,차이 / Chai,对比 / Duìbǐ
+Communication,Communication,Kommunikation,Communicatie,,의사소통 / Uisasotong,沟通 / Gōutōng
+Background,Contexte,Hintergrund,Achtergrond,,배경 / Baegyeong,背景 / Bèijǐng
+Shape,Façonner,Gestalten,Vorm,,모양 / Moyang,形状 / Xíngzhuàng
+Wine,Vin,Wein,Wijn,Vin,와인 / Wain,葡萄酒 / Pútáojiǔ
+Star,Étoile,Stern,Ster,,별 / Byeol,星星 / Xīngxīng
+Hope,Espoir,Hoffnung,Hoop,,희망 / Huimang,希望 / Xīwàng
+Selection,Sélection,Auswahl,Selectie,Chwès,선택 / Seontaeg,选择 / Xuǎnzé
+Detail,Détail,Detail,Detail-,,세부 사항 / Sebu sahang,细节 / Xìjié
+User,Utilisateur,Benutzer,Gebruiker,,사용자 / Sayongja,用户 / Yònghù
+Path,Chemin,Weg,Pad,Vôye,길 / Gil,小路 / Xiǎo lù
+Client,Client,Klient,Cliënt,,고객 / Gogaeg,客户 / Kèhù
+Search,Chercher,Suche,Zoekopdracht,,검색 / Geomsaeg,搜索 / Sōusuǒ
+Master,Maître,Meister,Meester,Aprinde,주인 / Ju-in,掌握 / Zhǎngwò
+Rain,Pluie,Regen,Regen,Plêve,비 / Bi,雨 / Yǔ
+Offer,Offre,Angebot,Bieden,,권하다 / Gwonhada,提供 / Tígōng
+Goal,But,Tor,Doel,Dèssin,목표 / Mogpyo,目标 / Mùbiāo
+Dinner,Dîner,Abendessen,Avondeten,Dîner,저녁 / Jeonyeog,晚餐 / Wǎncān
+Freedom,Liberté,Freiheit,Vrijheid,Lîbèrté,자유 / Jayu,自由 / Zìyóu
+Attitude,Attitude,Attitüde,Houding,,태도 / Taedo,态度 / Tàidù
+While,Pendant que,Während,Terwijl,Tot fant qui,동안 / Dong-an,尽管 / Jǐnguǎn
+Agency,Agence,Agentur,Bureau,Ac',대행사 / Daehaengsa,机构 / Jīgòu
+Seat,Siège,Sitz,Zitplaats,,좌석 / Jwaseog,座位 / Zuòwèi
+Manner,Manière,Benehmen,Wijze,Manîre,방법 / Bangbeob,方式 / Fāngshì
+Favour,Favoriser,Gefallen,Gunst,Avantèdjî,호의 / Houi,青睐 / Qīnglài
+Pair,Paire,Paar,Paar-,Apêrî,쌍 / Ssang,一对 / Yī duì
+Crisis,Crise,Krise,Crisis,,위기 / Wigi,危机 / Wéijī
+Smile,Sourire,Lächeln,Glimlach,,웃다 / Usda,微笑 / Wéixiào
+Prince,Prince,Prinz,Prins,,왕자 / Wangja,王子 / Wángzǐ
+Danger,Danger,Achtung,Gevaar,Dandjî,위험 / Wiheom,危险 / Wéixiǎn
+Call,Appel,Forderung,Telefoongesprek,,전화 / Jeonhwa,称呼 / Chēnghu
+Capacity,Capacité,Kapazität,Capaciteit,Cont'nince,용량 / Yonglyang,容量 / Róngliàng
+Output,Production,Ausgang,Uitvoer,,산출 / Sanchul,输出 / Shūchū
+Note,Remarque,Hinweis,Notitie,,노트 / Noteu,笔记 / Bǐjì
+Procedure,Procédure,Verfahren,Procedure,,절차 / Jeolcha,程序 / Chéngxù
+Theatre,Théâtre,Theater,Theater,Tèyåte,극장 / Geugjang,剧院 / Jùyuàn
+Tour,Visiter,Tour,Tour,,관광 / Gwangwang,旅游 / Lǚyóu
+Recognition,Reconnaissance,Erkennung,Erkenning,Rik'nohance,인식 / Insig,认出 / Rèn chū
+Middle,Milieu,Mitte,Midden-,,가운데 / Gaunde,中间 / Zhōngjiān
+Absence,Absence,Abwesenheit,Afwezigheid,,결석 / Gyeolseog,缺席 / Quēxí
+Sentence,Phrase,Satz,Zin,Fråse,문장 / Munjang,句子 / Jùzi
+Package,Emballer,Paket,Pakket,,패키지 / Paekiji,包裹 / Bāoguǒ
+Track,Piste,Spur,Spoor,,과정 / Gwajeong,追踪 / Zhuīzōng
+Card,Carte,Karte,Kaart,Carte,카드 / Kadeu,卡片 / Kǎpiàn
+Sign,Signe,Schild,Teken,Trace,징후 / Jinghu,符号 / Fúhào
+Commitment,Engagement,Engagement,Inzet,,약속 / Yagsog,承诺 / Chéngnuò
+Player,Joueur,Spieler,Speler,Acteûr,플레이어 / Peulleieo,播放器 / Bòfàng qì
+Threat,Menace,Drohung,Bedreiging,Mènace,위협 / Wihyeob,威胁 / Wēixié
+Weather,Météo,Wetter,Het weer,,날씨 / Nalssi,天气 / Tiānqì
+Element,Élément,Element,Element,,요소 / Yoso,元素 / Yuánsù
+Conflict,Conflit,Konflikt,Conflict,,갈등 / Galdeung,冲突 / Chōngtú
+Notice,Avis,Notiz,Merk op,,알아채다 / Al-achaeda,注意 / Zhùyì
+Victory,Victoire,Sieg,Zege,,승리 / Seungli,胜利 / Shènglì
+Bottom,Bas,Unterseite,Onderkant,Fond,맨 아래 / Maen alae,底部 / Dǐbù
+Finance,Finance,Finanzen,Financiën,,재원 / Jaewon,金融 / Jīnróng
+Fund,Fonds,Fonds,Fonds,,축적 / Chugjeog,基金 / Jījīn
+Violence,Violence,Gewalt,Geweld,,폭행 / Poghaeng,暴力 / Bàolì
+File,Dossier,Datei,Dossier,Poyîre,파일 / Pail,文件 / Wénjiàn
+Profit,Profit,Profitieren,Winst,,이익 / Iig,利润 / Lìrùn
+Standard,Norme,Standard,Standaard-,,기준 / Gijun,标准 / Biāozhǔn
+Jack,Jack,Jack,Jack,Valèt,잭 / Jaeg,杰克 / Jiékè
+Route,Itinéraire,Route,Route,Vôye,노선 / Noseon,路线 / Lùxiàn
+China,Chine,China,China,Chine,중국 / Jung-gug,中国 / Zhōngguó
+Expenditure,Dépense,Ausgaben,Uitgaven,,지출 / Jichul,支出 / Zhīchū
+Second,Seconde,Zweite,Tweede,,두번째 / Dubeonjjae,第二 / Dì èr
+Discipline,Discipline,Disziplin,Discipline,,규율 / Gyuyul,纪律 / Jìlǜ
+Cell,Cellule,Zelle,Cel,,셀 / Sel,细胞 / Xìbāo
+Reaction,Réaction,Reaktion,Reactie,,반응 / Ban-eung,反应 / Fǎnyìng
+Castle,Château,Schloss,Kasteel,Tchèstê,성 / Seong,城堡 / Chéngbǎo
+Congress,Congrès,Kongress,Congres,,회의 / Hoeui,国会 / Guóhuì
+Individual,Individuel,Individuell,Individueel,,개인 / Gaein,个人 / Gèrén
+Lead,Mener,Führen,Leiding,,리드 / Lideu,带领 / Dàilǐng
+Consideration,Considération,Rücksichtnahme,Overweging,,고려 사항 / Golyeo sahang,考虑 / Kǎolǜ
+Debt,Dette,Schuld,Schuld,,빚 / Bij,债务 / Zhàiwù
+Option,Option,Möglichkeit,Optie,,옵션 / Obsyeon,选项 / Xuǎnxiàng
+Payment,Paiement,Zahlung,Betaling,Påyemint,지불 / Jibul,支付 / Zhīfù
+Exhibition,Exposition,Ausstellung,Tentoonstelling,,전시회 / Jeonsihoe,展览 / Zhǎnlǎn
+Reform,Réforme,Reform,Hervorming,,개정 / Gaejeong,改革 / Gǎigé
+Emphasis,Accent,Betonung,Nadruk,,중요성 / Jung-yoseong,强调 / Qiángdiào
+Spring,Printemps,Frühling,De lente,,봄 / Bom,春天 / Chūntiān
+Audience,Spectateurs,Publikum,Publiek,,청중 / Cheongjung,观众 / Guānzhòng
+Feature,Fonctionnalité,Merkmal,Functie,,특징 / Teugjing,特征 / Tèzhēng
+Touch,Touche,Berühren,Aanraken,Atoucher,접촉 / Jeobchog,触碰 / Chù pèng
+Estate,Domaine,Anwesen,Landgoed,,사유지 / Sayuji,财产 / Cáichǎn
+Assembly,Assemblée,Montage,Bijeenkomst,,집회 / Jibhoe,集会 / Jíhuì
+Volume,Volume,Volumen,Volume,,용량 / Yonglyang,体积 / Tǐjī
+Youth,Jeunesse,Jugend,Jeugd,Djon.nèsse,청소년 / Cheongsonyeon,青年 / Qīngnián
+Contribution,Contribution,Beitrag,Bijdrage,,기부금 / Gibugeum,贡献 / Gòngxiàn
+Curriculum,Programme d'études,Lehrplan,Leerplan,,과정 / Gwajeong,课程 / Kèchéng
+Appearance,Apparence,Aussehen,Verschijning,,모습 / Moseub,外貌 / Wàimào
+Martin,Martin,Martin,Martin,,남자 이름 / Namja ileum,马丁 / Mǎdīng
+Boat,Bateau,Boot,Boot,,보트 / Boteu,船 / Chuán
+Institute,Institut,Institut,Instituut,,학회 / Haghoe,研究所 / Yánjiū suǒ
+Membership,Adhésion,Mitgliedschaft,Lidmaatschap,,회원 / Hoewon,会员资格 / Huìyuán zīgé
+Branch,Succursale,Zweig,Tak,,나뭇가지 / Namusgaji,分支 / Fēn zhī
+Bus,Autobus,Bus,Bus,,버스 / Beoseu,公共汽车 / Gōnggòng qìchē
+Waste,Gaspillage,Abfall,Afval,Trifôgnî,쓰레기 / Sseulegi,浪费 / Làngfèi
+Heat,Chauffer,Wärme,Warmte,,열 / Yeol,热 / Rè
+Neck,Cou,Nacken,Nek,,목 / Mog,脖子 / Bózi
+Object,Objet,Objekt,Voorwerp,Camatche,물체 / Mulche,目的 / Mùdì
+Captain,Capitaine,Kapitän,Kapitein,,선장 / Seonjang,队长 / Duìzhǎng
+Driver,Conducteur,Treiber,Bestuurder,,운전사 / Unjeonsa,司机 / Sījī
+Challenge,Défi,Herausforderung,Uitdaging,,도전 / Dojeon,挑战 / Tiǎozhàn
+Conversation,Conversation,Konversation,Gesprek,D'vize,대화 / Daehwa,对话 / Duìhuà
+Occasion,Occasion,Gelegenheit,Gelegenheid,,기회 / Gihoe,场合 / Chǎnghé
+Code,Code,Code,Code,Côde,암호 / Amho,代码 / Dàimǎ
+Crown,Couronne,Krone,Kroon,,왕관 / Wang-gwan,王冠 / Wángguàn
+Birth,Naissance,Geburt,Geboorte,Natål(e),출생 / Chulsaeng,出生 / Chūshēng
+Silence,Silence,Schweigen,Stilte,Silince,고요 / Goyo,安静 / Ānjìng
+Literature,Littérature,Literatur,Literatuur,,문학 / Munhag,文学 / Wénxué
+Faith,Foi,Vertrauen,Vertrouwen,Fwè,믿음 / Mid-eum,信仰 / Xìnyǎng
+Hell,Enfer,Hölle,Hel,Infér,지옥 / Jiog,地狱 / Dìyù
+Entry,Entrée,Eintrag,Binnenkomst,,기입 / Giib,入口 / Rùkǒu
+Transfer,Transférer,Transfer,Overdracht,,옮기다 / Olmgida,转移 / Zhuǎnyí
+Gentleman,Gentilhomme,Gentleman,Heer,Moncheû,신사 / Sinsa,绅士 / Shēnshì
+Bag,Sac,Tasche,Tas,,가방 / Gabang,包 / Bāo
+Coal,Charbon,Kohle,Steenkool,Tchèrbon,석탄 / Seogtan,煤炭 / Méitàn
+Investigation,Enquête,Ermittlung,Onderzoek,,조사 / Josa,调查 / Diàochá
+Leg,Jambe,Bein,Been,Pate,다리 / Dali,腿 / Tuǐ
+Belief,Croyance,Glauben,Geloof,Crèyince,믿음 / Mid-eum,信仰 / Xìnyǎng
+Total,Total,Gesamt,Totaal,,총 / Chong,全部的 / Quánbù de
+Major,Majeur,Wesentlich,Belangrijk,,주요한 / Juyohan,主要的 / Zhǔyào de
+Document,Document,Dokumentieren,Document,,문서 / Munseo,文档 / Wéndàng
+Description,Description,Bezeichnung,Omschrijving,,설명 / Seolmyeong,描述 / Miáoshù
+Murder,Meurtre,Mord,Moord,Moude,살인 / Sal-in,谋杀 / Móushā
+Aim,Objectif,Ziel,Doel,,목표 / Mogpyo,目标 / Mùbiāo
+Flight,Vol,Flug,Vlucht,Volêye,비행 / Bihaeng,航班 / Hángbān
+Conclusion,Conclusion,Fazit,Conclusie,,결론 / Gyeollon,结论 / Jiélùn
+Drug,Médicament,Arzneimittel,Drugs,Drogue,의약품 / Uiyagpum,药品 / Yàopǐn
+Tradition,Tradition,Tradition,Traditie,,전통 / Jeontong,传统 / Chuántǒng
+Pleasure,Plaisir,Vergnügen,Plezier,Plêzîr,기쁨 / Gippeum,乐趣 / Lèqù
+Connection,Lien,Verbindung,Verbinding,,연결 / Yeongyeol,联系 / Liánxì
+Owner,Propriétaire,Inhaber,Baasje,,소유자 / Soyuja,所有者 / Suǒyǒu zhě
+Treaty,Traité,Vertrag,Verdrag,,조약 / Joyag,条约 / Tiáoyuē
+Desire,Désir,Verlangen,Verlangen,Lèmer,욕구 / Yoggu,欲望 / Yùwàng
+Professor,Professeur,Professor,Professor,Profèsseûr,교수 / Gyosu,教授 / Jiàoshòu
+Copy,Copie,Kopieren,Kopiëren,,복사 / Bogsa,复制 / Fùzhì
+Ministry,Ministère,Ministerium,Ministerie,,내각 / Naegag,部 / Bù
+Acid,Acide,Säure,Zuur,,산 / San,酸 / Suān
+Palace,Palais,Palast,Paleis,Palå,궁전 / Gungjeon,宫 / Gōng
+Address,Adresse,Die anschrift,Adres,Adrèssî,주소 / Juso,地址 / Dìzhǐ
+Institution,Institution,Institution,Instelling,,기관 / Gigwan,机构 / Jīgòu
+Lunch,Déjeuner,Mittagessen,Lunch,Dîner,점심 / Jeomsim,午餐 / Wǔcān
+Generation,Génération,Generation,Generatie,Jènèråchon,세대 / Sedae,一代 / Yīdài
+Partner,Partenaire,Partner,Partner,,파트너 / Pateuneo,伙伴 / Huǒbàn
+Engine,Moteur,Motor,Motor,,엔진 / Enjin,引擎 / Yǐnqíng
+Newspaper,Journal,Zeitung,Krant-,Gazète,신문 / Sinmun,报纸 / Bàozhǐ
+Cross,Croix,Kreuz,Kruis,,가로 질러 가다 / Galo jilleo gada,叉 / Chā
+Reduction,Réduction,Ermäßigung,Afname,Abahèdje,절감 / Jeolgam,减少 / Jiǎnshǎo
+Welfare,Bien-être,Wohlfahrt,Welzijn,,복지 / Bogji,福利 / Fúlì
