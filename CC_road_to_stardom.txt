@@ -55,18 +55,6 @@ redescribe = auto_beta
 
 start_at = dream
 #cc_room
-/*
-on_debug {
-   : goto  "living_room";
-   : set_true "is_puzzle_seven_seas_now";
-   : set_string var="sound_volume" value="lowlowest";
-   : gosub "set_sound_on";
-   : gosub "update_volume";
-   : pocket "map";
-   : pocket "stars";
-   : pocket "communicator";
-   : redescribe;
-}*/
 
 vocabulary {
    : verb / aliases = [examine, check, regarde, touch, look, see]
@@ -1085,6 +1073,28 @@ on_command {
          : set_sentence "look map";
       }
    }
+   : match "click cake" {
+      : if (previous_command == sentence_raw()) {
+         : print ("You <get<#cc0>> the <"+first_cap(original "noun1")+"<#cc0>>!");
+         : set_verb text="get";
+      }
+      : else {
+         : set_string var="previous_command" (sentence_raw());
+         : print ("You <look<#cc0>> at the <"+first_cap(original "noun1")+"<#cc0>>!");
+         : set_verb text="look";
+      }
+   }
+   : match "click wool; click rud; click 7c; click e; click june; click florrie" {
+      : if (previous_command == sentence_raw()) {
+         : print ("You <talk<#cc0>> to <"+first_cap(original "noun1")+"<#cc0>>!");
+         : set_verb text="talk";
+      }
+      : else {
+         : set_string var="previous_command" (sentence_raw());
+         : print ("You <look<#cc0>> at <"+first_cap(original "noun1")+"<#cc0>>!");
+         : set_verb text="look";
+      }
+   }
    : if (is_using_map) {
       : set_false "is_map_command";
       : match "look wool" {
@@ -1474,7 +1484,7 @@ on_command {
       }
       : else_if (is_at "puzzle_hat" && !is_puzzle_wool_solved) {
         : print "An albatross, a bald eagle and a chicken each wear a hat. They see the colors of the others’ hats but not their own. " ;
-        : print "Their hats were randomly drawn among 5 hats, 3 RED ones, and 2 BLUE ones. " ;
+        : print "Their hats were randomly drawn among 5 hats, 3 <RED<#c00>> ones, and 2 <BLUE<#00c>> ones. " ;
         : print "The albatross is asked to guess its hat color, but responds \'No idea\'. The bald eagle cannot guess its color either." ;
         : print "Then the chicken says \'I know my color\'. Which one is it? Type <GUESS<#cc0>> color." ;
       }
@@ -1623,7 +1633,7 @@ on_command {
       }
       : if (is_at "puzzle_hat") {
          : print "An albatross, a bald eagle and a chicken each wear a hat. They see the colors of the others’ hats but not their own. " ;
-         : print "Their hats were randomly drawn among 5 hats, 3 RED ones, and 2 BLUE ones. " ;
+         : print "Their hats were randomly drawn among 5 hats, 3 <RED<#c00>> ones, and 2 <BLUE<#00c>> ones. " ;
          : print "The albatross is asked to guess its hat color, but responds \'No idea\'. The bald eagle cannot guess its color either." ;
          : print "Then the chicken says \'I know my color\'. Which one is it? Type <GUESS<#cc0>> color." ;
       }
@@ -1679,7 +1689,7 @@ on_command {
    : match "red -; guess _"  {
       : if (is_at "puzzle_hat") {
         : if (hat_color == original "noun1" || verb_is "red") {
-            : print "Wool says: \'Correct. The chicken's hat is red of course.";
+            : print "Wool says: \'Correct. The chicken's hat is <red<#c00>> of course.";
             : print "I can <EXPLAIN<#cc0>> if you want.\'";
             : success ;
             : set_true "is_puzzle_wool_solved";
@@ -1694,7 +1704,7 @@ on_command {
         }
         : else {
             : print "Wool says: \'Did you hurt your head or something?";
-            : print "You only have a choice between two colors, red and blue.";
+            : print "You only have a choice between two colors, <red<#c00>> and <blue<#00c>>.";
             : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
             : failure ;
         }
@@ -1712,10 +1722,10 @@ on_command {
    :match "explain _ ; explain -"  {
       : if (is_at "wools_wheels" && is_puzzle_wool_solved) {
          : print "Let's call our 3 characters A, B and C." ;
-         : print "A cannot guess its own color unless both B and C are BLUE. So there must be at least one RED hat among B and C." ;
+         : print "A cannot guess its own color unless both B and C are <BLUE<#00c>>. So there must be at least one <RED<#c00>> hat among B and C." ;
          : print "Same for B." ;
-         : print "But B could guess its own color if C was BLUE and A was RED. In this case it would mean B must be RED too." ;
-         : print "Since B's Big Brain cannot guess its own color, C must be RED." ;
+         : print "But B could guess its own color if C was <BLUE<#00c>> and A was <RED<#c00>>. In this case it would mean B must be <RED<#c00>> too." ;
+         : print "Since B's Big Brain cannot guess its own color, C must be <RED<#c00>>." ;
       }
    }
 
@@ -2082,26 +2092,33 @@ on_command {
    : match "give chicken"  {
        : if (is_carried "chicken_wing") {
          : if ((is_present "rud_happy" || is_present "rud_kitchen")) {
+            : play_incidental "incidental_ok";
             : print "RuD says: \'Thanks, but I don't want to get my fingers dirty while gaming.\'" ;
             : print "He takes a sip of energy drink." ;
          }
       : if ((is_present "seven_seas" || is_present "sevenseas_kitchen")) {
+         : play_incidental "incidental_ok";
          : print "Seven Seas says: \'Interesting, as this contains vitamin C and carotenoids, it is considered a CC-rich food." ;
          : print "Certainly nutritious for you, but not as useful for me.\'" ;
       }
       : if ((is_present "june"|| is_present "june_kitchen")) {
+         : failure;
          : print "June says: \'Thanks, but I grow my own in my lab and they are way tastier. Please try them some time!\'" ;
       }
       : if ((is_present "wool"|| is_present "wool_kitchen")) {
+         : failure;
          : print "Wool says: \'Thanks, but my flying tool friend Pyjeon can go and grab some for me anytime.\'" ;
       }
       : if ((is_present "ee" || is_present "ee_kitchen")) {
+         : play_incidental "incidental_ok";
          : print "E takes a bite of the chicken wing." ;
          : print "E says: \'Not too bad, but I prefer the ones that June give me.\'" ;
       }
       : if (is_present "florrie") {
+         : play_incidental "incidental_ok";
          : print "Florrie takes a bite of the chicken wing..." ;
          : print "Florrie says: \'Thanks CC, it tastes super good! \'" ;
+         
       }
     }
    }
@@ -2535,13 +2552,18 @@ on_command {
       : else_if (is_present "florrie"  && (is_florrie_in_living_room_with_cake || is_everybody_here)) {
              : print "Florrie sings: \'Happy birthday CC!";
              : print "Try this cake we made with plenty of";
-             : print "C6H1206 it's so sweet\'" ;
+             : print "C6H12O6 it's so sweet\'" ;
              : print "Hmm... Not sure what this is all about." ;
              : set_true "talked_to_someone_before_cake" ;
       }
    }
 
-   : match "opensourcenow -"  {
+   : match "open source"  {
+      : if (noun2_is "now") {
+         : set_sentence "opensourcenow";
+      }
+   }
+   : match "opensourcenow -; open sourcenow; opensource now" {
         : if (is_exists "florrie" && is_at "living_room" && is_puzzle_florrie_now ) {
             : print "Awesome!!! I wonder what it means though." ;
             : success ;
@@ -2870,13 +2892,27 @@ on_command {
       }
    }
    
-   : match "play dovalingo; dovalingo -; open dovalingo; open notification" {
+   : match "examine dovalingo" {
+      : if (is_present "ee") {
+         : print "So many notifications, I should help E to do some <Dovalingo<#cc0>>™ lessons.";
+      } : else_if (is_carried "communicator") {
+         : print "I should do some <Dovalingo<#cc0>>™ lessons for Florrie.";
+      } : else {
+         : print "I can't <Dovalingo<#cc0>>™ without Florrie communicator";
+      }
+   }
+   
+   : match "play dovalingo; dovalingo -; open dovalingo; open notification; use dovalingo; do dovalingo; train dovalingo" {
       : if (is_present "ee") {
          : print "I should help E to do some Dovalingo™ lessons.";
-      } : else {
+         : gosub "play_dovalingo";
+      } : else_if (is_carried "communicator") {
+
          : print "I should do some Dovalingo™ lessons for Florrie.";
+         : gosub "play_dovalingo";
+      } : else {
+         : print "I can't <Dovalingo<#cc0>>™ without Florrie communicator";
       }
-      : gosub "play_dovalingo";
    }
    
    : match "drop *" {
@@ -2993,7 +3029,10 @@ on_post_tick {
 on_render {
  : if (is_using_map) {
    : overlay "new_map";
-   : if (!is_puzzle_wool_solved) {
+   : if (!has_seen_laptop_puzzle) {
+      : overlay "map_wool_grey";
+   }
+   : if (has_seen_laptop_puzzle && !is_puzzle_wool_solved) {
       : overlay (has_seen_wool_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="163" y="35" experimental_command = "look wool";
    }
    #: experimental_text_overlay text -> ("yoh"+has_seen_laptop_puzzle) x="20" y="20" ;
@@ -3001,12 +3040,18 @@ on_render {
       : overlay (has_seen_laptop_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="225" y="35" experimental_command = "look lounge";
    }
    : if (is_puzzle_7c_solved && is_laptop_unlocked && is_exists "rud_happy" && is_puzzle_wool_solved) {
-      : overlay (has_seen_laptop_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="225" y="35" experimental_command = "look lounge";
+      : overlay "exclamation_mark_grey" x="225" y="35" experimental_command = "look lounge";
    }
-   : if (is_exists "rud_sad") {
+   : if (!has_seen_wool_puzzle) {
+      : overlay "map_game_grey";
+   }
+   : if (has_seen_wool_puzzle && is_exists "rud_sad") {
       : overlay (has_seen_rud_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="162" y="67" experimental_command = "look game";
    }
-   : if (!is_puzzle_7c_solved) {
+   : if (is_rud_sad || !is_puzzle_wool_solved || !is_laptop_unlocked) {
+      : overlay "map_yard_grey";
+   }
+   : if (!(is_rud_sad || !is_puzzle_wool_solved || !is_laptop_unlocked) && !is_puzzle_7c_solved) {
       : overlay (has_seen_7c_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="218" y="67" experimental_command = "look yard";
    }
    : overlay "icon_cross" x="235" y="1" experimental_command = "exit";
@@ -3044,10 +3089,16 @@ assets {
       incidental_ok : sound_sample "https://cosmoose.org/adventuron_april_2022/Music/SFX_OK_130bpm.mp3" ;
    }
    graphics {
-      cc_room : png "https://cosmoose.org/adventuron_april_2022/Images/cc_room.png" ;
+         cc_room : png "https://cosmoose.org/adventuron_april_2022/Images/cc_room.png" {
+         : overlay "transparent_40x40" x="113" y="8" experimental_command = "look mirror"; 
+         : overlay "transparent_40x40" x="133" y="8" experimental_command = "look mirror"; 
+      };
       crispy_garden : png "https://cosmoose.org/adventuron_april_2022/Images/crispy_garden_no7Cs.png" {
         : if (is_seven_seas_crispy) {
                : overlay "crispy_garden_7Cs";
+               : overlay "transparent_20x20" x="177" y="18" experimental_command = "click 7Cs";
+               : overlay "transparent_20x20" x="177" y="38" experimental_command = "click 7Cs";
+               : overlay "transparent_20x20" x="177" y="58" experimental_command = "click 7Cs";
         }
         : if (is_puzzle_seven_seas_now) {
                : overlay "puzzle_channels";
@@ -3056,12 +3107,20 @@ assets {
       wools_wheels : png "https://cosmoose.org/adventuron_april_2022/Images/wools_wheels.png" {
         : if (is_wool_wheeled) {
                : overlay "wool";
+               : overlay "transparent_20x20" x="52" y="15" experimental_command = "click wool";
+               : overlay "transparent_20x20" x="52" y="35" experimental_command = "click wool";
+               : overlay "transparent_20x20" x="52" y="55" experimental_command = "click wool";
+               
+               
         }
       } ;
       party_planet : png "https://cosmoose.org/adventuron_april_2022/Images/party_planet.png" ;
       party_planet_inside : png "https://cosmoose.org/adventuron_april_2022/Images/rud.png" {
         : if (is_rud_sad) {
                : overlay "rudface";
+               : overlay "transparent_20x20" x="143" y="20" experimental_command = "click RuD";
+               : overlay "transparent_20x20" x="143" y="40" experimental_command = "click RuD";
+               : overlay "transparent_20x20" x="143" y="60" experimental_command = "click RuD";
                : if (is_puzzle_rud_in_progress) {
                 : overlay "puzzle_rud";
                }
@@ -3084,25 +3143,44 @@ assets {
         }
         : if (is_june_in_living_room) {
                : overlay "june";
+               : overlay "transparent_40x40" x="138" y="9" experimental_command = "click june";
+               : overlay "transparent_40x40" x="138" y="40" experimental_command = "click june";
                : if (is_e_in_living_room) {
                  : overlay "etana";
+                 : overlay "transparent_20x20" x="91" y="24" experimental_command = "click e";
+                 : overlay "transparent_40x40" x="69" y="50" experimental_command = "click e";
                }
         }
         : else_if (is_e_in_living_room) {
                : overlay "etana";
+               : overlay "transparent_20x20" x="91" y="24" experimental_command = "click e";
+               : overlay "transparent_40x40" x="69" y="50" experimental_command = "click e";
         }
         : else_if (is_florrie_alone_in_living_room) {
                : overlay "florrie";
+               : overlay "transparent_40x40" x="68" y="20" experimental_command = "click florrie";
+               : overlay "transparent_40x40" x="68" y="60" experimental_command = "click florrie";
         }
         : else_if (is_florrie_in_living_room_with_cake) {
             : overlay "florrie_cake";
+            : overlay "transparent_40x40" x="68" y="20" experimental_command = "click florrie";
+            : overlay "transparent_40x40" x="68" y="60" experimental_command = "click florrie";
+            : overlay "transparent_40x40" x="107" y="19" experimental_command = "click cake";
         }
 
         : else_if (is_everybody_here) {
                : overlay "everyone";
         }
-
-
+        : if (!is_everybody_here && !is_florrie_in_living_room_with_cake) {
+            : if (!is_e_in_living_room) {
+               : overlay "transparent_10x10" x="114" y="50" experimental_command = "look laptop";
+            }
+               
+           : overlay "transparent_20x20" x="190" y="23" experimental_command = "look screen";
+           : overlay "transparent_20x20" x="190" y="23" experimental_command = "look screen";
+           : overlay "transparent_20x20" x="210" y="23" experimental_command = "look screen";
+           : overlay "transparent_20x20" x="226" y="23" experimental_command = "look screen";
+         }
       } ;
       everyone : png "https://cosmoose.org/adventuron_april_2022/Images/everyone.png" ;
       loading_screen : png "https://cosmoose.org/adventuron_april_2022/Images/loading.png" ;
@@ -3123,6 +3201,33 @@ assets {
                   graphic -> (is_at "labyrinth_ship_destroyed" ? "puzzle_ship_destroyed" : "puzzle_ship")
                   x       -> ( labyrinth_position_x )
                   y       -> ( labyrinth_position_y )
+            }
+            : if (! is_at "labyrinth_ship_destroyed") {
+               : overlay {
+                  graphic -> ("transparent_10x10")
+                  experimental_command -> ("east")
+                  x       -> ( labyrinth_position_x + 10 + 110 )
+                  y       -> ( labyrinth_position_y + 15 )
+                  
+               }
+               : overlay {
+                  graphic -> ("transparent_10x10")
+                  experimental_command -> ("west")
+                  x       -> ( labyrinth_position_x - 10 +110 )
+                  y       -> ( labyrinth_position_y + 15 )
+               }
+               : overlay {
+                  graphic -> ("transparent_10x10")
+                  experimental_command -> ("north")
+                  x       -> ( labyrinth_position_x + 110 )
+                  y       -> ( labyrinth_position_y - 10 + 15 )
+               }
+               : overlay {
+                  graphic -> ("transparent_10x10")
+                  experimental_command -> ("south")
+                  x       -> ( labyrinth_position_x + 110 )
+                  y       -> ( labyrinth_position_y + 10 + 15 )
+               }
             }
          };
 
@@ -3150,8 +3255,12 @@ assets {
       dream_stars: png "https://cosmoose.org/adventuron_april_2022/Images/dream_stars.png";
       map_object: png "https://cosmoose.org/adventuron_april_2022/Images/icon_map.png";
       new_map:  png "https://cosmoose.org/adventuron_april_2022/Images/map.png";
-      transparent_20x20: png "https://ea.cosmoose.org/adventuron_april_2022/Images/transparent_20x20.png";
-      exclamation_mark: png "https://ea.cosmoose.org/adventuron_april_2022/Images/exclamation_mark.png";
+      map_game_grey: png "https://cosmoose.org/adventuron_april_2022/Images/map_game_grey.png";
+      map_wool_grey: png "https://cosmoose.org/adventuron_april_2022/Images/map_wool_grey.png";
+      map_yard_grey: png "https://cosmoose.org/adventuron_april_2022/Images/map_yard_grey.png";
+      transparent_10x10: png "https://cosmoose.org/adventuron_april_2022/Images/transparent_10x10.png";
+      transparent_20x20: png "https://cosmoose.org/adventuron_april_2022/Images/transparent_20x20.png";
+      transparent_40x40: png "https://cosmoose.org/adventuron_april_2022/Images/transparent_40x40.png";
       exclamation_mark_grey: png "https://cosmoose.org/adventuron_april_2022/Images/bang_grey.png";
       exclamation_mark_orange: png "https://cosmoose.org/adventuron_april_2022/Images/bang_red.png";
       icon_cc: png "https://cosmoose.org/adventuron_april_2022/Images/icon_cc.png";
