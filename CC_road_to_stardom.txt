@@ -179,6 +179,7 @@ booleans {
    talked_to_june : boolean "false" ;
    talked_to_e : boolean "false" ;
    talked_to_rud : boolean "false" ;
+   talked_to_mirror : boolean "false" ;
    talked_to_mirror_and_solved_puzzles : boolean "false" ;
    rud_sad_talked : dynamic_boolean {(
       talked_to_rud &&
@@ -548,6 +549,13 @@ ee_kitchen : scenery "<E<#cc0>>" ;
 ######################################
 
 barriers {
+   block_cc_room_exit : block_path {
+      from = cc_room
+      to = living_room
+      message  = Why leave? You have all your toys here, including the brand-new mirror June gave you!
+      block_when_not = talked_to_mirror
+
+   }
    block_laptop_wools_wheels : block_path {
       from = living_room
       to = wools_wheels
@@ -1421,6 +1429,7 @@ on_command {
    }
    : match "talk mirror; talk -"   {
       : if (is_at "cc_room" && !talked_to_mirror_and_solved_puzzles) {
+         : set_true "talked_to_mirror" ;
          : print "The mirror says:" ;
          : print "\'To answer your question: " ;
          : print "Will you become the most famous superstar of the Cosmooverse?" ;
