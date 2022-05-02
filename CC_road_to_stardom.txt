@@ -80,7 +80,7 @@ vocabulary {
    : verb / aliases = [exit, leave, outside, out, flee, escape, no, refuse]
    : verb / aliases = [enter, inside, in]
    : verb / aliases = [use, drink, eat, consume, swallow]
-   : verb / aliases = [throw, discard, vomit, puke]
+   : verb / aliases = [drop, throw, discard, vomit, puke]
    : verb / aliases = [ring,strike]
    : verb / aliases = [move, go]
    : verb / aliases = [pigeon, pigoen]
@@ -2065,27 +2065,6 @@ on_command {
       }
    }
 
-   : match "discard drink"  {
-      : if (is_carried "energy_drink") {
-         : print "Please honor the present that was given to you." ;
-      }
-   }
-
-   : match "discard chicken"  {
-      : if (is_carried "chicken_wing") {
-         : print "You may need it if you get hungry at night." ;
-      }
-   }
-
-   : match "discard spherificator"  {
-      : if (is_carried "spherificator" && !is_at "wools_wheels") {
-         : print "If Wool finds it away, he may be more careful next time. Better keep it." ;
-      }
-      : if (is_carried "spherificator" && is_at "wools_wheels") {
-         : print "Better put it back in its place so that Wool doesn't notice its disappearance." ;
-      }
-   }
-
    : match "examine leaderboard; examine leaders; examine leader"  {
       : if (is_at "party_planet_inside" && is_exists "rud_sad") {
         : print "RuD is so close to the top!!!! Only beaten by a certain OK.F, who must be a nerd." ;
@@ -2222,7 +2201,7 @@ on_command {
 
    : match "examine spherificator"  {
       : if (is_carried "spherificator") {
-        : print "" ;
+        : print "You turn is around in your paws, but have no idea how that can work." ;
       }
       : else_if (is_at "wools_wheels") {
         : print "Wool said the Banach-Spherificator is the best measuring tool around. Old but reliable." ;
@@ -2959,7 +2938,22 @@ on_command {
    }
    
    : match "drop *" {
-      : print "You don't need to drop anything.";
+      : if (noun1_is "chicken_wing" && is_carried "chicken_wing") {
+         : print "You may need it if you get hungry at night." ;
+      }
+      : else_if (noun1_is "spherificator" && is_carried "spherificator" && !is_at "wools_wheels") {
+         : print "If Wool finds it away, he may be more careful next time. Better keep it." ;
+      }
+      : else_if (noun1_is "spherificator" && is_carried "spherificator" && is_at "wools_wheels") {
+         : print "Better put it back in its place so that Wool doesn't notice its disappearance." ;
+         : drop "spherificator";
+      }
+      : else_if (noun1_is "drink" && is_carried "drink") {
+         : print "Please honor the present that was given to you." ;
+      }
+      : else {
+         : print "You don't need to drop anything.";
+      }
    }
    : match "cheat *" {
       : print "Unknown verb - \"cheat\".";
