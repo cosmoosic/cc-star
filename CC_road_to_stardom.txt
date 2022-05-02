@@ -2961,6 +2961,7 @@ on_command {
       : else_if (noun1_is "spherificator" && is_carried "spherificator" && is_at "wools_wheels") {
          : print "Better put it back in its place so that Wool doesn't notice its disappearance." ;
          : drop "spherificator";
+         : play_incidental "incidental_ok";
       }
       : else_if (noun1_is "energydrink" && is_carried "energydrink") {
          : print "Please honor the present that was given to you." ;
