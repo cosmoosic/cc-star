@@ -1267,6 +1267,11 @@ on_command {
          : print "You are waking up from your tutiful dream.";
          : set_sentence "exit";
       }
+      : if (is_carried "stars") {
+         : print "The stars you were holding are losing their reality.";
+         : print "You don't really need them, you will become the most shining star of the universe.";
+         : drop "stars";
+      }
    }
    : if (is_present "map" && !is_carried "map" && (is_at "cc_room" || is_at "dream")) {
       : match "get map" {
