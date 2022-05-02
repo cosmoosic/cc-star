@@ -72,7 +72,7 @@ vocabulary {
    : verb / aliases = [throw, discard, vomit, puke]
    : verb / aliases = [ring,strike]
    : verb / aliases = [move, go]
-   : verb / aliases = [pigeon]
+   : verb / aliases = [pigeon, pigoen]
    : verb / aliases = [east, right]
    : verb / aliases = [west, left]
    : verb / aliases = [north, top]
@@ -92,7 +92,7 @@ vocabulary {
    : noun      / aliases = [bread, croissant, pain, cookie, loaf, biscuit]
    : noun      / aliases = [cafe, coocoo, shop, restaurant]
    : noun      / aliases = [owner, vendor]
-   : noun      / aliases = [pigeon]
+   : noun      / aliases = [pigeon, pigoen]
    : noun      / aliases = [red]
    : noun      / aliases = [cosmoogang]
    : noun      / aliases = [opensourcenow]
@@ -1098,25 +1098,76 @@ on_command {
    : if (is_using_map) {
       : set_false "is_map_command";
       : match "look wool" {
-         : print "We should solve Wool's issue.";
+         : set_sentence "nothing";
+         : if(!has_seen_wool_puzzle) {
+            : print "I should ask Wool if we can do something for him.";
+         } : else_if (!is_puzzle_wool_solved) {
+            : print "I should solve Wool's favorite puzzle... red chicken with blue wings.. what was it again?";
+         } : else {
+            : print "I solved Wool's puzzle, how smart am I?";
+         }
          : set_true "is_map_command";
       }
       : match "look lounge" {
-         : print "We should solve the laptop's issue.";
+         : set_sentence "nothing";
+         : if(!has_seen_laptop_puzzle) {
+            : print "There might be something to do do in the living room?";
+         } : else_if (!is_laptop_unlocked) {
+            : print "I should unlock Florrie's laptop to make sure she did not left a message for me?";
+         } : else_if (!is_puzzle_7c_solved) {
+            : print "I found Florrie password, it was so unexpected. Did June get the same laptop?";
+         } : else_if (!is_puzzle_ee_solved) {
+            : print "I should go check the living room, I heard some cooing sounds and activity.";
+         } : else_if (is_at "cc_hero_june") {
+            : print "I should help E but what can I do?";
+         } : else_if (is_present "ee" && is_puzzle_ee_solved && !is_labyrinth_open) {
+            : print "I'm happy to have saved E, I wonder how tumultuous his feelings are.";
+         } : else_if (is_labyrinth_open) {
+            : print "The screen of living room finally opened? I should check on that.";
+         } : else_if (is_florrie_alone_in_living_room && !is_puzzle_florrie_now) {
+            : print "Can I help Florrie with something?";
+         } : else_if (is_puzzle_florrie_now) {
+            : print "As expected of Florrie, a very complicated problem. I should be able to solve it... I hope.";
+         } : else_if (is_everybody_here) {
+            : print "I'm hungry, can I get something somewhere?";
+         } : else {
+            : print "Let's find a way to eat cake!";
+         }
          : set_true "is_map_command";
       }
       : match "look game" {
-         : print "We should go see RuD's issue.";
+         : set_sentence "nothing";
+         : if (!has_seen_rud_puzzle) {
+            : print "We have heard noise coming from the gaming room for weeks, but nobody is leaving or entering? We should check it out.";
+         } : else_if (!is_present "rud_happy") {
+         
+            : print "I have to find a way to help RuD win his bet. Maybe I could change every clocks several hours behind and give him some more time?";
+         } : else {
+            : print "I solved RuD problem, now he has won so much more time to play more.";
+         }
          : set_true "is_map_command";
       }
       : match "look yard" {
-         : print "We should solve 7C's issue.";
+         : set_sentence "nothing";
+         : if (!has_seen_7c_puzzle) {
+            : print "We should visit Crispy Garden, maybe there is some work I could help with.";
+         } : else_if (!is_puzzle_7c_solved) {
+            : print "Who could be the most popular? If 7Cs found it in 10 seconds, I should be able to find it too in less than 1000 time the time she took.";
+         } : else {
+            : print "Of course \"C-Cherries\" is the best! I really like their name.";
+         }
          : set_true "is_map_command";
       }
       : match "exit -; leave -; return -; close -; m -; map -; use map; examine map; c -" {
          : set_true "tuto_used_map";
          : set_false "is_using_map";
          : set_sentence "nothing";
+         : set_true "is_map_command";
+         : redescribe;
+      }
+      : match "n -; w -; e -; s -; enter -" {
+         : set_true "tuto_used_map";
+         : set_false "is_using_map";
          : set_true "is_map_command";
          : redescribe;
       }
