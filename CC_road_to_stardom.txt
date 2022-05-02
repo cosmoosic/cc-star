@@ -154,7 +154,7 @@ vocabulary {
 booleans {
    can_leave_crispy_garden : boolean "false";
    help_about_commands : boolean "false";
-   is_sound_muted : boolean "true";
+   is_sound_muted : boolean "true" scope="survivor";
    music_ever_enabled : boolean "false";
    is_puzzle_wool_solved : boolean "false" ;
    is_puzzle_7c_solved : boolean "false" ;
@@ -369,6 +369,7 @@ strings {
        chance(33) ? "music_labyrinth" :
     chance(34) ? "music_labyrinth_2" : "music_beat_1");
    previous_command : string "";
+   jingle_song : string "";
    dovalingo_src_lang : string "";
    dovalingo_dst_lang : string "";
    dova_word_to_find : string "";
@@ -681,6 +682,19 @@ subroutines {
    failure_jingle : subroutine {
       : play_incidental "incidental_failure";
    }
+   
+   play_jingle : subroutine {
+      : set_music_vol volume -> (sound_volume / 5);
+      : play_incidental (jingle_song);
+      : if (jingle_song == "incidental_failing_failure") {
+         : pause "2850";
+      } : else_if (jingle_song == "incidental_success") {
+         : pause "2460";
+      } : else {
+         : pause "1000";
+      }
+      : gosub "update_volume";
+   }
 
    set_sound_on : subroutine {
       : if (!sysvar_bool "sysvar_sound_enabled") {
@@ -945,18 +959,14 @@ subroutines {
             : if (chosen() == dova_word_to_find) {
                : print ("You have made the correct choice, it is <"+first_cap(chosen())+"<#6dc928>>!");
                : increment "dovalingo_score"; 
-               : set_music_vol volume="1";
-               : play_incidental "incidental_ok";
-               : pause "500";
-               : gosub "update_volume";
+               : set_string var="jingle_song" value="incidental_ok";
+               : gosub "play_jingle";
             }
             : else {
                : collection_push { collection = "dovalingo_wrong_choices" item -> (dova_word_index_to_find ) }
                : print ("Oh, you made an error, the correct choice was <"+dova_word_to_find+"<#6dc928>>.");
-               : set_music_vol volume="1";
-               : failure;
-               : pause "500";
-               : gosub "update_volume";
+               : set_string var="jingle_song" value="incidental_failure";
+               : gosub "play_jingle";
             }
          }
          : if (dova_word_index_to_find == -1) {
@@ -1003,12 +1013,14 @@ on_describe {
        : update_graphic;
    }
    : else_if (is_at "labyrinth_4_2" ) {
-       : play_incidental "incidental_useless_success";
-       : set_true "has_blueprint";
+         : set_string var="jingle_song" value="incidental_useless_success";
+         : gosub "play_jingle";
+         : set_true "has_blueprint";
    }
    : else_if (is_at "labyrinth_5_5") {
        : if (has_blueprint) {
-           : success;
+            : set_string var="jingle_song" value="incidental_success";
+            : gosub "play_jingle";
            : set_false "in_labyrinth";
            : set_false "is_labyrinth_open";
            : print "You did it! You're a hero, CC!";
@@ -1031,7 +1043,8 @@ on_describe {
        : redescribe;
    }
    : if (is_at "living_room" && in_labyrinth) {
-      : play_incidental "incidental_failing_failure";
+      : set_string var="jingle_song" value="incidental_useless_success";
+      : gosub "play_jingle";
       : print "Well, that didn't work out, but it's not an easy task. Luckily, that was a simulation that 7Cs' AI ran through her algorithms. Thanks to that we found the mistake in advance so we are safe. Let's try again.";
       : set_false "in_labyrinth";
       : press_any_key;
@@ -1043,7 +1056,8 @@ on_describe {
       }
    }
    : if (is_at "labyrinth_ship_destroyed") {
-        : failure ;
+       : set_string var="jingle_song" value="incidental_failure";
+       : gosub "play_jingle";
    }
    
 }
@@ -1258,7 +1272,7 @@ on_command {
          : print "This is Florrie communicator, it's locked but you see <Dovalingo<#cc0>>™ notifications that you can open.";
       }
    }
-   : match "get communicator"  {
+   : match "get communicator; get g"  {
       : if (is_present "communicator" && !is_carried "communicator") {
          : print "You got it, it's locked but you see <Dovalingo™<#cc0>> notifications that you can open.";
          : pocket "communicator";
@@ -1371,7 +1385,7 @@ on_command {
          }
       }
       : if (! verb_is "nothing") {
-         : set_integer var="current_volume_index" value="-1";
+         : set_integer var="current_volume_index" value="-1";  
          : iterate "sound_volume_labels" {
             : if (rationalized "noun1" == item()) {
                : set_integer var="current_volume_index" (index());
@@ -1404,19 +1418,15 @@ on_command {
                : set_integer var="sound_volume" (int(sound_volume_values[current_volume_index]));
                : print ("Sound volume set to "+string_tmp+" ("+sound_volume+"%%).");
             }
+            : set_false "is_sound_muted";
             : gosub "update_volume";
             : gosub "play_music";
          }
       }
       : else_if(noun1_is "off") {
-         : mask {
-           : set_sentence "sound off";
-           # to prevent not restarting on SOUND ON
-           : play_music "music_win";
-           : set_string var = "current_track" value="";
+           : set_sentence "nothing";
            : set_true "is_sound_muted";
            : gosub "update_volume";
-         }
       }
       : else_if (!verb_is "nothing") {
          : if (sysvar_bool "sysvar_sound_enabled") {
@@ -1647,19 +1657,22 @@ on_command {
             : print "Video \'TEQ Talk: Improve Office Efficiency\' shows a pigeon at a desk drinking a protein-packed cheese beverage, and then there's \'Learn Programming in Pyghon with E\'... " ;
             : print "How can you compete? So unfair!!! You quickly lock the computer and swear not to touch it ever again." ;
             : press_any_key;
-            : success ;
+          : set_string var="jingle_song" value="incidental_success";
+          : gosub "play_jingle";
             : set_true "is_laptop_unlocked" ;
             : goto "living_room";
             : redescribe;
         }
         : print "Try again." ;
-        : failure ;
+       : set_string var="jingle_song" value="incidental_failure";
+       : gosub "play_jingle";
      }
    }
 
     : match "unlock dove; dove -"  {
       : if (is_at "puzzle_florrie_laptop") {
-        : failure ;
+       : set_string var="jingle_song" value="incidental_failure";
+       : gosub "play_jingle";
         : print "Almost there, too bad there can only be one password." ;
         : press_any_key;
       }
@@ -1744,7 +1757,8 @@ on_command {
         : if (hat_color == original "noun1" || verb_is "red") {
             : print "Wool says: \'Correct. The chicken's hat is <red<#c00>> of course.";
             : print "I can <EXPLAIN<#cc0>> if you want.\'";
-            : success ;
+             : set_string var="jingle_song" value="incidental_success";
+             : gosub "play_jingle";
             : set_true "is_puzzle_wool_solved";
             : set_true "talked_to_mirror_and_solved_puzzles" ;
             : print "Alright, maybe answering riddles is one way to become famous? You should try with someone else. Let's go.";
@@ -1753,13 +1767,15 @@ on_command {
         : else_if (hat_blue == original "noun1") {
             : print "Wool says: \'Nope.";
             : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
-            : failure ;
+             : set_string var="jingle_song" value="incidental_failure";
+             : gosub "play_jingle";
         }
         : else {
             : print "Wool says: \'Did you hurt your head or something?";
             : print "You only have a choice between two colors, <red<#c00>> and <blue<#00c>>.";
             : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
-            : failure ;
+            : set_string var="jingle_song" value="incidental_failure";
+            : gosub "play_jingle";
         }
      }
    }
@@ -1768,7 +1784,8 @@ on_command {
       : if (is_at "puzzle_hat" && !is_puzzle_wool_solved) {
          : print "\'Nope.";
          : print "If you study a bit of logic (even Tarski theories should suffice), you should be able to guess the correct color next try.\'";
-         : failure ;
+          : set_string var="jingle_song" value="incidental_failure";
+          : gosub "play_jingle";
       }
    }
 
@@ -1818,7 +1835,8 @@ on_command {
 
    : match "get poster; get guitar; get headphones; get frog ; get joystick ; get mouse ; get keyboard; get chair" {
       : if (is_at "party_planet_inside") {
-         : failure ;
+          : set_string var="jingle_song" value="incidental_failure";
+          : gosub "play_jingle";
          : print "RuD will probably be very angry if someone touches his stuff." ;
       }
    }
@@ -1971,7 +1989,8 @@ on_command {
              : print "But he doesn't look too impressed by your deduction skills." ;
              : print "He gives you a can of energy drink, as promised. " ;
              : print "It's in your <INVENTORY<#cc0>>, you can <GIVE<#cc0>>, <USE<#cc0>> it." ;
-             : success ;
+             : set_string var="jingle_song" value="incidental_success";
+             : gosub "play_jingle";
              : set_false "is_rud_sad";
              : set_false "is_puzzle_rud_in_progress" ;
              : destroy "rud_sad";
@@ -1983,17 +2002,20 @@ on_command {
             : else_if ((incorrect_game_1 == original "noun1") || "1" == original "noun1" || "a" == original "noun1") {
                 : print "You are about to suggest \'AKAFeather\', but notice a drawing pad is required to play. RuD excels with any controller... Except this one." ;
                 : print "RuD takes a sip of energy drink." ;
-                : failure ;
+                : set_string var="jingle_song" value="incidental_failure";
+                : gosub "play_jingle";
             }
             : else_if ((incorrect_game_2 == original "noun1") || "2" == original "noun1" || "b" == original "noun1") {
                 : print "You are about to suggest \'Brooms\', but remember that RuD never cleans his room or anything, there's no way he can get Diamond with this game!" ;
                 : print "RuD takes a sip of energy drink." ;
-                : failure ;
+                : set_string var="jingle_song" value="incidental_failure";
+                : gosub "play_jingle";
             }
             : else {
                 : print " RuD doesn't look too impressed by your deduction skills. \'Does this even exist?\' he asks." ;
                 : print " He takes a sip of energy drink." ;
-                : failure ;
+                : set_string var="jingle_song" value="incidental_failure";
+                : gosub "play_jingle";
             }
        }
    }
@@ -2002,7 +2024,8 @@ on_command {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print "You are about to suggest \'AKAFeather\', but notice a drawing pad is required to play. RuD excels with any controller... Except this one." ;
          : print "RuD takes a sip of energy drink." ;
-         : failure ;
+          : set_string var="jingle_song" value="incidental_failure";
+          : gosub "play_jingle";
        }
    }
 
@@ -2010,7 +2033,8 @@ on_command {
        : if (is_present "rud_sad" && is_at "party_planet_inside") {
          : print "You are about to suggest \'Brooms\', but remember that RuD never cleans his room or anything, there's no way he can get Diamond with this game!" ;
          : print "RuD takes a sip of energy drink." ;
-         : failure ;
+          : set_string var="jingle_song" value="incidental_failure";
+          : gosub "play_jingle";
        }
    }
 
@@ -2028,30 +2052,36 @@ on_command {
 
    : match "give drink "  {
       : if ((is_present "rud_happy" || is_present "rud_kitchen") && is_carried "energydrink") {
-         : play_incidental "incidental_ok";
+         : set_string var="jingle_song" value="incidental_ok";
+         : gosub "play_jingle";
          : print "RuD says: \'Look I promised that if you helped I'd give you this can. It already hurts me to see it go, so please keep it out of my sight.\'" ;
          : print "He takes a sip of his own energy drink." ;
       }
       : if ((is_present "seven_seas" || is_present "sevenseas_kitchen") && is_carried "energydrink") {
-         : play_incidental "incidental_ok";
+         : set_string var="jingle_song" value="incidental_ok";
+         : gosub "play_jingle";
          : print "Seven Seas says: \'I really appreciate your gesture but I think I am allergic to one component of this drink." ;
          : print "Last time I tried it, I began shaking everywhere and lost all control of my movements." ;
          : print "It might contain too much taurine.\'" ;
       }
       : if ((is_present "june"|| is_present "june_kitchen") && is_carried "energydrink") {
-         : play_incidental "incidental_ok";
+         : set_string var="jingle_song" value="incidental_ok";
+         : gosub "play_jingle";
          : print "June says: \'Oh it's the juice that looks like Clayrox toilet cleaner! Yeah tastes great, I don't want to deprive you of it!\'" ;
       }
       : if ((is_present "wool"|| is_present "wool_kitchen") && is_carried "energydrink") {
-         : play_incidental "incidental_ok";
+         : set_string var="jingle_song" value="incidental_ok";
+         : gosub "play_jingle";
          : print "Wool says: \'No thanks. People think energy drinks boosts your attention, but it's all a lie.\'" ;
       }
       : if ((is_present "ee" || is_present "ee_kitchen") && is_carried "energydrink") {
-         : play_incidental "incidental_ok";
+         : set_string var="jingle_song" value="incidental_ok";
+         : gosub "play_jingle";
          : print "E says: \'When I tried this, my disappointment was immeasurable and my day was ruined.\'" ;
       }
       : if (is_present "florrie" && is_carried "energydrink" && !has_florrie_drank) {
-         : play_incidental "incidental_ok";
+         : set_string var="jingle_song" value="incidental_ok";
+         : gosub "play_jingle";
          : print "Florrie takes a sip of energy drink..." ;
          : press_any_key ;
          : print "She coughs for a while, then disappears for a minute, then comes back and whispers:" ;
@@ -2064,7 +2094,8 @@ on_command {
          : set_true "has_florrie_drank" ;
       }
       : else_if (is_present "florrie" && is_carried "energydrink" && has_florrie_drank) {
-         : play_incidental "incidental_failing_failure";
+         : set_string var="jingle_song" value="incidental_failing_failure";
+         : gosub "play_jingle";
          : print "Florrie says she hears her phone ringing, and excuses herself." ;
       }
    }
@@ -2093,7 +2124,8 @@ on_command {
 
    : match "get chicken; taste chicken; grab chicken; seize chicken; eat chicken"  {
     : if (is_at "crispy_garden" && is_present "chicken_wing" && !is_carried "chicken_wing") {
-        : play_incidental "incidental_useless_success";
+       : set_string var="jingle_song" value="incidental_useless_success";
+       : gosub "play_jingle";
         : print "You take a chicken fruit from the tree. It's delicious, full of vitamins, and grown without pesticides." ;
         : pocket "chicken_wing" ;
         : print "This <WING<#cc0>> is now in your <INVENTORY<#cc0>>." ;
@@ -2108,7 +2140,8 @@ on_command {
 
    : match "get spherificator; take spherificator"  {
     : if (is_at "wools_wheels" && is_present "spherificator" && !is_carried "spherificator") {
-        : play_incidental "incidental_useless_success";
+        : set_string var="jingle_song" value="incidental_useless_success";
+        : gosub "play_jingle";
         : print "You sneakily take the Banach-Spherificator. You don't know how to use it though." ;
         : pocket "spherificator" ;
         : print "This <SPHERIFICATOR<#cc0>> is now in your <INVENTORY<#cc0>>." ;
@@ -2124,30 +2157,36 @@ on_command {
    : match "give chicken"  {
        : if (is_carried "chicken_wing") {
          : if ((is_present "rud_happy" || is_present "rud_kitchen")) {
-            : play_incidental "incidental_ok";
+            : set_string var="jingle_song" value="incidental_ok";
+            : gosub "play_jingle";
             : print "RuD says: \'Thanks, but I don't want to get my fingers dirty while gaming.\'" ;
             : print "He takes a sip of energy drink." ;
          }
       : if ((is_present "seven_seas" || is_present "sevenseas_kitchen")) {
-         : play_incidental "incidental_ok";
+         : set_string var="jingle_song" value="incidental_ok";
+         : gosub "play_jingle";
          : print "Seven Seas says: \'Interesting, as this contains vitamin C and carotenoids, it is considered a CC-rich food." ;
          : print "Certainly nutritious for you, but not as useful for me.\'" ;
       }
       : if ((is_present "june"|| is_present "june_kitchen")) {
-         : failure;
+          : set_string var="jingle_song" value="incidental_failure";
+          : gosub "play_jingle";
          : print "June says: \'Thanks, but I grow my own in my lab and they are way tastier. Please try them some time!\'" ;
       }
       : if ((is_present "wool"|| is_present "wool_kitchen")) {
-         : failure;
+          : set_string var="jingle_song" value="incidental_failure";
+          : gosub "play_jingle";
          : print "Wool says: \'Thanks, but my flying tool friend Pyjeon can go and grab some for me anytime.\'" ;
       }
       : if ((is_present "ee" || is_present "ee_kitchen")) {
-         : play_incidental "incidental_ok";
+         : set_string var="jingle_song" value="incidental_ok";
+         : gosub "play_jingle";
          : print "E takes a bite of the chicken wing." ;
          : print "E says: \'Not too bad, but I prefer the ones that June give me.\'" ;
       }
       : if (is_present "florrie") {
-         : play_incidental "incidental_ok";
+         : set_string var="jingle_song" value="incidental_ok";
+         : gosub "play_jingle";
          : print "Florrie takes a bite of the chicken wing..." ;
          : print "Florrie says: \'Thanks CC, it tastes super good! \'" ;
          
@@ -2157,17 +2196,20 @@ on_command {
    : match "give spherificator"  {
        : if (is_carried "spherificator") {
          : if ((is_present "rud_happy" || is_present "rud_kitchen")) {
-            : play_incidental "incidental_ok";
+            : set_string var="jingle_song" value="incidental_ok";
+            : gosub "play_jingle";
             : print "RuD says: \'I've seen wool guarding it like a treasure, how did you get it? Hey I'll trade an energy drink for it!\'" ;
             : print "You politely decline, while he takes a sip of energy drink." ;
          }
          : if ((is_present "seven_seas" || is_present "sevenseas_kitchen")) {
-             : play_incidental "incidental_ok";
+             : set_string var="jingle_song" value="incidental_ok";
+             : gosub "play_jingle";
              : print "Seven Seas says: \'Interesting, is it some kind of measuring device?" ;
              : print "My data does not contain any usage manual. How unfortunate.\'" ;
          }
          : if ((is_present "june"|| is_present "june_kitchen")) {
-             : play_incidental "incidental_ok";
+             : set_string var="jingle_song" value="incidental_ok";
+             : gosub "play_jingle";
              : print "June says: \'No thanks, I don't understand why he uses such primitive tools." ;
              : print "I can measure everything perfectly with my gyro-bubble gum device!\'" ;
          }
@@ -2175,11 +2217,13 @@ on_command {
              : print "Wool is deep in thoughts, he does not even notice you." ;
          }
          : if ((is_present "ee" || is_present "ee_kitchen")) {
-             : play_incidental "incidental_ok";
+             : set_string var="jingle_song" value="incidental_ok";
+             : gosub "play_jingle";
              : print "E looks puzzled, like chicken in front of a knife." ;
          }
          : if (is_present "florrie") {
-             : play_incidental "incidental_ok";
+             : set_string var="jingle_song" value="incidental_ok";
+             : gosub "play_jingle";
              : print "Florrie says: \'Thanks, but I would prefer some chicken wing or chocolate!\'" ;
          }
        }
@@ -2313,7 +2357,8 @@ on_command {
        : if (is_at "crispy_garden" && is_exists "seven_seas" && is_puzzle_seven_seas_now) {
          : print "Well-done! Indeed, C-Cherries is currently the top star." ;
          : print "C-Cherries looks very wealthy. That's probably the main explanation for this incredible success." ;
-         : success ;
+          : set_string var="jingle_song" value="incidental_success";
+          : gosub "play_jingle";
          : print "SevenSeas says: \'CC, I may have another suggestion for becoming popular." ;
          : press_any_key ;
          : print "My data shows heroes are popular. You could become one? " ;
@@ -2347,7 +2392,8 @@ on_command {
    : match "guess one; guess 1; guess three; guess 3; guess four; guess 4; guess b; guess beat; guess d; guess dew; guess dewdiedie ; guess e; guess eight; guess 8; guess 8k; guess eightk; guess eightkminuterecipes; guess wrong"  {
        : if (is_at "crispy_garden" && is_exists "seven_seas" && is_puzzle_seven_seas_now) {
          : print "Maybe you need another <CLUE<#cc0>>?" ;
-         : failure ;
+          : set_string var="jingle_song" value="incidental_failure";
+          : gosub "play_jingle";
        }
    }
 
@@ -2524,11 +2570,13 @@ on_command {
 
    : match "examine beak; examine herocc; examine hero; talk june; thank june; beak -; talk -; get beak"  {
       : if (is_at "cc_hero_june") {
-        : success ;
+          : set_string var="jingle_song" value="incidental_success";
+          : gosub "play_jingle";
         : print "This thing looks like a Belgian cuberdon, those raspberry gummy candies." ;
         : print "Wow! You feel lighter and different." ;
         : press_any_key ;
-        : play_incidental "incidental_failing_failure";
+       : set_string var="jingle_song" value="incidental_failing_failure";
+       : gosub "play_jingle";
         : print "You hear a strangled noise." ;
         : print "E, who was eating popcorn, is starting to choke!!!!!" ;
         : press_any_key ;
@@ -2599,7 +2647,8 @@ on_command {
    : match "opensourcenow -; open sourcenow; opensource now" {
         : if (is_exists "florrie" && is_at "living_room" && is_puzzle_florrie_now ) {
             : print "Awesome!!! I wonder what it means though." ;
-            : success ;
+            : set_string var="jingle_song" value="incidental_success";
+            : gosub "play_jingle";
             : set_false "is_puzzle_florrie_now" ;
             : set_true "is_puzzle_florrie_solved" ;
             : set_true "is_everybody_here" ;
@@ -2622,7 +2671,8 @@ on_command {
     : if (is_exists "florrie" && is_at "living_room" && is_puzzle_florrie_now ) {
         : if (florrie_code == original "noun1") {
             : print "Awesome!!! I wonder what it means though." ;
-            : success ;
+            : set_string var="jingle_song" value="incidental_success";
+            : gosub "play_jingle";
             : set_false "is_puzzle_florrie_now" ;
             : set_true "is_puzzle_florrie_solved" ;
             : set_true "is_everybody_here" ;
@@ -2641,7 +2691,8 @@ on_command {
         }
         : else {
             : print "Florrie says: \'It's a tough question, do you need a <HINT<#cc0>>?\'";
-            : failure ;
+             : set_string var="jingle_song" value="incidental_failure";
+             : gosub "play_jingle";
         }
      }
     }
@@ -3307,6 +3358,7 @@ assets {
       dream_stars: png "https://cosmoose.org/adventuron_april_2022/Images/dream_stars.png";
       map_object: png "https://cosmoose.org/adventuron_april_2022/Images/icon_map.png";
       new_map:  png "https://cosmoose.org/adventuron_april_2022/Images/map.png";
+      map_lounge_grey: png "https://cosmoose.org/adventuron_april_2022/Images/map_lounge_grey.png";
       map_game_grey: png "https://cosmoose.org/adventuron_april_2022/Images/map_game_grey.png";
       map_wool_grey: png "https://cosmoose.org/adventuron_april_2022/Images/map_wool_grey.png";
       map_yard_grey: png "https://cosmoose.org/adventuron_april_2022/Images/map_yard_grey.png";
