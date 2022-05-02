@@ -66,9 +66,6 @@ redescribe = auto_beta
 start_at = dream
 #cc_room
 
-on_debug {
-   : pocket "communicator";
-}
 
 vocabulary {
    : verb / aliases = [examine, check, regarde, touch, look, see]
@@ -207,6 +204,7 @@ booleans {
 }
 
 integers {
+   sound_volume : integer "16" scope="survivor";
    pitch_random : integer "0";
    inventory_limit : integer "30" ;
    day_spend_labyrinth_enigma : integer "0";
@@ -274,8 +272,12 @@ collections {
       items  = [ "1_1", "1_2", "1_3", "1_4", "1_5", "2_1", "2_2", "2_3", "2_4", "2_5", "3_1", "3_2", "3_3", "3_4", "3_5", "4_1", "4_2", "4_3", "4_4", "4_5", "5_1", "5_2", "5_3", "5_4", "5_5", "ship_destroyed"]
    }
    
-   sound_volumes : list {
-      items = [ "lowlowest", "lowest", "highlowest", "lowlow", "low", "highlow", "lownormal", "normal", "highnormal", "lowhigh", "high", "highhigh", "lowhighest", "highest", "highhighest" ]
+   sound_volume_labels : list {
+      items = ["lowest", "low", "normal", "high", "highest"]
+   }
+   
+   sound_volume_values : list {
+      items =  [1, 7, 16, 40, 100]
    }
 
    choking_e_choice_1: list {
@@ -345,7 +347,6 @@ collections {
 strings {
    next_track : string "";
    current_track : string "";
-   sound_volume : string "normal" scope="survivor";
    string_tmp : string "";
    comments : string "";
    nothing_message : string "";
@@ -762,61 +763,9 @@ subroutines {
          : set_music_vol volume="0";
          : set_incidental_vol volume="0";
       }
-      : else_if (sound_volume == "lowlowest") {
-         : set_music_vol volume="1";
-         : set_incidental_vol volume="1";
-      }
-      : else_if (sound_volume == "lowest") {
-         : set_music_vol volume="2";
-         : set_incidental_vol volume="2";
-      }
-      : else_if (sound_volume == "highlowest") {
-         : set_music_vol volume="3";
-         : set_incidental_vol volume="3";
-      }
-      : else_if (sound_volume == "lowlow") {
-         : set_music_vol volume="5";
-         : set_incidental_vol volume="5";
-      }
-      : else_if (sound_volume == "low") {
-         : set_music_vol volume="7";
-         : set_incidental_vol volume="7";
-      }
-      : else_if (sound_volume == "highlow") {
-         : set_music_vol volume="10";
-         : set_incidental_vol volume="10";
-      }
-      : else_if (sound_volume == "lownormal") {
-         : set_music_vol volume="13";
-         : set_incidental_vol volume="13";
-      }
-      : else_if (sound_volume == "normal") {
-         : set_music_vol volume="16";
-         : set_incidental_vol volume="16";
-      }
-      : else_if (sound_volume == "highnormal") {
-         : set_music_vol volume="24";
-         : set_incidental_vol volume="24";
-      }
-      : else_if (sound_volume == "lowhigh") {
-         : set_music_vol volume="32";
-         : set_incidental_vol volume="32";
-      }
-      : else_if (sound_volume == "high") {
-         : set_music_vol volume="40";
-         : set_incidental_vol volume="40";
-      }
-      : else_if (sound_volume == "highhigh") {
-         : set_music_vol volume="60";
-         : set_incidental_vol volume="60";
-      }
-      : else_if (sound_volume == "highest") {
-         : set_music_vol volume="80";
-         : set_incidental_vol volume="80";
-      }
-      : else_if (sound_volume == "highhighest") {
-         : set_music_vol volume="100";
-         : set_incidental_vol volume="100";
+      : else {
+         : set_music_vol volume -> (sound_volume);
+         : set_incidental_vol volume -> (sound_volume);
       }
    }
    play_choking_e_puzzle_choice : subroutine {
@@ -884,7 +833,7 @@ subroutines {
    play_dovalingo :  subroutine {
       : clear_screen;
       : set_theme "theme_dovalingo";
-      : print ("Welcome back to Dovalingo™ "+(is_present "ee" ? "E" : "Florrie")+"!\n\nYou are still in the "+(dovalingo_league_name)+" league "+(is_present "ee" ? "totally behind Florrie" : "with enormous advance over E")+".\n\nClick <here<#6dc928>>[https://adventuron.io] to report any inaccuracy from our flying learning experts. \n\n");
+      : print ("Welcome back to Dovalingo™ "+(is_present "ee" ? "E" : "Florrie")+"!\n\nYou are still in the "+(dovalingo_league_name)+" league "+(is_present "ee" ? "totally behind Florrie" : "with enormous advance over E")+".\n\n");
       : if (dovalingo_src_lang != "") {
          : add_choice text -> ("Do you want to continue playing from "+title_case(dovalingo_src_lang)+" to "+title_case(dovalingo_dst_lang)+"?") {
          }
@@ -909,7 +858,6 @@ subroutines {
          : print "Goodbye, thanks for using our services.";
          : set_integer var="integer_tmp" value="1";
       }
-      : print "d";
       : choose hint="numeric_list_always" ;
       : if (integer_tmp == 1) {
       
@@ -1379,8 +1327,8 @@ on_command {
    : match "sound _; music _; volume _" {
       : if (noun1_is "lower" || noun1_is "higher") {
          : set_integer var="current_volume_index" value="-1";
-         : iterate "sound_volumes" {
-            : if (item() == sound_volume) {
+         : iterate "sound_volume_labels" {
+            : if (int(sound_volume_values[index()]) == sound_volume) {
                : set_integer var="current_volume_index" (index());
             }
          }
@@ -1395,7 +1343,7 @@ on_command {
                }
             }
             : else {
-               : if (current_volume_index + 1 < count "sound_volumes") {
+               : if (current_volume_index + 1 < count "sound_volume_labels") {
                   : increment "current_volume_index";
                }
                : else {
@@ -1403,21 +1351,21 @@ on_command {
                   : set_sentence "nothing";
                }
             }
-            : set_noun1 (collection_get {
-               collection -> ("sound_volumes")
-                  index -> ( current_volume_index )
-            });
+            : set_noun1 (sound_volume_labels[current_volume_index]);
+         } : else {
+            : print "You are not on a named sound level (<LOWEST<#cc0>> | <LOW<#cc0>> | <NORMAL<#cc0>> | <HIGH<#cc0>> | <HIGHEST<#cc0>>) but at {sound_volume}%%";
+            : set_sentence "nothing";
          }
       }
       : if (! verb_is "nothing") {
          : set_integer var="current_volume_index" value="-1";
-         : iterate "sound_volumes" {
+         : iterate "sound_volume_labels" {
             : if (rationalized "noun1" == item()) {
                : set_integer var="current_volume_index" (index());
             }
          }
       }
-      : if (! verb_is "nothing" && (preposition_is "on" || current_volume_index != -1)) {
+      : if (! verb_is "nothing" && (preposition_is "on" || current_volume_index != -1 || (is_int( original "noun1") && int( original "noun1") >= 0 && int( original "noun1") <= 100))) {
          : mask {
             : set_string var="string_tmp" {(rationalized "noun1")}
             : set_sentence "nothing";
@@ -1436,11 +1384,15 @@ on_command {
                   : set_string var="nothing_message" value="You have not enabled the music";
                }
             }
-            : if (string_tmp != "") {
-               : set_string var="sound_volume" {(string_tmp)};
-               : print "Sound volume set to {sound_volume}.";
+            : if (is_int(string_tmp)) {
+               : set_integer var="sound_volume" (int(string_tmp));
+               : print "Sound volume set to {sound_volume}%%.";
+            } : else_if (current_volume_index != -1) {
+               : set_integer var="sound_volume" (int(sound_volume_values[current_volume_index]));
+               : print ("Sound volume set to "+string_tmp+" ("+sound_volume+"%%).");
             }
             : gosub "update_volume";
+            : gosub "play_music";
          }
       }
       : else_if(noun1_is "off") {
@@ -1455,10 +1407,10 @@ on_command {
       }
       : else_if (!verb_is "nothing") {
          : if (sysvar_bool "sysvar_sound_enabled") {
-            : print "<SOUND OFF<#cc0>> | <LOWEST<#cc0>> | <LOW<#cc0>> | <NORMAL<#cc0>> | <HIGH<#cc0>> | <HIGHEST<#cc0>> to disable sound or change volume.";
+            : print "<SOUND OFF<#cc0>> | <LOWEST<#cc0>> | <LOW<#cc0>> | <NORMAL<#cc0>> | <HIGH<#cc0>> | <HIGHEST<#cc0>> | <0-100<#cc0>> to disable sound or change volume.";
          }
          : else {
-            : print "<SOUND ON<#cc0>> | <LOWEST<#cc0>> | <LOW<#cc0>> | <NORMAL<#cc0>> | <HIGH<#cc0>> | <HIGHEST<#cc0>> to enable sound and change volume.";
+            : print "<SOUND ON<#cc0>> | <LOWEST<#cc0>> | <LOW<#cc0>> | <NORMAL<#cc0>> | <HIGH<#cc0>> | <HIGHEST<#cc0>> | <0-100<#cc0>> to enable sound and change volume.";
          }
      }
    }
@@ -2761,6 +2713,7 @@ on_command {
        }
        : print "- Type <N<#cc0>>, <S<#cc0>>, <E<#cc0>>, <W<#cc0>>, <ENTER<#cc0>>, <EXIT<#cc0>> to move";
        : print "- Type '<LOAD<#cc0>>' or  '<SAVE<#cc0>>' to load or save a game";
+       : print "- Type '<UNDO<#cc0>>' to go back in time and undo what you have just done";
        : print "- Type '<CLEAR<#cc0>>' or  '<REDESCRIBE<#cc0>>' to clear the screen";
        : print "- Type '<HINT<#cc0>>' to get a hint on a puzzle\n  If a HINT is not sufficient, check the solution in the PDF guide. Don't give up!";
        : print "- Type '<QUIT<#cc0>>' to restart a game";
