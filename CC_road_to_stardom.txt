@@ -66,11 +66,6 @@ redescribe = auto_beta
 start_at = dream
 #cc_room
 
-on_debug {
-   : goto "cc_hero_june";
-   : redescribe;
-}
-
 vocabulary {
    : verb / aliases = [examine, check, regarde, touch, look, see]
    : verb / aliases = [give, show]
