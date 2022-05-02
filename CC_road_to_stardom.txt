@@ -66,7 +66,6 @@ redescribe = auto_beta
 start_at = dream
 #cc_room
 
-
 vocabulary {
    : verb / aliases = [examine, check, regarde, touch, look, see]
    : verb / aliases = [give, show]
@@ -202,6 +201,7 @@ booleans {
    has_seen_rud_puzzle : boolean "false";
    has_seen_7c_puzzle : boolean "false";
    boolean_tmp : boolean "false";
+   has_won_previously : boolean "true" scope="survivor";
 }
 
 integers {
@@ -228,6 +228,7 @@ integers {
       dovalingo_lessons < 42 ? 210 :
       count "dovalingo_english");
    dova_word_index_to_find : integer "0";
+   seed_florrie_puzzle  : integer "4";
 }
 
 collections {
@@ -553,7 +554,7 @@ barriers {
    block_cc_room_exit : block_path {
       from = cc_room
       to = living_room
-      message  = Why leave? You have all your toys here, including the brand-new mirror June gave you!
+      message  = Why leave? You have all your toys here, including the brand-new <mirror<#cc0>> June gave you!
       block_when_not = talked_to_mirror
 
    }
@@ -622,6 +623,9 @@ barriers {
 ######################################
 
 on_startup {
+   : if (has_won_previously) {
+      : set_integer var="seed_florrie_puzzle" (random(674));
+   }
    : iterate "labyrinth_dir" {
        : set_graphic {
          graphic -> ("puzzle_labyrinth")
@@ -994,6 +998,7 @@ on_describe {
       : press_any_key ;
       : clear_screen;
       : stop_music;
+      : set_true "has_won_previously";
       : win_game ;
    }
   : if (is_at "puzzle_labyrinth" ) {
@@ -1090,7 +1095,7 @@ on_command {
          : set_verb text="look";
       }
    }
-   : match "click wool; click rud; click 7c; click e; click june; click florrie" {
+   : match "click wool; click rud; click 7c; click e; click june; click florrie; click mirror" {
       : if (previous_command == sentence_raw()) {
          : print ("You <talk<#cc0>> to <"+first_cap(original "noun1")+"<#cc0>>!");
          : set_verb text="talk";
@@ -1436,6 +1441,11 @@ on_command {
             : print "<SOUND ON<#cc0>> | <LOWEST<#cc0>> | <LOW<#cc0>> | <NORMAL<#cc0>> | <HIGH<#cc0>> | <HIGHEST<#cc0>> | <0-100<#cc0>> to enable sound and change volume.";
          }
      }
+   }
+   : match "break mirror; explode mirror"   {
+      : if (is_at "cc_room") {
+         : print "This is a gift from June! What unlucky things am I thinking of?";
+      }
    }
    : match "talk mirror; talk -"   {
       : if (is_at "cc_room" && !talked_to_mirror_and_solved_puzzles) {
@@ -2617,16 +2627,16 @@ on_command {
         : print "The following sentence:" ;
         : print "\'Few radios play June's song.\'" ;
         : print "translates to (thanks to a mysterious mathematical formula):" ;
-        : print "19-14-257" ;
-        : print "157-4-10-40-109-175" ;
-        : print "124-70-4-304" ;
-        : print "49-214-95-14'175" ;
-        : print "175-109-95-25" ;
+        : print ((seed_florrie_puzzle+15)+"-"+(seed_florrie_puzzle+10)+"-"+(seed_florrie_puzzle+253)) ;
+        : print ((seed_florrie_puzzle+153)+"-"+(seed_florrie_puzzle)+"-"+(seed_florrie_puzzle+6)+"-"+(seed_florrie_puzzle+36)+"-"+(seed_florrie_puzzle+105)+"-"+(seed_florrie_puzzle+171)) ;
+        : print ((seed_florrie_puzzle+120)+"-"+(seed_florrie_puzzle+66)+"-"+(seed_florrie_puzzle)+"-"+(seed_florrie_puzzle+300));
+        : print ((seed_florrie_puzzle+45)+"-"+(seed_florrie_puzzle+210)+"-"+(seed_florrie_puzzle+91)+"-"+(seed_florrie_puzzle+10)+"'"+(seed_florrie_puzzle+171));
+        : print ((seed_florrie_puzzle+171)+"-"+(seed_florrie_puzzle+105)+"-"+(seed_florrie_puzzle+91)+"-"+(seed_florrie_puzzle+21));
         : press_any_key ;
         : print "Can you guess the original sentence behind the following:" ;
-        : print "109-124-14-95" ;
-        : print "175-109-214-157-7-14" ;
-        : print "95-109-257" ;
+        : print ((seed_florrie_puzzle+105)+"-"+(seed_florrie_puzzle+120)+"-"+(seed_florrie_puzzle+10)+"-"+(seed_florrie_puzzle+91));
+        : print ((seed_florrie_puzzle+171)+"-"+(seed_florrie_puzzle+105)+"-"+(seed_florrie_puzzle+210)+"-"+(seed_florrie_puzzle+153)+"-"+(seed_florrie_puzzle+3)+"-"+(seed_florrie_puzzle+10));
+        : print ((seed_florrie_puzzle+91)+"-"+(seed_florrie_puzzle+105)+"-"+(seed_florrie_puzzle+253));
         : print "<TYPE<#cc0>> THEFULLANSWER (without spaces)." ;
         : print "<HINT<#cc0>> can help if you are stuck. " ;
       }
@@ -2798,10 +2808,10 @@ on_command {
          }
        : else_if (is_at "living_room" && is_exists "florrie" && is_puzzle_florrie_now) {
         : print "Letters are translated to numbers following a mathematical sequence. Can you see the pattern?" ;
-        : print "D = 10" ;
-        : print "E = 14" ;
-        : print "F = 19" ;
-        : print "G = 25" ;
+        : print ("D = "+(seed_florrie_puzzle+6)) ;
+        : print ("E = "+(seed_florrie_puzzle+10)) ;
+        : print ("F = "+(seed_florrie_puzzle+15)) ;
+        : print ("G = "+(seed_florrie_puzzle+21)) ;
         }
         : else_if (is_at "living_room" && is_exists "june" && is_exists "ee" ) {
             : print "Make sure you talk to both June and E." ;
@@ -3132,6 +3142,10 @@ on_post_tick {
 on_render {
  : if (is_using_map) {
    : overlay "new_map";
+   : if (!talked_to_mirror) {
+      : overlay "map_lounge_grey";
+   
+   }
    : if (!has_seen_laptop_puzzle) {
       : overlay "map_wool_grey";
    }
@@ -3139,7 +3153,7 @@ on_render {
       : overlay (has_seen_wool_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="163" y="35" experimental_command = "look wool";
    }
    #: experimental_text_overlay text -> ("yoh"+has_seen_laptop_puzzle) x="20" y="20" ;
-   : if (!is_laptop_unlocked) {
+   : if (!is_laptop_unlocked && talked_to_mirror) {
       : overlay (has_seen_laptop_puzzle ? "exclamation_mark_orange" :  "exclamation_mark_grey") x="225" y="35" experimental_command = "look lounge";
    }
    : if (is_puzzle_7c_solved && is_laptop_unlocked && is_exists "rud_happy" && is_puzzle_wool_solved) {
@@ -3193,8 +3207,8 @@ assets {
    }
    graphics {
          cc_room : png "https://cosmoose.org/adventuron_april_2022/Images/cc_room.png" {
-         : overlay "transparent_40x40" x="113" y="8" experimental_command = "look mirror"; 
-         : overlay "transparent_40x40" x="133" y="8" experimental_command = "look mirror"; 
+         : overlay "transparent_40x40" x="113" y="8" experimental_command = "click mirror"; 
+         : overlay "transparent_40x40" x="133" y="8" experimental_command = "click mirror"; 
       };
       crispy_garden : png "https://cosmoose.org/adventuron_april_2022/Images/crispy_garden_no7Cs.png" {
         : if (is_seven_seas_crispy) {
