@@ -914,7 +914,7 @@ subroutines {
                : print "Goodbye, thanks for using our services.";
                : set_integer var="integer_tmp" value="1";
             }
-            : choose "?" hint="numeric_list_always" ;
+            : choose hint="numeric_list_always" ;
             : if (integer_tmp == 1) {
                : break;
             }
