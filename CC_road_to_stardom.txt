@@ -994,7 +994,7 @@ subroutines {
    dovalingo_do_exercice :  subroutine {
       : set_integer var="dova_word_index_to_find" value="-1";
       : iterate "dovalingo_choices" {
-         : set_integer var="integer_tmp" (random(dovalingo_wordlist_size));
+         : set_integer var="integer_tmp" (random(dovalingo_wordlist_size - 1));
          : collection_modify { collection = "dovalingo_choices" index -> (index()) item -> (integer_tmp) }
          # 13% of chance to get a word that was wrong before (1 - 0.98**8/1**8)
          : if (count "dovalingo_wrong_choices" > 0 && chance(2) && dova_word_index_to_find == -1) {
