@@ -201,7 +201,7 @@ booleans {
    has_seen_rud_puzzle : boolean "false";
    has_seen_7c_puzzle : boolean "false";
    boolean_tmp : boolean "false";
-   has_won_previously : boolean "true" scope="survivor";
+   has_won_previously : boolean "false" scope="survivor";
 }
 
 integers {
