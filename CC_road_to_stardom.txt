@@ -129,7 +129,7 @@ vocabulary {
    : noun      / aliases = [python, pighon, pygeon, pyghon]
    : noun      / aliases = [puzzle, enigma, riddle, mystery, problem]
    : noun      / aliases = [guitar, music, bass, instrument]
-   : noun      / aliases = [communicator, smartphone, phone, gsm]
+   : noun      / aliases = [communicator, smartphone, phone, gsm, g]
    : noun      / aliases = [notification, notif]
    : noun      / aliases = [tool, machine, gadget, appliance, kirby, device, toolbox, furniture, gear, pyjeon]
    : noun      / aliases = [tree, pine, forest, plant]
@@ -229,9 +229,15 @@ integers {
       count "dovalingo_english");
    dova_word_index_to_find : integer "0";
    seed_florrie_puzzle  : integer "4";
+   dovapingot_amount : integer "0" scope="survivor";
+   dovapingot_won_emotes : integer "0" scope="survivor";
+   dovapingot_emote_pity : integer "0" scope="survivor";
 }
 
 collections {
+   dovalingo_emojis : list {
+      items = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
+   }
    dovalingo_langs : list {
       items = ["english", "french", "german", "dutch", "korean", "chinese", "walloon"]
    }
@@ -353,14 +359,19 @@ strings {
     chance(34) ? "music_labyrinth_2" : "music_beat_1");
    previous_command : string "";
    jingle_song : string "";
-   dovalingo_src_lang : string "";
-   dovalingo_dst_lang : string "";
+   dovalingo_src_lang : string "" scope="survivor";
+   dovalingo_dst_lang : string "" scope="survivor";
    dova_word_to_find : string "";
    dovalingo_league_name: dynamic_string(
       dovalingo_lessons < 7 ? "Squab" :
       dovalingo_lessons < 14 ? "Young Pigeon" :
       dovalingo_lessons < 42 ? "Pigeon" :
       dovalingo_lessons < 100 ? "Wise Pigeon" : "Ultimate Pigeon");
+   emoji_0 : string "";
+   emoji_1 : string "";
+   emoji_2 : string "";
+   emoji_3 : string "";
+   emoji_4 : string "";
 }
 
 ######################################
@@ -605,6 +616,7 @@ barriers {
 ######################################
 
 on_startup {
+   : collection_sort collection="dovalingo_emojis" algorithm="shuffle" ;
    : if (has_won_previously) {
       : set_integer var="seed_florrie_puzzle" (random(674));
    }
@@ -821,18 +833,91 @@ subroutines {
    play_dovalingo :  subroutine {
       : clear_screen;
       : set_theme "theme_dovalingo";
-      : print ("Welcome back to Dovalingo™ "+(is_present "ee" ? "E" : "Florrie")+"!\n\nYou are still in the "+(dovalingo_league_name)+" league "+(is_present "ee" ? "totally behind Florrie" : "with enormous advance over E")+".\n\n");
+      : set_integer var="integer_tmp" value="0";
+      : print ("Welcome back to Dovalingo™ "+(is_present "ee" ? "E" : "Florrie")+"!\n\nYou have <"+dovapingot_amount+"₫<#007700>> and are still in the <"+(dovalingo_league_name)+" league<#adff68>> "+(is_present "ee" ? "totally behind Florrie" : "with enormous advance over E")+".\n\n");
       : if (dovalingo_src_lang != "") {
-         : add_choice text -> ("Do you want to continue playing from "+title_case(dovalingo_src_lang)+" to "+title_case(dovalingo_dst_lang)+"?") {
-         }
-         : add_choice text -> ("Inverse and play from "+title_case(dovalingo_dst_lang)+" to "+title_case(dovalingo_src_lang)+"?") {
-            : set_string var="string_tmp" (dovalingo_src_lang);
-            : set_string var="dovalingo_src_lang" (dovalingo_dst_lang);
-            : set_string var="dovalingo_dst_lang" (string_tmp);
-         }
-         : add_choice "Change languages?" {
-            : clear "dovalingo_wrong_choices";
-            : set_string var="dovalingo_src_lang" value="";
+         : while (true) {
+            : add_choice text -> ("Do you want to continue playing from "+title_case(dovalingo_src_lang)+" to "+title_case(dovalingo_dst_lang)+"?") {
+               : break;
+            }
+            : add_choice text -> ("Inverse and play from "+title_case(dovalingo_dst_lang)+" to "+title_case(dovalingo_src_lang)+"?") {
+               : set_string var="string_tmp" (dovalingo_src_lang);
+               : set_string var="dovalingo_src_lang" (dovalingo_dst_lang);
+               : set_string var="dovalingo_dst_lang" (string_tmp);
+               : break;
+            }
+            : add_choice "Change languages and play?" {
+               : clear "dovalingo_wrong_choices";
+               : set_string var="dovalingo_src_lang" value="";
+               : break;
+            }
+            : if (dovapingot_amount > 159) {
+               : add_choice text -> ("Pull some Coop boxes open with your <"+dovapingot_amount+" Dovapingots<#007700>>?") {
+                  : while (dovapingot_amount > 159) {
+                     : ask_bool question -> ("Open one Coop box by spending <160₫<#007700>>?") var = "boolean_tmp";
+                     : if (boolean_tmp) {
+                        : set_integer var="dovapingot_amount" (dovapingot_amount - 160);
+                        : print ("New Dovapingots amount: <"+dovapingot_amount+"₫<#007700>>.");
+                        : increment "dovapingot_emote_pity";
+                        : if (chance(3) || dovapingot_emote_pity >= 10) {
+                           : increment "dovapingot_won_emotes";
+                           : print "Hourra, you got a new emoticoone!! You now have {dovapingot_won_emotes} emoticoones \\o/";
+                           : if (dovapingot_won_emotes > 14) {
+                              : print "Currently we only have 15 emoticoones and you already have all of tem, congratulations!";
+                           }
+                           : set_integer var="dovapingot_emote_pity" value="0";
+                           : set_string var="jingle_song" value="incidental_success";
+                           : gosub "play_jingle";
+                        } : else {
+                           : print "Nothing in this Coop box, but next time for sure.";
+                        }
+                     } : else {
+                        : break;
+                     }
+                  }
+                  : print "You are lighter after spending so many Dovapingots, come back soon <<3";
+               }
+            }
+            : if (dovapingot_won_emotes > 0) {
+               : add_choice text -> ("Display "+(dovapingot_won_emotes>1?"all":"")+" my "+(dovapingot_won_emotes> 15 ? 15:dovapingot_won_emotes)+" emoticoone"+(dovapingot_won_emotes>1?"s":"")+"?") {
+                  : iterate "dovalingo_emojis" {
+                     : if (index() >= dovapingot_won_emotes - 1) {
+                        : break;
+                     }
+                     :set_string var -> ("emoji_" + (index()%5)) ("emoji_"+item());
+                     : if (index() % 5 == 4) {
+                        : print_graphic "transparent_cover";
+                        : set_string var="emoji_0" value="";
+                        : set_string var="emoji_1" value="";
+                        : set_string var="emoji_2" value="";
+                        : set_string var="emoji_3" value="";
+                        : set_string var="emoji_4" value="";
+                        : press_any_key;
+                     }
+                  }
+                  : if (emoji_0 != "") {
+                     : print_graphic "transparent_cover";
+                     : set_string var="emoji_0" value="";
+                     : set_string var="emoji_1" value="";
+                     : set_string var="emoji_2" value="";
+                     : set_string var="emoji_3" value="";
+                     : press_any_key;
+                  }
+                  : if (dovapingot_won_emotes < 15) {
+                     : print "Congratulations, you have {dovapingot_won_emotes} out of 15 emoticoones!";
+                  } : else {
+                     : print "Congratulations, you have all 15 emoticoones!";
+                  }
+               }
+            }
+            : add_choice "Quit?" {
+               : print "Goodbye, thanks for using our services.";
+               : set_integer var="integer_tmp" value="1";
+            }
+            : choose "?" hint="numeric_list_always" ;
+            : if (integer_tmp == 1) {
+               : break;
+            }
          }
       } : else {
          : print "It's the first time you are playing, please choose your lessons language.";
@@ -840,30 +925,29 @@ subroutines {
             : clear "dovalingo_wrong_choices";
             : set_string var="dovalingo_src_lang" value="";
          }
+         : add_choice "Quit?" {
+            : print "Goodbye, thanks for using our services.";
+            : set_integer var="integer_tmp" value="1";
+         }
+         : choose hint="numeric_list_always" ;
       }
-      : set_integer var="integer_tmp" value="0";
-      : add_choice "Quit?" {
-         : print "Goodbye, thanks for using our services.";
-         : set_integer var="integer_tmp" value="1";
-      }
-      : choose hint="numeric_list_always" ;
       : if (integer_tmp == 1) {
       
             : print "Thank you for using <Dovalingo<#cc0>>™. Come back at any time to learn new words!";
             : press_any_key ;
             : set_theme "theme_base";
             : redescribe;
-         :return;
+            :return;
       }
       : if (dovalingo_src_lang == "") {
          : iterate "dovalingo_langs" {
-            : add_choice text -> (title_case(item()))  {
+            : add_choice text -> ("<"+title_case(item())+"<#adff68>>") payload -> (item())  {
                : set_string var="dovalingo_src_lang" (lower(chosen()));
             }
          }
          : choose "What language do you want to learn?" hint="numeric_list_always" ;
-         : iterate "dovalingo_langs" filter -> (item() != dovalingo_src_lang)  {
-            : add_choice text -> (title_case(item())) {
+         : iterate "dovalingo_langs" filter -> (item() != dovalingo_src_lang)   {
+            : add_choice text -> ("<"+title_case(item())+"<#adff68>>") payload -> (item()) {
                : set_string var="dovalingo_dst_lang"  (lower(chosen()));
             }
          }
@@ -878,13 +962,25 @@ subroutines {
          : print "Lesson {dovalingo_lessons} - exercise 3";
          : gosub "dovalingo_do_exercice";
          : if (dovalingo_score > 1) {
-            : print ((chance(50) ? "Great" : "Well done")+", you finished lesson {dovalingo_lessons} by getting {dovalingo_score} correct answers.");
+            : if (dovalingo_score == 3 ) {
+               : set_integer var="integer_tmp" (27 + random(13));
+            } :else {
+               : set_integer var="integer_tmp" (14 + random(7));
+            }
+            : set_integer var="dovapingot_amount" (dovapingot_amount + integer_tmp);
+            : print ((chance(50) ? "Great" : "Well done")+", you finished lesson {dovalingo_lessons} by getting {dovalingo_score} correct answers."+" <+"+integer_tmp+"₫<#007700>>.");
             : increment "dovalingo_lessons";
          }
          : else {
-            : print ("So sad, you failed the lesson with "+(dovalingo_score == 1 ? "only one" : "no") +" correct answer. But try again any time.");
+            : if (dovalingo_score == 1 ) {
+               : set_integer var="integer_tmp" (5 + random(3));
+            } :else {
+               : set_integer var="integer_tmp" value="0";
+            }
+            : set_integer var="dovapingot_amount" (dovapingot_amount + integer_tmp);
+            : print ("So sad, you failed the lesson with "+(dovalingo_score == 1 ? "only one" : "no") +" correct answer. But try again any time." + (integer_tmp > 0? " <+"+integer_tmp+"₫<#007700>>.":""));
          }
-         : ask_bool question -> ("Quit <Dovalingo<#cc0>>™ and no not "+ (dovalingo_score > 1 ? "start next lesson" : "try again this lesson")+"?") var = "boolean_tmp";
+         : ask_bool question -> ("Quit <Dovalingo<#cc0>>™ and do not "+ (dovalingo_score > 1 ? "start next lesson" : "try again this lesson")+"?") var = "boolean_tmp";
          : if (boolean_tmp) {
             : print "Thank you for using <Dovalingo<#cc0>>™. Come back at any time to learn new words!";
             : press_any_key ;
@@ -921,7 +1017,7 @@ subroutines {
       }
       : collection_sort collection="dovalingo_choices" algorithm = "shuffle" ;
       : iterate "dovalingo_choices" filter -> (item() != "") {
-         : add_choice text -> (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (int(item()))}) {
+         : add_choice text -> ("<"+collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (int(item()))}+"<#adff68>>") payload -> (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (int(item()))}) {
             : if (chosen() == dova_word_to_find) {
                : print ("You have made the correct choice, it is <"+first_cap(chosen())+"<#6dc928>>!");
                : increment "dovalingo_score"; 
@@ -1239,9 +1335,9 @@ on_command {
          : print "This is Florrie communicator, it's locked but you see <Dovalingo<#cc0>>™ notifications that you can open.";
       }
    }
-   : match "get communicator; get g"  {
+   : match "get communicator"  {
       : if (is_present "communicator" && !is_carried "communicator") {
-         : print "You got it, it's locked but you see <Dovalingo™<#cc0>> notifications that you can open.";
+         : print "You got it, it's locked but you see <Dovalingo<#cc0>>™ notifications that you can open.";
          : pocket "communicator";
       }
    }
@@ -2963,14 +3059,14 @@ on_command {
       }
    }
    
-   : match "play dovalingo; dovalingo -; open dovalingo; open notification; use dovalingo; do dovalingo; train dovalingo" {
+   : match "play dovalingo; dovalingo -; open dovalingo; open notification; use dovalingo; do dovalingo; train dovalingo; open communicator; use communicator" {
       : if (is_present "ee") {
          : print "I should help E to do some Dovalingo™ lessons.";
          : press_any_key;
          : gosub "play_dovalingo";
       } : else_if (is_carried "communicator") {
 
-         : print "I should do some Dovalingo™ lessons for Florrie.";
+         : print "I should do some <Dovalingo<#cc0>>™ lessons for Florrie.";
          : press_any_key;
          : gosub "play_dovalingo";
       } : else {
@@ -3330,10 +3426,40 @@ assets {
             : overlay "transparent_20x20" x="160" y="60" experimental_command = "click map";
          }
       };
-      // test for text overlay but not great yet
-      /*
-      dream: png "data:image/svg+xml;utf8,<svg xmalns=\"http://www.w3.org/2000/svg\"  ><g><text >Hello World!</text></g></svg>";
-      */
+      
+   
+      transparent_cover: png "https://cosmoose.org/adventuron_april_2022/Images/transparent_400x80.png" {
+         : if (emoji_0 != "") {
+            : overlay (emoji_0) x="0";
+         }
+         : if (emoji_1 != "") {
+            : overlay (emoji_1) x="80";
+         }
+         : if (emoji_2 != "") {
+            : overlay (emoji_2) x="160";
+         }
+         : if (emoji_3 != "") {
+            : overlay (emoji_3) x="240";
+         }
+         : if (emoji_4 != "") {
+            : overlay (emoji_4) x="320";
+         }
+      };
+      emoji_0: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_0.png";
+      emoji_1: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_1.png";
+      emoji_2: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_2.png";
+      emoji_3: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_3.png";
+      emoji_4: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_4.png";
+      emoji_5: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_5.png";
+      emoji_6: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_6.png";
+      emoji_7: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_7.png";
+      emoji_8: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_8.png";
+      emoji_9: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_9.png";
+      emoji_10: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_10.png";
+      emoji_11: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_11.png";
+      emoji_12: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_12.png";
+      emoji_13: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_13.png";
+      emoji_14: png "https://cosmoose.org/adventuron_april_2022/Images/emoji_14.png";
       dream_cc: png "https://cosmoose.org/adventuron_april_2022/Images/dream_cc.png";
       dream_stars: png "https://cosmoose.org/adventuron_april_2022/Images/dream_stars.png";
       map_object: png "https://cosmoose.org/adventuron_april_2022/Images/icon_map.png";
@@ -3366,4 +3492,3 @@ assets {
 
    }
 }
-
