@@ -859,7 +859,7 @@ subroutines {
                         : set_integer var="dovapingot_amount" (dovapingot_amount - 160);
                         : print ("New Dovapingots amount: <"+dovapingot_amount+"₫<#007700>>.");
                         : increment "dovapingot_emote_pity";
-                        : if (chance(3) || dovapingot_emote_pity >= 10) {
+                        : if (chance(7) || dovapingot_emote_pity >= 10) {
                            : increment "dovapingot_won_emotes";
                            : print "Hourra, you got a new emoticoone!! You now have {dovapingot_won_emotes} emoticoones \\o/";
                            : if (dovapingot_won_emotes > 14) {
