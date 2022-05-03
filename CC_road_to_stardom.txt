@@ -4,7 +4,7 @@
 
 game_information {
    game_name                    = CC's Road to Stardom
-   game_version                 = 1.0.0
+   game_version                 = 1.0.1
    game_shortname               = CC Star
    written_by                   = OK Feather
    uuid                         = 910e5474-beef-11ec-9d64-0242ac120002
@@ -968,7 +968,7 @@ subroutines {
                : set_integer var="integer_tmp" (14 + random(7));
             }
             : set_integer var="dovapingot_amount" (dovapingot_amount + integer_tmp);
-            : print ((chance(50) ? "Great" : "Well done")+", you finished lesson {dovalingo_lessons} by getting {dovalingo_score} correct answers."+" <+"+integer_tmp+"₫<#007700>>.");
+            : print ((chance(50) ? "Great" : "Well done")+", you finished lesson {dovalingo_lessons} by getting {dovalingo_score} correct answers."+" <+"+integer_tmp+"₫<#007700>>");
             : increment "dovalingo_lessons";
          }
          : else {
@@ -978,7 +978,7 @@ subroutines {
                : set_integer var="integer_tmp" value="0";
             }
             : set_integer var="dovapingot_amount" (dovapingot_amount + integer_tmp);
-            : print ("So sad, you failed the lesson with "+(dovalingo_score == 1 ? "only one" : "no") +" correct answer. But try again any time." + (integer_tmp > 0? " <+"+integer_tmp+"₫<#007700>>.":""));
+            : print ("So sad, you failed the lesson with "+(dovalingo_score == 1 ? "only one" : "no") +" correct answer. But try again any time." + (integer_tmp > 0? " <+"+integer_tmp+"₫<#007700>>":""));
          }
          : ask_bool question -> ("Quit <Dovalingo<#cc0>>™ and do not "+ (dovalingo_score > 1 ? "start next lesson" : "try again this lesson")+"?") var = "boolean_tmp";
          : if (boolean_tmp) {
