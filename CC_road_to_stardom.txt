@@ -685,16 +685,18 @@ subroutines {
    }
    
    play_jingle : subroutine {
-      : set_music_vol volume -> (sound_volume / 5);
-      : play_incidental (jingle_song);
-      : if (jingle_song == "incidental_failing_failure") {
-         : pause "2850";
-      } : else_if (jingle_song == "incidental_success") {
-         : pause "2460";
-      } : else {
-         : pause "1000";
-      }
-      : set_music_vol volume -> (sound_volume);
+        : if (!is_sound_muted) {
+          : set_music_vol volume -> (sound_volume / 5);
+          : play_incidental (jingle_song);
+          : if (jingle_song == "incidental_failing_failure") {
+             : pause "2850";
+          } : else_if (jingle_song == "incidental_success") {
+             : pause "2460";
+          } : else {
+             : pause "1000";
+          }
+          : set_music_vol volume -> (sound_volume);
+        }
    }
 
    set_sound_on : subroutine {
