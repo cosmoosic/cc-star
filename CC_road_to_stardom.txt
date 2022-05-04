@@ -410,7 +410,7 @@ locations {
    labyrinth_1_5: location "How did you get there?";
    labyrinth_2_1: location "";
    labyrinth_2_2: location "";
-   labyrinth_2_3: location "You won't be able to get the blueprint...";
+   labyrinth_2_3: location (is_carried "blueprint" ? "You have found a path my processors could not imagine!" : "You won't be able to get the blueprint...");
    labyrinth_2_4: location "";
    labyrinth_2_5: location "Almost there...";
    labyrinth_3_1: location "It was a trap, there's no way to continue!";
@@ -3135,7 +3135,7 @@ on_command {
       }
       : match "look blueprint" {
          : if (!is_carried "blueprint") {
-            : print "We can get the blueprint by passing in front of blue cannon.";
+            : print "We can get the blueprint by passing in front of the blue cannon.";
          } : else {
             :  print "We have the blueprint. Now we only need to get to the end safely.";
          }
