@@ -197,6 +197,7 @@ booleans {
    has_seen_7c_puzzle : boolean "false";
    boolean_tmp : boolean "false";
    has_won_previously : boolean "false" scope="survivor";
+   dovalingo_leave_lesson : boolean "false";
 }
 
 integers {
@@ -217,6 +218,7 @@ integers {
    tuto_directions : integer "0";
    dovalingo_lessons : integer "1" scope="survivor";
    dovalingo_score : integer "0";
+   dovalingo_current_index : integer "0";
    dovalingo_wordlist_size : dynamic_integer (
       dovalingo_lessons < 7 ? 21 :
       dovalingo_lessons < 14 ? 70 :
@@ -237,7 +239,7 @@ collections {
       items = ["english", "french", "german", "dutch", "korean", "chinese", "walloon"]
    }
    dovalingo_choices : list {
-      items = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      items = [0, 0, 0, 0, 0, 0, 0, 0];
    }
    dovalingo_wrong_choices : list {
       items = [];
@@ -248,7 +250,7 @@ collections {
     }
 
     dovalingo_french : list {
-        items = ["Pigeon", "Temps", "Chemin", "An", "Travail", "Gouvernement", "Journée", "Homme", "Monde", "Vie", "Partie", "Maison", "Cours", "Cas", "Système", "Lieu", "Finir", "Grouper", "Société", "Faire la fête", "Information", "École", "Fait", "L'argent", "Point", "Exemple", "Etat", "Affaires", "Nuit", "Région", "Eau", "Chose", "Famille", "Tête", "Main", "Commande", "Côté", "Domicile", "Développement", "Semaine", "Puissance", "Pays", "Conseil", "Utiliser", "Service", "Salle", "Marché", "Problème", "Tribunal", "Terrain", "Un", "Guerre", "Police", "Intérêt", "Auto", "Droit", "Route", "Formulaire", "Visage", "Éducation", "Politique", "Rechercher", "Trier", "Bureau", "Corps", "Personne", "Santé", "Mère", "Question", "Période", "Nom", "Livre", "Niveau", "Enfant", "Contrôler", "Société", "Ministre", "Vue", "Porte", "Ligne", "Communauté", "Sud", "Ville", "Dieu", "Père", "Centre", "Effet", "Personnel", "Position", "Type", "Travail", "Femme", "Action", "Management", "Agir", "Processus", "Nord", "Âge", "Preuve", "Idée", "Ouest", "Support", "Moment", "Sens", "Rapport", "Écouter", "Église", "Matin", "Mort", "Monnaie", "Industrie", "Terre", "Se soucier", "Siècle", "Portée", "Table", "Arrière", "Commerce", "Histoire", "Étude", "Rue", "Comité", "Taux", "Mot", "Aliments", "Langue", "Vivre", "Résultat", "Équipe", "Autre", "Monsieur", "Section", "Programme", "Air", "Autorité", "Rôle", "Raison", "Prix", "Ville", "Classe", "Nature", "Matière", "Département", "Syndicat", "Banque", "Membre", "Valeur", "Avoir besoin", "Est", "Entrainement", "Type", "Papier", "Date", "Décision", "Chiffre", "À droite", "Épouse", "Président", "Université", "Ami", "Club", "Qualité", "Voix", "Seigneur", "Organiser", "Roi", "Nous", "Situation", "Léger", "Impôt", "Production", "Mars", "Secrétaire", "Art", "Planche", "Mai", "Hôpital", "Mois", "Musique", "Coût", "Domaine", "Décerner", "Publier", "Lit", "Projet", "Chapitre", "Fille", "Jeu", "Montant", "Base", "Connaissance", "Approcher", "Séries", "Amour", "Haut", "Nouvelles", "Face", "Futur", "Gestionnaire", "Compte", "Ordinateur", "Sécurité", "Repos", "Travail", "Structure", "Cheveu", "Facture", "Cœur", "Obliger", "Attention", "Mouvement", "Succès", "Lettre", "Accord", "Capitale", "Analyse", "Population", "Environnement", "Performance", "Maquette", "Matériel", "Théorie", "Croissance", "Feu", "Chance", "Garçon", "Relation amoureuse", "Fils", "Mer", "Record", "Taille", "Biens", "Espace", "Terme", "Réalisateur", "Plan", "Comportement", "Traitement", "Énergie", "Revenu", "Coupe", "Schème", "Motif", "Réponse", "Association", "Choix", "Pression", "Entrée", "Couple", "Technologie", "Défense", "Liste", "Président", "Perte", "Activité", "Contrat", "Comté", "Mur", "Différence", "Armée", "Hôtel", "Soleil", "Produit", "Été", "Positionner", "Village", "Couleur", "Étage", "Saison", "Unité", "Parc", "Heure", "Investissement", "Test", "Jardin", "Mari", "Emploi", "Style", "Science", "Regarder", "Accord", "Charger", "Aider", "Économie", "Nouveau", "Page", "Risque", "Conseils", "Événement", "Image", "Commission", "Poisson", "Université", "Huile", "Médecin", "Occasion", "Film", "Conférence", "Opération", "Application", "Presse", "Étendue", "Addition", "Station", "Fenêtre", "Magasin", "Accéder", "Région", "Doute", "Majorité", "Diplôme", "Télévision", "Sang", "Déclaration", "Son", "Élection", "Parlement", "Site", "Marque", "Importance", "Titre", "Espèces", "Augmenter", "Retourner", "Préoccuper", "Publique", "Concours", "Logiciel", "Verre", "Demoiselle", "Répondre", "Terre", "Fille", "But", "Responsabilité", "Dirigeant", "Fleuve", "Œil", "Capacité", "Faire appel", "Opposition", "Campagne", "Respect", "Tâche", "Exemple", "Vendre", "Entier", "Officier", "Méthode", "Division", "Source", "Pièce", "Modèle", "Manquer de", "Maladie", "Équipement", "Surface", "Demande", "Publier", "Bouche", "Radio", "Disposition", "Tenter", "Secteur", "Solidifier", "Statut", "Paix", "Variété", "Prof", "Afficher", "Conférencier", "Bébé", "Bras", "Base", "Mademoiselle", "Sécurité", "Difficulté", "Culture", "Direction", "Contexte", "Personnage", "Boîte", "Discussion", "Passé", "Masse", "Démarrer", "Frère", "Ligue", "État", "Machine", "Argument", "Sexe", "Budget", "Anglais", "Transport", "Partager", "Maman", "Espèces", "Principe", "Échanger", "Aide", "Bibliothèque", "Version", "Règle", "Thé", "Solde", "Après-midi", "Référence", "Protection", "Vérité", "District", "Tourner", "Forgeron", "Revue", "Minute", "Devoir", "Sondage", "Présence", "Influence", "Calcul", "Chien", "Avantage", "Recueil", "Exécutif", "Discours", "Fonction", "Reine", "Mariage", "Stock", "Échec", "Cuisine", "Élève", "Effort", "Vacance", "Carrière", "Attaque", "Longueur", "Cheval", "Progrès", "Plante", "Visiter", "Relation", "Balle", "Mémoire", "Bar", "Opinion", "Trimestre", "Impacter", "Échelle", "Course", "Image", "Confiance", "Justice", "Bord", "Gaz", "Chemin de fer", "Expression", "Avantage", "Or", "Bois", "Réseau", "Texte", "Forêt", "Sœur", "Chaise", "Cause", "Pied", "Monter", "Moitié", "Hiver", "Coin", "Assurance", "Étape", "Dégâts", "Crédit", "Douleur", "Possibilité", "Législation", "Force", "Vitesse", "Criminalité", "Colline", "Débat", "Sera", "Fourniture", "Cadeau", "Confiance", "Patient", "Vent", "Solution", "Bande", "Musée", "Ferme", "Broyer", "Correspondre", "Évaluation", "Message", "Football", "Non", "Animal", "Peau", "Scène", "Article", "Truc", "Introduction", "Joue", "Administration", "Crainte", "Père", "Proportion", "Île", "Contactez", "Japon", "Réclamation", "Royaume", "Vidéo", "Télé", "Existence", "Téléphone", "Mouvement", "Circulation", "Distance", "Soulagement", "Cabinet", "Chômage", "Réalité", "Cibler", "Essai", "Rocher", "Concept", "Esprit", "Accident", "Organisme", "Construction", "Café", "Téléphoner", "Distribution", "Train", "Vue", "Difficulté", "Facteur", "Exercer", "Week-end", "Bataille", "Prison", "Accorder", "Avion", "Arbre", "Pont", "Stratégie", "Contraste", "Communication", "Contexte", "Façonner", "Vin", "Étoile", "Espoir", "Sélection", "Détail", "Utilisateur", "Chemin", "Client", "Chercher", "Maître", "Pluie", "Offre", "But", "Dîner", "Liberté", "Attitude", "Pendant que", "Agence", "Siège", "Manière", "Favoriser", "Paire", "Crise", "Sourire", "Prince", "Danger", "Appel", "Capacité", "Production", "Remarque", "Procédure", "Théâtre", "Visiter", "Reconnaissance", "Milieu", "Absence", "Phrase", "Emballer", "Piste", "Carte", "Signe", "Engagement", "Joueur", "Menace", "Météo", "Élément", "Conflit", "Avis", "Victoire", "Bas", "Finance", "Fonds", "Violence", "Dossier", "Profit", "Norme", "Jack", "Itinéraire", "Chine", "Dépense", "Seconde", "Discipline", "Cellule", "Réaction", "Château", "Congrès", "Individuel", "Mener", "Considération", "Dette", "Option", "Paiement", "Exposition", "Réforme", "Accent", "Printemps", "Spectateurs", "Fonctionnalité", "Touche", "Domaine", "Assemblée", "Volume", "Jeunesse", "Contribution", "Programme d'études", "Apparence", "Martin", "Bateau", "Institut", "Adhésion", "Succursale", "Autobus", "Gaspillage", "Chauffer", "Cou", "Objet", "Capitaine", "Conducteur", "Défi", "Conversation", "Occasion", "Code", "Couronne", "Naissance", "Silence", "Littérature", "Foi", "Enfer", "Entrée", "Transférer", "Gentilhomme", "Sac", "Charbon", "Enquête", "Jambe", "Croyance", "Total", "Majeur", "Document", "Description", "Meurtre", "Objectif", "Vol", "Conclusion", "Médicament", "Tradition", "Plaisir", "Lien", "Propriétaire", "Traité", "Désir", "Professeur", "Copie", "Ministère", "Acide", "Palais", "Adresse", "Institution", "Déjeuner", "Génération", "Partenaire", "Moteur", "Journal", "Croix", "Réduction", "Bien-être"]
+        items = ["Pigeon", "Temps", "Chemin", "An", "Travail", "Gouvernement", "Journée", "Homme", "Monde", "Vie", "Partie", "Maison", "Cours", "Cas", "Système", "Lieu", "Finir", "Grouper", "Société", "Faire la fête", "Information", "École", "Fait", "Argent", "Point", "Exemple", "Etat", "Affaires", "Nuit", "Région", "Eau", "Chose", "Famille", "Tête", "Main", "Commande", "Côté", "Domicile", "Développement", "Semaine", "Puissance", "Pays", "Conseil", "Utiliser", "Service", "Salle", "Marché", "Problème", "Tribunal", "Terrain", "Un", "Guerre", "Police", "Intérêt", "Auto", "Droit", "Route", "Formulaire", "Visage", "Éducation", "Politique", "Rechercher", "Trier", "Bureau", "Corps", "Personne", "Santé", "Mère", "Question", "Période", "Nom", "Livre", "Niveau", "Enfant", "Contrôler", "Société", "Ministre", "Vue", "Porte", "Ligne", "Communauté", "Sud", "Ville", "Dieu", "Père", "Centre", "Effet", "Personnel", "Position", "Type", "Travail", "Femme", "Action", "Management", "Agir", "Processus", "Nord", "Âge", "Preuve", "Idée", "Ouest", "Support", "Moment", "Sens", "Rapport", "Écouter", "Église", "Matin", "Mort", "Monnaie", "Industrie", "Terre", "Se soucier", "Siècle", "Portée", "Table", "Arrière", "Commerce", "Histoire", "Étude", "Rue", "Comité", "Taux", "Mot", "Aliments", "Langue", "Vivre", "Résultat", "Équipe", "Autre", "Monsieur", "Section", "Programme", "Air", "Autorité", "Rôle", "Raison", "Prix", "Ville", "Classe", "Nature", "Matière", "Département", "Syndicat", "Banque", "Membre", "Valeur", "Avoir besoin", "Est", "Entrainement", "Type", "Papier", "Date", "Décision", "Chiffre", "À droite", "Épouse", "Président", "Université", "Ami", "Club", "Qualité", "Voix", "Seigneur", "Organiser", "Roi", "Nous", "Situation", "Léger", "Impôt", "Production", "Mars", "Secrétaire", "Art", "Planche", "Mai", "Hôpital", "Mois", "Musique", "Coût", "Domaine", "Décerner", "Publier", "Lit", "Projet", "Chapitre", "Fille", "Jeu", "Montant", "Base", "Connaissance", "Approcher", "Séries", "Amour", "Haut", "Nouvelles", "Face", "Futur", "Gestionnaire", "Compte", "Ordinateur", "Sécurité", "Repos", "Travail", "Structure", "Cheveu", "Facture", "Cœur", "Obliger", "Attention", "Mouvement", "Succès", "Lettre", "Accord", "Capitale", "Analyse", "Population", "Environnement", "Performance", "Maquette", "Matériel", "Théorie", "Croissance", "Feu", "Chance", "Garçon", "Relation amoureuse", "Fils", "Mer", "Record", "Taille", "Biens", "Espace", "Terme", "Réalisateur", "Plan", "Comportement", "Traitement", "Énergie", "Revenu", "Coupe", "Schème", "Motif", "Réponse", "Association", "Choix", "Pression", "Entrée", "Couple", "Technologie", "Défense", "Liste", "Président", "Perte", "Activité", "Contrat", "Comté", "Mur", "Différence", "Armée", "Hôtel", "Soleil", "Produit", "Été", "Positionner", "Village", "Couleur", "Étage", "Saison", "Unité", "Parc", "Heure", "Investissement", "Test", "Jardin", "Mari", "Emploi", "Style", "Science", "Regarder", "Accord", "Charger", "Aider", "Économie", "Nouveau", "Page", "Risque", "Conseils", "Événement", "Image", "Commission", "Poisson", "Université", "Huile", "Médecin", "Occasion", "Film", "Conférence", "Opération", "Application", "Presse", "Étendue", "Addition", "Station", "Fenêtre", "Magasin", "Accéder", "Région", "Doute", "Majorité", "Diplôme", "Télévision", "Sang", "Déclaration", "Son", "Élection", "Parlement", "Site", "Marque", "Importance", "Titre", "Espèces", "Augmenter", "Retourner", "Préoccuper", "Publique", "Concours", "Logiciel", "Verre", "Demoiselle", "Répondre", "Terre", "Fille", "But", "Responsabilité", "Dirigeant", "Fleuve", "Œil", "Capacité", "Faire appel", "Opposition", "Campagne", "Respect", "Tâche", "Exemple", "Vendre", "Entier", "Officier", "Méthode", "Division", "Source", "Pièce", "Modèle", "Manquer de", "Maladie", "Équipement", "Surface", "Demande", "Publier", "Bouche", "Radio", "Disposition", "Tenter", "Secteur", "Solidifier", "Statut", "Paix", "Variété", "Prof", "Afficher", "Conférencier", "Bébé", "Bras", "Base", "Mademoiselle", "Sécurité", "Difficulté", "Culture", "Direction", "Contexte", "Personnage", "Boîte", "Discussion", "Passé", "Masse", "Démarrer", "Frère", "Ligue", "État", "Machine", "Argument", "Sexe", "Budget", "Anglais", "Transport", "Partager", "Maman", "Espèces", "Principe", "Échanger", "Aide", "Bibliothèque", "Version", "Règle", "Thé", "Solde", "Après-midi", "Référence", "Protection", "Vérité", "District", "Tourner", "Forgeron", "Revue", "Minute", "Devoir", "Sondage", "Présence", "Influence", "Calcul", "Chien", "Avantage", "Recueil", "Exécutif", "Discours", "Fonction", "Reine", "Mariage", "Stock", "Échec", "Cuisine", "Élève", "Effort", "Vacance", "Carrière", "Attaque", "Longueur", "Cheval", "Progrès", "Plante", "Visiter", "Relation", "Balle", "Mémoire", "Bar", "Opinion", "Trimestre", "Impacter", "Échelle", "Course", "Image", "Confiance", "Justice", "Bord", "Gaz", "Chemin de fer", "Expression", "Avantage", "Or", "Bois", "Réseau", "Texte", "Forêt", "Sœur", "Chaise", "Cause", "Pied", "Monter", "Moitié", "Hiver", "Coin", "Assurance", "Étape", "Dégâts", "Crédit", "Douleur", "Possibilité", "Législation", "Force", "Vitesse", "Criminalité", "Colline", "Débat", "Sera", "Fourniture", "Cadeau", "Confiance", "Patient", "Vent", "Solution", "Bande", "Musée", "Ferme", "Broyer", "Correspondre", "Évaluation", "Message", "Football", "Non", "Animal", "Peau", "Scène", "Article", "Truc", "Introduction", "Joue", "Administration", "Crainte", "Père", "Proportion", "Île", "Contactez", "Japon", "Réclamation", "Royaume", "Vidéo", "Télé", "Existence", "Téléphone", "Mouvement", "Circulation", "Distance", "Soulagement", "Cabinet", "Chômage", "Réalité", "Cibler", "Essai", "Rocher", "Concept", "Esprit", "Accident", "Organisme", "Construction", "Café", "Téléphoner", "Distribution", "Train", "Vue", "Difficulté", "Facteur", "Exercer", "Week-end", "Bataille", "Prison", "Accorder", "Avion", "Arbre", "Pont", "Stratégie", "Contraste", "Communication", "Contexte", "Façonner", "Vin", "Étoile", "Espoir", "Sélection", "Détail", "Utilisateur", "Chemin", "Client", "Chercher", "Maître", "Pluie", "Offre", "But", "Dîner", "Liberté", "Attitude", "Pendant que", "Agence", "Siège", "Manière", "Favoriser", "Paire", "Crise", "Sourire", "Prince", "Danger", "Appel", "Capacité", "Production", "Remarque", "Procédure", "Théâtre", "Visiter", "Reconnaissance", "Milieu", "Absence", "Phrase", "Emballer", "Piste", "Carte", "Signe", "Engagement", "Joueur", "Menace", "Météo", "Élément", "Conflit", "Avis", "Victoire", "Bas", "Finance", "Fonds", "Violence", "Dossier", "Profit", "Norme", "Jack", "Itinéraire", "Chine", "Dépense", "Seconde", "Discipline", "Cellule", "Réaction", "Château", "Congrès", "Individuel", "Mener", "Considération", "Dette", "Option", "Paiement", "Exposition", "Réforme", "Accent", "Printemps", "Spectateurs", "Fonctionnalité", "Touche", "Domaine", "Assemblée", "Volume", "Jeunesse", "Contribution", "Programme d'études", "Apparence", "Martin", "Bateau", "Institut", "Adhésion", "Succursale", "Autobus", "Gaspillage", "Chauffer", "Cou", "Objet", "Capitaine", "Conducteur", "Défi", "Conversation", "Occasion", "Code", "Couronne", "Naissance", "Silence", "Littérature", "Foi", "Enfer", "Entrée", "Transférer", "Gentilhomme", "Sac", "Charbon", "Enquête", "Jambe", "Croyance", "Total", "Majeur", "Document", "Description", "Meurtre", "Objectif", "Vol", "Conclusion", "Médicament", "Tradition", "Plaisir", "Lien", "Propriétaire", "Traité", "Désir", "Professeur", "Copie", "Ministère", "Acide", "Palais", "Adresse", "Institution", "Déjeuner", "Génération", "Partenaire", "Moteur", "Journal", "Croix", "Réduction", "Bien-être"]
     }
 
     dovalingo_german : list {
@@ -828,28 +830,32 @@ subroutines {
    }
 
    play_dovalingo :  subroutine {
-      : clear_screen;
-      : set_theme "theme_dovalingo";
       : set_integer var="integer_tmp" value="0";
-      : print ("Welcome back to Dovalingo™ "+(is_present "ee" ? "E" : "Florrie")+"!\n\nYou have <"+dovapingot_amount+"₫<#007700>> and are still in the <"+(dovalingo_league_name)+" league<#adff68>> "+(is_present "ee" ? "totally behind Florrie" : "with enormous advance over E")+".\n\n");
+      : if (!dovalingo_leave_lesson) {
+         : clear_screen;
+         : set_theme "theme_dovalingo";
+         : print ("Welcome back to Dovalingo™ "+(is_present "ee" ? "E" : "Florrie")+"!\n\nYou have <"+dovapingot_amount+"₫<#007700>> and are still in the <"+(dovalingo_league_name)+" league<#adff68>> "+(is_present "ee" ? "totally behind Florrie" : "with enormous advance over E")+".\n\n");
+      } : else {
+         : set_false "dovalingo_leave_lesson";
+      }
       : if (dovalingo_src_lang != "") {
          : while (true) {
-            : add_choice text -> ("Do you want to continue playing from "+title_case(dovalingo_src_lang)+" to "+title_case(dovalingo_dst_lang)+"?") {
+            : add_choice text -> ("Do you want to continue playing from "+title_case(dovalingo_src_lang)+" to "+title_case(dovalingo_dst_lang)) {
                : break;
             }
-            : add_choice text -> ("Inverse and play from "+title_case(dovalingo_dst_lang)+" to "+title_case(dovalingo_src_lang)+"?") {
+            : add_choice text -> ("Inverse and play from "+title_case(dovalingo_dst_lang)+" to "+title_case(dovalingo_src_lang)) {
                : set_string var="string_tmp" (dovalingo_src_lang);
                : set_string var="dovalingo_src_lang" (dovalingo_dst_lang);
                : set_string var="dovalingo_dst_lang" (string_tmp);
                : break;
             }
-            : add_choice "Change languages and play?" {
+            : add_choice "Change languages and play" {
                : clear "dovalingo_wrong_choices";
                : set_string var="dovalingo_src_lang" value="";
                : break;
             }
             : if (dovapingot_amount > 159) {
-               : add_choice text -> ("Pull some Coop boxes open with your <"+dovapingot_amount+" Dovapingots<#007700>>?") {
+               : add_choice text -> ("Pull some Coop boxes open with your <"+dovapingot_amount+" Dovapingots<#007700>>") {
                   : while (dovapingot_amount > 159) {
                      : ask_bool question -> ("Open one Coop box by spending <160₫<#007700>>?") var = "boolean_tmp";
                      : if (boolean_tmp) {
@@ -858,13 +864,12 @@ subroutines {
                         : increment "dovapingot_emote_pity";
                         : if (chance(7) || dovapingot_emote_pity >= 10) {
                            : increment "dovapingot_won_emotes";
-                           : print "Hourra, you got a new emoticoone!! You now have {dovapingot_won_emotes} emoticoones \\o/";
+                           : print ((chance(50)?"Hooray":"Hurrah")+", you got a new emoticoone!! You now have {dovapingot_won_emotes} emoticoone"+(dovapingot_won_emotes > 1 ? "s":"")+" \\o/");
                            : if (dovapingot_won_emotes > 14) {
                               : print "Currently we only have 15 emoticoones and you already have all of tem, congratulations!";
                            }
                            : set_integer var="dovapingot_emote_pity" value="0";
-                           : set_string var="jingle_song" value="incidental_success";
-                           : gosub "play_jingle";
+                           : play_incidental "incidental_success";
                         } : else {
                            : print "Nothing in this Coop box, but next time for sure.";
                         }
@@ -876,7 +881,7 @@ subroutines {
                }
             }
             : if (dovapingot_won_emotes > 0) {
-               : add_choice text -> ("Display "+(dovapingot_won_emotes>1?"all":"")+" my "+(dovapingot_won_emotes> 15 ? 15:dovapingot_won_emotes)+" emoticoone"+(dovapingot_won_emotes>1?"s":"")+"?") {
+               : add_choice text -> ("Display "+(dovapingot_won_emotes>1?"all":"")+" my "+(dovapingot_won_emotes> 15 ? 15:dovapingot_won_emotes)+" emoticoone"+(dovapingot_won_emotes>1?"s":"")) {
                   : iterate "dovalingo_emojis" {
                      : if (index() >= dovapingot_won_emotes - 1) {
                         : break;
@@ -907,8 +912,7 @@ subroutines {
                   }
                }
             }
-            : add_choice "Quit?" {
-               : print "Goodbye, thanks for using our services.";
+            : add_choice "<Quit<#bb8f8f>>" {
                : set_integer var="integer_tmp" value="1";
             }
             : choose hint="numeric_list_always" ;
@@ -918,18 +922,16 @@ subroutines {
          }
       } : else {
          : print "It's the first time you are playing, please choose your lessons language.";
-         : add_choice "Choose languages?" {
+         : add_choice "Choose languages and play" {
             : clear "dovalingo_wrong_choices";
             : set_string var="dovalingo_src_lang" value="";
          }
-         : add_choice "Quit?" {
-            : print "Goodbye, thanks for using our services.";
+         : add_choice "<Quit<#bb8f8f>>" {
             : set_integer var="integer_tmp" value="1";
          }
          : choose hint="numeric_list_always" ;
       }
       : if (integer_tmp == 1) {
-      
             : print "Thank you for using <Dovalingo<#cc0>>™. Come back at any time to learn new words!";
             : press_any_key ;
             : set_theme "theme_base";
@@ -942,22 +944,26 @@ subroutines {
                : set_string var="dovalingo_src_lang" (lower(chosen()));
             }
          }
-         : choose "What language do you want to learn?" hint="numeric_list_always" ;
+         : choose "What language do you want to learn?"  columns="3" hint="numeric_list_always" ;
          : iterate "dovalingo_langs" filter -> (item() != dovalingo_src_lang)   {
             : add_choice text -> ("<"+title_case(item())+"<#adff68>>") payload -> (item()) {
                : set_string var="dovalingo_dst_lang"  (lower(chosen()));
             }
          }
-         : choose  "What language do you speak?" hint="numeric_list_always" ;
+         : choose  "What language do you speak?" columns="3" hint="numeric_list_always" ;
       }
       : while (true) {
          : set_integer var="dovalingo_score" value="0";
          : print "Lesson {dovalingo_lessons} - exercise 1";
          : gosub "dovalingo_do_exercice";
-         : print "Lesson {dovalingo_lessons} - exercise 2";
-         : gosub "dovalingo_do_exercice";
-         : print "Lesson {dovalingo_lessons} - exercise 3";
-         : gosub "dovalingo_do_exercice";
+         : if (!dovalingo_leave_lesson) {
+            : print "Lesson {dovalingo_lessons} - exercise 2";
+            : gosub "dovalingo_do_exercice";
+         }
+         : if (!dovalingo_leave_lesson) {
+            : print "Lesson {dovalingo_lessons} - exercise 3";
+            : gosub "dovalingo_do_exercice";
+         }
          : if (dovalingo_score > 1) {
             : if (dovalingo_score == 3 ) {
                : set_integer var="integer_tmp" (42 + random(7));
@@ -965,8 +971,14 @@ subroutines {
                : set_integer var="integer_tmp" (21 + random(7));
             }
             : set_integer var="dovapingot_amount" (dovapingot_amount + integer_tmp);
-            : print ((chance(50) ? "Great" : "Well done")+", you finished lesson {dovalingo_lessons} by getting {dovalingo_score} correct answers."+" <+"+integer_tmp+"₫<#007700>>");
-            : increment "dovalingo_lessons";
+            : if (dovalingo_leave_lesson) {
+               : print ("You left the lesson and got 2 correct answers."+" <+"+integer_tmp+"₫<#007700>>");
+            } : else {
+               : print ((chance(50) ? "Great" : "Well done")+", you finished lesson {dovalingo_lessons} by getting {dovalingo_score} correct answers."+" <+"+integer_tmp+"₫<#007700>>");
+            }
+            : if (dovalingo_leave_lesson) {
+               : increment "dovalingo_lessons";
+            }
          }
          : else {
             : if (dovalingo_score == 1 ) {
@@ -975,66 +987,67 @@ subroutines {
                : set_integer var="integer_tmp" value="0";
             }
             : set_integer var="dovapingot_amount" (dovapingot_amount + integer_tmp);
-            : print ("So sad, you failed the lesson with "+(dovalingo_score == 1 ? "only one" : "no") +" correct answer. But try again any time." + (integer_tmp > 0? " <+"+integer_tmp+"₫<#007700>>":""));
+            : print ((dovalingo_leave_lesson ? "You left": "So sad, you failed")+" the lesson with "+(dovalingo_score == 1 ? "only one" : "no") +" correct answer. Try again any time." + (integer_tmp > 0? " <+"+integer_tmp+"₫<#007700>>":""));
          }
-         : ask_bool question -> ("Quit <Dovalingo<#cc0>>™ and do not "+ (dovalingo_score > 1 ? "start next lesson" : "try again this lesson")+"?") var = "boolean_tmp";
-         : if (boolean_tmp) {
-            : print "Thank you for using <Dovalingo<#cc0>>™. Come back at any time to learn new words!";
-            : press_any_key ;
-            : set_theme "theme_base";
-            : redescribe;
+         : press_any_key;
+         : if (dovalingo_leave_lesson) {
+            : gosub "play_dovalingo";
             : return;
          }
       }
    }
    
    dovalingo_do_exercice :  subroutine {
+      : set_false "dovalingo_leave_lesson";
       : set_integer var="dova_word_index_to_find" value="-1";
       : iterate "dovalingo_choices" {
-         : set_integer var="integer_tmp" (random(dovalingo_wordlist_size - 1));
-         : collection_modify { collection = "dovalingo_choices" index -> (index()) item -> (integer_tmp) }
-         # 13% of chance to get a word that was wrong before (1 - 0.98**8/1**8)
-         : if (count "dovalingo_wrong_choices" > 0 && chance(2) && dova_word_index_to_find == -1) {
+         # 13% of chance to get a word that was wrong before
+         : if (count "dovalingo_wrong_choices" > 0 && chance(13) && index()==0) {
             : collection_sort collection="dovalingo_wrong_choices" algorithm = "shuffle" ;
             : collection_pop  collection = "dovalingo_wrong_choices" var = "string_tmp";
             : set_integer var="dova_word_index_to_find" (int(string_tmp));
             : collection_modify { collection -> ("dovalingo_choices") index -> (0) item -> (dova_word_index_to_find)}
+         } : else {
+            : set_integer var="dovalingo_current_index" (index());
+            : set_false var="boolean_tmp";
+            : while (!boolean_tmp) {
+               : set_true var="boolean_tmp";
+               : set_integer var="integer_tmp" (random(dovalingo_wordlist_size - 1));
+               # if not defined for lang, pass
+               : if ((collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (integer_tmp)} == "") || (collection_get { collection -> ("dovalingo_"+dovalingo_src_lang) index -> (integer_tmp)} == "")) {
+                  : set_false var="boolean_tmp";
+               }
+               : iterate "dovalingo_choices" filter -> (index() < dovalingo_current_index) {
+                  : if (int(item()) == integer_tmp) {
+                     : set_false var="boolean_tmp";
+                  }
+               }
+            }
+            : collection_modify { collection = "dovalingo_choices" index -> (index()) item -> (integer_tmp) }
          }
       }
-      # remove duplicates
-      : collection_sort collection="dovalingo_choices" algorithm = "ascending" ;
-      : set_string var="string_tmp" value="";
-      : iterate "dovalingo_choices" {
-         : set_integer var="integer_tmp" (int(item()));
-            : if (string_tmp == item() || (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (integer_tmp)} == "") || (collection_get { collection -> ("dovalingo_"+dovalingo_src_lang) index -> (integer_tmp)} == "")) {
-               : collection_modify { collection -> ("dovalingo_choices") index -> (index()) item -> ("")}
-            } : else {
-               : set_string var="string_tmp" (item());
-            }
-      }
+      : set_integer var="dova_word_index_to_find" value -> (int(dovalingo_choices[0]));
       : collection_sort collection="dovalingo_choices" algorithm = "shuffle" ;
-      : iterate "dovalingo_choices" filter -> (item() != "") {
+      : iterate "dovalingo_choices" {
          : add_choice text -> ("<"+collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (int(item()))}+"<#adff68>>") payload -> (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (int(item()))}) {
             : if (chosen() == dova_word_to_find) {
                : print ("You have made the correct choice, it is <"+first_cap(chosen())+"<#6dc928>>!");
                : increment "dovalingo_score"; 
-               : set_string var="jingle_song" value="incidental_ok";
-               : gosub "play_jingle";
+               : play_incidental "incidental_ok";
             }
             : else {
                : collection_push { collection = "dovalingo_wrong_choices" item -> (dova_word_index_to_find ) }
                : print ("Oh, you made an error, the correct choice was <"+dova_word_to_find+"<#6dc928>>.");
-               : set_string var="jingle_song" value="incidental_failure";
-               : gosub "play_jingle";
+               : play_incidental "incidental_failure";
             }
-         }
-         : if (dova_word_index_to_find == -1) {
-            : set_integer var="dova_word_index_to_find" value -> (int(item()));
          }
       }
       : set_string var="dova_word_to_find" (collection_get { collection -> ("dovalingo_"+dovalingo_dst_lang) index -> (dova_word_index_to_find)});
       : set_string var="string_tmp" ("What is « <"+first_cap(collection_get { collection -> ("dovalingo_"+dovalingo_src_lang) index -> (dova_word_index_to_find)})+" <#6dc928>>» from "+dovalingo_src_lang+" to "+dovalingo_dst_lang+"?");
-      : choose question="{string_tmp}" hint="numeric_list_always" columns = "3"  order = "random";
+      : add_choice default = "true"  "<(Leave)<#bb8f8f>>" {
+         : set_true "dovalingo_leave_lesson";
+      }
+      : choose question="{string_tmp}" hint="numeric_list_always" columns = "3";
    }
 }
 
@@ -3053,7 +3066,7 @@ on_command {
       }
    }
    
-   : match "play dovalingo; dovalingo -; open dovalingo; open notification; use dovalingo; do dovalingo; train dovalingo; open communicator; use communicator" {
+   : match "play dovalingo; dovalingo -; open dovalingo; open notification; use dovalingo; do dovalingo; train dovalingo; open communicator; use communicator; play g; play communicator" {
       : set_sentence "nothing";
       : if (is_present "ee") {
          : print "I should help E to do some Dovalingo™ lessons.";
