@@ -180,6 +180,7 @@ booleans {
       talked_to_rud &&
       is_rud_sad
    )}
+   has_blueprint : boolean "false";
    in_labyrinth : boolean "false";
    is_labyrinth_open : boolean "false";
    is_playing_logic  : boolean "false";
@@ -410,7 +411,7 @@ locations {
    labyrinth_1_5: location "How did you get there?";
    labyrinth_2_1: location "";
    labyrinth_2_2: location "";
-   labyrinth_2_3: location (is_carried "blueprint" ? "You have found a path my processors could not imagine!" : "You won't be able to get the blueprint...");
+   labyrinth_2_3: location (has_blueprint ? "You have found a path my processors could not imagine!" : "You won't be able to get the blueprint...");
    labyrinth_2_4: location "";
    labyrinth_2_5: location "Almost there...";
    labyrinth_3_1: location "It was a trap, there's no way to continue!";
@@ -1085,6 +1086,7 @@ on_describe {
        : redescribe;
    }
    : else_if (is_at "labyrinth_1_1" ) {
+       : set_false "has_blueprint";
        : set_integer var = "labyrinth_position_x"  value = "0" ;
        : set_integer var = "labyrinth_position_y"  value = "-13" ;
        : set_integer var = "day_spend_labyrinth_enigma" value = "0";
@@ -1093,11 +1095,16 @@ on_describe {
    : else_if (is_at "labyrinth_4_2" ) {
          : set_string var="jingle_song" value="incidental_useless_success";
          : gosub "play_jingle";
-         : pocket "blueprint";
+         : if (is_pocketable "blueprint") {
+             : pocket "blueprint";
+         }
+         : set_true "has_blueprint";
    }
    : else_if (is_at "labyrinth_5_5") {
-       : if (is_carried "blueprint") {
-            : destroy "blueprint";
+       : if (has_blueprint) {
+            :if (is_exists "blueprint") {
+                : destroy "blueprint";
+            }
             : set_string var="jingle_song" value="incidental_success";
             : gosub "play_jingle";
            : set_false "in_labyrinth";
@@ -1135,7 +1142,9 @@ on_describe {
       }
    }
    : if (is_at "labyrinth_ship_destroyed") {
-       : destroy "blueprint";
+        :if (is_exists "blueprint") {
+            : destroy "blueprint";
+        }
        : set_string var="jingle_song" value="incidental_failure";
        : gosub "play_jingle";
    }
@@ -3124,17 +3133,21 @@ on_command {
 
    : if (in_labyrinth) {
       : match "start -; in -; enter -; retry -; restart -" {
-          : destroy "blueprint";
+          :if (is_exists "blueprint") {
+             : destroy "blueprint";
+          }
           : goto "labyrinth_1_1";
           : redescribe;
       }
       : match "exit -; leave -" {
-          : destroy "blueprint";
+          :if (is_exists "blueprint") {
+             : destroy "blueprint";
+          }
           : goto "living_room";
           : redescribe;
       }
       : match "look blueprint" {
-         : if (!is_carried "blueprint") {
+         : if (!has_blueprint) {
             : print "We can get the blueprint by passing in front of the blue cannon.";
          } : else {
             :  print "We have the blueprint. Now we only need to get to the end safely.";
