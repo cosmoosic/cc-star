@@ -9,6 +9,13 @@ If he doesn't, all his friends from the Cosmoose gang can help him. Maybe?
 
 This is a small, heartwarming story you can play with your kids.
 
+## Play the game
+
+https://okfeather.itch.io/ccs-road-to-stardom
+
+Jam submission (rate us if you liked!): https://itch.io/jam/talp2022/rate/1505448
+
+
 ## How to play
 
 This is a classical text adventure game.
@@ -22,6 +29,13 @@ To move on the map, you can use the cardinal directions, NORTH, EAST, SOUTH and 
 Type HELP to get some HELP.
 
 Check the booklet if you get stuck! Or RTFM as some used to say!
+
+## How to use the source
+
+You need to execute/compile it with: https://adventuron.io/betabeta/
+
+To embed images in the source file, you can use the embed script in the
+https://github.com/cosmoosic/adventuron-tools/ repository.
 
 Learn to write your own text adventure game (in an hour) with Adventuron:
 https://adventuron.io/documentation/tutorial-a.html
@@ -38,17 +52,3 @@ Music is DHXP, pixel graphics by Woolion, programming by E and Dova Lin, and som
 Special Thank You to all our Playtesters: Mélanie the shadowy but benevolent figure, 
 Daphne our reliable AI member, JJYY, Gaby, Jorchime, 
 and everybody else who helped improve the game.
-
-## Jam Submissions Comments
-
-Development Time
-7 days (for 4 persons)
-
-Native Language
-Various (not English)
-
-Opinion of Adventuron
-Adventuron is a really good tool for beginners as it is really good at catching errors. Love it!
-
-Prior Coding Experience
-Second Adventuron game.
