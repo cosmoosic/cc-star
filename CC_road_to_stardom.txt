@@ -1792,6 +1792,7 @@ on_command {
       : if (is_at "wools_wheels" && !is_puzzle_wool_solved) {
          : print "You ask Wool about pigeons. He replies: \'Why are pigeons so popular?" ;
          : print "I don't know, as I am not interested in physical entities. Only logic moves me.\'" ;
+         : press_any_key ;
          : goto "puzzle_hat" ;
          : redescribe ;
       }
