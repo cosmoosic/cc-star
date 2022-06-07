@@ -190,7 +190,7 @@ booleans {
    seen_inventory_tuto : boolean "false";
    tuto_used_map : boolean "false";
    is_map_command : boolean "false";
-   dream_cc_go_right : boolean "false";
+   dream_cc_go_left : boolean "false";
    dream_cc_go_bottom : boolean "false";
    has_seen_laptop_puzzle : boolean "false";
    has_seen_wool_puzzle : boolean "false";
@@ -3058,17 +3058,17 @@ on_command {
       }
       : if (is_movement_command() && verb_is "west") {
          : set_integer var="dream_cc_x" (dream_cc_x - 32);
-         : set_true "dream_cc_go_right";
-         : update_graphic;
-         : increment "tuto_directions";
-         : print ("Well done going <"+ original "verb" + "<#cc0>>, in the game you would have gone to the room to the right."+(tuto_directions < 4 ? " Move "+(4 - tuto_directions)+" more time" +(tuto_directions < 3 ? "s" : "") + "." : ""));
-      }
-      : if (is_movement_command() && verb_is "east") {
-         : set_integer var="dream_cc_x" (dream_cc_x + 32);
-         : set_false "dream_cc_go_right";
+         : set_true "dream_cc_go_left";
          : update_graphic;
          : increment "tuto_directions";
          : print ("Well done going <"+ original "verb" + "<#cc0>>, in the game you would have gone to the room to the left."+(tuto_directions < 4 ? " Move "+(4 - tuto_directions)+" more time" +(tuto_directions < 3 ? "s" : "") + "." : ""));
+      }
+      : if (is_movement_command() && verb_is "east") {
+         : set_integer var="dream_cc_x" (dream_cc_x + 32);
+         : set_false "dream_cc_go_left";
+         : update_graphic;
+         : increment "tuto_directions";
+         : print ("Well done going <"+ original "verb" + "<#cc0>>, in the game you would have gone to the room to the right."+(tuto_directions < 4 ? " Move "+(4 - tuto_directions)+" more time" +(tuto_directions < 3 ? "s" : "") + "." : ""));
       }
    }
    
@@ -3458,7 +3458,7 @@ assets {
          : overlay "dream_cc" {
             x -> (dream_cc_x)
             y -> (dream_cc_y)
-            flip_x -> (dream_cc_go_right)
+            flip_x -> (dream_cc_go_left)
             flip_y -> (dream_cc_go_bottom)
          }
          : if (dream_look_map && !is_carried "map") {
